@@ -5,7 +5,11 @@ using Microsoft.Extensions.Logging;
 
 using ContosoCrafts.WebSite.Models;
 using ContosoCrafts.WebSite.Services;
+<<<<<<< HEAD
 // I love Seattle Winter
+=======
+// I love Seattle Summers
+>>>>>>> c03f1c9 (Added Summers in Index.cshtml.cs for merge)
 namespace ContosoCrafts.WebSite.Pages
 {
     public class IndexModel : PageModel
