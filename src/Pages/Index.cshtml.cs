@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.RazorPages; 
 using Microsoft.Extensions.Logging;
 
 using ContosoCrafts.WebSite.Models;
 using ContosoCrafts.WebSite.Services;
-// I love Seattle Springs
+// I love Seattle Winter
 namespace ContosoCrafts.WebSite.Pages
 {
     public class IndexModel : PageModel
