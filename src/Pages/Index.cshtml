@@ -4,8 +4,16 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<div>Team02 Diamond Lewis and Chin-Chi(Edward)</div>
+<style>
+.myDiv {
+  background-color: rgb(165, 162, 162);    
+  text-align: center;
+  color:rgb(13, 12, 12);
+}
+</style>
+<div>
+	<h1 class="myDiv">Game Hub</h1>
+</div>
 @(await Html.RenderComponentAsync<ProductList>(RenderMode.ServerPrerendered))
 
 <script src="_framework/blazor.server.js"></script>
