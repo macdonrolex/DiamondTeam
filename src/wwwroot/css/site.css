@@ -112,6 +112,8 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  /* Modify the background color*/
+  background-color: rgb(221, 32, 32);
 }
 p {
     font-family: 'Nunito', sans-serif;
@@ -130,16 +132,16 @@ ul {
     line-height: 60px; /* Vertically center the text there */
     font-family: 'Nunito', sans-serif;
 }
-/*Backgrounds*/
+/* Modify the background colors of the navibar and the footer */
 .bg-navbar {
-    background: -webkit-linear-gradient(110deg, #e9a8a6 60%, #252152 60%);
-    background: -o-linear-gradient(110deg, #e9a8a6 60%, #252152 60%);
-    background: -moz-linear-gradient(110deg, #e9a8a6 60%, #252152 60%);
-    background: linear-gradient(110deg, #e9a8a6 60%, #252152 60%);
+    background: -webkit-linear-gradient(110deg, rgb(255, 255, 255) 60%, rgb(13, 12, 12) 60%);
+    background: -o-linear-gradient(110deg, rgb(255, 255, 255) 60%, rgb(13, 12, 12) 60%);
+    background: -moz-linear-gradient(110deg, rgb(255, 255, 255) 60%, rgb(13, 12, 12) 60%);
+    background: linear-gradient(110deg, rgb(255, 255, 255) 60%, rgb(13, 12, 12) 60%);
 }
 .bg-footer {
-    background: -webkit-linear-gradient(110deg, #252152 60%, #e9a8a6 60%);
-    background: -o-linear-gradient(110deg, #252152 60%, #e9a8a6 60%);
-    background: -moz-linear-gradient(110deg, #252152 60%, #e9a8a6 60%);
-    background: linear-gradient(110deg, #252152 60%, #e9a8a6 60%);
+    background: -webkit-linear-gradient(110deg, rgb(13, 12, 12) 60%, rgb(255, 255, 255) 60%);
+    background: -o-linear-gradient(110deg, rgb(13, 12, 12) 60%, rgb(255, 255, 255) 60%);
+    background: -moz-linear-gradient(110deg, rgb(13, 12, 12) 60%, rgb(255, 255, 255) 60%);
+    background: linear-gradient(110deg, rgb(13, 12, 12) 60%, rgb(255, 255, 255) 60%);
 }
