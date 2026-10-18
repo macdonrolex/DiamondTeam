@@ -121,13 +121,29 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  /* Modify the background color*/
-  background-color: rgb(221, 32, 32);
-  /* Modify all fonts*/
-  font-family: Chalkduster, fantasy;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    /* Modify the background color*/
+    background-color: #f4f6f8;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    /* Modify the background color*/
+    /* Modify all fonts*/
+    font-family: Chalkduster, fantasy;
 }
+    body::before {
+        content: "";
+        position: fixed;
+        inset: -5px;
+        z-index: -1;
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/images/gamewall.png") center / cover no-repeat;
+        filter: blur(3px);
+        opacity: 0.55;
+        pointer-events: none;
+    }
 p {
     font-family: Marker Felt, fantasy;
 }
