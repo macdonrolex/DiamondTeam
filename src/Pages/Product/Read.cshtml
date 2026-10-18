@@ -9,11 +9,9 @@ ViewData["Title"] = "Product Details";
     <a class="btn btn-secondary mr-3" asp-page="/Product/Index">
         Back to List
     </a>
-    
-
     <h2 class="mb-0">@Model.Product.Title</h2>
-</div>
-    <h2>@Model.Product.Title</h2>
+	</div>
+	
     <img class="mx-auto d-block img-fluid" src="@Model.Product.Image" alt="@Model.Product.Title" width="300" />
 	<div class="p-3">
         @*Only display the link buttons if the author provides something that's not empty*@
