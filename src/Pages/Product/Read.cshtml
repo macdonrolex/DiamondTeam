@@ -14,8 +14,8 @@ ViewData["Title"] = "Product Details";
     <div class="mt-3">
         <a class="btn btn-secondary" asp-page="/Product/Index">Back to List</a>
 
-		@*Only display the shop link button while theres a link*@
-		@if (Model.Product.ShopLink != null)
+		@*Only display the shop link button if the author provides something that's not empty*@
+		@if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
 		{
 			<a class="btn btn-secondary" href="@Model.Product.ShopLink">Buy the game!</a>
 		}
