@@ -21,7 +21,7 @@ ViewData["Title"] = "Product Details";
 		{
 			<a class="btn btn-secondary" href="@Model.Product.ShopLink">Buy </a>
 		}
-		@if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
+		@if (!string.IsNullOrWhiteSpace(Model.Product.RatingLink))
 		{
 			<a class="btn btn-secondary" href="@Model.Product.RatingLink">Game Rating</a>
 		}
