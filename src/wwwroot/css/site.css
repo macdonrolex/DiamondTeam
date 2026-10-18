@@ -5,6 +5,9 @@
 .fa-star {
   cursor: pointer;
 }
+.descenter {
+    text-align: center;
+}
 
 /* The style class for the web name */
 .webName{

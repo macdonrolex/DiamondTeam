@@ -14,18 +14,18 @@ ViewData["Title"] = "Product Details";
     <h2 class="mb-0">@Model.Product.Title</h2>
 </div>
     <h2>@Model.Product.Title</h2>
-    <img src="@Model.Product.Image" alt="@Model.Product.Title" width="300" />
+    <img class="mx-auto d-block img-fluid" src="@Model.Product.Image" alt="@Model.Product.Title" width="300" />
 	<div class="p-3">
         @*Only display the link buttons if the author provides something that's not empty*@
 		@if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
 		{
-			<a class="btn btn-secondary" href="@Model.Product.ShopLink">Buy the game!</a>
+			<a class="btn btn-secondary" href="@Model.Product.ShopLink">Buy </a>
 		}
 		@if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
 		{
-			<a class="btn btn-secondary" href="@Model.Product.RatingLink">Check the ratings of this game!</a>
+			<a class="btn btn-secondary" href="@Model.Product.RatingLink">Game Rating</a>
 		}
-		<p>@Model.Product.Post</p>
+		<p class="descenter">@Model.Product.Post</p>
 	</div>
 	
     
