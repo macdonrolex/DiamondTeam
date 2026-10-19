@@ -25,6 +25,10 @@ ViewData["Title"] = "Product Details";
 		}
 		<p class="descenter">@Model.Product.Post</p>
 	</div>
+	<div class="d-flex justify-content-end mt-3">
+		<a class="btn btn-secondary ml-3" asp-page="/Product/Update" asp-route-id="@Model.Product.Id">Edit</a>
+	</div>
+	
 	
     
 </div>
