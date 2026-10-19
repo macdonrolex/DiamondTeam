@@ -4,7 +4,7 @@
 @inject JsonFileProductService ProductService
 
 <div class="card-columns">
-    @foreach (var product in ProductService.GetAllData())
+@foreach (var product in ProductService.GetAllData().Skip((currentPage - 1) * PageSize).Take(PageSize))
     {
          <div class="card game-card border-0">
             <div class="card-img game-card-image" style="background-image: url('@product.Image');">
@@ -22,6 +22,15 @@
             </div>
         </div>
     }
+</div>
+<div class="product-pager" aria-label="Product pages">
+    <button class="pager-button pager-prev" type="button" @onclick="PreviousPage" disabled="@(currentPage == 1)">
+        <span aria-hidden="true">&larr;</span> Previous
+    </button>
+    <span class="pager-status">Page @currentPage of @TotalPages</span>
+    <button class="pager-button pager-next" type="button" @onclick="NextPage" disabled="@(currentPage == TotalPages)">
+        Next <span aria-hidden="true">&rarr;</span>
+    </button>
 </div>
 
 @if (selectedProduct != null)
@@ -111,5 +120,18 @@
         System.Console.WriteLine($"Rating received for {selectedProduct.Id}: {rating}");
         ProductService.AddRating(selectedProductId, rating);
         SelectProduct(selectedProductId);
+    }
+    const int PageSize = 6;
+    int currentPage = 1;
+    int TotalPages => Math.Max(1, (int)Math.Ceiling(ProductService.GetAllData().Count() / (double)PageSize));
+
+    void PreviousPage()
+    {
+        if (currentPage > 1) currentPage--;
+    }
+
+    void NextPage()
+    {
+        if (currentPage < TotalPages) currentPage++;
     }
 }
