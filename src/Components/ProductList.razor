@@ -6,19 +6,19 @@
 <div class="card-columns">
     @foreach (var product in ProductService.GetAllData())
     {
-        <div class="card">
-            <div class="card-img" style="background-image: url('@product.Image');">
+         <div class="card game-card border-0">
+            <div class="card-img game-card-image" style="background-image: url('@product.Image');">
+                <div class="game-card-title">@product.Title</div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">@product.Title</h5>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">
-                    <button @onclick="(e => SelectProduct(product.Id))"
-                        data-toggle="modal" data-target="#productModal" class="btn btn-primary">
-                        More Info
-                    </button>
-                </small>
+            <div class="dropdown game-card-menu">
+                <button class="btn btn-dark btn-sm rounded-circle game-card-menu-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Options for @product.Title">
+                    <span aria-hidden="true">&#8942;</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button" @onclick="(e => SelectProduct(product.Id))" data-toggle="modal" data-target="#productModal">More Info</button>
+                    <button class="dropdown-item" type="button" disabled>Edit</button>
+                    <button class="dropdown-item text-danger" type="button" disabled>Delete</button>
+                </div>
             </div>
         </div>
     }
