@@ -162,6 +162,21 @@ namespace ContosoCrafts.WebSite.Services
 
             return data;
         }
+        public ProductModel AddProduct(ProductModel product)
+        {
+            product.Id = System.Guid.NewGuid().ToString();
+
+            if (product.Ratings == null)
+            {
+                product.Ratings = new int[0];
+            }
+
+            var products = GetAllData().ToList();
+            products.Add(product);
+            SaveData(products);
+
+            return product;
+        }
 
         /// <summary>
         /// Remove the item from the system
