@@ -1,0 +1,80 @@
+﻿@page
+@model ContosoCrafts.WebSite.Pages.Product.PostCreateModel
+
+
+
+
+<div class="container py-4">
+
+    <h1 class="mb-4">Add a game</h1>
+
+    <form method="post">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group">
+
+            <label asp-for="Product.Title" class="font-weight-bold"></label>
+
+            <input asp-for="Product.Title" class="form-control" />
+
+            <span asp-validation-for="Product.Title" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="Product.Maker" class="font-weight-bold"></label>
+
+            <input asp-for="Product.Maker" class="form-control" />
+
+            <span asp-validation-for="Product.Maker" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="Product.Description" class="font-weight-bold"></label>
+
+            <textarea asp-for="Product.Description" class="form-control" rows="3"></textarea>
+
+            <span asp-validation-for="Product.Description" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+
+            <label asp-for="Product.Post" class="font-weight-bold"></label>
+
+            <textarea asp-for="Product.Post" class="form-control" rows="6"></textarea>
+
+            <span asp-validation-for="Product.Post" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="Product.Image" class="font-weight-bold"></label>
+
+            <input asp-for="Product.Image" class="form-control" />
+
+            <span asp-validation-for="Product.Image" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="Product.Url" class="font-weight-bold"></label>
+
+            <input asp-for="Product.Url" class="form-control" />
+
+            <span asp-validation-for="Product.Url" class="text-danger"></span>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add game</button>
+
+        <a asp-page="/Product/Index" class="btn btn-secondary ml-2">Cancel</a>
+
+    </form>
+
+</div
