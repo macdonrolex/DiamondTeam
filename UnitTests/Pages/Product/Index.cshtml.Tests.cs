@@ -90,7 +90,7 @@ namespace UnitTests.Pages.Product.Index
 
             // Assert
             Assert.That(pageModel.ModelState.IsValid, Is.True);
-            Assert.That(pageModel.Products.ToList().Count, Is.EqualTo(15));
+            Assert.That(pageModel.Products.ToList().Count, Is.EqualTo(16));
         }
         #endregion OnGet
     }
