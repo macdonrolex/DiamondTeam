@@ -1,19 +1,23 @@
-@page
+@page "{id}"
+@using ContosoCrafts.WebSite.Services
+@inject JsonFileProductService ProductService
 @model ContosoCrafts.WebSite.Pages.Product.Delete
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Delete page";
 }
 
-<!DOCTYPE html>
+<div class="container mt-4">
+    <div class="d-flex align-items-center flex-wrap mb-3">
+        <a class="btn btn-secondary mr-3" asp-page="/Product/Index">
+            Back to List
+        </a>
+        <h2 class="mb-0">Delete for @Model.Product.Title</h2>
+    </div>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+    <div>
+        <h1> Are you sure you want to delete @Model.Product.Title?</h1>
+        <button type="button" class="btn btn-danger btn-lg">Yes</button>
+        <a type="button" class="btn btn-danger btn-lg" asp-page="/Product/Index">No</a>
+    </div>
 </div>
-</body>
-</html>
