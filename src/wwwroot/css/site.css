@@ -303,3 +303,49 @@ ul {
 .pager-status {
     color: #6c757d;
 }
+/* Minimal More Info action shown with the title on hover */
+.game-card-title {
+    padding: 4px 5rem 2px 3px;
+    line-height: 2.25;
+}
+
+.game-card-menu {
+    right: 1px;
+    bottom: 1px;
+}
+
+.game-card-more-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px .5rem;
+    color: rgba(255, 255, 255, .95);
+    background: rgba(10, 10, 10, 0.1);
+    border: 1px solid rgba(255, 255, 255, .95);
+    border-radius: 6px;
+    border-color: rgba(255, 255, 255, .95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.65;
+    transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+    transform: translateY(3px);
+}
+
+.game-card:hover .game-card-more-info,
+.game-card:focus-within .game-card-more-info {
+    transform: translateY(0);
+}
+
+.game-card-more-info:hover,
+.game-card-more-info:focus-visible {
+    color: #111;
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .24);
+}
+
+@media (hover: none) {
+    .game-card-more-info {
+        transform: none;
+    }
+}
