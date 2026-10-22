@@ -10,15 +10,13 @@
             <div class="card-img game-card-image" style="background-image: url('@product.Image');">
                 <div class="game-card-title">@product.Title</div>
             </div>
-            <div class="dropdown game-card-menu">
-                <button class="btn btn-dark btn-sm rounded-circle game-card-menu-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Options for @product.Title">
-                    <span aria-hidden="true">&#8942;</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button" @onclick="(e => SelectProduct(product.Id))" data-toggle="modal" data-target="#productModal">More Info</button>
-                    <button class="dropdown-item" type="button" disabled>Edit</button>
-                    <button class="dropdown-item text-danger" type="button" disabled>Delete</button>
-                </div>
+            <div class="game-card-menu">
+                <button class="game-card-more-info" type="button" @onclick="(e => SelectProduct(product.Id))" data-toggle="modal" data-target="#productModal">More Info</button>
+
+
+
+  
+
             </div>
         </div>
     }
@@ -35,12 +33,13 @@
 
 @if (selectedProduct != null)
 {
-    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productTitle" aria-hidden="true">
+    <div class="modal-backdrop fade show" @onclick="CloseProductModal"></div>
+    <div class="modal fade show d-block" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productTitle" aria-modal="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="productTitle">@selectedProduct.Title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" @onclick="CloseProductModal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -86,6 +85,10 @@
 {
     ProductModel selectedProduct;
     string selectedProductId;
+    void CloseProductModal()
+    {
+        selectedProduct = null;
+    }
 
     void SelectProduct(string productId)
     {
