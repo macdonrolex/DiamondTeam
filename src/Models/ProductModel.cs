@@ -27,7 +27,8 @@ namespace ContosoCrafts.WebSite.Models
         
         // Short description (summary) of the post
         public string Description { get; set; }
-
+        
+        // Ratings given to the post by users(for now, haven't implemented the feature yet)
         public int[] Ratings { get; set; }
         
 		public string ShopLink { get; set; }
