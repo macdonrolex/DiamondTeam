@@ -36,6 +36,8 @@ namespace ContosoCrafts.WebSite.Models
         
         // Link to the Metacritic page of the game in the post
 		public string RatingLink { get; set; }
+        
+        // Main text content of the post
 		public string Post { get; set; }
         // Store the Comments entered by the users on this product
         public List<CommentModel> CommentList { get; set; } = new List<CommentModel>();
