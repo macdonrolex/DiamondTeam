@@ -11,6 +11,7 @@ namespace ContosoCrafts.WebSite.Models
     /// </summary>
     public class ProductModel
     {
+        // Unique identifier of the post
         public string Id { get; set; }
         public string Maker { get; set; }
 
