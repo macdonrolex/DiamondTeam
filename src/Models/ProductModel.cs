@@ -20,8 +20,6 @@ namespace ContosoCrafts.WebSite.Models
 
         public int[] Ratings { get; set; }
 
-        public string Quantity { get; set; }
-
         [Range (-1, 100, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int Price { get; set; }
 		public string ShopLink { get; set; }
