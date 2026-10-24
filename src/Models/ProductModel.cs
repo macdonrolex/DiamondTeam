@@ -16,7 +16,8 @@ namespace ContosoCrafts.WebSite.Models
         
         // Author of the post
         public string Maker { get; set; }
-
+        
+        // URL of the cover image for the game post (stored as "img" in the JSON file)
         [JsonPropertyName("img")]
         public string Image { get; set; }
         
