@@ -24,7 +24,8 @@ namespace ContosoCrafts.WebSite.Models
         // Title of the post, must be between 1 and 33 characters
         [StringLength (maximumLength: 33, MinimumLength = 1, ErrorMessage = "The Title should have a length of more than {2} and less than {1}")]
         public string Title { get; set; }
-
+        
+        // Short description (summary) of the post
         public string Description { get; set; }
 
         public int[] Ratings { get; set; }
