@@ -33,6 +33,8 @@ namespace ContosoCrafts.WebSite.Models
         
         // Link to a store page where the game can be bought (Amazon or others)
 		public string ShopLink { get; set; }
+        
+        // Link to the Metacritic page of the game in the post
 		public string RatingLink { get; set; }
 		public string Post { get; set; }
         // Store the Comments entered by the users on this product
