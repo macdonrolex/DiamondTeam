@@ -31,6 +31,7 @@ namespace ContosoCrafts.WebSite.Models
         // Ratings given to the post by users(for now, haven't implemented the feature yet)
         public int[] Ratings { get; set; }
         
+        // Link to a store page where the game can be bought (Amazon or others)
 		public string ShopLink { get; set; }
 		public string RatingLink { get; set; }
 		public string Post { get; set; }
