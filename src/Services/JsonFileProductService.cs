@@ -112,6 +112,7 @@ namespace ContosoCrafts.WebSite.Services
             productData.Post = data.Post.Trim();
             productData.Image = data.Image.Trim();
             productData.ShopLink = data.ShopLink.Trim();
+            productData.RatingLink = data.RatingLink.Trim();
 
             SaveData(products);
             return productData;
