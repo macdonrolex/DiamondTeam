@@ -13,6 +13,8 @@ namespace ContosoCrafts.WebSite.Models
     {
         // Unique identifier of the post
         public string Id { get; set; }
+        
+        // Author of the post
         public string Maker { get; set; }
 
         [JsonPropertyName("img")]
