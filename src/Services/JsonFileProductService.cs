@@ -110,6 +110,7 @@ namespace ContosoCrafts.WebSite.Services
             productData.Maker = data.Maker.Trim();
             productData.Description = data.Description.Trim();
             productData.Post = data.Post.Trim();
+            productData.Image = data.Image.Trim();
 
             SaveData(products);
             return productData;
