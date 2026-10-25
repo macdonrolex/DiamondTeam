@@ -35,6 +35,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
             }
 
+            Product.DateAdded = System.DateTime.UtcNow;
             _productService.AddProduct(Product);
 
             return RedirectToPage("/Product/Index");
