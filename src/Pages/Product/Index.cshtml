@@ -1,35 +1,71 @@
 ﻿@page
 @model ContosoCrafts.WebSite.Pages.Product.IndexModel
 @{
-ViewData["Title"] = "Index page";
+    ViewData["Title"] = "Reviews";
 }
 
-<div class="container">
-    <div style="margin-bottom: 20px;">
+<div class="container product-list-page">
+    <header class="product-list-heading">
+        <div>
+            <span class="product-list-eyebrow">POSTS PAGE</span>
+            <h1 class="product-list-title">Reviews</h1>
+            <p class="product-list-subtitle">Browse your collection of posts.</p>
+        </div>
+        <a asp-page="/Product/PostCreate" class="product-add-button">
+            <span class="product-add-icon" aria-hidden="true">+</span>
+            <span>Add a Post</span>
+        </a>
+    </header>
 
-        <a asp-page="/Product/PostCreate" class="btn btn-primary">Add New Post</a>
-    </div>
+    @if (Model.Products == null || !Model.Products.Any())
+    {
+        <div class="product-list-empty">
+            <h2>Your library is ready for its first Post</h2>
+            <p>Add a Post to see it here.</p>
+        </div>
+    }
+    else
+    {
+        <section class="product-list" aria-label="Game products">
+            @foreach (var product in Model.Products)
+            {
+                <article class="product-list-row">
+                    <div class="product-added-date">
+                        <span class="product-meta-label">Added</span>
+                        @if (product.DateAdded.HasValue)
+                        {
+                            <time class="product-date-value" datetime="@product.DateAdded.Value.ToString("yyyy-MM-dd")">
+                                @product.DateAdded.Value.ToLocalTime().ToString("MMM d, yyyy")
+                            </time>
+                        }
+                        else
+                        {
+                            <span class="product-date-value product-date-unknown">Date not recorded</span>
+                        }
+                    </div>
 
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var product in Model.Products)
-        {
-            <tr>
-                <td>@product.Title</td>
-                <td>
-                    <a class="btn btn-primary" asp-page="/Product/Read" asp-route-id="@product.Id">View Details</a>
-                    <a class="btn btn-primary" asp-page="/Product/Delete" asp-route-id="@product.Id">Delete</a>
-                    <a class="btn btn-primary" asp-page="/Product/Update" asp-route-id="@product.Id">Edit</a>
+                    <a class="product-thumb-link" asp-page="/Product/Read" asp-route-id="@product.Id" aria-label="View @product.Title">
+                        <div class="product-thumb">
+                            <img src="@product.Image" alt="@product.Title" loading="lazy" />
+                            <span class="product-thumb-title">@product.Title</span>
+                        </div>
+                    </a>
 
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
+                    <div class="product-summary">
+                        @if (!string.IsNullOrWhiteSpace(product.Maker))
+                        {
+                            <span class="product-maker">@product.Maker</span>
+                        }
+                        <p class="product-description">@product.Description</p>
+                    </div>
+
+                    <div class="product-row-actions">
+                        <a class="product-action product-action-details" asp-page="/Product/Read" asp-route-id="@product.Id">More info</a>
+                        <a class="product-action product-action-edit" asp-page="/Product/Update" asp-route-id="@product.Id">Edit</a>
+                        <a class="product-action product-action-delete" asp-page="/Product/Delete" asp-route-id="@product.Id">Delete</a>
+                    </div>
+                </article>
+            }
+        </section>
+    }
 </div>
