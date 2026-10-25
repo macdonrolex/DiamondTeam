@@ -82,14 +82,22 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 @code
-{
+{   
+    // Currently displayed game post
     public ProductModel SelectedProduct;
+    // Id of the game post
     public string SelectedProductId;
+    // Average rating of the selected game post
     public int CurrentRating = 0;
+    // Number of votes the selected game post has received
     public int VoteCount = 0;
+    // Text shown next to the vote count ("Vote" or "Votes")
     public string VoteLabel;
+    // Number of game posts shown on each page
     public const int PageSize = 6;
+    // Page currently displayed, starting from 1
     public int CurrentPage = 1;
+    // Total number of pages, calculated from the number of game posts (at least 1)
     public int TotalPages => Math.Max(1, (int)Math.Ceiling(ProductService.GetAllData().Count() / (double)PageSize));
     
     void CloseProductModal()
