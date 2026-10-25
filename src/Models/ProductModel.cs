@@ -42,6 +42,10 @@ public class ProductModel
 
     // Store the Comments entered by the users on this product
     public List<CommentModel> CommentList { get; set; } = new();
-
+    
+    /// <summary>
+    /// Converts this post to its JSON representation.
+    /// </summary>
+    /// <returns>A JSON string containing all the properties of this post</returns>
     public override string ToString() => JsonSerializer.Serialize<ProductModel>(this);
 }
