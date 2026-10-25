@@ -107,7 +107,12 @@
     {
         SelectedProduct = null;
     }
-
+    
+    /// <summary>
+    /// Finds the game post with the given id, stores it as the selected post
+    /// to show in the modal, and loads its current rating.
+    /// </summary>
+    /// <param name="productId">Id of the product the user clicked</param>
     void SelectProduct(string productId)
     {
         SelectedProductId = productId;
