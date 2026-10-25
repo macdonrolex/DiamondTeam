@@ -125,18 +125,19 @@
     /// </summary>
     void GetCurrentRating()
     {
+        // Fast fail
         if (SelectedProduct.Ratings == null)
         {
             CurrentRating = 0;
             VoteCount = 0;
+            System.Console.WriteLine($"Current rating for {SelectedProduct.Id}: {CurrentRating}");
+            return;
         }
-        else
-        {
-            VoteCount = SelectedProduct.Ratings.Count();
-            VoteLabel = VoteCount > 1 ? "Votes" : "Vote";
-            CurrentRating = SelectedProduct.Ratings.Sum() / VoteCount;
-        }
-
+        
+        VoteCount = SelectedProduct.Ratings.Count();
+        VoteLabel = VoteCount > 1 ? "Votes" : "Vote";
+        CurrentRating = SelectedProduct.Ratings.Sum() / VoteCount;
+        
         System.Console.WriteLine($"Current rating for {SelectedProduct.Id}: {CurrentRating}");
     }
     
