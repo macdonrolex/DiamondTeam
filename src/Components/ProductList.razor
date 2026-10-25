@@ -139,7 +139,12 @@
 
         System.Console.WriteLine($"Current rating for {SelectedProduct.Id}: {CurrentRating}");
     }
-
+    
+    /// <summary>
+    /// Saves a new rating for the selected game post, then reloads the post
+    /// so the stars and vote count are updated.
+    /// </summary>
+    /// <param name="rating">Number of stars the user clicked (1 to 5)</param>
     void SubmitRating(int rating)
     {
         System.Console.WriteLine($"Rating received for {SelectedProduct.Id}: {rating}");
