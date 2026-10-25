@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace ContosoCrafts.WebSite.Models;
 
 /// <summary>
-///     Data structure for storing a gaming blog post.Each entry in the JSON database
+///     Data model (structure) for a gaming blog post. Each entry in the JSON database
 ///     represents one post about one game, including its links, image, author(Maker)...etc.
 /// </summary>
 public class ProductModel
