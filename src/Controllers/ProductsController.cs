@@ -10,6 +10,7 @@ namespace ContosoCrafts.WebSite.Controllers;
 /// </summary>
 // Enables automatic API behavior
 [ApiController]
+// Attribute routing for REST APIs. See https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-10.0
 [Route("[controller]")]
 public class ProductsController : ControllerBase
 {
