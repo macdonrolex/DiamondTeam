@@ -23,6 +23,7 @@ public class ProductsController : ControllerBase
         ProductService = productService;
     }
 
+    // Service used to read and update the game post data (read-only after construction)
     public JsonFileProductService ProductService { get; }
 
     [HttpGet]
