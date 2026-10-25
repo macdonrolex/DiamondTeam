@@ -30,6 +30,7 @@ public class ProductsController : ControllerBase
     /// Gets all the game posts.
     /// </summary>
     /// <returns>A collection with every game post in the data source</returns>
+    // Handles HTTP GET requests sent to /Products
     [HttpGet]
     public IEnumerable<ProductModel> Get()
     {
