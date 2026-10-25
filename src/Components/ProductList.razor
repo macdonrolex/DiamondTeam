@@ -4,7 +4,7 @@
 @inject JsonFileProductService ProductService
 
 <div class="card-columns">
-@foreach (var product in ProductService.GetAllData().Skip((currentPage - 1) * PageSize).Take(PageSize))
+@foreach (var product in ProductService.GetAllData().Skip((CurrentPage - 1) * PageSize).Take(PageSize))
     {
          <div class="card game-card border-0">
             <div class="card-img game-card-image" style="background-image: url('@product.Image');">
@@ -22,49 +22,49 @@
     }
 </div>
 <div class="product-pager" aria-label="Product pages">
-    <button class="pager-button pager-prev" type="button" @onclick="PreviousPage" disabled="@(currentPage == 1)">
+    <button class="pager-button pager-prev" type="button" @onclick="PreviousPage" disabled="@(CurrentPage == 1)">
         <span aria-hidden="true">&larr;</span> Previous
     </button>
-    <span class="pager-status">Page @currentPage of @TotalPages</span>
-    <button class="pager-button pager-next" type="button" @onclick="NextPage" disabled="@(currentPage == TotalPages)">
+    <span class="pager-status">Page @CurrentPage of @TotalPages</span>
+    <button class="pager-button pager-next" type="button" @onclick="NextPage" disabled="@(CurrentPage == TotalPages)">
         Next <span aria-hidden="true">&rarr;</span>
     </button>
 </div>
 
-@if (selectedProduct != null)
+@if (SelectedProduct != null)
 {
     <div class="modal-backdrop fade show" @onclick="CloseProductModal"></div>
     <div class="modal fade show d-block" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productTitle" aria-modal="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="productTitle">@selectedProduct.Title</h5>
+                    <h5 class="modal-title" id="productTitle">@SelectedProduct.Title</h5>
                     <button type="button" class="close" @onclick="CloseProductModal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="card">
-                        <div class="card-img" style="background-image: url('@selectedProduct.Image');">
+                        <div class="card-img" style="background-image: url('@SelectedProduct.Image');">
                         </div>
                         <div class="card-body">
-                            <p class="card-text">@selectedProduct.Description</p>
+                            <p class="card-text">@SelectedProduct.Description</p>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    @if (voteCount == 0)
+                    @if (VoteCount == 0)
                     {
                         <span>Be the first to vote!</span>
                     }
                     else
                     {
-                        <span>@voteCount @voteLabel</span>
+                        <span>@VoteCount @VoteLabel</span>
                     }
                     @for (int i = 1; i < 6; i++)
                     {
                         var currentStar = i;
-                        if (i <= currentRating)
+                        if (i <= CurrentRating)
                         {
                             <span class="fa fa-star checked" @onclick="(e => SubmitRating(currentStar))"></span>
                         }
@@ -83,58 +83,58 @@
 
 @code
 {
-    ProductModel selectedProduct;
-    string selectedProductId;
-    int currentRating = 0;
-    int voteCount = 0;
-    string voteLabel;
+    ProductModel SelectedProduct;
+    string SelectedProductId;
+    int CurrentRating = 0;
+    int VoteCount = 0;
+    string VoteLabel;
     const int PageSize = 6;
-    int currentPage = 1;
+    int CurrentPage = 1;
     int TotalPages => Math.Max(1, (int)Math.Ceiling(ProductService.GetAllData().Count() / (double)PageSize));
     
     void CloseProductModal()
     {
-        selectedProduct = null;
+        SelectedProduct = null;
     }
 
     void SelectProduct(string productId)
     {
-        selectedProductId = productId;
-        selectedProduct = ProductService.GetAllData().First(x => x.Id == productId);
+        SelectedProductId = productId;
+        SelectedProduct = ProductService.GetAllData().First(x => x.Id == productId);
         GetCurrentRating();
     }
     
     void GetCurrentRating()
     {
-        if (selectedProduct.Ratings == null)
+        if (SelectedProduct.Ratings == null)
         {
-            currentRating = 0;
-            voteCount = 0;
+            CurrentRating = 0;
+            VoteCount = 0;
         }
         else
         {
-            voteCount = selectedProduct.Ratings.Count();
-            voteLabel = voteCount > 1 ? "Votes" : "Vote";
-            currentRating = selectedProduct.Ratings.Sum() / voteCount;
+            VoteCount = SelectedProduct.Ratings.Count();
+            VoteLabel = VoteCount > 1 ? "Votes" : "Vote";
+            CurrentRating = SelectedProduct.Ratings.Sum() / VoteCount;
         }
 
-        System.Console.WriteLine($"Current rating for {selectedProduct.Id}: {currentRating}");
+        System.Console.WriteLine($"Current rating for {SelectedProduct.Id}: {CurrentRating}");
     }
 
     void SubmitRating(int rating)
     {
-        System.Console.WriteLine($"Rating received for {selectedProduct.Id}: {rating}");
-        ProductService.AddRating(selectedProductId, rating);
-        SelectProduct(selectedProductId);
+        System.Console.WriteLine($"Rating received for {SelectedProduct.Id}: {rating}");
+        ProductService.AddRating(SelectedProductId, rating);
+        SelectProduct(SelectedProductId);
     }
     
     void PreviousPage()
     {
-        if (currentPage > 1) currentPage--;
+        if (CurrentPage > 1) CurrentPage--;
     }
 
     void NextPage()
     {
-        if (currentPage < TotalPages) currentPage++;
+        if (CurrentPage < TotalPages) CurrentPage++;
     }
 }
