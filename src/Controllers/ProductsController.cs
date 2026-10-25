@@ -8,6 +8,7 @@ namespace ContosoCrafts.WebSite.Controllers;
 /// <summary>
 /// API controller for game posts. It lets users read all the game posts and add a rating to a game post.
 /// </summary>
+// Enables automatic API behavior
 [ApiController]
 [Route("[controller]")]
 public class ProductsController : ControllerBase
