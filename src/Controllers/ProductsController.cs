@@ -37,6 +37,11 @@ public class ProductsController : ControllerBase
         return ProductService.GetAllData();
     }
 
+    /// <summary>
+    /// Adds a rating to one game post.
+    /// </summary>
+    /// <param name="request">Request body with the id of the game post and the rating to add</param>
+    /// <returns>An HTTP 200 (OK) response after the rating is saved</returns>
     [HttpPatch]
     public ActionResult Patch([FromBody] RatingRequestModel request)
     {
