@@ -36,10 +36,12 @@
   {
     "Id": "jenlooper-lightshow",
     "Maker": "@jenlooper",
-    "img": "/images/zelda.jpeg", 
+    "img": "/images/zelda.jpeg",
     "Title": "The Legend of Zelda",
     "Description": "Create a web-connected light-strip API controllable from your website, using the Particle.io.",
-    "Ratings": null,
+    "Ratings": [
+      2
+    ],
     "ShopLink": null,
     "RatingLink": "",
     "Post": "The Legend of Zelda[a] is a video game series created by Japanese game designers Shigeru Miyamoto and Takashi Tezuka. It is primarily developed and published by Nintendo, but some installments and re-releases have been outsourced to Flagship, Grezzo, and Tantalus Media.\n\nThe series centers on the various incarnations of Link, a courageous young boy of the elf-like Hylian race, and Princess Zelda, a princess within the bloodline of the goddess Hylia. They fight to save the land of Hyrule from Ganon, an evil warlord turned demon king who wishes to use the Triforce, a sacred relic that can grant any wish its user desires when complete, to remake the world in his own dark image. Zelda\u0027s role has often been that of a damsel in distress or donor who assists Link. If someone with a heart that does not possess a balance of Power, Courage, and Wisdom, attempts to touch the Triforce, it will split into three triangles and bond with three people whose hearts embody the required virtue. While the conflict with Ganon serves as a backbone for the series, some games have featured other settings and antagonists, with Link traveling or being sent to these other lands in their time of need.\n\nSince The Legend of Zelda was released in 1986, the series has expanded to include 21 entries on all of Nintendo\u0027s major game consoles, as well as a number of spin-offs. An American animated TV series based on the games aired in 1989 and manga adaptations commissioned by Nintendo have been produced in Japan since 1997. The Legend of Zelda is one of the best-selling video game franchises of all time, having sold over 150 million copies as of September 2024.[1] The series is also known for its high level of quality, with many of its entries considered among the greatest video games of all time.",
@@ -48,7 +50,7 @@
   {
     "Id": "jenlooper-survival",
     "Maker": "jenlooper",
-    "img": "/images/LOL.jpeg", 
+    "img": "/images/LOL.jpeg",
     "Title": "League of Legends",
     "Description": "Use an Altoids tin with Chibitronics sticker LEDs to create a light-up compact that doubles as a survival kit for the young hipster",
     "Ratings": null,
