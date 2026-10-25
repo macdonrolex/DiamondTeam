@@ -26,6 +26,10 @@ public class ProductsController : ControllerBase
     // Service used to read and update the game post data (read-only after construction)
     public JsonFileProductService ProductService { get; }
 
+    /// <summary>
+    /// Gets all the game posts.
+    /// </summary>
+    /// <returns>A collection with every game post in the data source</returns>
     [HttpGet]
     public IEnumerable<ProductModel> Get()
     {
