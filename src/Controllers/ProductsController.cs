@@ -14,6 +14,10 @@ namespace ContosoCrafts.WebSite.Controllers;
 [Route("[controller]")]
 public class ProductsController : ControllerBase
 {
+    /// <summary>
+    /// Creates the controller with the service that reads and saves the game posts.
+    /// </summary>
+    /// <param name="productService">Service that gives access to the game post data</param>
     public ProductsController(JsonFileProductService productService)
     {
         ProductService = productService;
