@@ -100,6 +100,9 @@
     // Total number of pages, calculated from the number of game posts (at least 1)
     public int TotalPages => Math.Max(1, (int)Math.Ceiling(ProductService.GetAllData().Count() / (double)PageSize));
     
+    /// <summary>
+    /// Closes the game post modal by clearing the selected product.
+    /// </summary>
     void CloseProductModal()
     {
         SelectedProduct = null;
