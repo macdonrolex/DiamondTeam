@@ -42,6 +42,7 @@ public class ProductsController : ControllerBase
     /// </summary>
     /// <param name="request">Request body with the id of the game post and the rating to add</param>
     /// <returns>An HTTP 200 (OK) response after the rating is saved</returns>
+    // Handles HTTP PATCH requests sent to /Products (a partial update of a game post)
     [HttpPatch]
     public ActionResult Patch([FromBody] RatingRequestModel request)
     {
