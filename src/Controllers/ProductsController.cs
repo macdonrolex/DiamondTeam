@@ -23,14 +23,14 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPatch]
-    public ActionResult Patch([FromBody] RatingRequest request)
+    public ActionResult Patch([FromBody] RatingRequestModel request)
     {
         ProductService.AddRating(request.ProductId, request.Rating);
 
         return Ok();
     }
 
-    public class RatingRequest
+    public class RatingRequestModel
     {
         public string ProductId { get; set; }
         public int Rating { get; set; }
