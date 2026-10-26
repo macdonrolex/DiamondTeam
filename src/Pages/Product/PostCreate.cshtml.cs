@@ -39,7 +39,9 @@ namespace ContosoCrafts.WebSite.Pages.Product
                 string.IsNullOrWhiteSpace(Product.Maker) &&
                 string.IsNullOrWhiteSpace(Product.Description) &&
                 string.IsNullOrWhiteSpace(Product.Post) &&
-                string.IsNullOrWhiteSpace(Product.Image))
+                string.IsNullOrWhiteSpace(Product.Image) &&
+                string.IsNullOrWhiteSpace(Product.RatingLink) &&
+                string.IsNullOrWhiteSpace(Product.ShopLink))
             {
                 ModelState.AddModelError(string.Empty, "Add at least one game detail before submitting.");
                 return Page();
