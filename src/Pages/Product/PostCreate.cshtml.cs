@@ -35,6 +35,16 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
             }
 
+            if (string.IsNullOrWhiteSpace(Product.Title) &&
+                string.IsNullOrWhiteSpace(Product.Maker) &&
+                string.IsNullOrWhiteSpace(Product.Description) &&
+                string.IsNullOrWhiteSpace(Product.Post) &&
+                string.IsNullOrWhiteSpace(Product.Image))
+            {
+                ModelState.AddModelError(string.Empty, "Add at least one game detail before submitting.");
+                return Page();
+            }
+
             Product.DateAdded = System.DateTime.UtcNow;
             _productService.AddProduct(Product);
 
