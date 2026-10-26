@@ -9,7 +9,7 @@ ViewData["Title"] = "Product Details";
     <a class="btn btn-secondary mr-3" asp-page="/Product/Index">
         Back to List
     </a>
-    <h2 class="mb-0">@Model.Product.Title</h2>
+    <h2 class="mb-0 mr-3">@Model.Product.Title</h2>
     @switch (string.IsNullOrWhiteSpace(Model.Product.Maker))
     {
 	    case true:
