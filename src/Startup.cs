@@ -9,18 +9,32 @@ using ContosoCrafts.WebSite.Services;
 
 namespace ContosoCrafts.WebSite
 {
+    /// <summary>
+    /// Registers application services and configures the HTTP request pipeline.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Creates the startup configuration using the application's configuration settings.
+        /// </summary>
+        /// <param name="configuration">Configuration values available to the application.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration values supplied to the application at startup.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Registers the services that pages, controllers, and other application components use.
+        /// </summary>
+        /// <param name="services">The application's service collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            // Register the web frameworks and the product data service used by the pages.
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddServerSideBlazor();
             services.AddHttpClient();
@@ -28,9 +42,14 @@ namespace ContosoCrafts.WebSite
             services.AddTransient<JsonFileProductService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Sets up middleware and routes used to handle incoming HTTP requests.
+        /// </summary>
+        /// <param name="app">Builder used to configure the request pipeline.</param>
+        /// <param name="env">The current hosting environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Show detailed errors in development and use the error page and HSTS elsewhere.
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -45,6 +64,7 @@ namespace ContosoCrafts.WebSite
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            // Routing must run before authorization and endpoint mapping.
             app.UseRouting();
 
             app.UseAuthorization();
