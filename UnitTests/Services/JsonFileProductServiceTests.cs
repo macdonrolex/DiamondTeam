@@ -51,6 +51,8 @@ namespace UnitTests.Services
             }
         }
 
+        #region AddRating
+
         /// <summary>
         /// Rejects a missing product identifier before reading the data file.
         /// </summary>
@@ -185,6 +187,8 @@ namespace UnitTests.Services
             // Assert
             Assert.That((result, savedRatings), Is.EqualTo((true, new[] { 3, 5 })));
         }
+
+        #endregion AddRating
 
         /// <summary>
         /// Builds a product fixture with only the identifier and ratings needed by AddRating.
