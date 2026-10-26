@@ -10,6 +10,15 @@ ViewData["Title"] = "Product Details";
         Back to List
     </a>
     <h2 class="mb-0">@Model.Product.Title</h2>
+    @switch (string.IsNullOrWhiteSpace(Model.Product.Maker))
+    {
+	    case true:
+		    <span class="product-maker">Maker Unknown</span>
+		    break;
+	    case false:
+		    <span class="product-maker">@Model.Product.Maker</span>
+		    break;
+    }
 	</div>
 	
     <img class="mx-auto d-block img-fluid" src="@Model.Product.Image" alt="@Model.Product.Title" width="300" />
