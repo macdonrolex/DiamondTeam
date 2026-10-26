@@ -1,71 +1,85 @@
 ﻿@page
 @model ContosoCrafts.WebSite.Pages.Product.PostCreateModel
 
+<div class="container py-5 post-create-page">
+    <div class="post-create-card">
+        <header class="post-create-header">
+            <span class="post-create-eyebrow">GAMEHUB · COMMUNITY LIBRARY</span>
+            <h1>Add a post</h1>
+            <p>Share a game post with the community. Add the details below to get it listed.</p>
+        </header>
 
+        <form method="post" class="post-create-form" id="postCreateForm">
+            <div asp-validation-summary="ModelOnly" class="post-create-validation" role="alert"></div>
 
+            <div class="post-create-grid">
+                <div class="post-create-field">
+                    <label asp-for="Product.Title" class="post-create-label"></label>
+                    <input asp-for="Product.Title" class="form-control post-create-input" placeholder="e.g. Stardew Valley" autocomplete="off" />
+                    <span asp-validation-for="Product.Title" class="post-create-error"></span>
+                </div>
 
-<div class="container py-4">
+                <div class="post-create-field">
+                    <label asp-for="Product.Maker" class="post-create-label"></label>
+                    <input asp-for="Product.Maker" class="form-control post-create-input" placeholder="Studio or publisher" autocomplete="organization" />
+                    <span asp-validation-for="Product.Maker" class="post-create-error"></span>
+                </div>
 
-    <h1 class="mb-4">Add a game</h1>
+                <div class="post-create-field post-create-field-wide">
+                    <label asp-for="Product.Description" class="post-create-label"></label>
+                    <textarea asp-for="Product.Description" class="form-control post-create-input post-create-textarea" rows="3" placeholder="A quick overview of the game"></textarea>
+                    <span asp-validation-for="Product.Description" class="post-create-error"></span>
+                </div>
 
-    <form method="post">
+                <div class="post-create-field post-create-field-wide">
+                    <label asp-for="Product.Post" class="post-create-label"></label>
+                    <textarea asp-for="Product.Post" class="form-control post-create-input post-create-textarea post-create-post" rows="5" placeholder="What should players know about it?"></textarea>
+                    <span asp-validation-for="Product.Post" class="post-create-error"></span>
+                </div>
 
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <div class="post-create-field post-create-field-wide">
+                    <label asp-for="Product.Image" class="post-create-label"></label>
+                    <input asp-for="Product.Image" class="form-control post-create-input" placeholder="Paste an image URL" inputmode="url" />
+                    <small class="post-create-hint">Use a direct link to the game’s cover art or promotional image.</small>
+                    <span asp-validation-for="Product.Image" class="post-create-error"></span>
+                </div>
+            </div>
 
-        <div class="form-group">
-
-            <label asp-for="Product.Title" class="font-weight-bold"></label>
-
-            <input asp-for="Product.Title" class="form-control" />
-
-            <span asp-validation-for="Product.Title" class="text-danger"></span>
-
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Product.Maker" class="font-weight-bold"></label>
-
-            <input asp-for="Product.Maker" class="form-control" />
-
-            <span asp-validation-for="Product.Maker" class="text-danger"></span>
-
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Product.Description" class="font-weight-bold"></label>
-
-            <textarea asp-for="Product.Description" class="form-control" rows="3"></textarea>
-
-            <span asp-validation-for="Product.Description" class="text-danger"></span>
-
-        </div>
-        <div class="form-group">
-
-            <label asp-for="Product.Post" class="font-weight-bold"></label>
-
-            <textarea asp-for="Product.Post" class="form-control" rows="6"></textarea>
-
-            <span asp-validation-for="Product.Post" class="text-danger"></span>
-
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Product.Image" class="font-weight-bold"></label>
-
-            <input asp-for="Product.Image" class="form-control" />
-
-            <span asp-validation-for="Product.Image" class="text-danger"></span>
-
-        </div>
-        
-
-        <button type="submit" class="btn btn-primary">Add Post</button>
-
-        <a asp-page="/Product/Index" class="btn btn-secondary ml-2">Cancel</a>
-
-    </form>
-
+            <div class="post-create-actions">
+                <a asp-page="/Product/Index" class="post-create-cancel">Cancel</a>
+                <button type="submit" class="btn post-create-submit" id="postCreateSubmit">
+                    <span>Add Post</span>
+                    <span class="post-create-submit-icon" aria-hidden="true">↗</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<script>
+    (() => {
+        const form = document.getElementById('postCreateForm');
+        const button = document.getElementById('postCreateSubmit');
+        if (!form || !button) return;
+
+        form.addEventListener('submit', (event) => {
+                            const hasInput = Array.from(form.querySelectorAll('input:not([type="hidden"]), textarea'))
+                    .some((field) => field.value.trim().length > 0);
+
+                if (!hasInput) {
+                    event.preventDefault();
+                    const summary = form.querySelector('.post-create-validation');
+                    if (summary) summary.textContent = 'Add at least one game detail before submitting.';
+                    return;
+                }
+
+    if (!form.checkValidity()) return;
+
+            event.preventDefault();
+            button.classList.add('is-submitting');
+            button.setAttribute('aria-busy', 'true');
+
+            window.setTimeout(() => HTMLFormElement.prototype.submit.call(form), 420);
+        }, { once: true });
+    })();
+</script>
