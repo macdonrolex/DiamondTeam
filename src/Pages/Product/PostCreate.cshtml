@@ -43,6 +43,17 @@
                     <small class="post-create-hint">Use a direct link to the game’s cover art or promotional image.</small>
                     <span asp-validation-for="Product.Image" class="post-create-error"></span>
                 </div>
+                <div class="post-create-field">
+                    <label asp-for="Product.RatingLink" class="post-create-label"></label>
+                    <input asp-for="Product.RatingLink" class="form-control post-create-input" placeholder="Rating Link" autocomplete="off" />
+                    <span asp-validation-for="Product.RatingLink" class="post-create-error"></span>
+                </div>
+
+                <div class="post-create-field">
+                    <label asp-for="Product.ShopLink" class="post-create-label"></label>
+                    <input asp-for="Product.ShopLink" class="form-control post-create-input" placeholder="Shop link" autocomplete="url" />
+                    <span asp-validation-for="Product.ShopLink" class="post-create-error"></span>
+                </div>
             </div>
 
             <div class="post-create-actions">
