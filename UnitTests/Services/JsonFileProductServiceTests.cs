@@ -235,6 +235,25 @@ namespace UnitTests.Services
                 (Guid.TryParse(result.Id, out _), result.Id == "caller-id", result.Ratings, saved.Id, saved.Ratings),
                 Is.EqualTo((true, false, new[] { 2, 4 }, result.Id, new[] { 2, 4 })));
         }
+        /// <summary>
+        /// Confirms DeleteData returns false when the identifier is not in the data file.
+        /// </summary>
+        [Test]
+        public void DeleteData_UnknownProductId_Should_ReturnFalse()
+        {
+            // Arrange
+            var id = "missing";
+
+            // Act
+            var result = _service.DeleteData(id);
+
+            // Reset
+            // TearDown removes the isolated JSON file.
+
+            // Assert
+            Assert.That(result, Is.False);
+        }
+        #endregion AddProduct
         }
     }
 }
