@@ -12,7 +12,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
     public class ReadModel : PageModel
     {
         // Provides access to the product records shown by this page.
-        private readonly JsonFileProductService ProductService;
+        public readonly JsonFileProductService ProductService;
 
         /// <summary>
         /// Creates the details page model with the product data service.
