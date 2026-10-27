@@ -29,5 +29,8 @@ namespace UnitTests.Pages.Product
             Assert.That(pageModel.Product, Is.Not.Null);
         }
         #endregion OnGet
+        
+        #region OnPost
+        #endregion OnPost
     }
 }
