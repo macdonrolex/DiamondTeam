@@ -54,7 +54,7 @@ public class Delete : PageModel
     }
 
     /// <summary>
-    /// Validates the submitted model, deletes the product, and returns to the listing.
+    /// Deletes the product(post) if it exists, and returns to the listing.
     /// </summary>
     /// <returns>The current page when validation fails; otherwise, a redirect to the listing.</returns>
     public IActionResult OnPost()
