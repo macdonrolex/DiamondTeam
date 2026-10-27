@@ -9,7 +9,7 @@ namespace UnitTests.Pages.Product
     {
         #region OnGet
         /// <summary>
-        /// Test whether OnGet actually return the product with given Id.
+        /// Test whether OnGet actually retrieves the product(post) with given Id.
         /// </summary>
         [Test]
         public void OnGet_Valid_Should_Should_Load_Product()
