@@ -120,7 +120,7 @@ namespace UnitTests.Pages.Product
             var result = pageModel.OnGet("jenlooper-light"); 
             
             // Reset
-            // No needed
+            // Not needed
 
             // Assert
             // The result is the page itself, not a redirect
@@ -129,6 +129,31 @@ namespace UnitTests.Pages.Product
         #endregion OnGet
         
         #region OnPost
+        /// <summary>
+        /// Test whether Onpost redirects to the index page while Product is null
+        /// </summary>
+        [Test]
+        public void OnPost_InValid_Product_Null_Should_Return_RedirectToPage_Product_Index()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var pageModel = new Delete(productService);
+            
+            pageModel.Product = null;
+            
+            // Act
+            var result = pageModel.OnPost() as RedirectToPageResult;
+            
+            // Reset
+            // Not needed
+            
+            // Assert
+            // If not RedirectToPageResult type, it will be null
+            Assert.That(result, Is.Not.Null);
+            // The redirected page is what we want
+            Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
+        }
         #endregion OnPost
     }
 }
