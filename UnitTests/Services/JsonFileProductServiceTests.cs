@@ -213,6 +213,28 @@ namespace UnitTests.Services
         {
             var json = JsonSerializer.Serialize(products);
             File.WriteAllText(Path.Combine(_webRootPath, "data", "products.json"), json);
+        /// <summary>
+        /// Confirms AddProduct preserves ratings that are already supplied.
+        /// </summary>
+        [Test]
+        public void AddProduct_ExistingRatings_ProductInput_Should_GenerateIdAndPreserveRatings()
+        {
+            // Arrange
+            var product = ProductWith("caller-id", new[] { 2, 4 });
+
+            // Act
+            var result = _service.AddProduct(product);
+            var saved = _service.GetAllData().Single(item => item.Id == result.Id);
+
+            // Reset
+            // TearDown removes the isolated JSON file.
+
+            // Assert
+            
+            Assert.That(
+                (Guid.TryParse(result.Id, out _), result.Id == "caller-id", result.Ratings, saved.Id, saved.Ratings),
+                Is.EqualTo((true, false, new[] { 2, 4 }, result.Id, new[] { 2, 4 })));
+        }
         }
     }
 }
