@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using ContosoCrafts.WebSite.Pages.Product;
 using ContosoCrafts.WebSite.Services;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UnitTests.Pages.Product
 {
@@ -31,6 +32,32 @@ namespace UnitTests.Pages.Product
         #endregion OnGet
         
         #region OnPost
+        [Test]
+        public void OnPost_InValid_All_Fields_Empty_Should_Return_Page()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var pageModel = new PostCreateModel(productService);
+            
+            // Set all fields to empty
+            pageModel.Product.Title = "";
+            pageModel.Product.Maker = "";
+            pageModel.Product.Description = "";
+            pageModel.Product.Post = "";
+            pageModel.Product.Image = "";
+            pageModel.Product.RatingLink = "";
+            pageModel.Product.ShopLink = "";
+            
+            // Act
+            var result = pageModel.OnPost();
+            
+            // Reset
+            // Not needed
+            
+            // Assert
+            Assert.That(result, Is.TypeOf<PageResult>());
+        }
         #endregion OnPost
     }
 }
