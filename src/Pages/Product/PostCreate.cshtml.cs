@@ -11,7 +11,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
     public class PostCreateModel : PageModel
     {
         // Provides the operation that stores a submitted product.
-        private readonly JsonFileProductService _productService;
+        private readonly JsonFileProductService ProductService;
 
         /// <summary>
         /// Creates the product creation page model with its data service.
@@ -21,7 +21,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
         {
 
-            _productService = productService;
+            ProductService = productService;
 
         }
 
@@ -70,7 +70,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
             // Record creation time in UTC so it is independent of the server's local time zone.
             Product.DateAdded = System.DateTime.UtcNow;
-            _productService.AddProduct(Product);
+            ProductService.AddProduct(Product);
 
             return RedirectToPage("/Product/Index");
         }
