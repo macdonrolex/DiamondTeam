@@ -21,6 +21,7 @@ using ContosoCrafts.WebSite.Services;
 
 namespace UnitTests.Pages.Product.Index
 {
+    [TestFixture]
     public class IndexTests
     {
         #region TestSetup
