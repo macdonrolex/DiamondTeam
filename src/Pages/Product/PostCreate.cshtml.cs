@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using ContosoCrafts.WebSite.Models;
 using ContosoCrafts.WebSite.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -45,17 +46,30 @@ namespace ContosoCrafts.WebSite.Pages.Product
             {
                 return Page();
             }
-
+            
+            // Store all necessary fields needed to be filled
+            List<string> fields = new List<string>();
+            fields.Add(Product.Title);
+            fields.Add(Product.Maker);
+            fields.Add(Product.Description);
+            fields.Add(Product.Post);
+            fields.Add(Product.Image);
+            fields.Add(Product.RatingLink);
+            fields.Add(Product.ShopLink);
+            
             // Require at least one entered field so an empty form does not create a blank product.
-            if (string.IsNullOrWhiteSpace(Product.Title) &&
-                string.IsNullOrWhiteSpace(Product.Maker) &&
-                string.IsNullOrWhiteSpace(Product.Description) &&
-                string.IsNullOrWhiteSpace(Product.Post) &&
-                string.IsNullOrWhiteSpace(Product.Image) &&
-                string.IsNullOrWhiteSpace(Product.RatingLink) &&
-                string.IsNullOrWhiteSpace(Product.ShopLink))
+            bool allEmpty = true;
+            foreach (var field in fields)
             {
-                ModelState.AddModelError(string.Empty, "Add at least one game detail before submitting.");
+                // If one field has something
+                if (!string.IsNullOrWhiteSpace(field))
+                {
+                    allEmpty = false;
+                }
+            }
+            if (allEmpty)
+            {
+                ModelState.AddModelError(string.Empty, "Add at least one game post detail before submitting.");
                 return Page();
             }
 
