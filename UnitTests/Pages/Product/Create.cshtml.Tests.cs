@@ -7,6 +7,8 @@ namespace UnitTests.Pages.Product
     [TestFixture]
     public class CreateTests
     {
-        
+        #region OnGet
+
+        #endregion OnGet
     }
 }
