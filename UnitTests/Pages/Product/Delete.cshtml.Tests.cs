@@ -13,7 +13,7 @@ namespace UnitTests.Pages.Product
         /// Test whether OnGet actually retrieves the product(post) with given Id.
         /// </summary>
         [Test]
-        public void OnGet_Valid_Should_Load_Product()
+        public void OnGet_Valid_Id_Exist_Should_Load_Product()
         {
             // Arrange
             var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
