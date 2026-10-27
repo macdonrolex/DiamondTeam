@@ -18,18 +18,14 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// </summary>
         /// <param name="productService">Service used to add the new product.</param>
         public PostCreateModel(JsonFileProductService productService)
-
         {
-
             ProductService = productService;
-
         }
 
         /// <summary>
         /// Gets or sets the product fields bound from the creation form.
         /// </summary>
         [BindProperty]
-
         public ProductModel Product { get; set; } = new ProductModel();
 
         /// <summary>
@@ -43,16 +39,11 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// </summary>
         /// <returns>The form when validation fails; otherwise, a redirect to the listing.</returns>
         public IActionResult OnPost()
-
         {
-
             // Return the form with validation messages when model binding finds invalid data.
             if (!ModelState.IsValid)
-
             {
-
                 return Page();
-
             }
 
             // Require at least one entered field so an empty form does not create a blank product.
@@ -74,7 +65,5 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
             return RedirectToPage("/Product/Index");
         }
-
-
-        }
     }
+}
