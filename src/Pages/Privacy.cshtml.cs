@@ -9,7 +9,7 @@ namespace ContosoCrafts.WebSite.Pages
     public class PrivacyModel : PageModel
     {
         // Logger injected for page diagnostics.
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<PrivacyModel> Logger;
 
         /// <summary>
         /// Creates the privacy page model with its logger.
@@ -17,7 +17,7 @@ namespace ContosoCrafts.WebSite.Pages
         /// <param name="logger">Logger associated with this page model.</param>
         public PrivacyModel(ILogger<PrivacyModel> logger)
         {
-            _logger = logger;
+            Logger = logger;
         }
 
         /// <summary>
