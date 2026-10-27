@@ -33,6 +33,7 @@ public class Delete : PageModel
     /// Finds the product selected for deletion.
     /// </summary>
     /// <param name="id">Identifier of the product to load.</param>
+    /// <returns>The details page when a product exists; otherwise, a redirect to the listing.</returns>
     public IActionResult OnGet(string id)
     {
         // A missing identifier cannot select a product, so return to the listing.
