@@ -7,6 +7,7 @@ namespace UnitTests.Pages.Product
     [TestFixture]
     public class ReadTests
     {
+        #region OnGet
         [Test]
         public void OnGet_Valid_Should_Return_Product()
         {
@@ -22,5 +23,6 @@ namespace UnitTests.Pages.Product
             Assert.That(pageModel.Product, Is.Not.Null);
             Assert.That(pageModel.Product.Id, Is.EqualTo("jenlooper-light"));
         }
+        #endregion OnGet
     }
 }
