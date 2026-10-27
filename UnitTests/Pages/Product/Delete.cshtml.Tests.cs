@@ -36,7 +36,7 @@ namespace UnitTests.Pages.Product
         /// Test whether OnGet returns the page when the product(post) with the given id exists.
         /// </summary>
         [Test]
-        public void OnGet_Valid_Should_Return_Page()
+        public void OnGet_Valid_Id_Exist_Should_Return_Page()
         {
             // Arrange
             var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
