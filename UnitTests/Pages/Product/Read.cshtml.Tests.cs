@@ -8,6 +8,9 @@ namespace UnitTests.Pages.Product
     public class ReadTests
     {
         #region OnGet
+        /// <summary>
+        /// Test whether OnGet actually return the product with given Id.
+        /// </summary>
         [Test]
         public void OnGet_Valid_Should_Return_Product()
         {
