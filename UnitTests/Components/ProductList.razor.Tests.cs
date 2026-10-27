@@ -20,7 +20,9 @@ namespace UnitTests.Components
         }
 
         #endregion TestSetup
-
+        /// <summary>
+        /// Test whether the home page can retrieve data from database
+        /// </summary>
         [Test]
         public void ProductList_Valid_Default_Should_Return_Content()
         {
