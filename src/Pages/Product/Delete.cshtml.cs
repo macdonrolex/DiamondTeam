@@ -59,14 +59,13 @@ public class Delete : PageModel
     /// <returns>The current page when validation fails; otherwise, a redirect to the listing.</returns>
     public IActionResult OnPost()
     {
-        // Keep the confirmation page open if the submitted form is invalid.
-        if (!ModelState.IsValid)
+        // Prevent someone calling OnPost without calling OnGet first.
+        if (Product == null)
         {
-            return Page();
+            return RedirectToPage("/Product/Index");
         }
 
         ProductService.DeleteData(Product.Id);
-        
         return RedirectToPage("/Product/Index");
     }
 }
