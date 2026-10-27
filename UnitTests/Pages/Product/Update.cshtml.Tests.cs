@@ -80,6 +80,29 @@ namespace UnitTests.Pages.Product
             // The redirected page is what we want
             Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
         }
+        
+        /// <summary>
+        /// Test whether OnGet actually retrieves the product(post) with given Id.
+        /// </summary>
+        [Test]
+        public void OnGet_Valid_Id_Exist_Should_Load_Product()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var pageModel = new UpdateModel(productService);
+
+            // Act
+            pageModel.OnGet("jenlooper-light"); 
+            
+            // Reset
+            // Not needed
+
+            // Assert
+            // The post was actually loaded into the page
+            Assert.That(pageModel.Product, Is.Not.Null);
+            Assert.That(pageModel.Product.Id, Is.EqualTo("jenlooper-light"));
+        }
         #endregion OnGet
     }
 }
