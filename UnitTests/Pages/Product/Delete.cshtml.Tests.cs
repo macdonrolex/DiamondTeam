@@ -1,3 +1,5 @@
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using ContosoCrafts.WebSite.Pages.Product;
 using ContosoCrafts.WebSite.Services;
@@ -130,7 +132,7 @@ namespace UnitTests.Pages.Product
         
         #region OnPost
         /// <summary>
-        /// Test whether Onpost redirects to the index page while Product is null
+        /// Test whether OnPost redirects to the index page while Product(post) is null
         /// </summary>
         [Test]
         public void OnPost_InValid_Product_Null_Should_Return_RedirectToPage_Product_Index()
@@ -147,6 +149,38 @@ namespace UnitTests.Pages.Product
             
             // Reset
             // Not needed
+            
+            // Assert
+            // If not RedirectToPageResult type, it will be null
+            Assert.That(result, Is.Not.Null);
+            // The redirected page is what we want
+            Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
+        }
+        
+        /// <summary>
+        /// Test whether OnPost redirects to the index page after deleting a product(post)
+        /// </summary>
+        [Test]
+        public void OnPost_Valid_Product_Exist_Should_Return_RedirectToPage_Product_Index()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var pageModel = new Delete(productService);
+            
+            // Put data into product
+            pageModel.Product = productService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-light");
+            
+            // Backup original database for resetting.
+            var path = Path.Combine(TestFixture.DataWebRootPath, "data", "products.json");
+            var backupDatabase = File.ReadAllText(path);
+            
+            // Act
+            var result = pageModel.OnPost() as RedirectToPageResult;
+            
+            // Reset
+            // Write the original texts in the database back to modified database
+            File.WriteAllText(path, backupDatabase);
             
             // Assert
             // If not RedirectToPageResult type, it will be null
