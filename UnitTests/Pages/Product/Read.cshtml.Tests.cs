@@ -1,12 +1,11 @@
 using NUnit.Framework;
 using ContosoCrafts.WebSite.Pages.Product;
 using ContosoCrafts.WebSite.Services;
-using Bunit;
 
 namespace UnitTests.Pages.Product
 {
     [TestFixture]
-    public class ReadTests : BunitTestContext
+    public class ReadTests
     {
         [Test]
         public void OnGet_Valid_Should_Return_Product()
