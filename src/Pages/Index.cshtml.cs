@@ -20,10 +20,10 @@ namespace ContosoCrafts.WebSite.Pages
         /// </summary>
         /// <param name="logger">Logger associated with this page model.</param>
         /// <param name="productService">Service that reads product data.</param>
-        public IndexModel(ILogger<IndexModel> ILogger,
+        public IndexModel(ILogger<IndexModel> logger,
             JsonFileProductService productService)
         {
-            Logger = ILogger;
+            Logger = logger;
             ProductService = productService;
         }
 
