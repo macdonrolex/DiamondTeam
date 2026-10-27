@@ -12,7 +12,7 @@ namespace ContosoCrafts.WebSite.Pages.Product;
 public class Delete : PageModel
 {
     // Provides product lookup and deletion operations for this page.
-    private readonly JsonFileProductService ProductService;
+    public readonly JsonFileProductService ProductService;
 
     /// <summary>
     /// Creates the delete page model with the product data service.
