@@ -18,6 +18,8 @@ namespace UnitTests.Pages.Product
 
             // Act
             pageModel.OnGet("jenlooper-light");
+            
+            // Reset
 
             // Assert
             Assert.That(pageModel.Product, Is.Not.Null);
