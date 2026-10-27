@@ -158,6 +158,39 @@ namespace UnitTests.Pages.Product
         }
         
         /// <summary>
+        /// Test whether OnPost deletes the product(post) if it exists.
+        /// </summary>
+        [Test]
+        public void OnPost_Valid_Product_Exist_Should_Delete_Product()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var pageModel = new Delete(productService);
+            
+            // Put data into product
+            pageModel.Product = productService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-light");
+            
+            // Backup original database for resetting.
+            var path = Path.Combine(TestFixture.DataWebRootPath, "data", "products.json");
+            var backupDatabase = File.ReadAllText(path);
+            
+            // Act
+            pageModel.OnPost();
+            
+            // Try to get the product with the same Id
+            var resultPageModel = productService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-light");
+            
+            // Reset
+            // Write the original texts in the database back to modified database
+            File.WriteAllText(path, backupDatabase);
+            
+            // Assert
+            // Cannot get the product with the Id
+            Assert.That(resultPageModel, Is.Null);
+        }
+        
+        /// <summary>
         /// Test whether OnPost redirects to the index page after deleting a product(post)
         /// </summary>
         [Test]
