@@ -23,7 +23,7 @@ namespace ContosoCrafts.WebSite.Pages
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
         // Retained for the page's diagnostic logging dependency.
-        private readonly ILogger<ErrorModel> Logger;
+        public readonly ILogger<ErrorModel> Logger;
 
         /// <summary>
         /// Creates the error page model with its logger.
