@@ -33,9 +33,23 @@ public class Delete : PageModel
     /// Finds the product selected for deletion.
     /// </summary>
     /// <param name="id">Identifier of the product to load.</param>
-    public void OnGet(string id)
+    public IActionResult OnGet(string id)
     {
-        Product = ProductService.GetAllData().FirstOrDefault(m => m.Id.Equals(id));
+        // A missing identifier cannot select a product, so return to the listing.
+        if (string.IsNullOrEmpty(id))
+        {
+            return RedirectToPage("/Product/Index");
+        }
+
+        Product = ProductService.GetAllData().FirstOrDefault(x => x.Id == id);
+
+        // Redirect when the supplied identifier does not match a stored product.
+        if (Product == null)
+        {
+            return RedirectToPage("/Product/Index");
+        }
+
+        return Page();
     }
 
     /// <summary>
