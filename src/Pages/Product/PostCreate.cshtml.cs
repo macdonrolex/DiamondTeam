@@ -11,7 +11,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
     public class PostCreateModel : PageModel
     {
         // Provides the operation that stores a submitted product.
-        private readonly JsonFileProductService ProductService;
+        public readonly JsonFileProductService ProductService;
 
         /// <summary>
         /// Creates the product creation page model with its data service.
