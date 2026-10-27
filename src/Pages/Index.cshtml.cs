@@ -13,7 +13,7 @@ namespace ContosoCrafts.WebSite.Pages
     public class IndexModel : PageModel
     {
         // Logger injected for the page model; retained for diagnostics as the page evolves.
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<IndexModel> Logger;
 
         /// <summary>
         /// Creates the home page model with its logging and product data dependencies.
@@ -23,7 +23,7 @@ namespace ContosoCrafts.WebSite.Pages
         public IndexModel(ILogger<IndexModel> logger,
             JsonFileProductService productService)
         {
-            _logger = logger;
+            Logger = logger;
             ProductService = productService;
         }
 
