@@ -213,6 +213,26 @@ namespace UnitTests.Services
         {
             var json = JsonSerializer.Serialize(products);
             File.WriteAllText(Path.Combine(_webRootPath, "data", "products.json"), json);
+        /// <summary>
+        /// Confirms the service keeps the environment used to locate its data file.
+        /// </summary>
+        [Test]
+        public void Constructor_EnvironmentProvided_Should_KeepEnvironment()
+        {
+            
+            // Arrange
+            var environment = new Mock<IWebHostEnvironment>();
+            environment.SetupGet(host => host.WebRootPath).Returns(_webRootPath);
+
+            // Act
+            var result = new JsonFileProductService(environment.Object);
+
+            // Reset
+            // The temporary directory is removed by TearDown.
+
+            // Assert
+            Assert.That(result.WebHostEnvironment, Is.SameAs(environment.Object));
+        }
 
         /// <summary>
         /// Confirms an empty JSON array produces an empty product collection.
