@@ -213,6 +213,25 @@ namespace UnitTests.Services
         {
             var json = JsonSerializer.Serialize(products);
             File.WriteAllText(Path.Combine(_webRootPath, "data", "products.json"), json);
+
+        /// <summary>
+        /// Confirms an empty JSON array produces an empty product collection.
+        /// </summary>
+        [Test]
+        public void GetAllData_EmptyJsonArray_Should_ReturnNoProducts()
+        {
+            // Arrange
+            WriteProducts();
+
+            // Act
+            var result = _service.GetAllData().Count();
+
+            // Reset
+            // TearDown removes the isolated JSON file.
+
+            // Assert
+            Assert.That(result, Is.Zero);
+        }
             /// <summary>
         /// Confirms UpdateData trims and saves every editable field for a matching product.
         /// </summary>
