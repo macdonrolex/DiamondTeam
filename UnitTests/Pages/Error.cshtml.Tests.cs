@@ -29,10 +29,13 @@ namespace UnitTests.Pages.Error
                 TempData = TestHelper.TempData,
             };
         }
-
         #endregion TestSetup
 
         #region OnGet
+        /// <summary>
+        /// Test whether OnGet uses the id of the current activity as the request id
+        /// when an activity is running.
+        /// </summary>
         [Test]
         public void OnGet_Valid_Activity_Set_Should_Return_RequestId()
         {
