@@ -54,7 +54,11 @@ namespace UnitTests.Pages.Error
             Assert.That(pageModel.ModelState.IsValid, Is.True);
             Assert.That(pageModel.RequestId, Is.EqualTo(activity.Id));
         }
-
+        
+        /// <summary>
+        /// Test whether OnGet uses the trace identifier of the HTTP context as the
+        /// request id when there is no current activity.
+        /// </summary>
         [Test]
         public void OnGet_InValid_Activity_Null_Should_Return_TraceIdentifier()
         {
