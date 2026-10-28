@@ -233,6 +233,7 @@ namespace UnitTests.Services
             // Assert
             Assert.That(result.WebHostEnvironment, Is.SameAs(environment.Object));
         }
+        #region GetAllData
 
         /// <summary>
         /// Confirms product JSON is read even when its property names use different casing.
