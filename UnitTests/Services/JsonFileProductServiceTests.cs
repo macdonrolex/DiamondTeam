@@ -276,6 +276,8 @@ namespace UnitTests.Services
             // Assert
             Assert.That(result, Is.Zero);
         }
+   
+        #endregion GetAllData
             /// <summary>
         /// Confirms UpdateData trims and saves every editable field for a matching product.
         /// </summary>
