@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using System.Linq;
@@ -15,7 +16,7 @@ using NUnit.Framework;
 namespace UnitTests.Services
 {
     /// <summary>
-    /// Verifies AddRating input guards, rating boundaries, and persisted updates.
+    /// Tests JSON product reads, ratings, updates, creation, addition, and deletion.
     /// </summary>
     [TestFixture]
     public class JsonFileProductServiceTests
@@ -189,7 +190,7 @@ namespace UnitTests.Services
         }
 
         #endregion AddRating
-
+        #region Test Helpers
         /// <summary>
         /// Builds a product fixture with only the identifier and ratings needed by AddRating.
         /// </summary>
@@ -204,6 +205,7 @@ namespace UnitTests.Services
                 Ratings = ratings
             };
         }
+        #region 
 
         /// <summary>
         /// Writes the supplied product records to this test's isolated JSON file.
@@ -211,8 +213,11 @@ namespace UnitTests.Services
         /// <param name="products">Records to write.</param>
         private void WriteProducts(params ProductModel[] products)
         {
+            var filePath = Path.Combine(_webRootPath, "data", "products.json");
             var json = JsonSerializer.Serialize(products);
-            File.WriteAllText(Path.Combine(_webRootPath, "data", "products.json"), json);
+            File.WriteAllText(filePath, json);
+        }
+#endregion Test Helpers
         /// <summary>
         /// Confirms the service keeps the environment used to locate its data file.
         /// </summary>
@@ -234,6 +239,7 @@ namespace UnitTests.Services
             Assert.That(result.WebHostEnvironment, Is.SameAs(environment.Object));
         }
         #region GetAllData
+
 
         /// <summary>
         /// Confirms product JSON is read even when its property names use different casing.
@@ -278,6 +284,9 @@ namespace UnitTests.Services
         }
    
         #endregion GetAllData
+            
+        #region UpdateData
+
             /// <summary>
         /// Confirms UpdateData trims and saves every editable field for a matching product.
         /// </summary>
@@ -311,6 +320,7 @@ namespace UnitTests.Services
                 Is.EqualTo(("New title", "Maker", "Description", "Post", "image.png", "shop", "rating",
                     "New title", "Maker", "Description", "Post", "image.png", "shop", "rating")));
         }
+
         /// <summary>
         /// Confirms UpdateData returns null when the requested product is not stored.
         /// </summary>
@@ -330,6 +340,11 @@ namespace UnitTests.Services
             // Assert
             Assert.That(result, Is.Null);
         }
+
+        #endregion UpdateData
+        #region CreateData
+
+        /// <summary>
         /// Confirms CreateData generates and saves a product with its placeholder values.
         /// </summary>
         [Test]
@@ -352,6 +367,8 @@ namespace UnitTests.Services
                 Is.EqualTo((true, "Enter Title", "Enter Description", "", originalCount + 1, "Enter Title")));
         }
 
+        #endregion CreateData
+
         /// <summary>
         /// Confirms AddProduct replaces a supplied ID, initializes missing ratings, and saves the product.
         /// </summary>
@@ -371,6 +388,7 @@ namespace UnitTests.Services
             // Assert
             Assert.That(result.Ratings, Is.Empty);
         }
+
         /// <summary>
         /// Confirms AddProduct preserves ratings that are already supplied.
         /// </summary>
@@ -393,6 +411,7 @@ namespace UnitTests.Services
                 (Guid.TryParse(result.Id, out _), result.Id == "caller-id", result.Ratings, saved.Id, saved.Ratings),
                 Is.EqualTo((true, false, new[] { 2, 4 }, result.Id, new[] { 2, 4 })));
         }
+
         /// <summary>
         /// Confirms DeleteData returns false when the identifier is not in the data file.
         /// </summary>
@@ -412,7 +431,7 @@ namespace UnitTests.Services
             Assert.That(result, Is.False);
         }
         #endregion AddProduct
-        #region DeleteDataAdded the test for DeleteData with an existing product ID.
+        #region DeleteData
 
 
         /// <summary>
