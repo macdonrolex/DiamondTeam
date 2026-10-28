@@ -58,7 +58,7 @@ namespace UnitTests.Services
         /// Rejects a missing product identifier before reading the data file.
         /// </summary>
         [Test]
-        public void AddRating_NullProductId_Should_ReturnFalse()
+        public void AddRating_InValid_NullProductId_Should_ReturnFalse()
         {
             // Arrange
             const string productId = null;
@@ -77,7 +77,7 @@ namespace UnitTests.Services
         /// Rejects an empty product identifier before reading the data file.
         /// </summary>
         [Test]
-        public void AddRating_EmptyProductId_Should_ReturnFalse()
+        public void AddRating_InValid_EmptyProductId_Should_ReturnFalse()
         {
             // Arrange
             const string productId = "";
@@ -96,7 +96,7 @@ namespace UnitTests.Services
         /// Returns false when the identifier does not match a stored product.
         /// </summary>
         [Test]
-        public void AddRating_UnknownProductId_Should_ReturnFalse()
+        public void AddRating_InValid_UnknownProductId_Should_ReturnFalse()
         {
             // Arrange
             const string productId = "missing";
@@ -115,7 +115,7 @@ namespace UnitTests.Services
         /// Rejects ratings below the allowed range.
         /// </summary>
         [Test]
-        public void AddRating_NegativeRating_Should_ReturnFalse()
+        public void AddRating_InValid_NegativeRating_Should_ReturnFalse()
         {
             // Arrange
             const int rating = -1;
@@ -134,7 +134,7 @@ namespace UnitTests.Services
         /// Rejects ratings above the allowed range.
         /// </summary>
         [Test]
-        public void AddRating_RatingAboveMaximum_Should_ReturnFalse()
+        public void AddRating_InValid_RatingAboveMaximum_Should_ReturnFalse()
         {
             // Arrange
             const int rating = 6;
@@ -153,7 +153,7 @@ namespace UnitTests.Services
         /// Accepts the minimum rating and initializes a missing ratings array.
         /// </summary>
         [Test]
-        public void AddRating_NullRatingsAndMinimumValue_Should_InitializeAndSaveRating()
+        public void AddRating_Valid_NullRatingsAndMinimumValue_Should_InitializeAndSaveRating()
         {
             // Arrange
             WriteProducts(ProductWith("game-1", ratings: null));
@@ -173,7 +173,7 @@ namespace UnitTests.Services
         /// Accepts the maximum rating and appends it to existing ratings.
         /// </summary>
         [Test]
-        public void AddRating_ExistingRatingsAndMaximumValue_Should_AppendAndSaveRating()
+        public void AddRating_Valid_ExistingRatingsAndMaximumValue_Should_AppendAndSaveRating()
         {
             // Arrange
             WriteProducts(ProductWith("game-1", ratings: new[] { 3 }));
@@ -222,7 +222,7 @@ namespace UnitTests.Services
         /// Confirms the service keeps the environment used to locate its data file.
         /// </summary>
         [Test]
-        public void Constructor_EnvironmentProvided_Should_KeepEnvironment()
+        public void Constructor_Valid_EnvironmentProvided_Should_KeepEnvironment()
         {
             
             // Arrange
@@ -245,7 +245,7 @@ namespace UnitTests.Services
         /// Confirms product JSON is read even when its property names use different casing.
         /// </summary>
         [Test]
-        public void GetAllData_ValidJson_Should_ReadPropertiesCaseInsensitively()
+        public void GetAllData_Valid_Json_Should_ReadPropertiesCaseInsensitively()
         {
             // Arrange
             File.WriteAllText(
@@ -268,7 +268,7 @@ namespace UnitTests.Services
         /// Confirms an empty JSON array produces an empty product collection.
         /// </summary>
         [Test]
-        public void GetAllData_EmptyJsonArray_Should_ReturnNoProducts()
+        public void GetAllData_Valid_EmptyJsonArray_Should_ReturnNoProducts()
         {
             // Arrange
             WriteProducts();
@@ -291,7 +291,7 @@ namespace UnitTests.Services
         /// Confirms UpdateData trims and saves every editable field for a matching product.
         /// </summary>
         [Test]
-        public void UpdateData_ExistingProduct_AllFields_Should_TrimAndPersist()
+        public void UpdateData_Valid_ExistingProduct_AllFields_Should_TrimAndPersist()
         {
             // Arrange
             var data = new ProductModel
@@ -325,7 +325,7 @@ namespace UnitTests.Services
         /// Confirms UpdateData returns null when the requested product is not stored.
         /// </summary>
         [Test]
-        public void UpdateData_UnknownProductId_Should_ReturnNull()
+        public void UpdateData_InValid_UnknownProductId_Should_ReturnNull()
         {
             // Arrange
             var data = ProductWith("missing", new int[0]);
@@ -348,7 +348,7 @@ namespace UnitTests.Services
         /// Confirms CreateData generates and saves a product with its placeholder values.
         /// </summary>
         [Test]
-        public void CreateData_ExistingProducts_Should_CreateAndPersistPlaceholderProduct()
+        public void CreateData_Valid_ExistingProducts_Should_CreateAndPersistPlaceholderProduct()
         {
             // Arrange
             var originalCount = _service.GetAllData().Count();
@@ -373,7 +373,7 @@ namespace UnitTests.Services
         /// Confirms AddProduct replaces a supplied ID, initializes missing ratings, and saves the product.
         /// </summary>
         [Test]
-        public void AddProduct_NullRatings_ProductInput_Should_InitializeRatings()
+        public void AddProduct_Valid_NullRatings_ProductInput_Should_InitializeRatings()
         {
             // Arrange
             var product = ProductWith("caller-id", null);
@@ -393,7 +393,7 @@ namespace UnitTests.Services
         /// Confirms AddProduct preserves ratings that are already supplied.
         /// </summary>
         [Test]
-        public void AddProduct_ExistingRatings_ProductInput_Should_GenerateIdAndPreserveRatings()
+        public void AddProduct_Valid_ExistingRatings_ProductInput_Should_GenerateIdAndPreserveRatings()
         {
             // Arrange
             var product = ProductWith("caller-id", new[] { 2, 4 });
@@ -416,7 +416,7 @@ namespace UnitTests.Services
         /// Confirms DeleteData returns false when the identifier is not in the data file.
         /// </summary>
         [Test]
-        public void DeleteData_UnknownProductId_Should_ReturnFalse()
+        public void DeleteData_InValid_UnknownProductId_Should_ReturnFalse()
         {
             // Arrange
             var id = "missing";
@@ -438,7 +438,7 @@ namespace UnitTests.Services
         /// Confirms DeleteData removes a matching product and saves the remaining collection.
         /// </summary>
         [Test]
-        public void DeleteData_ExistingProductId_Should_RemoveProductAndReturnTrue()
+        public void DeleteData_Valid_ExistingProductId_Should_RemoveProductAndReturnTrue()
         {
             // Arrange
             var id = "game-1";
