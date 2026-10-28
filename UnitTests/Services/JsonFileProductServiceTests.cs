@@ -254,6 +254,27 @@ namespace UnitTests.Services
             Assert.That(result, Is.False);
         }
         #endregion AddProduct
+        #region DeleteDataAdded the test for DeleteData with an existing product ID.
+
+
+        /// <summary>
+        /// Confirms DeleteData removes a matching product and saves the remaining collection.
+        /// </summary>
+        [Test]
+        public void DeleteData_ExistingProductId_Should_RemoveProductAndReturnTrue()
+        {
+            // Arrange
+            var id = "game-1";
+
+            // Act
+            var result = _service.DeleteData(id);
+            var remainingCount = _service.GetAllData().Count();
+
+            // Reset
+            // TearDown removes the isolated JSON file.
+
+            // Assert
+            Assert.That((result, remainingCount), Is.EqualTo((true, 0)));
         }
     }
 }
