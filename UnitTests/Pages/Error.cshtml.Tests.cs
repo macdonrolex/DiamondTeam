@@ -14,7 +14,10 @@ namespace UnitTests.Pages.Error
     {
         #region TestSetup
         public static ErrorModel pageModel;
-
+        
+        /// <summary>
+        /// Test setup for ErrorTests
+        /// </summary>
         [SetUp]
         public void TestInitialize()
         {
