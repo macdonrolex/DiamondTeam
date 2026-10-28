@@ -235,6 +235,29 @@ namespace UnitTests.Services
         }
 
         /// <summary>
+        /// Confirms product JSON is read even when its property names use different casing.
+        /// </summary>
+        [Test]
+        public void GetAllData_ValidJson_Should_ReadPropertiesCaseInsensitively()
+        {
+            // Arrange
+            File.WriteAllText(
+                Path.Combine(_webRootPath, "data", "products.json"),
+                "[{\"id\":\"game-2\",\"title\":\"Sample\",\"ratings\":[4]}]");
+
+            // Act
+            var result = _service.GetAllData().Single();
+
+            // Reset
+            // TearDown removes the isolated JSON file.
+
+            // Assert
+            Assert.That(result.Id, Is.EqualTo("game-2"));
+            Assert.That(result.Title, Is.EqualTo("Sample"));
+            Assert.That(result.Ratings, Is.EqualTo(new[] { 4 }));
+        }
+
+        /// <summary>
         /// Confirms an empty JSON array produces an empty product collection.
         /// </summary>
         [Test]
