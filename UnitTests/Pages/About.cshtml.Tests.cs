@@ -5,6 +5,8 @@ namespace UnitTests.Pages.About
 {
     public class AboutTests
     {
-        
+        #region OnGet
+  
+        #endregion OnGet
     }
 }
