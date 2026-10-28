@@ -213,6 +213,27 @@ namespace UnitTests.Services
         {
             var json = JsonSerializer.Serialize(products);
             File.WriteAllText(Path.Combine(_webRootPath, "data", "products.json"), json);
+        /// Confirms CreateData generates and saves a product with its placeholder values.
+        /// </summary>
+        [Test]
+        public void CreateData_ExistingProducts_Should_CreateAndPersistPlaceholderProduct()
+        {
+            // Arrange
+            var originalCount = _service.GetAllData().Count();
+
+            // Act
+            var result = _service.CreateData();
+            var saved = _service.GetAllData().Single(product => product.Id == result.Id);
+
+            // Reset
+            // TearDown removes the isolated JSON file.
+
+            // Assert
+            Assert.That(
+                (!string.IsNullOrWhiteSpace(result.Id), result.Title, result.Description, result.Image,
+                    _service.GetAllData().Count(), saved.Title),
+                Is.EqualTo((true, "Enter Title", "Enter Description", "", originalCount + 1, "Enter Title")));
+        }
 
         /// <summary>
         /// Confirms AddProduct replaces a supplied ID, initializes missing ratings, and saves the product.
