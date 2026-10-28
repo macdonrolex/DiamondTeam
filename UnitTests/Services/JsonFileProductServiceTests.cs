@@ -213,6 +213,25 @@ namespace UnitTests.Services
         {
             var json = JsonSerializer.Serialize(products);
             File.WriteAllText(Path.Combine(_webRootPath, "data", "products.json"), json);
+        /// <summary>
+        /// Confirms UpdateData returns null when the requested product is not stored.
+        /// </summary>
+        [Test]
+        public void UpdateData_UnknownProductId_Should_ReturnNull()
+        {
+            // Arrange
+            var data = ProductWith("missing", new int[0]);
+
+            
+            // Act
+            var result = _service.UpdateData(data);
+
+            // Reset
+            // TearDown removes the isolated JSON file.
+
+            // Assert
+            Assert.That(result, Is.Null);
+        }
         /// Confirms CreateData generates and saves a product with its placeholder values.
         /// </summary>
         [Test]
