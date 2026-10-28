@@ -213,6 +213,39 @@ namespace UnitTests.Services
         {
             var json = JsonSerializer.Serialize(products);
             File.WriteAllText(Path.Combine(_webRootPath, "data", "products.json"), json);
+            /// <summary>
+        /// Confirms UpdateData trims and saves every editable field for a matching product.
+        /// </summary>
+        [Test]
+        public void UpdateData_ExistingProduct_AllFields_Should_TrimAndPersist()
+        {
+            // Arrange
+            var data = new ProductModel
+            {
+                Id = "game-1",
+                Title = "  New title  ",
+                Maker = "  Maker  ",
+                Description = "  Description  ",
+                Post = "  Post  ",
+                Image = "  image.png  ",
+                ShopLink = "  shop  ",
+                RatingLink = "  rating  "
+            };
+
+            // Act
+            var result = _service.UpdateData(data);
+            var saved = _service.GetAllData().Single();
+
+            // Reset
+            // TearDown removes the isolated JSON file.
+
+            // Assert
+            Assert.That(
+                (result.Title, result.Maker, result.Description, result.Post, result.Image, result.ShopLink, result.RatingLink,
+                    saved.Title, saved.Maker, saved.Description, saved.Post, saved.Image, saved.ShopLink, saved.RatingLink),
+                Is.EqualTo(("New title", "Maker", "Description", "Post", "image.png", "shop", "rating",
+                    "New title", "Maker", "Description", "Post", "image.png", "shop", "rating")));
+        }
         /// <summary>
         /// Confirms UpdateData returns null when the requested product is not stored.
         /// </summary>
