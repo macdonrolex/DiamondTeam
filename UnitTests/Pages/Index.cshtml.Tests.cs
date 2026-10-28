@@ -32,6 +32,10 @@ namespace UnitTests.Pages.Index
         #endregion TestSetup
 
         #region OnGet
+        /// <summary>
+        /// Test whether OnGet loads the game posts into the Products property
+        /// of the Index page (home page).
+        /// </summary>
         [Test]
         public void OnGet_Valid_Should_Return_Products()
         {
