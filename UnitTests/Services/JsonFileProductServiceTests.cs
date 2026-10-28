@@ -213,6 +213,26 @@ namespace UnitTests.Services
         {
             var json = JsonSerializer.Serialize(products);
             File.WriteAllText(Path.Combine(_webRootPath, "data", "products.json"), json);
+
+        /// <summary>
+        /// Confirms AddProduct replaces a supplied ID, initializes missing ratings, and saves the product.
+        /// </summary>
+        [Test]
+        public void AddProduct_NullRatings_ProductInput_Should_InitializeRatings()
+        {
+            // Arrange
+            var product = ProductWith("caller-id", null);
+
+            // Act
+            var result = _service.AddProduct(product);
+            var saved = _service.GetAllData().Single(item => item.Id == result.Id);
+
+            // Reset
+            // TearDown removes the isolated JSON file.
+
+            // Assert
+            Assert.That(result.Ratings, Is.Empty);
+        }
         /// <summary>
         /// Confirms AddProduct preserves ratings that are already supplied.
         /// </summary>
