@@ -18,7 +18,7 @@ namespace UnitTests.Pages.Product
             // Arrange
             var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
             var productService = new JsonFileProductService(webHostEnvironment);
-            var pageModel = new PostCreateModel(productService);
+            var pageModel = new CreateModel(productService);
 
             // Act
             pageModel.OnGet();
@@ -38,7 +38,7 @@ namespace UnitTests.Pages.Product
             // Arrange
             var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
             var productService = new JsonFileProductService(webHostEnvironment);
-            var pageModel = new PostCreateModel(productService);
+            var pageModel = new CreateModel(productService);
             
             // Set all fields to empty
             pageModel.Product.Title = "";

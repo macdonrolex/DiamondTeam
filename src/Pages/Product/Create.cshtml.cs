@@ -9,7 +9,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
     /// <summary>
     /// Handles the form for creating a new product.
     /// </summary>
-    public class PostCreateModel : PageModel
+    public class CreateModel : PageModel
     {
         // Provides the operation that stores a submitted product.
         public readonly JsonFileProductService ProductService;
@@ -18,7 +18,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// Creates the product creation page model with its data service.
         /// </summary>
         /// <param name="productService">Service used to add the new product.</param>
-        public PostCreateModel(JsonFileProductService productService)
+        public CreateModel(JsonFileProductService productService)
         {
             ProductService = productService;
         }
