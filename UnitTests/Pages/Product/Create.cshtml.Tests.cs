@@ -1,3 +1,5 @@
+using System.Linq;
+using AngleSharp.Common;
 using NUnit.Framework;
 using ContosoCrafts.WebSite.Pages.Product;
 using ContosoCrafts.WebSite.Services;
@@ -32,8 +34,11 @@ namespace UnitTests.Pages.Product
         #endregion OnGet
         
         #region OnPost
+        /// <summary>
+        /// If the user didn't fill in any content, return the same page with error message.
+        /// </summary>
         [Test]
-        public void OnPost_InValid_All_Fields_Empty_Should_Return_Page()
+        public void OnPost_InValid_All_Fields_Empty_Should_Return_Page_With_Errors()
         {
             // Arrange
             var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
@@ -51,12 +56,16 @@ namespace UnitTests.Pages.Product
             
             // Act
             var result = pageModel.OnPost();
+            // Get the error message from the errors collection of string.Empty
+            var resultMessage = pageModel.ModelState[string.Empty].Errors[0].ErrorMessage;
             
             // Reset
             // Not needed
             
             // Assert
             Assert.That(result, Is.TypeOf<PageResult>());
+            Assert.That(pageModel.ModelState.IsValid, Is.False);
+            Assert.That(resultMessage, Is.EqualTo("Add at least one game post detail before submitting."));
         }
         #endregion OnPost
     }
