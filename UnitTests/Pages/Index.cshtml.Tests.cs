@@ -43,6 +43,8 @@ namespace UnitTests.Pages.Index
 
             // Act
             pageModel.OnGet();
+            
+            // Reset
 
             // Assert
             Assert.That(pageModel.ModelState.IsValid, Is.True);
