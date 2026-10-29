@@ -85,6 +85,9 @@ namespace UnitTests.Pages.Product.Index
         #endregion TestSetup
 
         #region OnGet
+        /// <summary>
+        /// Test whether the index page can retrieve  all the products
+        /// </summary>
         [Test]
         public void OnGet_Valid_Should_Return_Products()
         {
