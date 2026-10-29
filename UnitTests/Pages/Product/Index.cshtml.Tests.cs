@@ -37,6 +37,10 @@ namespace UnitTests.Pages.Product.Index
 
         public static IndexModel pageModel;
 
+        /// <summary>
+        /// Creates the fake web objects and the Index page model before each test,
+        /// so every test starts with a clean page model that reads the real data file.
+        /// </summary>
         [SetUp]
         public void TestInitialize()
         {
