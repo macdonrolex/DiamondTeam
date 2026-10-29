@@ -95,6 +95,8 @@ namespace UnitTests.Pages.Product.Index
 
             // Act
             pageModel.OnGet();
+            
+            // Reset
 
             // Assert
             Assert.That(pageModel.ModelState.IsValid, Is.True);
