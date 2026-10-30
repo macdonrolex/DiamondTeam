@@ -1,4 +1,5 @@
 @page
+@using ContosoCrafts.WebSite.Models
 @model ContosoCrafts.WebSite.Pages.Product.ReadModel
 @{
 ViewData["Title"] = "Product Details";
@@ -19,6 +20,7 @@ ViewData["Title"] = "Product Details";
 		    <span class="product-maker">@Model.Product.Maker</span>
 		    break;
     }
+    <span class="game-genre">@Model.Product.Genre.DisplayGenre()</span>
 	</div>
 	
     <img class="mx-auto d-block img-fluid" src="@Model.Product.Image" alt="@Model.Product.Title" width="300" />
