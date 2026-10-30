@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UnitTests.Pages.Product
 {
+    /// <summary>
+    ///  Unit tests for Update.cshtml.cs and Update.cshtml
+    /// </summary>
     [TestFixture]
     public class UpdateTests
     {
