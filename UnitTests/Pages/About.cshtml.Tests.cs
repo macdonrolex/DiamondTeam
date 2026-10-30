@@ -4,6 +4,9 @@ using ContosoCrafts.WebSite.Pages;
 
 namespace UnitTests.Pages.About
 {
+    /// <summary>
+    ///  Unit tests for About.cshtml.cs and About.cshtml
+    /// </summary>
     public class AboutTests
     {
         #region OnGet
