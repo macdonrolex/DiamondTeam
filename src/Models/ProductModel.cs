@@ -44,6 +44,9 @@ public class ProductModel
     // Store the Comments entered by the users on this product
     public List<CommentModel> CommentList { get; set; } = new();
     
+    // Genre of the game in the post. Default is Undefined
+    public GenreEnum Genre { get; set; } = GenreEnum.Undefined;
+    
     /// <summary>
     /// Converts this post to its JSON representation.
     /// </summary>
