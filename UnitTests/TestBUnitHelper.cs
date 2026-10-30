@@ -8,14 +8,18 @@ namespace UnitTests
     /// </summary>
     public abstract class BunitTestContext : Bunit.TestContext
     {
-        // The Setup sets the context
+        /// <summary>
+        /// The Setup sets the context
+        /// </summary>
         [SetUp]
         public void Setup()
         {
             
         }
 
-        // When done displose removes it, to free up system resources
+        /// <summary>
+        /// When done displose removes it, to free up system resources
+        /// </summary>
         [TearDown]
         public void TearDown()
         {
