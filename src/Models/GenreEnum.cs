@@ -48,7 +48,7 @@ public static class GenreEnumExtensions
             GenreEnum.Strategy => "Strategy Game",
  
             // Default, Unknown
-            _ => "",
+            _ => "Unknow Game Genre",
         };
     }
 }
