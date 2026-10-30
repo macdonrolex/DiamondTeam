@@ -21,6 +21,9 @@ using ContosoCrafts.WebSite.Services;
 
 namespace UnitTests.Pages.Product.Index
 {
+    /// <summary>
+    ///  Unit tests for Index.cshtml.cs and Index.cshtml under Pages/Product
+    /// </summary>
     [TestFixture]
     public class IndexTests
     {
