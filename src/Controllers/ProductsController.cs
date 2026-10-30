@@ -50,13 +50,4 @@ public class ProductsController : ControllerBase
 
         return Ok();
     }
-    
-    /// <summary>
-    /// Data sent by the user when it rates a game post.
-    /// </summary>
-    public class RatingRequestModel
-    {
-        public string ProductId { get; set; }
-        public int Rating { get; set; }
-    }
 }
