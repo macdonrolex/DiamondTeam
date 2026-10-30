@@ -5,6 +5,11 @@ using NUnit.Framework;
 
 namespace UnitTests
 {
+    /// <summary>
+    /// Shared setup for all the unit tests. It runs once, before the first test starts
+    /// and after the last test finishes, and it gives the tests their own copy of the
+    /// website data files.
+    /// </summary>
     [SetUpFixture]
     public class TestFixture
     {
@@ -13,7 +18,11 @@ namespace UnitTests
 
         // Path to the data folder for the content
         public static string DataContentRootPath = "./data/";
-
+        
+        /// <summary>
+        /// Runs once before any test. It replaces the test wwwroot folder with a fresh
+        /// copy of the data files of the website, so every test run starts from the same data.
+        /// </summary>
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
@@ -47,7 +56,11 @@ namespace UnitTests
                 File.Copy(OriginalFilePathName, newFilePathName);
             }
         }
-
+        
+        /// <summary>
+        /// Runs once after all the tests finish. There is nothing to clean up, because
+        /// the test data folder is deleted and created again at the next test run.
+        /// </summary>
         [OneTimeTearDown]
         public void RunAfterAnyTests()
         {
