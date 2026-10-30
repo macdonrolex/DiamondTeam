@@ -10,6 +10,9 @@ using ContosoCrafts.WebSite.Services;
 
 namespace UnitTests.Components
 {
+    /// <summary>
+    /// Unit tests for ProductList.razor
+    /// </summary>
     public class ProductListTests : BunitTestContext
     {
         #region TestSetup
