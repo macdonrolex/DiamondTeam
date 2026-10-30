@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UnitTests.Pages.Product
 {
+    /// <summary>
+    ///  Unit tests for Delete.cshtml.cs and Delete.cshtml
+    /// </summary>
     [TestFixture]
     public class DeleteTests
     {
