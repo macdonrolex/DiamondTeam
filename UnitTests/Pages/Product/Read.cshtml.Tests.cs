@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UnitTests.Pages.Product
 {
+    /// <summary>
+    ///  Unit tests for Read.cshtml.cs and Read.cshtml
+    /// </summary>
     [TestFixture]
     public class ReadTests
     {
