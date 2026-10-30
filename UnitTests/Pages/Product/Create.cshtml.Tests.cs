@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UnitTests.Pages.Product
 {
+    /// <summary>
+    ///  Unit tests for Create.cshtml.cs and Create.cshtml
+    /// </summary>
     [TestFixture]
     public class CreateTests
     {
