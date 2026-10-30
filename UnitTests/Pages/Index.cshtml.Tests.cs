@@ -10,6 +10,9 @@ using ContosoCrafts.WebSite.Pages;
 
 namespace UnitTests.Pages.Index
 {
+    /// <summary>
+    ///  Unit tests for Index.cshtml.cs and Index.cshtml under Pages
+    /// </summary>
     public class IndexTests
     {
         #region TestSetup
