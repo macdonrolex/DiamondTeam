@@ -532,6 +532,17 @@ ul {
     border-right: 1px solid #d1cdcd
 }
 
+.game-genre {
+    color: white;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    background-color: rgba(0, 0, 0, 0.20);
+    padding: 10px; /* Adds space between the text and the border */
+    border-style: hidden;
+    border-radius: 20px;
+}
+
 .product-maker {
     color: #5269a7;
     font-size: .78rem;
