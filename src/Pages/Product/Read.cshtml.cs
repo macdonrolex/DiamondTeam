@@ -29,6 +29,9 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// </summary>
         public ProductModel Product { get; private set; }
 
+        public List<ProductModel> OtherProducts { get; set; } = new List<ProductModel>();
+
+            = new List<ProductModel>();
         /// <summary>
         /// Finds the requested product and displays it, or redirects when it is missing.
         /// </summary>
