@@ -23,9 +23,25 @@ ViewData["Title"] = "Product Details";
     <span class="game-genre">@Model.Product.Genre.DisplayGenre()</span>
 	</div>
 	
-    <img class="mx-auto d-block img-fluid" src="@Model.Product.Image" alt="@Model.Product.Title" width="300" />
-	<div class="p-3">
-        @*Only display the link buttons if the author provides something that's not empty*@
+    <div class="product-detail-hero">
+        <img src="@Model.Product.Image" alt="@Model.Product.Title" />
+    </div>
+
+    <div class="product-detail-layout">
+        <main class="product-detail-story">
+            <div class="product-detail-meta">
+                <span class="product-detail-maker">
+                    @(string.IsNullOrWhiteSpace(Model.Product.Maker)
+                        ? "Maker Unknown"
+                        : Model.Product.Maker)
+                </span>
+                <span class="game-genre">
+                    @Model.Product.Genre.DisplayGenre()
+                </span>
+            </div>
+            
+
+            
 		@if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
 		{
 			<a class="btn btn-secondary" href="@Model.Product.ShopLink">Buy </a>
