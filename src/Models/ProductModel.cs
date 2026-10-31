@@ -19,7 +19,8 @@ public class ProductModel
     public string Maker { get; set; }
 
     // URL of the cover image for the game post (stored as "img" in the JSON file)
-    [JsonPropertyName("img")] public string Image { get; set; }
+    [JsonPropertyName("img")] 
+    public string Image { get; set; }
 
     // Title of the post, must be between 1 and 33 characters
     [StringLength(33, MinimumLength = 1,
@@ -47,13 +48,14 @@ public class ProductModel
     // Genre of the game in the post. Default is Undefined
     public GenreEnum Genre { get; set; } = GenreEnum.Undefined;
     
+    // When this product was first added. Existing records without a date remain null.
+    [JsonPropertyName("dateAdded")]
+    public DateTime? DateAdded { get; set; }
+    
     /// <summary>
     /// Converts this post to its JSON representation.
     /// </summary>
     /// <returns>A JSON string containing all the properties of this post</returns>
     public override string ToString() => JsonSerializer.Serialize<ProductModel>(this);
-    // When this product was first added. Existing records without a date remain null.
-    [JsonPropertyName("dateAdded")]
-    public DateTime? DateAdded { get; set; }
 
 }
