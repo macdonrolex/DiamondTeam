@@ -58,9 +58,14 @@ ViewData["Title"] = "Product Details";
             <div class="product-detail-copy">
                 <p>@Model.Product.Post</p>
 	</div>
-	<div class="d-flex justify-content-end mt-3">
-		<a class="btn btn-secondary ml-3" asp-page="/Product/Update" asp-route-id="@Model.Product.Id">Edit</a>
-		<a class="btn btn-danger ml-3" asp-page="/Product/Delete" asp-route-id="@Model.Product.Id">Delete</a>
+
+            <div class="product-detail-admin">
+                <a class="btn btn-secondary"
+                   asp-page="/Product/Update"
+                   asp-route-id="@Model.Product.Id">Edit</a>
+                <a class="btn btn-danger"
+                   asp-page="/Product/Delete"
+                   asp-route-id="@Model.Product.Id">Delete</a>
 	</div>
 	
 	
