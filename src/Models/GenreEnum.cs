@@ -21,6 +21,10 @@ public enum GenreEnum
     Stealth = 6,
     // Strategy game
     Strategy = 7,
+    // Sandbox game
+    Sandbox = 8,
+    // Rhythm game
+    Rhythm = 9,
 }
 
 /// <summary>
@@ -46,6 +50,8 @@ public static class GenreEnumExtensions
             GenreEnum.Fighting => "Fighting Game",
             GenreEnum.Stealth => "Stealth Game",
             GenreEnum.Strategy => "Strategy Game",
+            GenreEnum.Sandbox => "Sandbox Game",
+            GenreEnum.Rhythm => "Rhythm Game",
  
             // Default, Unknown
             _ => "Unknow Game Genre",
