@@ -68,6 +68,20 @@ ViewData["Title"] = "Product Details";
                    asp-route-id="@Model.Product.Id">Delete</a>
 	</div>
 	
+        <aside class="product-detail-sidebar">
+            <section class="product-author-card">
+                <h2>Post Details</h2>
+                <p class="product-sidebar-label">Maker</p>
+                <p class="product-sidebar-value">
+                    @(string.IsNullOrWhiteSpace(Model.Product.Maker)
+                        ? "Maker Unknown"
+                        : Model.Product.Maker)
+                </p>
+                <p class="product-sidebar-label">Genre</p>
+                <p class="product-sidebar-value">
+                    @Model.Product.Genre.DisplayGenre()
+                </p>
+            </section>
 	
     
 </div>
