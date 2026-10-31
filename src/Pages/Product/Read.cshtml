@@ -86,4 +86,32 @@ ViewData["Title"] = "Product Details";
             <section class="related-products-card">
                 <h2>More Posts</h2>
     
+                @switch (Model.OtherProducts.Count)
+                {
+                    case 0:
+                        <p>No other posts are available yet.</p>
+                        break;
+
+                    default:
+                        @foreach (var item in Model.OtherProducts)
+                        {
+                            <a class="related-product"
+                               asp-page="/Product/Read"
+                               asp-route-id="@item.Id">
+                                <img src="@item.Image" alt="@item.Title" />
+                                <span class="related-product-text">
+                                    <strong>@item.Title</strong>
+                                    <span>
+                                        @(string.IsNullOrWhiteSpace(item.Maker)
+                                            ? item.Genre.DisplayGenre()
+                                            : item.Maker)
+                                    </span>
+                                </span>
+                            </a>
+                        }
+                        break;
+                }
+            </section>
+        </aside>
+    </div>
 </div>
