@@ -2,28 +2,16 @@
 @using ContosoCrafts.WebSite.Models
 @model ContosoCrafts.WebSite.Pages.Product.ReadModel
 @{
-ViewData["Title"] = "Product Details";
+    ViewData["Title"] = "Post Details";
 }
 <div class="container product-detail-page">
     <div class="product-detail-topbar">
         <a class="btn btn-secondary" asp-page="/Product/Index">
-    <a class="btn btn-secondary mr-3" asp-page="/Product/Index">
-        Back to List
-    </a>
-    <h2 class="mb-0 mr-3">@Model.Product.Title</h2>
-    @switch (string.IsNullOrWhiteSpace(Model.Product.Maker))
-    {
-	    case true:
-		    <span class="product-maker">Maker Unknown</span>
-		    break;
-	    case false:
-		    <span class="product-maker">@Model.Product.Maker</span>
-		    break;
-    }
-    <span class="game-genre">@Model.Product.Genre.DisplayGenre()</span>
-	</div>
+            Back to List
+        </a>
+    </div>
     <h1>@Model.Product.Title</h1>
-	
+
     <div class="product-detail-hero">
         <img src="@Model.Product.Image" alt="@Model.Product.Title" />
     </div>
@@ -43,21 +31,23 @@ ViewData["Title"] = "Product Details";
             
 
             
-		@if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
-		{
-			<a class="btn btn-secondary" href="@Model.Product.ShopLink">Buy </a>
-		}
-		@if (!string.IsNullOrWhiteSpace(Model.Product.RatingLink))
-		{
+
+            <div class="product-detail-actions">
+                @if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
+                {
+                    <a class="btn btn-primary" href="@Model.Product.ShopLink">Buy</a>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Product.RatingLink))
+                {
                     <a class="btn btn-secondary" href="@Model.Product.RatingLink">
                         Game Rating
                     </a>
-		}
+                }
             </div>
 
             <div class="product-detail-copy">
                 <p>@Model.Product.Post</p>
-	</div>
+            </div>
 
             <div class="product-detail-admin">
                 <a class="btn btn-secondary"
@@ -66,8 +56,9 @@ ViewData["Title"] = "Product Details";
                 <a class="btn btn-danger"
                    asp-page="/Product/Delete"
                    asp-route-id="@Model.Product.Id">Delete</a>
-	</div>
-	
+            </div>
+        </main>
+
         <aside class="product-detail-sidebar">
             <section class="product-author-card">
                 <h2>Post Details</h2>
@@ -82,10 +73,10 @@ ViewData["Title"] = "Product Details";
                     @Model.Product.Genre.DisplayGenre()
                 </p>
             </section>
-	
+
             <section class="related-products-card">
                 <h2>More Posts</h2>
-    
+
                 @switch (Model.OtherProducts.Count)
                 {
                     case 0:
