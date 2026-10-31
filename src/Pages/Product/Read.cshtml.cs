@@ -51,9 +51,16 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
             // Redirect when the supplied identifier does not match a stored product.
             if (Product == null)
+
             {
                 return RedirectToPage("/Product/Index");
             }
+            OtherProducts = products
+                .Where(x => x.Id != Product.Id)
+
+                .Take(3)
+
+                .ToList();
 
             return Page();
         }
