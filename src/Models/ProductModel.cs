@@ -23,7 +23,7 @@ public class ProductModel
     public string Image { get; set; }
 
     // Title of the post, must be between 1 and 33 characters
-    [StringLength(33, MinimumLength = 1,
+    [StringLength(50, MinimumLength = 1,
         ErrorMessage = "The Title should have a length of more than {2} and less than {1}")]
     public string Title { get; set; }
 
