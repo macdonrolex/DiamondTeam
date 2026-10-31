@@ -45,7 +45,9 @@ namespace ContosoCrafts.WebSite.Pages.Product
                 return RedirectToPage("/Product/Index");
             }
 
-            Product = ProductService.GetAllData().FirstOrDefault(x => x.Id == id);
+            var products = ProductService.GetAllData();
+
+            Product = products.FirstOrDefault(x => x.Id == id);
 
             // Redirect when the supplied identifier does not match a stored product.
             if (Product == null)
