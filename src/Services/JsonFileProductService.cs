@@ -124,6 +124,7 @@ namespace ContosoCrafts.WebSite.Services
             // Trim user-entered text before replacing the stored values.
             productData.Title = data.Title.Trim();
             productData.Maker = data.Maker.Trim();
+            productData.Genre = data.Genre;
             productData.Description = data.Description.Trim();
             productData.Post = data.Post.Trim();
             productData.Image = data.Image.Trim();
