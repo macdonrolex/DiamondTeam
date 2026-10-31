@@ -49,7 +49,9 @@ ViewData["Title"] = "Product Details";
 		}
 		@if (!string.IsNullOrWhiteSpace(Model.Product.RatingLink))
 		{
-			<a class="btn btn-secondary" href="@Model.Product.RatingLink">Game Rating</a>
+                    <a class="btn btn-secondary" href="@Model.Product.RatingLink">
+                        Game Rating
+                    </a>
 		}
 		<p class="descenter">@Model.Product.Post</p>
 	</div>
