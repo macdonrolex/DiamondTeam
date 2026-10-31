@@ -1,7 +1,7 @@
 namespace ContosoCrafts.WebSite.Models;
 
 /// <summary>
-/// Enum class for representing the genres of the games.
+/// Enum for representing the genres of the games.
 /// </summary>
 public enum GenreEnum
 {
@@ -28,7 +28,7 @@ public enum GenreEnum
 }
 
 /// <summary>
-/// Extra features for GenreEnum
+/// Extension methods for GenreEnum
 /// </summary>
 public static class GenreEnumExtensions
 {
@@ -36,8 +36,7 @@ public static class GenreEnumExtensions
     /// Converts a game genre into the readable text that is shown to users.
     /// </summary>
     /// <param name="data">The game genre to convert</param>
-    /// <returns>The display text of the genre, or an empty text when
-    /// the genre is Undefined or unknown</returns>
+    /// <returns>The display text of the genre, or an empty text</returns>
     public static string DisplayGenre(this GenreEnum data)
     {
         // Return the display text
@@ -54,7 +53,7 @@ public static class GenreEnumExtensions
             GenreEnum.Rhythm => "Rhythm Game",
  
             // Default, Unknown
-            _ => "Unknow Game Genre",
+            _ => "Unknown Game Genre",
         };
     }
 }
