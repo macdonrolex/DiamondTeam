@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
@@ -63,5 +63,12 @@ public class ProductModel
     /// </summary>
     /// <returns>A JSON string containing all the properties of this post</returns>
     public override string ToString() => JsonSerializer.Serialize<ProductModel>(this);
+
+    /// <summary>
+    /// The date the game was originally released.
+    /// </summary>
+    [Required]
+    [JsonPropertyName("releaseDate")]
+    public DateTime? ReleaseDate { get; set; }
 
 }
