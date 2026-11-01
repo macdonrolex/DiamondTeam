@@ -1,3 +1,5 @@
+using System.Linq;
+using ContosoCrafts.WebSite.Models;
 using NUnit.Framework;
 using ContosoCrafts.WebSite.Pages.Product;
 using ContosoCrafts.WebSite.Services;
@@ -155,6 +157,38 @@ namespace UnitTests.Pages.Product
             // Assert
             // The result is the page itself, not a redirect
             Assert.That(result, Is.TypeOf<PageResult>());
+        }
+        
+        /// <summary>
+        /// After updating, return to Index page
+        /// </summary>
+        [Test]
+        public void OnPost_Valid_Should_Return_Index_Page()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var pageModel = new UpdateModel(productService);
+            
+            // Backup original database for resetting.
+            var backupData = productService.GetAllData().First();
+            
+            // Get the first data, and modify it to a new data
+            pageModel.Product = productService.GetAllData().First();
+            pageModel.Product.Title = "test_title";
+            
+            // Act
+            var result = pageModel.OnPost() as RedirectToPageResult;
+            
+            // Reset
+            // Update with the original first data in database
+            productService.UpdateData(backupData);
+            
+            // Assert
+            // If not RedirectToPageResult type, it will be null
+            Assert.That(result, Is.Not.Null);
+            // The redirected page is what we want
+            Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
         }
         #endregion OnPost
     }
