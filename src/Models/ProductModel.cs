@@ -16,6 +16,7 @@ public class ProductModel
     public string Id { get; set; }
 
     // Author of the post
+    [Required(ErrorMessage = "The field {0} is required!")]
     public string Maker { get; set; }
 
     // URL of the cover image for the game post (stored as "img" in the JSON file)
@@ -23,11 +24,13 @@ public class ProductModel
     public string Image { get; set; }
 
     // Title of the post, must be between 1 and 33 characters
+    [Required(ErrorMessage = "The field {0} is required!")]
     [StringLength(50, MinimumLength = 1,
         ErrorMessage = "The Title should have a length of more than {2} and less than {1}")]
     public string Title { get; set; }
 
     // Short description (summary) of the post
+    [Required(ErrorMessage = "The field {0} is required!")]
     public string Description { get; set; }
 
     // Ratings given to the post by users(for now, haven't implemented the feature yet)
@@ -40,6 +43,7 @@ public class ProductModel
     public string RatingLink { get; set; }
 
     // Main text content of the post
+    [Required(ErrorMessage = "The field {0} is required!")]
     public string Post { get; set; }
 
     // Store the Comments entered by the users on this product
