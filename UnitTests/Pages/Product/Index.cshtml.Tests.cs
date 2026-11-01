@@ -89,6 +89,25 @@ namespace UnitTests.Pages.Product.Index
 
         #region OnGet
         /// <summary>
+        /// If we cannot load the products(posts), display only one page.
+        /// </summary>
+        [Test]
+        public void OnGet_InValid_Product_Null_Should_Get_1_Page()
+        {
+            // Arrange
+
+            // Act
+            pageModel.OnGet();
+            // Assume we cannot load the posts
+            pageModel.Products = null;
+            
+            // Reset
+
+            // Assert
+            Assert.That(pageModel.TotalPages, Is.EqualTo(1));
+        }
+        
+        /// <summary>
         /// Test whether the index page can retrieve  all the products
         /// </summary>
         [Test]
