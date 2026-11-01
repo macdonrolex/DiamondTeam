@@ -302,8 +302,6 @@ namespace UnitTests.Services
                 Description = "  Description  ",
                 Post = "  Post  ",
                 Image = "  image.png  ",
-                ShopLink = "  shop  ",
-                RatingLink = "  rating  "
             };
 
             // Act
@@ -315,10 +313,10 @@ namespace UnitTests.Services
 
             // Assert
             Assert.That(
-                (result.Title, result.Maker, result.Description, result.Post, result.Image, result.ShopLink, result.RatingLink,
-                    saved.Title, saved.Maker, saved.Description, saved.Post, saved.Image, saved.ShopLink, saved.RatingLink),
-                Is.EqualTo(("New title", "Maker", "Description", "Post", "image.png", "shop", "rating",
-                    "New title", "Maker", "Description", "Post", "image.png", "shop", "rating")));
+                (result.Title, result.Maker, result.Description, result.Post, result.Image,
+                    saved.Title, saved.Maker, saved.Description, saved.Post, saved.Image),
+                Is.EqualTo(("New title", "Maker", "Description", "Post", "image.png",
+                    "New title", "Maker", "Description", "Post", "image.png")));
         }
 
         /// <summary>
