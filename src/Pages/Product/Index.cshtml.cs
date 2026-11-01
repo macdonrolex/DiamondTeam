@@ -41,12 +41,35 @@ namespace ContosoCrafts.WebSite.Pages.Product
         public int CurrentPage { get; private set; } = 1;
 
         // Total number of pages needed to show all posts.
-        public int TotalPages => Math.Max(1, (int)Math.Ceiling((Products?.Count() ?? 0) / (double)PageSize));
+        public int TotalPages
+        {
+            get
+            {
+                //  No posts are loaded, so there is only one(the returned 1) empty page
+                if (Products == null)
+                {
+                    return 1;
+                }
+
+                return Math.Max(1, (int)Math.Ceiling(Products.Count() / (double)PageSize));
+            }
+        }
 
         // The four posts to render for the current page.
-        public IEnumerable<ProductModel> PagedProducts => Products == null
-            ? Enumerable.Empty<ProductModel>()
-            : Products.Skip((CurrentPage - 1) * PageSize).Take(PageSize);
+        public IEnumerable<ProductModel> PagedProducts
+        {
+            get
+            {
+                // No posts are loaded, so there is nothing to show
+                if (Products == null)
+                {
+                    return Enumerable.Empty<ProductModel>();
+                }
+                
+                // Skip the posts of the previous pages, then take one page of posts
+                return Products.Skip((CurrentPage - 1) * PageSize).Take(PageSize);
+            }
+        }
 
         /// <summary>
         /// Loads all products when the listing page receives a GET request.
