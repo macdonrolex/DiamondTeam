@@ -67,5 +67,17 @@
                 </article>
             }
         </section>
+        <nav class="product-pager" aria-label="Product pages">
+            @if (Model.CurrentPage > 1)
+            {
+                <a class="pager-button pager-prev" asp-page="/Product/Index" asp-route-pageNumber="@(Model.CurrentPage - 1)">
+                    <span aria-hidden="true">&larr;</span> Previous
+                </a>
+            }
+            @if (Model.CurrentPage <= 1)
+            {
+                <button class="pager-button pager-prev" type="button" disabled>
+                    <span aria-hidden="true">&larr;</span> Previous
+                </button>
     }
 </div>
