@@ -124,12 +124,15 @@ namespace ContosoCrafts.WebSite.Services
             // Trim user-entered text before replacing the stored values.
             productData.Title = data.Title.Trim();
             productData.Maker = data.Maker.Trim();
-            productData.Genre = data.Genre;
             productData.Description = data.Description.Trim();
             productData.Post = data.Post.Trim();
             productData.Image = data.Image.Trim();
-            productData.ShopLink = data.ShopLink.Trim();
-            productData.RatingLink = data.RatingLink.Trim();
+            // No need to trim, because [URL] attribute will block invalid input.
+            // Also, users are allowed to provide null link. Trim a null link throw the exception.
+            productData.ShopLink = data.ShopLink;
+            productData.RatingLink = data.RatingLink;
+            
+            productData.Genre = data.Genre;
 
             SaveData(products);
             return productData;
