@@ -24,14 +24,11 @@ namespace ContosoCrafts.WebSite.Pages.Product
             ProductService = productService;
         }
 
-        /// <summary>
-        /// Gets the service used to read product records.
-        /// </summary>
-        public JsonFileProductService ProductService { get; }
 
-        /// <summary>
-        /// Gets the products loaded for the listing page.
-        /// </summary>
+        // Gets the service used to read product records.
+        public JsonFileProductService ProductService { get; }
+        
+        // Gets the products loaded for the listing page.
         public IEnumerable<ProductModel> Products { get; set; }
 
         // Maximum number of posts shown on one page.
