@@ -130,5 +130,9 @@ namespace UnitTests.Pages.Product
             Assert.That(result, Is.TypeOf<PageResult>());
         }
         #endregion OnGet
+        
+        #region OnPost
+        
+        #endregion OnPost
     }
 }
