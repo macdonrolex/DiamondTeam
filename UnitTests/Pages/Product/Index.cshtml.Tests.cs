@@ -100,11 +100,13 @@ namespace UnitTests.Pages.Product.Index
             pageModel.OnGet();
             // Assume we cannot load the posts
             pageModel.Products = null;
+
+            var result = pageModel.TotalPages;
             
             // Reset
 
             // Assert
-            Assert.That(pageModel.TotalPages, Is.EqualTo(1));
+            Assert.That(result, Is.EqualTo(1));
         }
         
         /// <summary>
