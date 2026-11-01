@@ -21,7 +21,7 @@
 </div>
 
 <div class="card-columns">
-@foreach (var product in ProductService.GetAllData().Skip((CurrentPage - 1) * PageSize).Take(PageSize))
+@foreach (var product in FilteredProducts.Skip((CurrentPage - 1) * PageSize).Take(PageSize))
     {
          <div class="card game-card border-0">
             <div class="card-img game-card-image" style="background-image: url('@product.Image');">
