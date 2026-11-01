@@ -3,10 +3,12 @@
 @using Microsoft.AspNetCore.Components.Web
 @inject JsonFileProductService ProductService
 @using Microsoft.AspNetCore.Components
+@* Live search controls for front-page posts. *@
 <div class="product-search mb-4" role="search">
     <label for="post-search" class="sr-only">Search game posts</label>
     <div class="input-group">
         <div class="input-group-prepend"><span class="input-group-text" aria-hidden="true">&#128269;</span></div>
+        @* Bind each keystroke to the search text and reset pagination afterward. *@
         <input id="post-search" class="form-control" type="search" placeholder="Search posts by title or text..." @bind="SearchQuery" @bind:event="oninput" @bind:after="ResetSearchPage" />
         @if (!string.IsNullOrWhiteSpace(SearchQuery))
         {
@@ -21,6 +23,7 @@
 </div>
 
 <div class="card-columns">
+@* Display only the matching posts on the current page. *@
 @foreach (var product in FilteredProducts.Skip((CurrentPage - 1) * PageSize).Take(PageSize))
     {
          <div class="card game-card border-0">
@@ -135,8 +138,41 @@
             FilteredProducts = posts.ToList();
             return;
         }
+
+        // Keep a post when the search text appears in any of these fields.
+        FilteredProducts = posts.Where(product =>
+            ContainsSearchText(product.Title, query) ||
+            ContainsSearchText(product.Description, query) ||
+            ContainsSearchText(product.Post, query) ||
+            ContainsSearchText(product.Maker, query) ||
+            ContainsSearchText(product.Genre.ToString(), query)).ToList();
+    }
+
+
+    // Check one field for a case-insensitive substring match.
+    private static bool ContainsSearchText(string value, string query)
+    {
+        // Empty fields cannot match; ignore letter casing in the comparison.
+        return !string.IsNullOrWhiteSpace(value) &&
+               value.Contains(query, System.StringComparison.OrdinalIgnoreCase);
+    }
+
+    // Keep pagination valid when the live search query changes.
+    private void ResetSearchPage()
+    {
+        CurrentPage = 1;
+        RefreshFilteredProducts();
+    }
+
+    // Clear the query and restore the complete post list.
+    private void ClearSearch()
+    {
+        SearchQuery = string.Empty;
+        CurrentPage = 1;
+        RefreshFilteredProducts();
+    }
     // Total number of pages, calculated from the number of game posts (at least 1)
-    public int TotalPages => Math.Max(1, (int)Math.Ceiling(ProductService.GetAllData().Count() / (double)PageSize));
+    public int TotalPages => Math.Max(1, (int)Math.Ceiling(FilteredProducts.Count() / (double)PageSize));
     
     /// <summary>
     /// Closes the game post modal by clearing the selected product.
