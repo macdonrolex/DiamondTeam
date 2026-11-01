@@ -131,6 +131,25 @@ namespace UnitTests.Pages.Product.Index
         }
         
         /// <summary>
+        /// Each page should display only [current page size] posts
+        /// </summary>
+        [Test]
+        public void OnGet_Valid_Should_Get_PageSize_Products_In_Each_Page()
+        {
+            // Arrange
+
+            // Act
+            pageModel.OnGet();
+            var result = pageModel.PagedProducts.Count();
+            
+            
+            // Reset
+
+            // Assert
+            Assert.That(result, Is.EqualTo(4));
+        }
+        
+        /// <summary>
         /// Test whether the index page can retrieve  all the products
         /// </summary>
         [Test]
