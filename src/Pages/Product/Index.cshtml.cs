@@ -32,7 +32,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// <summary>
         /// Gets the products loaded for the listing page.
         /// </summary>
-        public IEnumerable<ProductModel> Products { get; private set; }
+        public IEnumerable<ProductModel> Products { get; set; }
 
         // Maximum number of posts shown on one page.
         public const int PageSize = 4;
