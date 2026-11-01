@@ -31,6 +31,12 @@
                     <span asp-validation-for="Product.Description" class="post-create-error"></span>
                 </div>
 
+                <div class="post-create-field">
+                    <label asp-for="Product.ReleaseDate" class="post-create-label">Game release date</label>
+                    <input asp-for="Product.ReleaseDate" type="date" required class="form-control post-create-input" />
+                    <span asp-validation-for="Product.ReleaseDate" class="post-create-error"></span>
+                </div>
+
                 <div class="post-create-field post-create-field-wide">
                     <label asp-for="Product.Post" class="post-create-label"></label>
                     <textarea asp-for="Product.Post" class="form-control post-create-input post-create-textarea post-create-post" rows="5" placeholder="What should players know about it?"></textarea>
