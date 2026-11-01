@@ -304,6 +304,10 @@ ul {
 .pager-status {
     color: #6c757d;
 }
+
+.product-pager a.pager-button {
+    text-decoration: none;
+}
 /* Minimal More Info action shown with the title on hover */
 .game-card-title {
     padding: 4px 5rem 2px 3px;
@@ -1777,4 +1781,35 @@ ul {
     color: black;
     background-color: transparent;
     border-color: #ffffff;
+}
+
+/* Keep the Products pager pills aligned with the blue list actions. */
+.product-list-page .product-pager .pager-button {
+    border: 1px solid #93c5fd;
+    color: #1e3a8a !important;
+    background: #dbeafe;
+    box-shadow: 0 4px 12px rgba(30, 58, 138, .14);
+}
+
+.product-list-page .product-pager .pager-button:hover:not(:disabled),
+.product-list-page .product-pager .pager-button:focus-visible {
+    border-color: #315da8;
+    color: #fff !important;
+    background: #315da8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(30, 58, 138, .22);
+}
+
+.product-list-page .product-pager .pager-button:disabled {
+    border-color: #cbd5e1;
+    color: #64748b !important;
+    background: #e2e8f0;
+    opacity: .8;
+    box-shadow: none;
+}
+
+/* Use Nunito consistently across the site and keep icon font glyphs intact. */
+body,
+body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbols"]) {
+    font-family: "Nunito", sans-serif !important;
 }
