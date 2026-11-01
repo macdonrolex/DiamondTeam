@@ -95,6 +95,8 @@ namespace UnitTests.Pages.Product.Index
         public void OnGet_Valid_Should_Return_Products()
         {
             // Arrange
+            // Get total entries count in database
+            var dataCount = pageModel.ProductService.GetAllData().ToList().Count;
 
             // Act
             pageModel.OnGet();
@@ -103,7 +105,7 @@ namespace UnitTests.Pages.Product.Index
 
             // Assert
             Assert.That(pageModel.ModelState.IsValid, Is.True);
-            Assert.That(pageModel.Products.ToList().Count, Is.EqualTo(16));
+            Assert.That(pageModel.Products.ToList().Count, Is.EqualTo(dataCount));
         }
         #endregion OnGet
     }
