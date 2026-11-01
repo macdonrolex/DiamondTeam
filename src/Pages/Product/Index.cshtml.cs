@@ -38,7 +38,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         public const int PageSize = 4;
 
         // The page currently selected by the visitor.
-        public int CurrentPage { get; private set; } = 1;
+        public int CurrentPage { get; set; } = 1;
 
         // Total number of pages needed to show all posts.
         public int TotalPages
