@@ -2,6 +2,23 @@
 @using ContosoCrafts.WebSite.Services
 @using Microsoft.AspNetCore.Components.Web
 @inject JsonFileProductService ProductService
+@using Microsoft.AspNetCore.Components
+<div class="product-search mb-4" role="search">
+    <label for="post-search" class="sr-only">Search game posts</label>
+    <div class="input-group">
+        <div class="input-group-prepend"><span class="input-group-text" aria-hidden="true">&#128269;</span></div>
+        <input id="post-search" class="form-control" type="search" placeholder="Search posts by title or text..." @bind="SearchQuery" @bind:event="oninput" @bind:after="ResetSearchPage" />
+        @if (!string.IsNullOrWhiteSpace(SearchQuery))
+        {
+            <div class="input-group-append"><button class="btn btn-outline-secondary" type="button" @onclick="ClearSearch">Clear</button></div>
+        }
+    </div>
+    <small class="form-text text-muted">@FilteredProducts.Count() posts found</small>
+    @if (!FilteredProducts.Any())
+    {
+        <div class="alert alert-info text-center mt-3" role="status">No matching posts found.</div>
+    }
+</div>
 
 <div class="card-columns">
 @foreach (var product in ProductService.GetAllData().Skip((CurrentPage - 1) * PageSize).Take(PageSize))
