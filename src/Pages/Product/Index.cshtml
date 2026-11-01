@@ -38,7 +38,7 @@
                                 @product.DateAdded.Value.ToLocalTime().ToString("MMM d, yyyy")
                             </time>
                         }
-                        else
+                        @if (!product.DateAdded.HasValue)
                         {
                             <span class="product-date-value product-date-unknown">Date not recorded</span>
                         }
