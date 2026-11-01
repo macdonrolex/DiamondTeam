@@ -37,9 +37,11 @@ public class ProductModel
     public int[] Ratings { get; set; }
 
     // Link to a store page where the game can be bought (Amazon or others)
+    [Url(ErrorMessage = "Please enter a valid URL")]
     public string ShopLink { get; set; }
 
     // Link to the Metacritic page of the game in the post
+    [Url(ErrorMessage = "Please enter a valid URL")]
     public string RatingLink { get; set; }
 
     // Main text content of the post
