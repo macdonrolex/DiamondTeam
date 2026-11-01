@@ -110,6 +110,27 @@ namespace UnitTests.Pages.Product.Index
         }
         
         /// <summary>
+        /// If we cannot load the products(posts), get no products
+        /// </summary>
+        [Test]
+        public void OnGet_InValid_Product_Null_Should_Get_Empty_Products_Enum()
+        {
+            // Arrange
+
+            // Act
+            pageModel.OnGet();
+            // Assume we cannot load the posts
+            pageModel.Products = null;
+
+            var result = pageModel.PagedProducts;
+            
+            // Reset
+
+            // Assert
+            Assert.That(result, Is.Empty);
+        }
+        
+        /// <summary>
         /// Test whether the index page can retrieve  all the products
         /// </summary>
         [Test]
