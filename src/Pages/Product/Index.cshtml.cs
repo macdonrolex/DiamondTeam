@@ -1,4 +1,6 @@
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -49,9 +51,11 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// <summary>
         /// Loads all products when the listing page receives a GET request.
         /// </summary>
-        public void OnGet()
+        public void OnGet(int pageNumber = 1)
         {
             // Keep the complete collection available, then calculate the requested page.
+            Products = ProductService.GetAllData().ToList();
+            CurrentPage = Math.Max(1, Math.Min(pageNumber, TotalPages));
         }
     }
 }
