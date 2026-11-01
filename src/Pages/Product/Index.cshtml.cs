@@ -51,7 +51,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// </summary>
         public void OnGet()
         {
-            Products = ProductService.GetAllData();
+            // Keep the complete collection available, then calculate the requested page.
         }
     }
 }
