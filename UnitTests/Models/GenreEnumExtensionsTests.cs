@@ -8,5 +8,8 @@ namespace UnitTests.Models
     [TestFixture]
     public class GenreEnumExtensionsTests
     {
+        #region DisplayGenre
+        
+        #endregion DisplayGenre
     }
 }
