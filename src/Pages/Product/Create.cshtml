@@ -15,7 +15,7 @@
             <div class="post-create-grid">
                 <div class="post-create-field">
                     <label asp-for="Product.Title" class="post-create-label">
-                        <svg class="post-create-label-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 8.5h11a4.5 4.5 0 0 1 4.3 5.9l-1 3a2.5 2.5 0 0 1-4.1 1L14.8 16h-5.6l-1.9 2.4a2.5 2.5 0 0 1-4.1-1l-1-3A4.5 4.5 0 0 1 6.5 8.5Z"/><path d="M7 11v4m-2-2h4m7-1h.01M18 14h.01"/></svg>
+                        <svg class="post-create-label-icon post-create-label-icon--title" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 8.5h11a4.5 4.5 0 0 1 4.3 5.9l-1 3a2.5 2.5 0 0 1-4.1 1L14.8 16h-5.6l-1.9 2.4a2.5 2.5 0 0 1-4.1-1l-1-3A4.5 4.5 0 0 1 6.5 8.5Z"/><path d="M7 11v4m-2-2h4m7-1h.01M18 14h.01"/></svg>
                         <span>Game title</span>
                     </label>
                     <input asp-for="Product.Title" class="form-control post-create-input" placeholder="e.g. Stardew Valley" autocomplete="off" />
@@ -24,7 +24,7 @@
 
                 <div class="post-create-field">
                     <label asp-for="Product.Maker" class="post-create-label">
-                        <svg class="post-create-label-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20V7l8-4 8 4v13M2 20h20M8 10h2m4 0h2M8 14h2m4 0h2M10 20v-3h4v3"/></svg>
+                        <svg class="post-create-label-icon post-create-label-icon--maker" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20V7l8-4 8 4v13M2 20h20M8 10h2m4 0h2M8 14h2m4 0h2M10 20v-3h4v3"/></svg>
                         <span>Maker</span>
                     </label>
                     <input asp-for="Product.Maker" class="form-control post-create-input" placeholder="Studio or publisher" autocomplete="organization" />
@@ -33,7 +33,7 @@
 
                 <div class="post-create-field post-create-field-wide">
                     <label asp-for="Product.Description" class="post-create-label">
-                        <svg class="post-create-label-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 10h16M4 14h11M4 18h8"/></svg>
+                        <svg class="post-create-label-icon post-create-label-icon--description" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 10h16M4 14h11M4 18h8"/></svg>
                         <span>Description</span>
                     </label>
                     <textarea asp-for="Product.Description" class="form-control post-create-input post-create-textarea" rows="3" placeholder="A quick overview of the game"></textarea>
@@ -42,7 +42,7 @@
 
                 <div class="post-create-field">
                     <label asp-for="Product.ReleaseDate" class="post-create-label">
-                        <svg class="post-create-label-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+                        <svg class="post-create-label-icon post-create-label-icon--date" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
                         <span>Game release date</span>
                     </label>
                     <input asp-for="Product.ReleaseDate" type="date" required class="form-control post-create-input" />
@@ -51,7 +51,7 @@
 
                 <div class="post-create-field post-create-field-wide">
                     <label asp-for="Product.Post" class="post-create-label">
-                        <svg class="post-create-label-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 3h10l4 4v14H5zM14 3v5h5M8 13h8m-8 4h8"/></svg>
+                        <svg class="post-create-label-icon post-create-label-icon--post" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 3h10l4 4v14H5zM14 3v5h5M8 13h8m-8 4h8"/></svg>
                         <span>Post</span>
                     </label>
                     <textarea asp-for="Product.Post" class="form-control post-create-input post-create-textarea post-create-post" rows="5" placeholder="What should players know about it?"></textarea>
@@ -78,7 +78,7 @@
 
                 <div class="post-create-field">
                     <label asp-for="Product.ShopLink" class="post-create-label">
-                        <svg class="post-create-label-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 8h18l-1.5 13h-15L3 8Zm4 0a5 5 0 0 1 10 0"/></svg>
+                        <svg class="post-create-label-icon post-create-label-icon--shop" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 8h18l-1.5 13h-15L3 8Zm4 0a5 5 0 0 1 10 0"/></svg>
                         <span>Shop link</span>
                     </label>
                     <input asp-for="Product.ShopLink" class="form-control post-create-input" placeholder="Shop link" autocomplete="url" />
