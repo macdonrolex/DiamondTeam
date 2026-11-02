@@ -1235,6 +1235,33 @@ ul {
         outline: 0;
     }
 
+    /* Highlight only the field that failed validation. */
+    .post-create-input.input-validation-error,
+    .post-create-input[aria-invalid="true"] {
+        border-color: #dc3545;
+        background-color: #fff8f8;
+        box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .12);
+        animation: validation-border-pulse .35s ease-out;
+    }
+
+    .post-create-input.input-validation-error:focus,
+    .post-create-input[aria-invalid="true"]:focus {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 .22rem rgba(220, 53, 69, .18);
+    }
+
+    @keyframes validation-border-pulse {
+        0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, .32); }
+        100% { box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .12); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .post-create-input.input-validation-error,
+        .post-create-input[aria-invalid="true"] {
+            animation: none;
+        }
+    }
+
 .post-create-textarea {
     min-height: 108px;
     resize: vertical;
