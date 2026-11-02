@@ -39,5 +39,9 @@ namespace UnitTests.Controllers
             Assert.That(result, Is.EqualTo(dataCount));
         }
         #endregion Get
+
+        #region Patch
+        
+        #endregion Patch
     }
 }
