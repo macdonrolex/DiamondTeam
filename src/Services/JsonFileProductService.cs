@@ -133,6 +133,7 @@ namespace ContosoCrafts.WebSite.Services
             productData.RatingLink = data.RatingLink;
             
             productData.Genre = data.Genre;
+            productData.ReleaseYear = data.ReleaseYear;
 
             SaveData(products);
             return productData;
