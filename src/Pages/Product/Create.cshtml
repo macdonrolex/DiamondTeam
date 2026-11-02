@@ -9,7 +9,7 @@
             <p>Share a game post with the community. Add the details below to get it listed.</p>
         </header>
 
-        <form method="post" class="post-create-form" id="postCreateForm">
+        <form method="post" class="post-create-form" id="postCreateForm" novalidate>
             <div asp-validation-summary="ModelOnly" class="post-create-validation" role="alert"></div>
 
             <div class="post-create-grid">
@@ -45,7 +45,7 @@
                         <svg class="post-create-label-icon post-create-label-icon--date" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
                         <span>Game release date</span>
                     </label>
-                    <input asp-for="Product.ReleaseDate" type="date" required class="form-control post-create-input" />
+                    <input asp-for="Product.ReleaseDate" type="text" class="form-control post-create-input" />
                     <span asp-validation-for="Product.ReleaseDate" class="post-create-error"></span>
                 </div>
 
@@ -97,30 +97,6 @@
     </div>
 </div>
 
-<script>
-    (() => {
-        const form = document.getElementById('postCreateForm');
-        const button = document.getElementById('postCreateSubmit');
-        if (!form || !button) return;
-
-        form.addEventListener('submit', (event) => {
-                            const hasInput = Array.from(form.querySelectorAll('input:not([type="hidden"]), textarea'))
-                    .some((field) => field.value.trim().length > 0);
-
-                if (!hasInput) {
-                    event.preventDefault();
-                    const summary = form.querySelector('.post-create-validation');
-                    if (summary) summary.textContent = 'Add at least one game detail before submitting.';
-                    return;
-                }
-
-    if (!form.checkValidity()) return;
-
-            event.preventDefault();
-            button.classList.add('is-submitting');
-            button.setAttribute('aria-busy', 'true');
-
-            window.setTimeout(() => HTMLFormElement.prototype.submit.call(form), 420);
-        }, { once: true });
-    })();
-</script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
