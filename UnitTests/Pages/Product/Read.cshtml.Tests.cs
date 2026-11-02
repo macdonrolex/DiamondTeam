@@ -127,6 +127,37 @@ namespace UnitTests.Pages.Product
             // The result is the page itself, not a redirect
             Assert.That(result, Is.TypeOf<PageResult>());
         }
+        
+        /// <summary>
+        /// Test whether the Read page can display other three posts.
+        /// </summary>
+        [Test]
+        public void OnGet_Product_Exist_Should_Get_3_Other_Products()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var pageModel = new ReadModel(productService);
+
+            // Act
+            // Load a post
+            pageModel.OnGet("jenlooper-light"); 
+            // And then we get three other posts
+            var result = pageModel.OtherProducts;
+            var resultCount = result.Count;
+            
+            // Reset
+            // No needed
+
+            // Assert
+            // 3 posts
+            Assert.That(resultCount, Is.EqualTo(3));
+            // Not the same as the product of the Read page
+            Assert.That(result[0].Id, Is.Not.EqualTo("jenlooper-light"));
+            Assert.That(result[1].Id, Is.Not.EqualTo("jenlooper-light"));
+            Assert.That(result[2].Id, Is.Not.EqualTo("jenlooper-light"));
+            
+        }
         #endregion OnGet
     }
 }
