@@ -67,6 +67,7 @@ public class ProductModel
     
     // The year the game was originally released.
     [Required(ErrorMessage = "Choose the game's original release year.")]
+    [Range(-1, 2077, ErrorMessage = "Choose a year between 0 and 2077. -1 for year unknown")]
     [JsonPropertyName("releaseYear")]
     public int ReleaseYear { get; set; }
     
