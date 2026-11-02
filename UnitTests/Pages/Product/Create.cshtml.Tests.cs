@@ -3,6 +3,7 @@ using AngleSharp.Common;
 using NUnit.Framework;
 using ContosoCrafts.WebSite.Pages.Product;
 using ContosoCrafts.WebSite.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UnitTests.Pages.Product
@@ -94,6 +95,38 @@ namespace UnitTests.Pages.Product
             Assert.That(result, Is.TypeOf<PageResult>());
             Assert.That(pageModel.ModelState.IsValid, Is.False);
             Assert.That(resultMessage, Is.EqualTo("Add at least one game post detail before submitting."));
+        }
+        
+        /// <summary>
+        /// After creating, return to Index page
+        /// </summary>
+        [Test]
+        public void OnPost_Valid_Should_Return_Index_Page()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var pageModel = new CreateModel(productService);
+            
+            // Get the first data, and modify it to a new data
+            pageModel.Product = productService.GetAllData().First();
+            pageModel.Product.Title = "test_title";
+            
+            // Act
+            var result = pageModel.OnPost() as RedirectToPageResult;
+            
+            // The data Id used to delete in the reset stage
+            var dataId = pageModel.Product.Id;
+            
+            // Reset
+            // Delete the data created in Act
+            productService.DeleteData(dataId);
+            
+            // Assert
+            // If not RedirectToPageResult type, it will be null
+            Assert.That(result, Is.Not.Null);
+            // The redirected page is what we want
+            Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
         }
         #endregion OnPost
     }
