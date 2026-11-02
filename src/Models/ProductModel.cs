@@ -65,6 +65,11 @@ public class ProductModel
     [JsonPropertyName("dateAdded")]
     public DateTime? DateAdded { get; set; }
     
+    // The year the game was originally released.
+    [Required(ErrorMessage = "Choose the game's original release year.")]
+    [JsonPropertyName("releaseYear")]
+    public int ReleaseYear { get; set; }
+    
     /// <summary>
     /// Converts this post to its JSON representation.
     /// </summary>
