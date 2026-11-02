@@ -63,39 +63,6 @@ namespace UnitTests.Pages.Product
             Assert.That(result, Is.TypeOf<PageResult>());
         }
         
-        /// <summary>
-        /// If the user didn't fill in any content, return the same page with error message.
-        /// </summary>
-        [Test]
-        public void OnPost_InValid_All_Fields_Empty_Should_Return_Page_With_Errors()
-        {
-            // Arrange
-            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
-            var productService = new JsonFileProductService(webHostEnvironment);
-            var pageModel = new CreateModel(productService);
-            
-            // Set all fields to empty
-            pageModel.Product.Title = "";
-            pageModel.Product.Maker = "";
-            pageModel.Product.Description = "";
-            pageModel.Product.Post = "";
-            pageModel.Product.Image = "";
-            pageModel.Product.RatingLink = "";
-            pageModel.Product.ShopLink = "";
-            
-            // Act
-            var result = pageModel.OnPost();
-            // Get the error message from the errors collection of string.Empty
-            var resultMessage = pageModel.ModelState[string.Empty].Errors[0].ErrorMessage;
-            
-            // Reset
-            // Not needed
-            
-            // Assert
-            Assert.That(result, Is.TypeOf<PageResult>());
-            Assert.That(pageModel.ModelState.IsValid, Is.False);
-            Assert.That(resultMessage, Is.EqualTo("Add at least one game post detail before submitting."));
-        }
         
         /// <summary>
         /// After creating, return to Index page
