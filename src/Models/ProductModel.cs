@@ -76,12 +76,4 @@ public class ProductModel
     /// </summary>
     /// <returns>A JSON string containing all the properties of this post</returns>
     public override string ToString() => JsonSerializer.Serialize<ProductModel>(this);
-
-    /// <summary>
-    /// The date the game was originally released.
-    /// </summary>
-    [Required(ErrorMessage = "Choose the game's original release year.")]
-    [JsonPropertyName("releaseDate")]
-    public string ReleaseDate { get; set; }
-
 }
