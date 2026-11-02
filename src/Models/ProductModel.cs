@@ -15,37 +15,44 @@ public class ProductModel
     // Unique identifier of the post
     public string Id { get; set; }
 
-    // Author of the post
-    [Required(ErrorMessage = "The field {0} is required!")]
+    // The studio or publisher that made the game.
+    [Required(ErrorMessage = "Enter the maker or studio name.")]
+    [StringLength(80, MinimumLength = 2, ErrorMessage = "Maker must be between 2 and 80 characters.")]
     public string Maker { get; set; }
 
-    // URL of the cover image for the game post (stored as "img" in the JSON file)
+    // The cover image can be a full URL or a path inside this site.
+    [Required(ErrorMessage = "Add the cover image link.")]
+    [StringLength(2048, ErrorMessage = "The image link must be 2,048 characters or fewer.")]
+    [RegularExpression(@"^(https?://\S+|/(?!/)\S+)$", ErrorMessage = "Enter an image URL or a site path like /images/game.jpg.")]
     [JsonPropertyName("img")] 
     public string Image { get; set; }
 
-    // Title of the post, must be between 1 and 33 characters
-    [Required(ErrorMessage = "The field {0} is required!")]
-    [StringLength(50, MinimumLength = 1,
-        ErrorMessage = "The Title should have a length of more than {2} and less than {1}")]
+    // A short, readable name for the game.
+    [Required(ErrorMessage = "Enter the game title.")]
+    [StringLength(50, MinimumLength = 2, ErrorMessage = "Title must be between 2 and 50 characters.")]
     public string Title { get; set; }
 
-    // Short description (summary) of the post
-    [Required(ErrorMessage = "The field {0} is required!")]
+    // A short summary shown with the game.
+    [Required(ErrorMessage = "Enter a short game description.")]
+    [StringLength(300, MinimumLength = 10, ErrorMessage = "Description must be between 10 and 300 characters.")]
     public string Description { get; set; }
 
     // Ratings given to the post by users(for now, haven't implemented the feature yet)
     public int[] Ratings { get; set; }
 
     // Link to a store page where the game can be bought (Amazon or others)
-    [Url(ErrorMessage = "Please enter a valid URL")]
+    [StringLength(2048, ErrorMessage = "The shop link must be 2,048 characters or fewer.")]
+    [Url(ErrorMessage = "Enter a valid shop link, such as https://example.com.")]
     public string ShopLink { get; set; }
 
     // Link to the Metacritic page of the game in the post
-    [Url(ErrorMessage = "Please enter a valid URL")]
+    [StringLength(2048, ErrorMessage = "The rating link must be 2,048 characters or fewer.")]
+    [Url(ErrorMessage = "Enter a valid rating link, such as https://example.com.")]
     public string RatingLink { get; set; }
 
-    // Main text content of the post
-    [Required(ErrorMessage = "The field {0} is required!")]
+    // The longer post that explains what players should know.
+    [Required(ErrorMessage = "Write the game post.")]
+    [StringLength(5000, MinimumLength = 10, ErrorMessage = "The post must be between 10 and 5,000 characters.")]
     public string Post { get; set; }
 
     // Store the Comments entered by the users on this product
@@ -67,8 +74,8 @@ public class ProductModel
     /// <summary>
     /// The date the game was originally released.
     /// </summary>
-    [Required]
+    [Required(ErrorMessage = "Choose the game's original release year.")]
     [JsonPropertyName("releaseDate")]
-    public DateTime? ReleaseDate { get; set; }
+    public string ReleaseDate { get; set; }
 
 }
