@@ -38,6 +38,31 @@ namespace UnitTests.Pages.Product
         
         #region OnPost
         /// <summary>
+        /// Invalid model should return the page.
+        /// </summary>
+        [Test]
+        public void OnPost_InValid_Model_Invalid_Should_Return_Page()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var pageModel = new CreateModel(productService);
+            
+            // Force an invalid error state
+            pageModel.ModelState.AddModelError("bogus", "bogus error");
+
+            // Act
+            var result = pageModel.OnPost();
+            
+            // Reset
+            // Not needed
+
+            // Assert
+            // The result is the page itself, not a redirect
+            Assert.That(result, Is.TypeOf<PageResult>());
+        }
+        
+        /// <summary>
         /// If the user didn't fill in any content, return the same page with error message.
         /// </summary>
         [Test]
