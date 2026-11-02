@@ -8,5 +8,8 @@ namespace UnitTests.Models
     [TestFixture]
     public class ProductModelTests
     {
+        #region ToString
+        
+        #endregion ToString
     }
 }
