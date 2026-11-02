@@ -44,6 +44,12 @@
 		</div>
 		
 		<div class="form-group">
+			<label asp-for="Product.ReleaseYear" class="control-label"></label>
+			<input asp-for="Product.ReleaseYear" type="number" class="form-control" />
+			<span asp-validation-for="Product.ReleaseYear" class="text-danger"></span>
+		</div>
+		
+		<div class="form-group">
 			<label asp-for="Product.Maker" class="control-label"></label>
 			<input asp-for="Product.Maker" class="form-control" placeholder="Your name"/>
 			<span asp-validation-for="Product.Maker" class="text-danger"></span>
