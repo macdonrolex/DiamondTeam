@@ -12,6 +12,7 @@ namespace UnitTests.Controllers
     [TestFixture]
     public class ProductsControllerTests
     {
-        
+        #region Get
+        #endregion Get
     }
 }
