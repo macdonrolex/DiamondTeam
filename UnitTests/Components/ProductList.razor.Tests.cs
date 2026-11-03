@@ -37,9 +37,16 @@ namespace UnitTests.Components
 
             // Get the Cards retrned
             var result = page.Markup;
+            
+            // Reset
+            // Not neede
 
             // Assert
             Assert.That(result.Contains("Minecraft"), Is.True);
         }
+
+        #region SelectProduct
+        
+        #endregion SelectProduct
     }
 }
