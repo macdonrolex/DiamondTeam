@@ -68,12 +68,16 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    @* The Add Comment button*@
+                    <div class="col">
+                        <button @onclick="(e => ShowNewCommentInput())" id="AddComment" class="btn btn-primary">Add Comment</button>
+                    </div>
                     @switch (VoteCount)
                     {
-                        case 0 :
+                        case 0:
                             <span>Be the first to vote!</span>
                             break;
-                        case >0 :
+                        case > 0:
                             <span>@VoteCount @VoteLabel</span>
                             break;
                     }
@@ -83,7 +87,7 @@
                         var currentStar = i;
                         // The class for star button
                         string starClass = "fa fa-star";
-                        
+
                         // Example: CurrentRating = 3. It means we need to make the first 3 stars checked(shiny)
                         if (currentStar <= CurrentRating)
                         {
@@ -93,6 +97,27 @@
                         <span class=@starClass @onclick="(e => SubmitRating(currentStar))"></span>
                     }
                 </div>
+                @* Show input field after clicking the Add Comment button*@
+                @if (NewComment)
+                {
+                    <div class="row" >
+                        <div class="col">
+                            <input type="text" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText" />
+                            @* Clicking the Save Comment button will close the input field by seeting the NewComment flag*@
+                            <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); 
+                                        NewComment = false; }" class="btn btn-success" data-toggle="modal">Save Comment</button>
+                        </div>
+                    </div>
+                }
+                @* Display all comments *@
+                @foreach (var comment in SelectedProduct.CommentList)
+                {
+                    <div class="row">
+                        <div class="col">
+                            @comment.Comment
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
