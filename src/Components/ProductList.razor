@@ -258,12 +258,14 @@
     }
     
     /// <summary>
-    /// Show the Input Entry Box
+    /// Show the Input Entry Box, and remove the old text
     /// </summary>
     void ShowNewCommentInput()
     {
         // Setting the new comment flag to true will show the input box
         NewComment = true;
+
+        NewCommentText = "";
     }
     
     /// <summary>
