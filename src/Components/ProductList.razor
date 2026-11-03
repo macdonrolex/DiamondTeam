@@ -166,21 +166,28 @@
         // Remove extra spaces around the text typed by the visitor.
         var query = SearchQuery.Trim();
         // Get the full list before applying the search filter.
-        var posts = ProductService.GetAllData();
+        var products = ProductService.GetAllData().ToList();
+        
         // With no search text, display every post.
         if (query.Length == 0)
         {
-            FilteredProducts = posts.ToList();
+            FilteredProducts = products.ToList();
             return;
         }
-
-        // Keep a post when the search text appears in any of these fields.
-        FilteredProducts = posts.Where(product =>
-            ContainsSearchText(product.Title, query) ||
-            ContainsSearchText(product.Description, query) ||
-            ContainsSearchText(product.Post, query) ||
-            ContainsSearchText(product.Maker, query) ||
-            ContainsSearchText(product.Genre.ToString(), query)).ToList();
+        
+        // Removed old filtered results
+        FilteredProducts.Clear();
+        
+        // Search for Title, Descriptionm, Maker, and Genre
+        foreach (var p in products)
+        {
+            // Concatenate all fields for searching
+            var target = p.Title + " " + p.Description+ " " + p.Maker+ " " + p.Genre.DisplayGenre();
+            if (ContainsSearchText(target, query))
+            {
+                FilteredProducts.Add(p);
+            }
+        }
     }
     
     /// <summary>
