@@ -256,7 +256,17 @@
         }
         
         VoteCount = SelectedProduct.Ratings.Count();
-        VoteLabel = VoteCount > 1 ? "Votes" : "Vote";
+        // Prevent 0 divition
+        if (VoteCount == 0)
+        {
+            return;
+        }
+
+        VoteLabel = "Vote";
+        if (VoteCount > 1)
+        {
+            VoteLabel = "Votes";
+        }
         CurrentRating = SelectedProduct.Ratings.Sum() / VoteCount;
         
         System.Console.WriteLine($"Current rating for {SelectedProduct.Id}: {CurrentRating}");
