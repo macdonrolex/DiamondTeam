@@ -158,7 +158,9 @@
         RefreshFilteredProducts();
     }
 
-    // Rebuild the list of posts that match the current search text.
+    /// <summary>
+    /// Rebuild the list of posts that match the current search text.
+    /// </summary>
     private void RefreshFilteredProducts()
     {
         // Remove extra spaces around the text typed by the visitor.
@@ -180,9 +182,13 @@
             ContainsSearchText(product.Maker, query) ||
             ContainsSearchText(product.Genre.ToString(), query)).ToList();
     }
-
-
-    // Check one field for a case-insensitive substring match.
+    
+    /// <summary>
+    /// Check one field for a case-insensitive substring match.
+    /// </summary>
+    /// <param name="value"> search target</param>
+    /// <param name="query"> the text you are searching search for</param>
+    /// <returns></returns>
     private static bool ContainsSearchText(string value, string query)
     {
         // Empty fields cannot match; ignore letter casing in the comparison.
@@ -195,14 +201,18 @@
         return value.Contains(query, System.StringComparison.OrdinalIgnoreCase);
     }
 
-    // Keep pagination valid when the live search query changes.
+    /// <summary>
+    /// Keep pagination valid when the live search query changes.
+    /// </summary>
     private void ResetSearchPage()
     {
         CurrentPage = 1;
         RefreshFilteredProducts();
     }
 
-    // Clear the query and restore the complete post list.
+    /// <summary>
+    /// Clear the query and restore the complete post list.
+    /// </summary>
     private void ClearSearch()
     {
         SearchQuery = string.Empty;
