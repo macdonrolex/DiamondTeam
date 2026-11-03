@@ -68,25 +68,29 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    @if (VoteCount == 0)
+                    @switch (VoteCount)
                     {
-                        <span>Be the first to vote!</span>
-                    }
-                    else
-                    {
-                        <span>@VoteCount @VoteLabel</span>
+                        case 0 :
+                            <span>Be the first to vote!</span>
+                            break;
+                        case >0 :
+                            <span>@VoteCount @VoteLabel</span>
+                            break;
                     }
                     @for (int i = 1; i < 6; i++)
                     {
+                        // Current star button to display
                         var currentStar = i;
-                        if (i <= CurrentRating)
+                        // The class for star button
+                        string starClass = "fa fa-star";
+                        
+                        // Example: CurrentRating = 3. It means we need to make the first 3 stars checked(shiny)
+                        if (currentStar <= CurrentRating)
                         {
-                            <span class="fa fa-star checked" @onclick="(e => SubmitRating(currentStar))"></span>
+                            starClass = "fa fa-star checked";
                         }
-                        else
-                        {
-                            <span class="fa fa-star" @onclick="(e => SubmitRating(currentStar))"></span>
-                        }
+
+                        <span class=@starClass @onclick="(e => SubmitRating(currentStar))"></span>
                     }
                 </div>
             </div>
