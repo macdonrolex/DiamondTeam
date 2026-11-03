@@ -455,7 +455,34 @@ namespace UnitTests.Services
         #endregion DeleteData
 
         #region AddCommentToProduct
-        
+        /// <summary>
+        /// Check whether the function can add comment to the database
+        /// </summary>
+        [Test]
+        public void  AddCommentToProduct_Valid__Should_Save_Comment_To_Product()
+        {
+            // Arrange
+            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+            var productService = new JsonFileProductService(webHostEnvironment);
+            var productModel = new ProductModel();
+            var data = "test_comment";
+
+            // Act
+            // Add the comment into the productModel
+            productService.AddCommentToProduct(productModel, data);
+            
+            // The data Id used to delete in the reset stage
+            var dataId = productModel.Id;
+            
+            // Reset
+            // Delete the data created in Act
+            productService.DeleteData(dataId);
+            
+            // Assert
+            // Check whether the new comment in the productModel is the same as the comment.
+            Assert.That(productModel.CommentList.First().Comment, Is.EqualTo(data));
+
+        }
         #endregion AddCommentToProduct
     }
 }
