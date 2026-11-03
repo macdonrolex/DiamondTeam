@@ -42,7 +42,7 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 .modal .card-img {
-  height: 500px;
+  height: 300px;
   vertical-align: bottom;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
