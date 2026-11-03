@@ -135,6 +135,8 @@ namespace ContosoCrafts.WebSite.Services
             productData.Genre = data.Genre;
             productData.ReleaseYear = data.ReleaseYear;
 
+            productData.CommentList = data.CommentList;
+
             SaveData(products);
             return productData;
         }
