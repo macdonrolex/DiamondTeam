@@ -186,8 +186,13 @@
     private static bool ContainsSearchText(string value, string query)
     {
         // Empty fields cannot match; ignore letter casing in the comparison.
-        return !string.IsNullOrWhiteSpace(value) &&
-               value.Contains(query, System.StringComparison.OrdinalIgnoreCase);
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return false;
+        }
+        
+        // If true, happy path
+        return value.Contains(query, System.StringComparison.OrdinalIgnoreCase);
     }
 
     // Keep pagination valid when the live search query changes.
