@@ -453,5 +453,9 @@ namespace UnitTests.Services
         }
 
         #endregion DeleteData
+
+        #region AddCommentToProduct
+        
+        #endregion AddCommentToProduct
     }
 }
