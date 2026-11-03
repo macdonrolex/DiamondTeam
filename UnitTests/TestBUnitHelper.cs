@@ -5,7 +5,12 @@ namespace UnitTests
 {
     /// <summary>
     /// Test Context used by bUnit
+    ///
+    /// [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
+    /// A new instance of the test class is created for each test removing the need for the wrapper.
+    /// see https://bunit.dev/docs/getting-started/writing-tests.html?tabs=nunit
     /// </summary>
+    [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
     public abstract class BunitTestContext : Bunit.TestContext
     {
         /// <summary>
