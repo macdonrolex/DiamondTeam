@@ -226,5 +226,17 @@ namespace ContosoCrafts.WebSite.Services
             return true;
         }
         
+        /// <summary>
+        /// Save the new comment text to database
+        /// </summary>
+        public void AddCommentToProduct(ProductModel selectedProduct, string newCommentText)
+        {
+            // Add it to the Comment List
+            selectedProduct.CommentList.Add(new CommentModel() { Comment = newCommentText});
+    
+            // Call for the Product to be saved
+            UpdateData(selectedProduct);
+        }
+        
     }
 }
