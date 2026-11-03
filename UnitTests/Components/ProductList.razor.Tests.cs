@@ -79,5 +79,10 @@ namespace UnitTests.Components
                 Is.True);
         }
         #endregion SelectProduct
+
+        #region SubmitRating
+
+        
+        #endregion SubmitRating
     }
 }
