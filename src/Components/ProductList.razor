@@ -145,6 +145,8 @@
     public bool NewComment = false;
     // The new comment text to store
     public string NewCommentText;
+    // Total number of pages, calculated from the number of game posts (at least 1)
+    public int TotalPages => Math.Max(1, (int)Math.Ceiling(FilteredProducts.Count() / (double)PageSize));
     
     // Text used to filter home-page posts as the visitor types.
     private string SearchQuery { get; set; } = string.Empty;
@@ -209,8 +211,7 @@
         CurrentPage = 1;
         RefreshFilteredProducts();
     }
-    // Total number of pages, calculated from the number of game posts (at least 1)
-    public int TotalPages => Math.Max(1, (int)Math.Ceiling(FilteredProducts.Count() / (double)PageSize));
+    
     
     /// <summary>
     /// Closes the game post modal by clearing the selected product.
