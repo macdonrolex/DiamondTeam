@@ -147,12 +147,10 @@
     public string NewCommentText;
     // Total number of pages, calculated from the number of game posts (at least 1)
     public int TotalPages => Math.Max(1, (int)Math.Ceiling(FilteredProducts.Count() / (double)PageSize));
-    
     // Text used to filter home-page posts as the visitor types.
-    private string SearchQuery { get; set; } = string.Empty;
-
+    public string SearchQuery { get; set; } = string.Empty;
     // Cache filtered posts so each render avoids rereading the JSON file.
-    private List<ProductModel> FilteredProducts { get; set; } = new();
+    public List<ProductModel> FilteredProducts { get; set; } = new();
 
     // Load the posts when Blazor first creates this component.
     protected override void OnInitialized()
