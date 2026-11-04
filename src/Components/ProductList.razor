@@ -45,6 +45,7 @@
         Next <span aria-hidden="true">&rarr;</span>
     </button>
 </div>
+@* Modal for displaying the selected product's details. *@
 
 @if (SelectedProduct != null)
 {
@@ -253,6 +254,7 @@
     void GetCurrentRating()
     {
         // Fast fail
+        // If the selected product has no ratings, set the current rating and vote count to 0.
         if (SelectedProduct.Ratings == null)
         {
             CurrentRating = 0;
@@ -260,7 +262,7 @@
             System.Console.WriteLine($"Current rating for {SelectedProduct.Id}: {CurrentRating}");
             return;
         }
-        
+        // Calculate the vote count
         VoteCount = SelectedProduct.Ratings.Count();
         // Prevent 0 divition
         if (VoteCount == 0)
@@ -273,6 +275,7 @@
         {
             VoteLabel = "Votes";
         }
+        // Calculate the average rating
         CurrentRating = SelectedProduct.Ratings.Sum() / VoteCount;
         
         System.Console.WriteLine($"Current rating for {SelectedProduct.Id}: {CurrentRating}");
