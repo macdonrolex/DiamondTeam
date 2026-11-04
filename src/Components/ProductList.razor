@@ -72,14 +72,13 @@
                     <div class="col">
                         <button @onclick="(e => ShowNewCommentInput())" id="AddComment" class="btn btn-primary">Add Comment</button>
                     </div>
-                    @switch (VoteCount)
-                    {
-                        case 0:
-                            <span>Be the first to vote!</span>
-                            break;
-                        case > 0:
-                            <span>@VoteCount @VoteLabel</span>
-                            break;
+                    @{
+                        string voteText = VoteCount + " " + VoteLabel;
+                        if (VoteCount == 0)
+                        {
+                            voteText = "Be the first to vote!";
+                        }
+                        <span>@voteText</span>
                     }
                     @for (int i = 1; i < 6; i++)
                     {
