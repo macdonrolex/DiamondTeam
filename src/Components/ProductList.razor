@@ -12,7 +12,7 @@
         <input id="post-search" class="form-control" type="search" placeholder="Search posts by title or text..." @bind="SearchQuery" @bind:event="oninput" @bind:after="ResetSearchPage" />
         @if (!string.IsNullOrWhiteSpace(SearchQuery))
         {
-            <div class="input-group-append"><button class="btn btn-outline-secondary" type="button" @onclick="ClearSearch">Clear</button></div>
+            <div class="input-group-append"><button class="btn btn-outline-secondary" type="button" @onclick="ClearSearch" id="Clear">Clear</button></div>
         }
     </div>
     <small class="form-text text-muted">@FilteredProducts.Count() posts found</small>
