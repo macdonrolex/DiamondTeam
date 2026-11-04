@@ -415,5 +415,39 @@ namespace UnitTests.Components
             Assert.That(preMarkup.Equals(postMarkup), Is.False);
         }
         #endregion CloseProductModal
+        
+        #region NextPage
+        /// <summary>
+        ///  Next button should change to next page
+        /// </summary>
+        [Test]
+        public void NextPage_Valid_Should_Move_To_Next_Page()
+        {
+            // Arrange
+            Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+            var page = Render<ProductList>();
+            
+            // Find the Next button
+            var buttonList = page.FindAll("Button");
+
+            var button = buttonList.First((m => m.OuterHtml.Contains("NextButton")));
+            
+            // Get the markup to use for the assert
+            var preMarkup = page.Markup;
+            
+            // Act
+            button.Click();
+            
+            // Get the markup after close the model
+            var postMarkup = page.Markup;
+
+            // Reset
+            // Not Needed
+
+            // Assert
+            Assert.That(preMarkup.Equals(postMarkup), Is.False);
+            Assert.That(postMarkup.Contains("Page 2 of "), Is.True);
+        }
+        #endregion NextPage
     }
 }
