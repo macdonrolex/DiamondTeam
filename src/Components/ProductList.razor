@@ -41,7 +41,7 @@
         <span aria-hidden="true">&larr;</span> Previous
     </button>
     <span class="pager-status">Page @CurrentPage of @TotalPages</span>
-    <button class="pager-button pager-next" type="button" @onclick="NextPage" disabled="@(CurrentPage == TotalPages)">
+    <button class="pager-button pager-next" type="button" @onclick="NextPage" disabled="@(CurrentPage == TotalPages)" id="NextButton">
         Next <span aria-hidden="true">&rarr;</span>
     </button>
 </div>
