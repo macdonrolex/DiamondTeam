@@ -157,7 +157,50 @@ namespace UnitTests.Components
             Assert.That(preVoteCountString.Equals(postVoteCountString), Is.False);
             Assert.That(preStarChange.Equals(postStarChange), Is.False);
         }
-        
         #endregion SubmitRating
+        
+        #region ShowNewCommentInput
+        /// <summary>
+        /// Click the Add Comment button should display the input field and the Save Comment button
+        /// </summary>
+        [Test]
+        public void ShowNewCommentInput_Valid_Click_AddComment_Should_Display_Comment_Edit()
+        {
+            // Arrange
+            Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+            var id = "MoreInfoButton_jenlooper-cactus";
+            var page = Render<ProductList>();
+            // Find the Buttons (more info)
+            var buttonList = page.FindAll("Button");
+            // Find the one that matches the ID looking for and click it
+            var button = buttonList.First((m => m.OuterHtml.Contains(id)));
+            button.Click();
+            
+            // Get the Add Comment button
+            id = "AddComment";
+            buttonList = page.FindAll("Button");
+            var addCommentButton = buttonList.First((m => m.OuterHtml.Contains(id)));
+            
+            // Get the markup for the assertion
+            var preButtonMarkup = page.Markup;
+                
+            // Act
+            // Click the Add Comment button
+            addCommentButton.Click();
+            
+            // Get the post click markup 
+            var postButtonMarkup = page.Markup;
+            
+            // Reset
+            
+            // Assert
+            // Before clicking, no input field and Save Comment button
+            Assert.That(preButtonMarkup.Contains("input type=\"text\""), Is.False);
+            Assert.That(preButtonMarkup.Contains("Save Comment"), Is.False);
+            // After clicking, has input field and Save Comment button
+            Assert.That(postButtonMarkup.Contains("input type=\"text\""), Is.True);
+            Assert.That(postButtonMarkup.Contains("Save Comment"), Is.True);
+        }
+        #endregion ShowNewCommentInput
     }
 }
