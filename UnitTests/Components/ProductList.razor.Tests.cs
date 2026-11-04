@@ -318,5 +318,60 @@ namespace UnitTests.Components
         }
 
         #endregion ContainsSearchText
+
+        #region ClearSearch
+        /// <summary>
+        /// Test the clear button
+        /// </summary>
+        [Test]
+        public void ClearSearch_Valid_TypeIn_Text_Should_Disappear()
+        {
+            // Arrange
+            Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+            
+            // Backup original database for resetting.
+            var backupData = TestHelper.ProductService.GetAllData().First();
+            // Make a fake post into database and try to search it
+            var post = TestHelper.ProductService.GetAllData().First();
+            post.Title = "test_title";
+            TestHelper.ProductService.UpdateData(post);
+            
+            // Get the total post count for assertion
+            var postCount = TestHelper.ProductService.GetAllData().Count();
+            
+            // Render the page
+            var page = Render<ProductList>();
+            
+            // Type text into the search box
+            page.Find("input[id=\"post-search\"]").Input("test_title");
+            
+            // Find the clear button
+            var buttonList = page.FindAll("Button");
+            var button = buttonList.First((m => m.OuterHtml.Contains("Clear")));
+            
+            // Get the markup for the assertion
+            var preMarkup = page.Markup;
+            
+            // Act
+            // Click the clear button
+            button.Click();
+            
+            // Get the markup for the assertion
+            var postMarkup = page.Markup;
+            
+            
+            // Reset
+            // Update with the original data in database
+            TestHelper.ProductService.UpdateData(backupData);
+            
+            // Assert
+            // Before searching, {postCount} posts
+            Assert.That(preMarkup.Contains("1 posts found"), Is.True);
+            // After searching, 1 post
+            Assert.That(postMarkup.Contains(postCount + " posts found"), Is.True);
+
+        }
+
+        #endregion ClearSearch
     }
 }
