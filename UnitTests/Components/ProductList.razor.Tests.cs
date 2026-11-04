@@ -369,9 +369,51 @@ namespace UnitTests.Components
             Assert.That(preMarkup.Contains("1 posts found"), Is.True);
             // After searching, 1 post
             Assert.That(postMarkup.Contains(postCount + " posts found"), Is.True);
-
         }
 
         #endregion ClearSearch
+
+        #region CloseProductModal
+
+        /// <summary>
+        ///  The "X" should close the modal
+        /// </summary>
+        [Test]
+        public void CloseProductModal_Valid_Modal_Should_Be_Closed()
+        {
+            // Arrange
+            Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+            var id = "MoreInfoButton_jenlooper-cactus";
+
+            var page = Render<ProductList>();
+            
+            // Find the Buttons (more info)
+            var buttonList = page.FindAll("Button");
+            
+            // Find the one that matches the ID looking for and click it
+            var button = buttonList.First((m => m.OuterHtml.Contains(id)));
+            
+            // Show the popup
+            button.Click();
+            
+            // Get the markup to use for the assert
+            var preMarkup = page.Markup;
+            
+            // Find the X button
+            buttonList = page.FindAll("span");
+            var xButton = buttonList.First((m => m.OuterHtml.Contains("xButton")));
+            // Act
+            xButton.Click();
+            
+            // Get the markup after close the model
+            var postMarkup = page.Markup;
+
+            // Reset
+            // Not Needed
+
+            // Assert
+            Assert.That(preMarkup.Equals(postMarkup), Is.False);
+        }
+        #endregion CloseProductModal
     }
 }
