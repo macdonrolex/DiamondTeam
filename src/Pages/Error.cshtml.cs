@@ -39,8 +39,22 @@ namespace ContosoCrafts.WebSite.Pages
         /// </summary>
         public void OnGet()
         {
-            // Prefer the current activity ID; fall back to ASP.NET Core's request ID.
-            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            string id = null;
+
+            // Use the current activity's ID if there is one
+            if (Activity.Current != null)
+            {
+                id = Activity.Current.Id;
+            }
+
+            // If there was no activity, or it had no ID, use ASP.NET Core's request ID instead
+            if (id == null)
+            {
+                id = HttpContext.TraceIdentifier;
+            }
+
+            RequestId = id;
         }
+
     }
 }
