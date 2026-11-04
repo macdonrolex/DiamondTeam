@@ -105,7 +105,7 @@
                             <input type="text" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText" />
                             @* Clicking the Save Comment button will close the input field by seeting the NewComment flag*@
                             <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); 
-                                        NewComment = false; }" class="btn btn-success" data-toggle="modal">Save Comment</button>
+                                        NewComment = false; }" class="btn btn-success" data-toggle="modal" id="SaveComment">Save Comment</button>
                         </div>
                     </div>
                 }
