@@ -37,7 +37,7 @@
     }
 </div>
 <div class="product-pager" aria-label="Product pages">
-    <button class="pager-button pager-prev" type="button" @onclick="PreviousPage" disabled="@(CurrentPage == 1)">
+    <button class="pager-button pager-prev" type="button" @onclick="PreviousPage" disabled="@(CurrentPage == 1)" id="previousButton">
         <span aria-hidden="true">&larr;</span> Previous
     </button>
     <span class="pager-status">Page @CurrentPage of @TotalPages</span>
