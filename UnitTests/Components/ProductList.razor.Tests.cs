@@ -202,5 +202,63 @@ namespace UnitTests.Components
             Assert.That(postButtonMarkup.Contains("Save Comment"), Is.True);
         }
         #endregion ShowNewCommentInput
+        
+        #region UpdateCommentText
+        
+        /// <summary>
+        /// Test whether we can type in the comment, save it, and display it
+        /// </summary>
+        [Test]
+        public void UpdateCommentText_Valid_TypeIn_Text_And_Save_Should_Display_The_Comment()
+        {
+            // Arrange
+            Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+            var id = "MoreInfoButton_jenlooper-cactus";
+            var page = Render<ProductList>();
+            // Find the Buttons (more info)
+            var buttonList = page.FindAll("Button");
+            // Find the one that matches the ID looking for and click it
+            var button = buttonList.First((m => m.OuterHtml.Contains(id)));
+            button.Click();
+            
+            // Get the Add Comment button
+            id = "AddComment";
+            buttonList = page.FindAll("Button");
+            var addCommentButton = buttonList.First((m => m.OuterHtml.Contains(id)));
+            
+            // Get the markup for the assertion
+            var preButtonMarkup = page.Markup;
+            
+            // Backup original database for resetting.
+            var backupData = TestHelper.ProductService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-cactus");
+                
+            // Act
+            // Click the Add Comment button
+            addCommentButton.Click();
+            
+            // Type in some text
+            page.Find("input[type='text']").Change("test_comment");
+            
+            // Get the save button and click it
+            buttonList = page.FindAll("Button");
+            id = "SaveComment";
+            var saveButton = buttonList.First((m => m.OuterHtml.Contains(id)));
+            saveButton.Click();
+            
+            // Get the post click markup 
+            var postButtonMarkup = page.Markup;
+            
+            // Reset
+            // Update with the original data in database
+            TestHelper.ProductService.UpdateData(backupData);
+            
+            // Assert
+            // Before clicking, no comment
+            Assert.That(preButtonMarkup.Contains("test_comment"), Is.False);
+            // After clicking, show the comment
+            Assert.That(postButtonMarkup.Contains("test_comment"), Is.True);
+        }
+        #endregion UpdateCommentText
+        
     }
 }
