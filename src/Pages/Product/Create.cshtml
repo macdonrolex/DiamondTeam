@@ -9,7 +9,7 @@
             <p>Share a game post with the community. Add the details below to get it listed.</p>
         </header>
 
-        <form method="post" class="post-create-form" id="postCreateForm" novalidate>
+        <form method="post" enctype="multipart/form-data" class="post-create-form" id="postCreateForm" novalidate>
             <div asp-validation-summary="ModelOnly" class="post-create-validation" role="alert"></div>
 
             <div class="post-create-grid">
@@ -59,13 +59,20 @@
                 </div>
 
                 <div class="post-create-field post-create-field-wide">
-                    <label asp-for="Product.Image" class="post-create-label">
+                    <label asp-for="ImageFile" class="post-create-label">
                         <svg class="post-create-label-icon post-create-label-icon--image" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/></svg>
-                        <span>Image</span>
+                        <span>Upload game image</span>
                     </label>
-                    <input asp-for="Product.Image" class="form-control post-create-input" placeholder="Paste an image URL" inputmode="url" />
-                    <small class="post-create-hint">Use a direct link to the game’s cover art or promotional image.</small>
-                    <span asp-validation-for="Product.Image" class="post-create-error"></span>
+                    <div class="post-create-upload-control">
+                        <input asp-for="ImageFile" type="file" accept=".jpg,.jpeg,.png,.gif,.webp,image/jpeg,image/png,image/gif,image/webp" class="post-create-file-input" />
+                        <label for="ImageFile" class="post-create-file-button">
+                            <span class="post-create-file-button-icon" aria-hidden="true">↑</span>
+                            <span>Choose image</span>
+                        </label>
+                        <span id="selectedImageName" class="post-create-file-name" aria-live="polite">No image selected</span>
+                    </div>
+                    <small class="post-create-hint">Choose a JPG, PNG, GIF, or WEBP file, up to 10 MB.</small>
+                    <span asp-validation-for="ImageFile" class="post-create-error"></span>
                 </div>
                 <div class="post-create-field">
                     <label asp-for="Product.RatingLink" class="post-create-label">
@@ -89,8 +96,9 @@
             <div class="post-create-actions">
                 <a asp-page="/Product/Index" class="post-create-cancel">Cancel</a>
                 <button type="submit" class="btn post-create-submit" id="postCreateSubmit">
-                    <span>Add Post</span>
+                    <span class="post-create-submit-label">Add Post</span>
                     <span class="post-create-submit-icon" aria-hidden="true">↗</span>
+                    <span class="post-create-spinner" aria-hidden="true"></span>
                 </button>
             </div>
         </form>
@@ -99,4 +107,20 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Show the selected image filename beside the upload button.
+        (() => {
+            const imageInput = document.getElementById("ImageFile");
+            const imageName = document.getElementById("selectedImageName");
+
+            if (!imageInput || !imageName) return;
+
+            imageInput.addEventListener("change", () => {
+                const selectedFile = imageInput.files && imageInput.files[0];
+                imageName.textContent = selectedFile ? selectedFile.name : "No image selected";
+                imageName.classList.toggle("has-file", Boolean(selectedFile));
+            });
+        })();
+    </script>
 }
