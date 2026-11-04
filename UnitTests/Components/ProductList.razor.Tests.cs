@@ -81,7 +81,82 @@ namespace UnitTests.Components
         #endregion SelectProduct
 
         #region SubmitRating
-
+        /// <summary>
+        /// This test tests that the SubmitRating will change the vote as well as the Star checked
+        /// Because the star check is a calculation of the ratings, using a record that has no stars and checking one
+        /// makes it clear what was changed.
+        /// 
+        /// The test needs to open the page
+        /// Then open the popup on the card
+        /// Then record the state of the count and star check status
+        /// Then check a star
+        /// Then check again the state of the cound and star check status
+        /// </summary>
+        [Test]
+        public void SubmitRating_Valid_ID_Click_Unstared_Should_Increment_Count_And_Check_Star()
+        {
+            // Arrange
+            Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+            var id = "MoreInfoButton_jenlooper-light";
+            var page = Render<ProductList>();
+            // Find the Buttons (more info)
+            var buttonList = page.FindAll("Button");
+            // Find the one that matches the ID looking for and click it
+            var button = buttonList.First((m => m.OuterHtml.Contains(id)));
+            button.Click();
+            
+            // Get the markup of the page post the Click action
+            var buttonMarkup = page.Markup;
+            
+            // Get the star buttons
+            var preStarButtonList = page.FindAll("span");
+            
+            // Get the Vote Count, the sixth span in the List is the first star 
+            var preVoteCountSpan = preStarButtonList[5];
+            var preVoteCountString = preVoteCountSpan.OuterHtml;
+            
+            // Get the First star item from the List, it should not be checked
+            var starButton = preStarButtonList.First(m => !string.IsNullOrEmpty(m.ClassName)
+                                                       && m.ClassName.Contains("fa fa-star"));
+            
+            // Save the html for it to compare after the click
+            var preStarChange = starButton.OuterHtml;
+            
+            // Backup original database for resetting.
+            var backupData = TestHelper.ProductService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-light");
+                
+            // Act
+            
+            // Click the star button
+            starButton.Click();
+            
+            // Get the markup to use for teh assert
+            buttonMarkup = page.Markup;
+            
+            // Get the star buttons after clicking
+            var postStarButtonList = page.FindAll("span");
+            
+            // Get the Vote Count
+            var postVoteCountSpan = postStarButtonList[5];
+            var postVoteCountString = postVoteCountSpan.OuterHtml;
+            
+            // Get the Last stared item from the list
+            starButton = postStarButtonList.First(m => !string.IsNullOrEmpty(m.ClassName)
+                                                   && m.ClassName.Contains("fa fa-star checked"));
+            
+            // Save the html for it to compare after the click
+            var postStarChange = starButton.OuterHtml;
+            
+            // Reset
+            // Update with the original data in database
+            TestHelper.ProductService.UpdateData(backupData);
+            
+            // Assert
+            Assert.That(preVoteCountString.Contains("Be the first to vote!"), Is.True);
+            Assert.That(postVoteCountString.Contains("1 Vote"), Is.True);
+            Assert.That(preVoteCountString.Equals(postVoteCountString), Is.False);
+            Assert.That(preStarChange.Equals(postStarChange), Is.False);
+        }
         
         #endregion SubmitRating
     }
