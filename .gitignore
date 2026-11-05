@@ -331,3 +331,5 @@ ASALocalRun/
 .mfractor/
 
 .vscode/
+/UnitTests
+/src/wwwroot/data/images
