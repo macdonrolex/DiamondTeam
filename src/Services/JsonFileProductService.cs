@@ -145,7 +145,7 @@ namespace ContosoCrafts.WebSite.Services
         /// Serializes the product records and replaces the contents of the JSON data file.
         /// </summary>
         /// <param name="products">Records to write to the data file.</param>
-        private void SaveData(IEnumerable<ProductModel> products)
+        public void SaveData(IEnumerable<ProductModel> products)
         {
 
             // Recreate the file so it contains the current product collection.
