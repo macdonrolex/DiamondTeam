@@ -262,6 +262,32 @@ namespace UnitTests.Components
         #endregion UpdateCommentText
 
         #region ContainsSearchText
+        
+        /// <summary>
+        /// Test whether the search function cna handle the situation that a post contains no content
+        /// or only white spaces
+        /// </summary>
+        [Test]
+        public void ContainsSearchText_InValid_TargetText_Null_Or_WhiteSpace_Should_Return_False()
+        {
+            // Arrange
+            
+            // The white spaces target text
+            var dataText = "  ";
+            
+            // The query provided by user
+            var dataQuery = "query";
+
+            // Act
+            var result = ProductList.ContainsSearchText(dataText, dataQuery);
+
+            // Reset
+            // Not needed
+
+            // Assert
+            Assert.That(result, Is.EqualTo(false));
+        }
+        
         /// <summary>
         /// Test the search function
         /// </summary>
