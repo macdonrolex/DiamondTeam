@@ -512,5 +512,40 @@ namespace UnitTests.Components
             Assert.That(postMarkup.Contains("Page 1 of "), Is.True);
         }
         #endregion PreviousPage
+
+        #region GetCurrentRating
+
+        /// <summary>
+        /// If the post has no vote yet, display "Vote" the current rating is 0.
+        /// </summary>
+        [Test]
+        public void GetCurrentRating_Valid_VoteCount_0_Should_Set_Vote_And_0()
+        {
+            // Arrange
+            
+            // Put the first entry into ProductList, and set its VoteCount to 0
+            var data = new ProductList();
+            data.SelectedProduct = TestHelper.ProductService.GetAllData().First();
+            data.SelectedProduct.Ratings = [];
+            
+            // Set the VoteCount and VoteLabel to arbitrary values for assertion
+            data.VoteLabel = "test";
+            data.CurrentRating = 999;
+            
+
+            // Act
+            
+            // The method should set VoteLabel to "Vote" and CurrentRating to 0
+            data.GetCurrentRating();
+            
+            // Reset
+            // Not needed
+
+            // Assert
+            Assert.That(data.VoteLabel, Is.EqualTo("Vote"));
+            Assert.That(data.CurrentRating, Is.EqualTo(0));
+        }
+        
+        #endregion GetCurrentRating
     }
 }
