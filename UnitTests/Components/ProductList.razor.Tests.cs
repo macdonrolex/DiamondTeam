@@ -289,6 +289,59 @@ namespace UnitTests.Components
         }
         
         /// <summary>
+        /// Test typing in unmatched text should display "No matching posts found."
+        /// </summary>
+        [Test]
+        public void ContainsSearchText_InValid_TypeIn_Unmatched_Text_Should_Display_No_Matching()
+        {
+            // Arrange
+            Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+            
+            // Backup original database for resetting.
+            var backupData = TestHelper.ProductService.GetAllData();
+            
+            // Delete all but first data in Database
+            foreach (var e in backupData.Skip(1))
+            {
+                TestHelper.ProductService.DeleteData(e.Id);
+            }
+            
+            // Make a fake post into database and try to search it
+            var post = TestHelper.ProductService.GetAllData().First();
+            post.Title = "test_title";
+            post.Maker = "teest_maker";
+            post.Description = "test_description";
+            TestHelper.ProductService.UpdateData(post);
+            
+            // Render the page
+            var page = Render<ProductList>();
+            
+            // Get the markup for the assertion
+            var preMarkup = page.Markup;
+            
+            // Act
+            // Type unmatched text into the search box
+            page.Find("input[id=\"post-search\"]").Input("unmatched_text");
+            
+            // Get the markup for the assertion
+            var postMarkup = page.Markup;
+            
+            
+            // Reset
+            
+            // Update with the original data in database
+            TestHelper.ProductService.SaveData(backupData);
+            
+            // Assert
+            
+            // Before searching, 1 post
+            Assert.That(preMarkup.Contains("1 posts found"), Is.True);
+            
+            // After Searching, display No matching posts found.
+            Assert.That(postMarkup.Contains("No matching posts found."), Is.True);
+        }
+        
+        /// <summary>
         /// Test the search function
         /// </summary>
         [Test]
