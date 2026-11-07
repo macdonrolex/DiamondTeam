@@ -148,44 +148,40 @@ namespace ContosoCrafts.WebSite.Pages.Product
         // Returns true if the image and product were saved, false if saving failed.
         private async Task<bool> SaveImageAndProductAsync(string imagesFolder, string fullImagePath, string fileName)
         {
-            try
-            {
-                Directory.CreateDirectory(imagesFolder);
-
-                await using (var imageStream = new FileStream(
-                    fullImagePath,
-                    FileMode.CreateNew,
-                    FileAccess.Write,
-                    FileShare.None))
-                {
-                    await ImageFile.CopyToAsync(imageStream);
-                }
-
-                Product.Image = "/data/images/" + fileName;
-                Product.DateAdded = DateTime.UtcNow;
-                ProductService.AddProduct(Product);
-
-                return true;
-            }
-            catch (Exception exception) when (
-                exception is IOException || exception is UnauthorizedAccessException)
+            // Stop if no image was uploaded
+            if (ImageFile == null)
             {
                 return false;
             }
+
+            // Stop if a file with this name already exists
+            if (System.IO.File.Exists(fullImagePath))
+            {
+                return false;
+            }
+
+            // Make sure the images folder exists
+            Directory.CreateDirectory(imagesFolder);
+
+            // Save the image
+            using (var imageStream = new FileStream(fullImagePath, FileMode.Create))
+            {
+                await ImageFile.CopyToAsync(imageStream);
+            }
+
+            // Save the product
+            Product.Image = "/data/images/" + fileName;
+            Product.DateAdded = DateTime.UtcNow;
+            ProductService.AddProduct(Product);
+
+            return true;
         }
 
         private static void DeleteFileIfItExists(string path)
         {
-            try
+            if (System.IO.File.Exists(path))
             {
-                if (System.IO.File.Exists(path))
-                {
-                    System.IO.File.Delete(path);
-                }
-            }
-            catch (IOException)
-            {
-                // Ignore this. The visitor should see the original save error, not this one.
+                System.IO.File.Delete(path);
             }
         }
 
