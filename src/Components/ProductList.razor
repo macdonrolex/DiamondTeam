@@ -161,7 +161,7 @@
     /// <summary>
     /// Rebuild the list of posts that match the current search text.
     /// </summary>
-    private void RefreshFilteredProducts()
+    public void RefreshFilteredProducts()
     {
         // Remove extra spaces around the text typed by the visitor.
         var query = SearchQuery.Trim();
@@ -196,7 +196,7 @@
     /// <param name="value"> search target</param>
     /// <param name="query"> the text you are searching search for</param>
     /// <returns></returns>
-    private static bool ContainsSearchText(string value, string query)
+    public static bool ContainsSearchText(string value, string query)
     {
         // Empty fields cannot match; ignore letter casing in the comparison.
         if (string.IsNullOrWhiteSpace(value))
@@ -211,7 +211,7 @@
     /// <summary>
     /// Keep pagination valid when the live search query changes.
     /// </summary>
-    private void ResetSearchPage()
+    public void ResetSearchPage()
     {
         CurrentPage = 1;
         RefreshFilteredProducts();
@@ -220,7 +220,7 @@
     /// <summary>
     /// Clear the query and restore the complete post list.
     /// </summary>
-    private void ClearSearch()
+    public void ClearSearch()
     {
         SearchQuery = string.Empty;
         CurrentPage = 1;
@@ -231,7 +231,7 @@
     /// <summary>
     /// Closes the game post modal by clearing the selected product.
     /// </summary>
-    void CloseProductModal()
+    public void CloseProductModal()
     {
         SelectedProduct = null;
     }
@@ -241,7 +241,7 @@
     /// to show in the modal, and loads its current rating.
     /// </summary>
     /// <param name="productId">Id of the product the user clicked</param>
-    void SelectProduct(string productId)
+    public void SelectProduct(string productId)
     {
         SelectedProductId = productId;
         SelectedProduct = ProductService.GetAllData().First(x => x.Id == productId);
@@ -251,7 +251,7 @@
     /// <summary>
     /// Calculates the vote count, the vote label, and the average rating of the selected game post.
     /// </summary>
-    void GetCurrentRating()
+    public void GetCurrentRating()
     {
         // Fast fail
         // If the selected product has no ratings, set the current rating and vote count to 0.
@@ -286,7 +286,7 @@
     /// so the stars and vote count are updated.
     /// </summary>
     /// <param name="rating">Number of stars the user clicked (1 to 5)</param>
-    void SubmitRating(int rating)
+    public void SubmitRating(int rating)
     {
         System.Console.WriteLine($"Rating received for {SelectedProduct.Id}: {rating}");
         ProductService.AddRating(SelectedProductId, rating);
@@ -296,7 +296,7 @@
     /// <summary>
     /// Goes to the previous page of game posts, if there is one.
     /// </summary>
-    void PreviousPage()
+    public void PreviousPage()
     {
         if (CurrentPage > 1)
         {
@@ -307,7 +307,7 @@
     /// <summary>
     /// Goes to the previous page of game posts, if there is one.
     /// </summary>
-    void NextPage()
+    public void NextPage()
     {
         if (CurrentPage < TotalPages)
         {
@@ -318,7 +318,7 @@
     /// <summary>
     /// Show the Input Entry Box, and remove the old text
     /// </summary>
-    void ShowNewCommentInput()
+    public void ShowNewCommentInput()
     {
         // Setting the new comment flag to true will show the input box
         NewComment = true;
@@ -330,7 +330,7 @@
     /// Remember the new comment text
     /// </summary>
     /// <param name="newCommentText"> the new comment text</param>
-    void UpdateCommentText(string newCommentText)
+    public void UpdateCommentText(string newCommentText)
     {
         NewCommentText = newCommentText;
     }
