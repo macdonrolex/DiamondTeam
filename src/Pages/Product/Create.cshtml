@@ -48,6 +48,20 @@
                     <input asp-for="Product.ReleaseYear" type="number" class="form-control post-create-input" />
                     <span asp-validation-for="Product.ReleaseYear" class="post-create-error"></span>
                 </div>
+                <div class="post-create-field">
+                    <span class="post-create-label" id="playModeLabel">
+                        <svg class="post-create-label-icon post-create-label-icon--mode" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 8a3 3 0 1 0 6 0a3 3 0 1 0-6 0M3 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1M15 5.2a3 3 0 0 1 0 5.6M17 14.2a5 5 0 0 1 4 4.8v1" /></svg>
+                        <span>Play mode</span>
+                    </span>
+                    <div class="post-create-playmode" role="radiogroup" aria-labelledby="playModeLabel">
+                        <input type="radio" asp-for="Product.PlayMode" value="Single player" id="playModeSingle" class="post-create-playmode-radio" />
+                        <label for="playModeSingle" class="post-create-playmode-option">Single player</label>
+
+                        <input type="radio" asp-for="Product.PlayMode" value="Multiplayer" id="playModeMulti" class="post-create-playmode-radio" />
+                        <label for="playModeMulti" class="post-create-playmode-option">Multiplayer</label>
+                    </div>
+                    <span asp-validation-for="Product.PlayMode" class="post-create-error"></span>
+                </div>
 
                 <div class="post-create-field post-create-field-wide">
                     <label asp-for="Product.Post" class="post-create-label">
