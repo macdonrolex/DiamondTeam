@@ -162,37 +162,86 @@
     {
         RefreshFilteredProducts();
     }
-
+    
     /// <summary>
-    /// Rebuild the list of posts that match the current search text.
+    /// Rebuild the list of posts that match the current filter.
+    /// First filter: text query filter
+    /// Second filter: genre query filter
     /// </summary>
     public void RefreshFilteredProducts()
     {
-        // Remove extra spaces around the text typed by the visitor.
-        var query = SearchQuery.Trim();
-        // Get the full list before applying the search filter.
+        // Get the full list before applying search filters.
         var products = ProductService.GetAllData().ToList();
         
-        // With no search text, display every post.
+        // Apply text filter
+        products = TextFilter(products);
+        
+        // Apply Genre filter
+        products = GenreFilter(products);
+        
+        // Filter current displayed posts
+        FilteredProducts = products;
+    }
+
+    /// <summary>
+    /// Keeps only the posts whose title, description, or maker contains the current search text.
+    /// </summary>
+    /// <param name="list">The posts to filter</param>
+    /// <returns>The posts that match the search text, or the given list when the search text is empty</returns>
+    public List<ProductModel> TextFilter(List<ProductModel> list)
+    {
+        // Remove extra spaces around the text typed by the visitor.
+        var query = SearchQuery.Trim();
+        
+        // With no search text, return given list.
         if (query.Length == 0)
         {
-            FilteredProducts = products.ToList();
-            return;
+            return list;
         }
         
-        // Removed old filtered results
-        FilteredProducts.Clear();
+        // The result list
+        List<ProductModel> resultList = [];
         
         // Search for Title, Descriptionm, Maker, and Genre
-        foreach (var p in products)
+        foreach (var p in list)
         {
             // Concatenate all fields for searching
             var target = p.Title + " " + p.Description+ " " + p.Maker;
             if (ContainsSearchText(target, query))
             {
-                FilteredProducts.Add(p);
+                resultList.Add(p);
             }
         }
+
+        return resultList;
+    }
+
+    /// <summary>
+    /// Keeps only the posts that belong to the selected genre.
+    /// </summary>
+    /// <param name="list">The posts to filter</param>
+    /// <returns>The posts of the selected genre, or the given list when no genre is selected</returns>
+    public List<ProductModel> GenreFilter(List<ProductModel> list)
+    {
+        // With no selected genre, return given list.
+        if (GenreQuery == null)
+        {
+            return list;
+        }
+        
+        // The result list
+        List<ProductModel> resultList = [];
+        
+        // Search for Title, Descriptionm, Maker, and Genre
+        foreach (var p in list)
+        {
+            if (p.Genre == GenreQuery)
+            {
+                resultList.Add(p);
+            }
+        }
+
+        return resultList;
     }
     
     /// <summary>
