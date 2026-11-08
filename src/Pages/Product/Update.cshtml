@@ -72,6 +72,29 @@
 			<input asp-for="Product.Image" class="form-control" />
 			<span asp-validation-for="Product.Image" class="text-danger"></span>
 		</div>
+		<div class="form-group">
+			<label class="control-label d-block">Play mode</label>
+
+			<div class="form-check">
+				<input asp-for="Product.PlayMode"
+					   type="radio"
+					   value="Single player"
+					   id="playModeSingle"
+					   class="form-check-input" />
+				<label for="playModeSingle" class="form-check-label">Single player</label>
+			</div>
+
+			<div class="form-check">
+				<input asp-for="Product.PlayMode"
+					   type="radio"
+					   value="Multiplayer"
+					   id="playModeMulti"
+					   class="form-check-input" />
+				<label for="playModeMulti" class="form-check-label">Multiplayer</label>
+			</div>
+
+			<span asp-validation-for="Product.PlayMode" class="text-danger"></span>
+		</div>
 		
 		<div class="form-group">
 			<label asp-for="Product.ShopLink" class="control-label"></label>
