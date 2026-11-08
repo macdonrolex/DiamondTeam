@@ -135,8 +135,7 @@ namespace ContosoCrafts.WebSite.Services
             // Also, users are allowed to provide null link. Trim a null link throw the exception.
             productData.ShopLink = data.ShopLink;
             productData.RatingLink = data.RatingLink;
-            
-            // No need to trim enum
+            productData.PlayMode = data.PlayMode;
             productData.Genre = data.Genre;
             
             // No need to trim int
@@ -147,6 +146,7 @@ namespace ContosoCrafts.WebSite.Services
             
             // No need to trim bool
             productData.IsMultiplayer = data.IsMultiplayer;
+
 
             SaveData(products);
             return productData;
