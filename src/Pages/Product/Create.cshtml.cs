@@ -54,7 +54,6 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// </summary>
         public void OnGet()
         {
-            Product.PlayMode = "Single player";
         }
 
 
