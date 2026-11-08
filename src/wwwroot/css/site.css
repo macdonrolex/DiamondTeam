@@ -1233,6 +1233,11 @@ ul {
     --icon-accent-2: #8c98ff;
 }
 
+.post-create-label-icon--multiplayer {
+    --icon-accent: #4aa8d6;
+    --icon-accent-2: #8cffd6;
+}
+
 .post-create-field:hover .post-create-label-icon,
 .post-create-field:focus-within .post-create-label-icon {
     transform: translateY(-2px) rotate(-6deg) scale(1.08);
