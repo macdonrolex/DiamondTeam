@@ -20,13 +20,7 @@ public class ProductModel
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Maker must be between 2 and 80 characters.")]
     public string Maker { get; set; }
 
-    // The playmode that made the game.
-    [Required(ErrorMessage = "Choose a play mode.")]
 
-    [RegularExpression("^(Single player|Multiplayer)$",
-
-    ErrorMessage = "Choose Single player or Multiplayer.")]
-    public string PlayMode { get; set; }
 
     // The cover image can be a full URL or a path inside this site.
     [Required(ErrorMessage = "Add the cover image link.")]
@@ -65,8 +59,10 @@ public class ProductModel
 
     // Store the Comments entered by the users on this product
     public List<CommentModel> CommentList { get; set; } = new();
-    
+
     // Genre of the game in the post. Default is Undefined
+    [Required(ErrorMessage = "Choose a genre.")]
+    [Range(1, 9, ErrorMessage = "Choose a genre.")]
     public GenreEnum Genre { get; set; } = GenreEnum.Undefined;
     
     // When this product was first added. Existing records without a date remain null.
