@@ -600,6 +600,15 @@ ul {
     text-transform: uppercase;
     margin-right: 12px;
 }
+.product-genre {
+    color: #5269a7;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-right: 12px;
+}
+
 
 .product-description {
     display: -webkit-box;
@@ -919,6 +928,17 @@ ul {
     }
 
     .product-list-page .product-maker {
+        display: inline-flex;
+        margin: 0 0 .55rem;
+        padding: .3rem .62rem;
+        border: 1px solid rgba(151, 174, 255, .25);
+        border-radius: 999px;
+        background: rgb(233 234 236 / 90%) !important;
+        color: #c2d0ff;
+        font-size: .76rem;
+        font-weight: 750;
+    }
+    .product-list-page .product-genre {
         display: inline-flex;
         margin: 0 0 .55rem;
         padding: .3rem .62rem;
