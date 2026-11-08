@@ -48,6 +48,29 @@
                     <input asp-for="Product.ReleaseYear" type="number" class="form-control post-create-input" />
                     <span asp-validation-for="Product.ReleaseYear" class="post-create-error"></span>
                 </div>
+                <div class="post-create-field">
+                    <label asp-for="Product.Genre" class="post-create-label">
+                        <svg class="post-create-label-icon post-create-label-icon--genre" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M20.6 13.4 11 3.8H4v7.1l9.6 9.7a2 2 0 0 0 2.8 0l4.2-4.3a2 2 0 0 0 0-2.9Z" />
+                            <circle cx="7.5" cy="7.5" r="1" />
+                        </svg>
+                        <span>Genre</span>
+                    </label>
+                    <select asp-for="Product.Genre" class="form-control post-create-input post-create-genre">
+                        <option value="0" disabled>Choose Genre</option>
+                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Action">Action</option>
+                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Adventure">Adventure</option>
+                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Platform">Platform</option>
+                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Shooter">Shooter</option>
+                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Fighting">Fighting</option>
+                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Stealth">Stealth</option>
+                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Strategy">Strategy</option>
+                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Sandbox">Sandbox</option>
+                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Rhythm">Rhythm</option>
+                    </select>
+                    <span asp-validation-for="Product.Genre" class="post-create-error"></span>
+                </div>
+
                 
 
                 <div class="post-create-field post-create-field-wide">
