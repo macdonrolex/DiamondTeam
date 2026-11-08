@@ -127,6 +127,7 @@ namespace ContosoCrafts.WebSite.Services
             productData.Description = data.Description.Trim();
             productData.Post = data.Post.Trim();
             productData.Image = data.Image.Trim();
+            
             // No need to trim, because [URL] attribute will block invalid input.
             // Also, users are allowed to provide null link. Trim a null link throw the exception.
             productData.ShopLink = data.ShopLink;
@@ -136,6 +137,8 @@ namespace ContosoCrafts.WebSite.Services
             productData.ReleaseYear = data.ReleaseYear;
 
             productData.CommentList = data.CommentList;
+
+            productData.IsMultiplayer = data.IsMultiplayer;
 
             SaveData(products);
             return productData;
