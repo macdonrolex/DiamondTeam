@@ -20,6 +20,14 @@ public class ProductModel
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Maker must be between 2 and 80 characters.")]
     public string Maker { get; set; }
 
+    // The playmode that made the game.
+    [Required(ErrorMessage = "Choose a play mode.")]
+
+    [RegularExpression("^(Single player|Multiplayer)$",
+
+    ErrorMessage = "Choose Single player or Multiplayer.")]
+    public string PlayMode { get; set; }
+
     // The cover image can be a full URL or a path inside this site.
     [Required(ErrorMessage = "Add the cover image link.")]
     [StringLength(2048, ErrorMessage = "The image link must be 2,048 characters or fewer.")]
