@@ -2317,7 +2317,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     font-size: .82rem;
 }
 
-@@media (max-width: 700px) {
+@media (max-width: 700px) {
     .delete-card {
         grid-template-columns: 1fr;
     }
@@ -2331,7 +2331,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     }
 }
 
-@@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
     .delete-button {
         transition: none;
     }
@@ -2340,3 +2340,13 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
             transform: none;
         }
 }
+
+.delete-button--cancel {
+    text-decoration: none;
+}
+
+    .delete-button--cancel:hover,
+    .delete-button--cancel:focus-visible {
+        color: black;
+        text-decoration: none;
+    }
