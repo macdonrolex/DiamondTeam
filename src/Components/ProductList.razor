@@ -152,6 +152,9 @@
     // Cache filtered posts so each render avoids rereading the JSON file.
     public List<ProductModel> FilteredProducts { get; set; } = new();
     
+    // The selected genre type in the filter, null means all genre
+    public GenreEnum? GenreQuery { get; set; } = null;
+    
     /// <summary>
     /// Load the posts when Blazor first creates this component.
     /// </summary>
