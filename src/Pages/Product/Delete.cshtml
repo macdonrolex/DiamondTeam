@@ -4,17 +4,51 @@
 @model ContosoCrafts.WebSite.Pages.Product.Delete
 
 @{
-    ViewData["Title"] = "Delete page";
+    ViewData["Title"] = "Delete post";
 }
 
-<div class="container mt-4">
-    <div class="d-flex align-items-center flex-wrap mb-3">
-        <h2 class="mb-0">Delete for @Model.Product.Title</h2>
-    </div>
+<main class="delete-page">
+    <section class="delete-card" aria-labelledby="delete-title">
+        <div class="delete-card__visual">
+            @if (!string.IsNullOrWhiteSpace(Model.Product.Image))
+            {
+                <img class="delete-card__image" src="@Model.Product.Image" alt="" />
+            }
 
-    <form method="post">
-        <h1> Are you sure you want to delete @Model.Product.Title?</h1>
-        <input type="submit" value="Yes" class="btn btn-danger btn-lg"/>
-        <a type="button" class="btn btn-danger btn-lg" asp-page="/Product/Index">No</a>
-    </form>
-</div>
+            @if (string.IsNullOrWhiteSpace(Model.Product.Image))
+            {
+                <div class="delete-card__placeholder" aria-hidden="true">
+                    <span>GH</span>
+                </div>
+            }
+            <span class="delete-card__badge">Community review</span>
+        </div>
+
+        <div class="delete-card__content">
+            <div class="delete-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <p class="delete-card__eyebrow">POST MANAGEMENT</p>
+            <h1 id="delete-title">Delete this post?</h1>
+            <p class="delete-card__description">
+                You’re about to remove <strong>@Model.Product.Title</strong> from the GameHub community.
+            </p>
+
+            <div class="delete-card__notice" role="note">
+                <span class="delete-card__notice-mark" aria-hidden="true">!</span>
+                <p>This action can’t be undone. The post will no longer appear in the product list or on the front page.</p>
+            </div>
+
+            <form method="post" class="delete-card__actions">
+                <button type="submit" class="delete-button delete-button--danger">
+                    <span aria-hidden="true">Delete post</span>
+                </button>
+                <a class="delete-button delete-button--cancel" asp-page="/Product/Index">Keep this post</a>
+            </form>
+            <p class="delete-card__footnote">Please confirm only if you’re sure.</p>
+        </div>
+    </section>
+</main>
+
