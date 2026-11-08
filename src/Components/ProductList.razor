@@ -276,8 +276,13 @@
     /// </summary>
     public void ClearSearch()
     {
+        // Set query properties to default to display all posts
         SearchQuery = string.Empty;
+        GenreQuery = null;
+        
+        // Back to page 1
         CurrentPage = 1;
+        
         RefreshFilteredProducts();
     }
     
