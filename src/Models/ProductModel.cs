@@ -71,6 +71,9 @@ public class ProductModel
     [JsonPropertyName("releaseYear")]
     public int ReleaseYear { get; set; }
     
+    // Whether the game in the post is multiplayer game.
+    public bool IsMultiplayer { get; set; } = false;
+    
     /// <summary>
     /// Converts this post to its JSON representation.
     /// </summary>
