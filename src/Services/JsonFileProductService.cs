@@ -114,8 +114,11 @@ namespace ContosoCrafts.WebSite.Services
         /// <returns>The updated stored product, or <see langword="null"/> when no matching ID exists.</returns>
         public ProductModel UpdateData(ProductModel data)
         {
+            // Get the post you want to update
             var products = GetAllData().ToList();
             var productData = products.FirstOrDefault(x => x.Id.Equals(data.Id));
+            
+            // Can't find the post
             if (productData == null)
             {
                 return null;
@@ -133,11 +136,16 @@ namespace ContosoCrafts.WebSite.Services
             productData.ShopLink = data.ShopLink;
             productData.RatingLink = data.RatingLink;
             
+            // No need to trim enum
             productData.Genre = data.Genre;
+            
+            // No need to trim int
             productData.ReleaseYear = data.ReleaseYear;
-
+            
+            // No need to trim List
             productData.CommentList = data.CommentList;
-
+            
+            // No need to trim bool
             productData.IsMultiplayer = data.IsMultiplayer;
 
             SaveData(products);
