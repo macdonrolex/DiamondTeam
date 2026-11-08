@@ -56,6 +56,11 @@
                         {
                             <span class="product-maker">@product.Maker</span>
                         }
+                        @if (!string.IsNullOrWhiteSpace(product.Genre.ToString()))
+                        {
+                            <span class="product-genre">@product.Genre</span>
+                        }
+                     
                         <p class="product-description">@product.Description</p>
                     </div>
 
