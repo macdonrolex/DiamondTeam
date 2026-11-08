@@ -184,7 +184,7 @@
         foreach (var p in products)
         {
             // Concatenate all fields for searching
-            var target = p.Title + " " + p.Description+ " " + p.Maker+ " " + p.Genre.DisplayGenre();
+            var target = p.Title + " " + p.Description+ " " + p.Maker;
             if (ContainsSearchText(target, query))
             {
                 FilteredProducts.Add(p);
