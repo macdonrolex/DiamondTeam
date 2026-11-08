@@ -14,6 +14,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
     /// Handles the form for creating a new product and saving its uploaded cover image.
     /// </summary>
     /// 
+    [RequestSizeLimit(10 * 1024 * 1024 + 64 * 1024)]
     public class CreateModel : PageModel
     {
         // Limit uploaded images to 10 MB.
@@ -61,7 +62,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// Validates the submitted fields, saves the image, and adds the post.
         /// </summary>
         /// <returns>The form when validation fails; otherwise, a redirect to the listing.</returns>
-        [RequestSizeLimit(10 * 1024 * 1024 + 64 * 1024)]
+        
         [RequestFormLimits(MultipartBodyLengthLimit = 10 * 1024 * 1024 + 64 * 1024)]
         public async Task<IActionResult> OnPostAsync()
         {
