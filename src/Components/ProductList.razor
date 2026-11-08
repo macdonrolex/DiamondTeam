@@ -151,8 +151,10 @@
     public string SearchQuery { get; set; } = string.Empty;
     // Cache filtered posts so each render avoids rereading the JSON file.
     public List<ProductModel> FilteredProducts { get; set; } = new();
-
-    // Load the posts when Blazor first creates this component.
+    
+    /// <summary>
+    /// Load the posts when Blazor first creates this component.
+    /// </summary>
     protected override void OnInitialized()
     {
         RefreshFilteredProducts();
