@@ -13,6 +13,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
     /// <summary>
     /// Handles the form for creating a new product and saving its uploaded cover image.
     /// </summary>
+    /// 
     public class CreateModel : PageModel
     {
         // Limit uploaded images to 10 MB.
@@ -40,6 +41,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         [BindProperty]
         public ProductModel Product { get; set; } = new ProductModel();
 
+
         /// <summary>
         /// Gets or sets the image file selected in the create form.
         /// </summary>
@@ -52,7 +54,9 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// </summary>
         public void OnGet()
         {
+            Product.PlayMode = "Single player";
         }
+
 
         /// <summary>
         /// Validates the submitted fields, saves the image, and adds the post.
@@ -146,6 +150,8 @@ namespace ContosoCrafts.WebSite.Pages.Product
         }
 
         // Returns true if the image and product were saved, false if saving failed.
+  
+      
         private async Task<bool> SaveImageAndProductAsync(string imagesFolder, string fullImagePath, string fileName)
         {
             // Stop if no image was uploaded
@@ -176,6 +182,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
             return true;
         }
+
 
         private static void DeleteFileIfItExists(string path)
         {
