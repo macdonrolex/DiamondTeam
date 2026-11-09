@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
 namespace ContosoCrafts.WebSite.Pages
 {
+
     /// <summary>
     /// Supplies the page handler for the Privacy page.
     /// </summary>
     public class PrivacyModel : PageModel
     {
+
         // Logger injected for page diagnostics.
         public readonly ILogger<PrivacyModel> Logger;
 
@@ -26,5 +28,7 @@ namespace ContosoCrafts.WebSite.Pages
         public void OnGet()
         {
         }
+
     }
+
 }
