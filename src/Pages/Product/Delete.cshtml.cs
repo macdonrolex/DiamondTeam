@@ -11,6 +11,7 @@ namespace ContosoCrafts.WebSite.Pages.Product;
 /// </summary>
 public class Delete : PageModel
 {
+
     // Provides product lookup and deletion operations for this page.
     public readonly JsonFileProductService ProductService;
 
@@ -22,7 +23,7 @@ public class Delete : PageModel
     {
         ProductService = productService;
     }
-    
+
     /// <summary>
     /// Gets or sets the product displayed for confirmation and submitted for deletion.
     /// </summary>
@@ -36,6 +37,7 @@ public class Delete : PageModel
     /// <returns>The details page when a product exists; otherwise, a redirect to the listing.</returns>
     public IActionResult OnGet(string id)
     {
+
         // A missing identifier cannot select a product, so return to the listing.
         if (string.IsNullOrEmpty(id))
         {
@@ -59,6 +61,7 @@ public class Delete : PageModel
     /// <returns>The current page when validation fails; otherwise, a redirect to the listing.</returns>
     public IActionResult OnPost()
     {
+
         // Prevent someone calling OnPost without calling OnGet first.
         if (Product == null)
         {
@@ -68,4 +71,5 @@ public class Delete : PageModel
         ProductService.DeleteData(Product.Id);
         return RedirectToPage("/Product/Index");
     }
+
 }
