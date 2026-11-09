@@ -8,16 +8,17 @@
 	ViewData["Title"] = "Update page";
 }
 
-<div class="container mt-4">
-	<div class="d-flex align-items-center flex-wrap mb-3">
-    <a class="btn btn-secondary mr-3" asp-page="/Product/Index">
-        Back to List
-    </a>
-	<h2 class="mb-0">Edit for @Model.Product.Title</h2>
+<div class="container py-5 update-page">
+	<div class="update-top">
+		<a class="update-back" asp-page="/Product/Index">
+			<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"/></svg>
+			<span>Back to List</span>
+		</a>
+		<h1 class="update-title">Edit for @Model.Product.Title</h1>
 	</div>
 
-	<form method="post">
-		<div asb-asp-validation-summary="ModleOnly" class ="text-danger"></div>
+	<form method="post" class="update-card" novalidate>
+		<div asp-validation-summary="ModelOnly" class="post-create-validation" role="alert"></div>
 		@Html.HiddenFor(x => x.Product.Id)
 
 		<div class="form-group">
@@ -99,3 +100,7 @@
 		</div>
 	</form>
 </div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
