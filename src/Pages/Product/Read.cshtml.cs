@@ -7,11 +7,13 @@ using System.Linq;
 
 namespace ContosoCrafts.WebSite.Pages.Product
 {
+
     /// <summary>
     /// Loads one product for the product details page.
     /// </summary>
     public class ReadModel : PageModel
     {
+
         // Provides access to the product records shown by this page.
         public readonly JsonFileProductService ProductService;
 
@@ -29,6 +31,9 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// </summary>
         public ProductModel Product { get; private set; }
 
+        /// <summary>
+        /// Gets related products shown with the selected product.
+        /// </summary>
         public List<ProductModel> OtherProducts { get; set; } = new List<ProductModel>();
 
         /// <summary>
@@ -38,6 +43,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// <returns>The details page when a product exists; otherwise, a redirect to the listing.</returns>
         public IActionResult OnGet(string id)
         {
+
             // A missing identifier cannot select a product, so return to the listing.
             if (string.IsNullOrEmpty(id))
             {
@@ -54,6 +60,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
             {
                 return RedirectToPage("/Product/Index");
             }
+
             OtherProducts = products
                 .Where(x => x.Id != Product.Id)
 
@@ -63,5 +70,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
             return Page();
         }
+
     }
+
 }
