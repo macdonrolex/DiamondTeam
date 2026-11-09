@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,11 +10,13 @@ using ContosoCrafts.WebSite.Services;
 
 namespace ContosoCrafts.WebSite.Pages.Product
 {
+
     /// <summary>
     /// Loads all products for the product listing page.
     /// </summary>
     public class IndexModel : PageModel
     {
+
         /// <summary>
         /// Creates the page model with the product data service.
         /// </summary>
@@ -24,10 +26,9 @@ namespace ContosoCrafts.WebSite.Pages.Product
             ProductService = productService;
         }
 
-
         // Gets the service used to read product records.
         public JsonFileProductService ProductService { get; }
-        
+
         // Gets the products loaded for the listing page.
         public IEnumerable<ProductModel> Products { get; set; }
 
@@ -42,6 +43,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         {
             get
             {
+
                 //  No posts are loaded, so there is only one(the returned 1) empty page
                 if (Products == null)
                 {
@@ -50,6 +52,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
                 return Math.Max(1, (int)Math.Ceiling(Products.Count() / (double)PageSize));
             }
+
         }
 
         // The four posts to render for the current page.
@@ -57,15 +60,17 @@ namespace ContosoCrafts.WebSite.Pages.Product
         {
             get
             {
+
                 // No posts are loaded, so there is nothing to show
                 if (Products == null)
                 {
                     return Enumerable.Empty<ProductModel>();
                 }
-                
+
                 // Skip the posts of the previous pages, then take one page of posts
                 return Products.Skip((CurrentPage - 1) * PageSize).Take(PageSize);
             }
+
         }
 
         /// <summary>
@@ -73,9 +78,12 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// </summary>
         public void OnGet(int pageNumber = 1)
         {
+
             // Keep the complete collection available, then calculate the requested page.
             Products = ProductService.GetAllData().ToList();
             CurrentPage = Math.Max(1, Math.Min(pageNumber, TotalPages));
         }
+
     }
+
 }
