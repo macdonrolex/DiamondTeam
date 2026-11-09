@@ -338,7 +338,7 @@ namespace UnitTests.Components
             Assert.That(preMarkup.Contains("1 posts found"), Is.True);
             
             // After Searching, display No matching posts found.
-            Assert.That(postMarkup.Contains("No matching posts found."), Is.True);
+            Assert.That(postMarkup.Contains("No matching post found."), Is.True);
         }
         
         /// <summary>
