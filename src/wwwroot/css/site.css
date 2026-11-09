@@ -480,7 +480,6 @@ ul {
 /* Modern product list layout */
 .product-list-page {
     max-width: 1360px;
-    padding-top: 2.25rem;
     padding-bottom: 3rem;
 }
 
@@ -818,7 +817,7 @@ ul {
 .product-list-page {
     box-sizing: border-box;
     width: min(1180px, calc(100% - 2rem));
-    margin: 2.25rem auto 6rem;
+  
     color: #edf2ff;
 }
 
@@ -2462,3 +2461,368 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
         color: black;
         text-decoration: none;
     }
+
+/* ==========================================================================
+   Update page: pill fields with the coloured icon tile inside the field.
+   Reuses the .post-create-label-icon--* tile colours from the create page.
+   ========================================================================== */
+.update-page {
+    max-width: 960px;
+    color: #202536;
+}
+
+.update-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+    margin-bottom: 1.75rem;
+}
+
+.update-title {
+    margin: 0;
+    color: #1d2433;
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
+    font-weight: 760;
+    letter-spacing: -.035em;
+}
+
+.update-back {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    min-height: 44px;
+    padding: 0 1.2rem 0 .85rem;
+    color: #202637;
+    font-weight: 600;
+    text-decoration: none;
+    background: rgba(255, 255, 255, .7);
+    border: 1px solid rgba(137, 151, 170, .42);
+    border-radius: 999px;
+    box-shadow: 0 5px 14px rgba(63, 79, 104, .08);
+    transition: transform .22s ease, box-shadow .22s ease, background-color .22s ease;
+}
+
+    .update-back svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .update-back:hover {
+        color: #202637;
+        text-decoration: none;
+        background: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(55, 67, 91, .16);
+    }
+
+.update-card {
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+    background-color: rgba(255, 255, 255, .3);
+    border: 1px solid rgba(255, 255, 255, .76);
+    border-radius: 28px;
+    box-shadow: 0 20px 60px rgba(29, 37, 56, .09);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.update-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem 1.25rem;
+}
+
+.update-field {
+    min-width: 0;
+}
+
+.update-field-wide {
+    grid-column: 1 / -1;
+}
+
+/* The pill: icon tile + floating label + input, all inside one border */
+.update-control {
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+    min-height: 60px;
+    margin: 0;
+    padding: 0 1.4rem 0 .7rem;
+    background-color: rgba(255, 255, 255, .62);
+    border: 1px solid rgba(137, 151, 170, .42);
+    border-radius: 999px;
+    box-shadow: 0 0 0 0 transparent;
+    cursor: text;
+    transition: box-shadow .22s ease, border-color .22s ease, background-color .22s ease, transform .22s ease;
+}
+
+    .update-control:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px -6px rgba(21, 23, 26, .18), 0 2px 6px rgba(21, 23, 26, .06);
+    }
+
+    .update-control:focus-within {
+        background-color: rgba(255, 255, 255, .88);
+        border-color: rgba(101, 139, 241, .78);
+        box-shadow: 0 0 0 4px rgba(101, 139, 241, .16), 0 8px 22px rgba(73, 106, 181, .12);
+    }
+
+        .update-control:focus-within:hover {
+            box-shadow: 0 0 0 4px rgba(101, 139, 241, .16), 0 10px 24px -6px rgba(21, 23, 26, .18);
+        }
+
+    .update-control:has(.input-validation-error) {
+        background-color: #fff8f8;
+        border-color: #dc3545;
+        box-shadow: 0 0 0 4px rgba(220, 53, 69, .12);
+    }
+
+.update-control-tall {
+    align-items: flex-start;
+    padding-top: .7rem;
+    padding-bottom: .7rem;
+    border-radius: 28px;
+}
+
+/* Icon tile: lifts forward and tilts 10deg over 1s when the field is hovered */
+.update-icon.post-create-label-icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    flex: 0 0 2.4rem;
+    padding: .55rem;
+    border-radius: 12px;
+    transform-origin: 50% 50%;
+    transition: transform 1s cubic-bezier(.25, .8, .25, 1), box-shadow 1s ease;
+}
+
+.update-control:hover .update-icon.post-create-label-icon,
+.update-control:focus-within .update-icon.post-create-label-icon {
+    transform: scale(1.18) rotate(10deg);
+    box-shadow: 0 8px 18px color-mix(in srgb, var(--icon-accent) 45%, transparent), inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+
+.update-icon--genre {
+    --icon-accent: #e8a13a;
+    --icon-accent-2: #f9cf6c;
+}
+
+.update-body {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: .2rem;
+    padding: .55rem 0;
+}
+
+.update-label {
+    margin: 0;
+    color: #697386;
+    font-size: .75rem;
+    font-weight: 650;
+    line-height: 1;
+    cursor: inherit;
+    transition: color .22s ease;
+}
+
+.update-control:focus-within .update-label {
+    color: #4a6fd8;
+}
+
+.update-input {
+    display: block;
+    width: 100%;
+    padding: 0;
+    color: #222a39;
+    font-size: 1rem;
+    line-height: 1.4;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+}
+
+    .update-input::placeholder {
+        color: #9aa3b2;
+    }
+
+    .update-input:focus {
+        outline: 0;
+    }
+
+.update-select {
+    margin-left: -2px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.update-chevron {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    fill: none;
+    stroke: #697386;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+.update-textarea {
+    min-height: 72px;
+    line-height: 1.55;
+    resize: vertical;
+}
+
+.update-textarea-post {
+    min-height: 150px;
+}
+
+/* Multiplayer: same pill, with a switch on the right */
+.update-control-toggle {
+    cursor: pointer;
+}
+
+.update-toggle-text {
+    flex: 1;
+    color: #30384a;
+    font-weight: 600;
+}
+
+.update-switch {
+    position: relative;
+    width: 46px;
+    height: 26px;
+    flex: 0 0 46px;
+    margin: 0;
+    cursor: pointer;
+    background: #cfd5df;
+    border-radius: 999px;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: background-color .22s ease;
+}
+
+    .update-switch::after {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 20px;
+        height: 20px;
+        content: "";
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+        transition: transform .22s ease;
+    }
+
+    .update-switch:checked {
+        background: #4aa8d6;
+    }
+
+        .update-switch:checked::after {
+            transform: translateX(20px);
+        }
+
+    .update-switch:focus-visible {
+        outline: 3px solid rgba(101, 139, 241, .45);
+        outline-offset: 2px;
+    }
+
+.update-error {
+    display: block;
+    padding-left: 1.4rem;
+}
+
+.update-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .75rem;
+    margin-top: 1.75rem;
+    padding-top: 1.35rem;
+    border-top: 1px solid rgba(137, 151, 170, .22);
+}
+
+.update-cancel,
+.update-save {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0 1.75rem;
+    font-weight: 650;
+    text-decoration: none;
+    border-radius: 999px;
+    transition: transform .22s ease, box-shadow .22s ease, background-color .22s ease, filter .22s ease;
+}
+
+.update-cancel {
+    color: #30384a;
+    background: rgba(255, 255, 255, .56);
+    border: 1px solid rgba(137, 151, 170, .3);
+}
+
+    .update-cancel:hover {
+        color: #202637;
+        text-decoration: none;
+        background: rgba(255, 255, 255, .9);
+        transform: translateY(-1px);
+    }
+
+.update-save {
+    color: #fff;
+    background: linear-gradient(135deg, #8c98ff, #4a5bd6);
+    border: 0;
+    box-shadow: 0 8px 20px rgba(74, 91, 214, .28);
+}
+
+    .update-save:hover {
+        filter: brightness(1.06);
+        transform: translateY(-1px);
+        box-shadow: 0 12px 26px rgba(74, 91, 214, .34);
+    }
+
+    .update-save:focus-visible,
+    .update-cancel:focus-visible,
+    .update-back:focus-visible {
+        outline: 0;
+        box-shadow: 0 0 0 4px rgba(101, 139, 241, .3);
+    }
+
+@media (max-width: 640px) {
+    .update-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .update-actions > * {
+        flex: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .update-control,
+    .update-icon.post-create-label-icon,
+    .update-back,
+    .update-cancel,
+    .update-save {
+        transition: none;
+    }
+
+        .update-control:hover,
+        .update-control:hover .update-icon.post-create-label-icon,
+        .update-control:focus-within .update-icon.post-create-label-icon,
+        .update-back:hover,
+        .update-cancel:hover,
+        .update-save:hover {
+            transform: none;
+        }
+}
