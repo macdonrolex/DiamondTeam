@@ -2,20 +2,21 @@ using System.Linq;
 using ContosoCrafts.WebSite.Controllers;
 using ContosoCrafts.WebSite.Models;
 using NUnit.Framework;
-using ContosoCrafts.WebSite.Pages.Product;
 using ContosoCrafts.WebSite.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UnitTests.Controllers
 {
+    
     /// <summary>
     ///  Unit tests for ProductsController.cs 
     /// </summary>
     [TestFixture]
     public class ProductsControllerTests
     {
+        
         #region Get
+        
         /// <summary>
         /// Get should return all product data in the database
         /// </summary>
@@ -39,15 +40,18 @@ namespace UnitTests.Controllers
             // Assert
             Assert.That(result, Is.EqualTo(dataCount));
         }
+        
         #endregion Get
 
         #region Patch
+        
         /// <summary>
         /// Patch should add a new rating and return OK result
         /// </summary>
         [Test]
         public void Patch_Valid_Should_Return_OK()
         {
+            
             // Arrange
             var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
             var productService = new JsonFileProductService(webHostEnvironment);
@@ -67,6 +71,7 @@ namespace UnitTests.Controllers
             var resultRating = resultModel.Ratings.Last();
 
             // Reset
+            
             // Update with the original first data in database
             productService.UpdateData(backupData);
 
@@ -74,6 +79,9 @@ namespace UnitTests.Controllers
             Assert.That(result, Is.TypeOf<OkResult>());
             Assert.That(resultRating, Is.EqualTo(5));
         }
+        
         #endregion Patch
+        
     }
+    
 }
