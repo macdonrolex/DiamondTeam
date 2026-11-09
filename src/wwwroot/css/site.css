@@ -1385,6 +1385,22 @@ ul {
     }
 }
 
+.post-create-checkbox {
+    color: #222a39;
+    width: 2rem;
+    height: 2rem;
+    box-shadow: none;
+    border-radius: 50%;
+    background-color: #fbfcfe;
+    border: 1px solid #dfe3eb;
+    transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+    appearance: none;
+}
+
+.post-create-checkbox:checked {
+    background-color: #597b90;
+}
+
 .post-create-input {
     min-height: 52px;
     padding: .8rem .95rem;
