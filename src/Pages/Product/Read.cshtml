@@ -29,9 +29,6 @@
                 </span>
             </div>
             
-
-            
-
             <div class="product-detail-actions">
                 @if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
                 {
@@ -72,6 +69,15 @@
                 <p class="product-sidebar-value">
                     @Model.Product.Genre.DisplayGenre()
                 </p>
+                @switch (Model.Product.IsMultiplayer)
+                {
+                    case true :
+                        <p class="product-sidebar-value">Multi-Player Game</p>
+                        break; 
+                    case false :
+                        <p class="product-sidebar-value">Single-Player Game</p>
+                        break; 
+                }
             </section>
 
             <section class="related-products-card">
