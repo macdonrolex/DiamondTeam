@@ -1,35 +1,39 @@
 using System.Collections.Generic;
 using System.Linq;
-
 using Microsoft.Extensions.DependencyInjection;
-
 using Bunit;
 using NUnit.Framework;
-
 using ContosoCrafts.WebSite.Components;
 using ContosoCrafts.WebSite.Models;
 using ContosoCrafts.WebSite.Services;
 
 namespace UnitTests.Components
 {
+    
     /// <summary>
     /// Unit tests for ProductList.razor
     /// </summary>
     public class ProductListTests : BunitTestContext
     {
         #region TestSetup
-
+        
+        /// <summary>
+        /// Initialize the test
+        /// </summary>
         [SetUp]
         public void TestInitialize()
         {
         }
+        
         #endregion TestSetup
+        
         /// <summary>
         /// Test whether the home page can retrieve data from database
         /// </summary>
         [Test]
         public void ProductList_Valid_Default_Should_Return_Content()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
 
@@ -40,6 +44,7 @@ namespace UnitTests.Components
             var result = page.Markup;
             
             // Reset
+            
             // Not needed
 
             // Assert
@@ -47,16 +52,17 @@ namespace UnitTests.Components
         }
 
         #region SelectProduct
+        
         /// <summary>
         ///  Open the popup, and see if the content is what we want.
         /// </summary>
         [Test]
         public void SelectProduct_Valid_ID_jenlooper_Should_Return_Content()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             var id = "MoreInfoButton_jenlooper-cactus";
-
             var page = Render<ProductList>();
             
             // Find the Buttons (more info)
@@ -72,6 +78,7 @@ namespace UnitTests.Components
             var pageMarkup = page.Markup;
 
             // Reset
+            
             // Not Needed
 
             // Assert
@@ -80,9 +87,11 @@ namespace UnitTests.Components
                     "Minecraft is a sandbox video game developed and published by the Swedish company Mojang Studios."),
                 Is.True);
         }
+        
         #endregion SelectProduct
 
         #region SubmitRating
+        
         /// <summary>
         /// This test tests that the SubmitRating will change the vote as well as the Star checked
         /// Because the star check is a calculation of the ratings, using a record that has no stars and checking one
@@ -97,12 +106,15 @@ namespace UnitTests.Components
         [Test]
         public void SubmitRating_Valid_ID_Click_Unstared_Should_Increment_Count_And_Check_Star()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             var id = "MoreInfoButton_jenlooper-light";
             var page = Render<ProductList>();
+            
             // Find the Buttons (more info)
             var buttonList = page.FindAll("Button");
+            
             // Find the one that matches the ID looking for and click it
             var button = buttonList.First((m => m.OuterHtml.Contains(id)));
             button.Click();
@@ -150,6 +162,7 @@ namespace UnitTests.Components
             var postStarChange = starButton.OuterHtml;
             
             // Reset
+            
             // Update with the original data in database
             TestHelper.ProductService.UpdateData(backupData);
             
@@ -159,21 +172,26 @@ namespace UnitTests.Components
             Assert.That(preVoteCountString.Equals(postVoteCountString), Is.False);
             Assert.That(preStarChange.Equals(postStarChange), Is.False);
         }
+        
         #endregion SubmitRating
         
         #region ShowNewCommentInput
+        
         /// <summary>
         /// Click the Add Comment button should display the input field and the Save Comment button
         /// </summary>
         [Test]
         public void ShowNewCommentInput_Valid_Click_AddComment_Should_Display_Comment_Edit()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             var id = "MoreInfoButton_jenlooper-cactus";
             var page = Render<ProductList>();
+            
             // Find the Buttons (more info)
             var buttonList = page.FindAll("Button");
+            
             // Find the one that matches the ID looking for and click it
             var button = buttonList.First((m => m.OuterHtml.Contains(id)));
             button.Click();
@@ -187,6 +205,7 @@ namespace UnitTests.Components
             var preButtonMarkup = page.Markup;
                 
             // Act
+            
             // Click the Add Comment button
             addCommentButton.Click();
             
@@ -196,13 +215,16 @@ namespace UnitTests.Components
             // Reset
             
             // Assert
+            
             // Before clicking, no input field and Save Comment button
             Assert.That(preButtonMarkup.Contains("input type=\"text\""), Is.False);
             Assert.That(preButtonMarkup.Contains("Save Comment"), Is.False);
+            
             // After clicking, has input field and Save Comment button
             Assert.That(postButtonMarkup.Contains("input type=\"text\""), Is.True);
             Assert.That(postButtonMarkup.Contains("Save Comment"), Is.True);
         }
+        
         #endregion ShowNewCommentInput
         
         #region UpdateCommentText
@@ -213,12 +235,15 @@ namespace UnitTests.Components
         [Test]
         public void UpdateCommentText_Valid_TypeIn_Text_And_Save_Should_Display_The_Comment()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             var id = "MoreInfoButton_jenlooper-cactus";
             var page = Render<ProductList>();
+            
             // Find the Buttons (more info)
             var buttonList = page.FindAll("Button");
+            
             // Find the one that matches the ID looking for and click it
             var button = buttonList.First((m => m.OuterHtml.Contains(id)));
             button.Click();
@@ -235,6 +260,7 @@ namespace UnitTests.Components
             var backupData = TestHelper.ProductService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-cactus");
                 
             // Act
+            
             // Click the Add Comment button
             addCommentButton.Click();
             
@@ -251,15 +277,19 @@ namespace UnitTests.Components
             var postButtonMarkup = page.Markup;
             
             // Reset
+            
             // Update with the original data in database
             TestHelper.ProductService.UpdateData(backupData);
             
             // Assert
+            
             // Before clicking, no comment
             Assert.That(preButtonMarkup.Contains("test_comment"), Is.False);
+            
             // After clicking, show the comment
             Assert.That(postButtonMarkup.Contains("test_comment"), Is.True);
         }
+        
         #endregion UpdateCommentText
 
         #region ContainsSearchText
@@ -271,6 +301,7 @@ namespace UnitTests.Components
         [Test]
         public void ContainsSearchText_InValid_TargetText_Null_Or_WhiteSpace_Should_Return_False()
         {
+            
             // Arrange
             
             // The white spaces target text
@@ -283,6 +314,7 @@ namespace UnitTests.Components
             var result = ProductList.ContainsSearchText(dataText, dataQuery);
 
             // Reset
+            
             // Not needed
 
             // Assert
@@ -295,6 +327,7 @@ namespace UnitTests.Components
         [Test]
         public void ContainsSearchText_InValid_TypeIn_Unmatched_Text_Should_Display_No_Matching()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             
@@ -321,6 +354,7 @@ namespace UnitTests.Components
             var preMarkup = page.Markup;
             
             // Act
+            
             // Type unmatched text into the search box
             page.Find("input[id=\"post-search\"]").Input("unmatched_text");
             
@@ -348,11 +382,13 @@ namespace UnitTests.Components
         [Test]
         public void ContainsSearchText_Valid_TypeIn_Text_Should_Posts_Containing_Text()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             
             // Backup original database for resetting.
             var backupData = TestHelper.ProductService.GetAllData().First();
+            
             // Make a fake post into database and try to search it
             var post = TestHelper.ProductService.GetAllData().First();
             post.Title = "test_title";
@@ -365,32 +401,39 @@ namespace UnitTests.Components
             
             // Render the page
             var page = Render<ProductList>();
+            
             // Get the markup for the assertion
             var preMarkup = page.Markup;
             
             // Act
             // Type text into the search box
             page.Find("input[id=\"post-search\"]").Input("test_title");
+            
             // Get the markup for the assertion
             var titleMarkup = page.Markup;
             
             // Type text into the search box
             page.Find("input[id=\"post-search\"]").Input("test_maker");
+            
             // Get the markup for the assertion
             var makerMarkup = page.Markup;
             
             // Type text into the search box
             page.Find("input[id=\"post-search\"]").Input("test_des");
+            
             // Get the markup for the assertion
             var desMarkup = page.Markup;
             
             // Reset
+            
             // Update with the original data in database
             TestHelper.ProductService.UpdateData(backupData);
             
             // Assert
+            
             // Before searching, {postCount} posts
             Assert.That(preMarkup.Contains(postCount + " posts found"), Is.True);
+            
             // After searching, 1 post
             Assert.That(titleMarkup.Contains("1 posts found"), Is.True);
             Assert.That(makerMarkup.Contains("1 posts found"), Is.True);
@@ -400,17 +443,20 @@ namespace UnitTests.Components
         #endregion ContainsSearchText
 
         #region ClearSearch
+        
         /// <summary>
         /// Test the clear button
         /// </summary>
         [Test]
         public void ClearSearch_Valid_TypeIn_Text_Should_Disappear()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             
             // Backup original database for resetting.
             var backupData = TestHelper.ProductService.GetAllData().First();
+            
             // Make a fake post into database and try to search it
             var post = TestHelper.ProductService.GetAllData().First();
             post.Title = "test_title";
@@ -433,20 +479,23 @@ namespace UnitTests.Components
             var preMarkup = page.Markup;
             
             // Act
+            
             // Click the clear button
             button.Click();
             
             // Get the markup for the assertion
             var postMarkup = page.Markup;
             
-            
             // Reset
+            
             // Update with the original data in database
             TestHelper.ProductService.UpdateData(backupData);
             
             // Assert
+            
             // Before searching, {postCount} posts
             Assert.That(preMarkup.Contains("1 posts found"), Is.True);
+            
             // After searching, 1 post
             Assert.That(postMarkup.Contains(postCount + " posts found"), Is.True);
         }
@@ -461,10 +510,10 @@ namespace UnitTests.Components
         [Test]
         public void CloseProductModal_Valid_Modal_Should_Be_Closed()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             var id = "MoreInfoButton_jenlooper-cactus";
-
             var page = Render<ProductList>();
             
             // Find the Buttons (more info)
@@ -482,6 +531,7 @@ namespace UnitTests.Components
             // Find the X button
             buttonList = page.FindAll("span");
             var xButton = buttonList.First((m => m.OuterHtml.Contains("xButton")));
+            
             // Act
             xButton.Click();
             
@@ -489,27 +539,30 @@ namespace UnitTests.Components
             var postMarkup = page.Markup;
 
             // Reset
+            
             // Not Needed
 
             // Assert
             Assert.That(preMarkup.Equals(postMarkup), Is.False);
         }
+        
         #endregion CloseProductModal
         
         #region NextPage
+        
         /// <summary>
         ///  Next button should change to next page
         /// </summary>
         [Test]
         public void NextPage_Valid_Should_Move_To_Next_Page()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             var page = Render<ProductList>();
             
             // Find the Next button
             var buttonList = page.FindAll("Button");
-
             var button = buttonList.First((m => m.OuterHtml.Contains("NextButton")));
             
             // Get the markup to use for the assert
@@ -522,21 +575,25 @@ namespace UnitTests.Components
             var postMarkup = page.Markup;
 
             // Reset
+            
             // Not Needed
 
             // Assert
             Assert.That(preMarkup.Equals(postMarkup), Is.False);
             Assert.That(postMarkup.Contains("Page 2 of "), Is.True);
         }
+        
         #endregion NextPage
         
         #region PreviousPage
+        
         /// <summary>
         ///  Previous button should move to previous page
         /// </summary>
         [Test]
         public void PreviousPage_Valid_Should_Move_Back_To_Previous_Page()
         {
+            
             // Arrange
             Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
             var page = Render<ProductList>();
@@ -559,12 +616,14 @@ namespace UnitTests.Components
             var postMarkup = page.Markup;
 
             // Reset
+            
             // Not Needed
 
             // Assert
             Assert.That(preMarkup.Equals(postMarkup), Is.False);
             Assert.That(postMarkup.Contains("Page 1 of "), Is.True);
         }
+        
         #endregion PreviousPage
 
         #region GetCurrentRating
@@ -575,6 +634,7 @@ namespace UnitTests.Components
         [Test]
         public void GetCurrentRating_Valid_VoteCount_0_Should_Set_Vote_And_0()
         {
+            
             // Arrange
             
             // Put the first entry into ProductList, and set its VoteCount to 0
@@ -586,13 +646,13 @@ namespace UnitTests.Components
             data.VoteLabel = "test";
             data.CurrentRating = 999;
             
-
             // Act
             
             // The method should set VoteLabel to "Vote" and CurrentRating to 0
             data.GetCurrentRating();
             
             // Reset
+            
             // Not needed
 
             // Assert
@@ -610,6 +670,7 @@ namespace UnitTests.Components
         [Test]
         public void GenreFilter_Valid_Genre_Match_Should_Return_Filtered_Posts()
         {
+            
             // Arrange
             
             // A fake ProductList with target genre Action
@@ -634,6 +695,7 @@ namespace UnitTests.Components
             var resultList = data.GenreFilter(postList);
             
             // Reset
+            
             // Not needed
 
             // Assert
@@ -646,5 +708,7 @@ namespace UnitTests.Components
         }
         
         #endregion GenreFilter
+        
     }
+    
 }
