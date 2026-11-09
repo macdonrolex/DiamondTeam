@@ -18,17 +18,6 @@
 
     <div class="product-detail-layout">
         <main class="product-detail-story">
-            <div class="product-detail-meta">
-                <span class="product-detail-maker">
-                    @(string.IsNullOrWhiteSpace(Model.Product.Maker)
-                        ? "Maker Unknown"
-                        : Model.Product.Maker)
-                </span>
-                <span class="game-genre">
-                    @Model.Product.Genre.DisplayGenre()
-                </span>
-            </div>
-            
             <div class="product-detail-actions">
                 @if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
                 {
