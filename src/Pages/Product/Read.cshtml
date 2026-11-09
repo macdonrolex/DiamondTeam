@@ -49,11 +49,15 @@
             <section class="product-author-card">
                 <h2>Post Details</h2>
                 <p class="product-sidebar-label">Maker</p>
-                <p class="product-sidebar-value">
-                    @(string.IsNullOrWhiteSpace(Model.Product.Maker)
-                        ? "Maker Unknown"
-                        : Model.Product.Maker)
-                </p>
+                @switch (string.IsNullOrWhiteSpace(Model.Product.Maker))
+                {
+                    case true:
+                        <p class="product-sidebar-value">Maker Unknown</p>
+                        break;
+                    case false:
+                        <p class="product-sidebar-value">@Model.Product.Maker</p>
+                        break;
+                }
                 <p class="product-sidebar-label">Genre</p>
                 <p class="product-sidebar-value">
                     @Model.Product.Genre.DisplayGenre()
@@ -87,11 +91,15 @@
                                 <img src="@item.Image" alt="@item.Title" />
                                 <span class="related-product-text">
                                     <strong>@item.Title</strong>
-                                    <span>
-                                        @(string.IsNullOrWhiteSpace(item.Maker)
-                                            ? item.Genre.DisplayGenre()
-                                            : item.Maker)
-                                    </span>
+                                    @switch (string.IsNullOrWhiteSpace(Model.Product.Maker))
+                                    {
+                                        case true:
+                                            <span>@item.Genre.DisplayGenre()</span>
+                                            break;
+                                        case false:
+                                            <span>@item.Maker</span>
+                                            break;
+                                    }
                                 </span>
                             </a>
                         }
