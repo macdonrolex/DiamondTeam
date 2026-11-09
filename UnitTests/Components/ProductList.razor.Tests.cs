@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -600,5 +601,50 @@ namespace UnitTests.Components
         }
         
         #endregion GetCurrentRating
+        
+        #region GenreFilter
+        
+        /// <summary>
+        /// Test whether the genre filter works
+        /// </summary>
+        [Test]
+        public void GenreFilter_Valid_Genre_Match_Should_Return_Filtered_Posts()
+        {
+            // Arrange
+            
+            // A fake ProductList with target genre Action
+            var data = new ProductList();
+            data.GenreQuery = GenreEnum.Action;
+            
+            // Create two fake post with different genre
+            var postAction = new ProductModel();
+            postAction.Genre = GenreEnum.Action;
+            var postAdventure = new ProductModel();
+            postAdventure.Genre = GenreEnum.Adventure;
+            
+            // Put the posts into a list
+            var postList = new List<ProductModel>();
+            postList.Add(postAction);
+            postList.Add(postAdventure);
+            
+
+            // Act
+            
+            // Filter the list we just created and get a new list
+            var resultList = data.GenreFilter(postList);
+            
+            // Reset
+            // Not needed
+
+            // Assert
+            
+            // Original list has 2 posts inside
+            Assert.That(postList.Count, Is.EqualTo(2));
+            
+            // Only one Action post left after filtering
+            Assert.That(resultList.Count, Is.EqualTo(1));
+        }
+        
+        #endregion GenreFilter
     }
 }
