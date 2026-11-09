@@ -10,13 +10,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ContosoCrafts.WebSite.Pages.Product
 {
+
     /// <summary>
     /// Handles the form for creating a new product and saving its uploaded cover image.
     /// </summary>
-    /// 
+    ///
     [RequestSizeLimit(10 * 1024 * 1024 + 64 * 1024)]
     public class CreateModel : PageModel
     {
+
         // Limit uploaded images to 10 MB.
         private const long MaximumImageSizeBytes = 10 * 1024 * 1024;
 
@@ -42,7 +44,6 @@ namespace ContosoCrafts.WebSite.Pages.Product
         [BindProperty]
         public ProductModel Product { get; set; } = new ProductModel();
 
-
         /// <summary>
         /// Gets or sets the image file selected in the create form.
         /// </summary>
@@ -57,15 +58,15 @@ namespace ContosoCrafts.WebSite.Pages.Product
         {
         }
 
-
         /// <summary>
         /// Validates the submitted fields, saves the image, and adds the post.
         /// </summary>
         /// <returns>The form when validation fails; otherwise, a redirect to the listing.</returns>
-        
+
         [RequestFormLimits(MultipartBodyLengthLimit = 10 * 1024 * 1024 + 64 * 1024)]
         public async Task<IActionResult> OnPostAsync()
         {
+
             // The handler sets Product.Image itself later, so don't validate it here.
             ModelState.Remove("Product.Image");
 
@@ -100,6 +101,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
                 {
                     extensionIsAllowed = true;
                 }
+
             }
 
             if (!extensionIsAllowed)
@@ -116,6 +118,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
                 {
                     ModelState.AddModelError(nameof(ImageFile), "This file is not a valid supported image.");
                 }
+
             }
 
             // Step 5: If any image check failed, show the errors.
@@ -137,6 +140,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
 
             if (!savedOk)
             {
+
                 // Saving failed, so clean up any half-saved image.
                 DeleteFileIfItExists(fullImagePath);
 
@@ -150,10 +154,17 @@ namespace ContosoCrafts.WebSite.Pages.Product
         }
 
         // Returns true if the image and product were saved, false if saving failed.
-  
-      
+
+        /// <summary>
+        /// Saves the uploaded image and adds the product record.
+        /// </summary>
+        /// <param name="imagesFolder">Image destination folder.</param>
+        /// <param name="fullImagePath">Full image destination path.</param>
+        /// <param name="fileName">Generated image file name.</param>
+        /// <returns>True when image and product are saved.</returns>
         private async Task<bool> SaveImageAndProductAsync(string imagesFolder, string fullImagePath, string fileName)
         {
+
             // Stop if no image was uploaded
             if (ImageFile == null)
             {
@@ -183,18 +194,25 @@ namespace ContosoCrafts.WebSite.Pages.Product
             return true;
         }
 
-
+        /// <summary>
+        /// Deletes the specified file when it exists.
+        /// </summary>
+        /// <param name="path">Full path to the file.</param>
         private static void DeleteFileIfItExists(string path)
         {
             if (System.IO.File.Exists(path))
             {
                 System.IO.File.Delete(path);
             }
+
         }
 
         /// <summary>
         /// Checks the file signature so a renamed non-image file is rejected.
         /// </summary>
+        /// <param name="file">Uploaded file to inspect.</param>
+        /// <param name="extension">File extension to validate.</param>
+        /// <returns>True when the bytes match a supported image format.</returns>
         private static async Task<bool> HasValidImageSignatureAsync(IFormFile file, string extension)
         {
             var header = new byte[12];
@@ -229,6 +247,9 @@ namespace ContosoCrafts.WebSite.Pages.Product
                 default:
                     return false;
             }
+
         }
+
     }
+
 }
