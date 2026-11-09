@@ -6,12 +6,14 @@ using Microsoft.Extensions.Logging;
 
 namespace ContosoCrafts.WebSite.Pages
 {
+
     /// <summary>
     /// Supplies diagnostic information for the application's error page.
     /// </summary>
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class ErrorModel : PageModel
     {
+
         /// <summary>
         /// Gets or sets the identifier for the current request.
         /// </summary>
@@ -57,4 +59,5 @@ namespace ContosoCrafts.WebSite.Pages
         }
 
     }
+
 }
