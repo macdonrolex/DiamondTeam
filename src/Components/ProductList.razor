@@ -18,10 +18,6 @@
                 }
             </div>
             <small class="form-text text-muted">@FilteredProducts.Count() posts found</small>
-            @if (!FilteredProducts.Any())
-            {
-                <div class="alert alert-info text-center mt-3" role="status">No matching posts found.</div>
-            }
         </div>
     </div>
     <div class="col-6">
@@ -41,6 +37,10 @@
         </select>
     </div>
 </div>
+@if (!FilteredProducts.Any())
+{
+    <div class="alert alert-info text-center mt-3" role="status">No matching post found.</div>
+}
 
 <div class="card-columns">
 @* Display only the matching posts on the current page. *@
