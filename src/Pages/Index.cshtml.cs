@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-using Microsoft.AspNetCore.Mvc.RazorPages; 
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
 using ContosoCrafts.WebSite.Models;
 using ContosoCrafts.WebSite.Services;
 namespace ContosoCrafts.WebSite.Pages
 {
+
     /// <summary>
     /// Loads the product data displayed on the site's home page.
     /// </summary>
     public class IndexModel : PageModel
     {
+
         // Logger injected for the page model; retained for diagnostics as the page evolves.
         public readonly ILogger<IndexModel> Logger;
 
@@ -44,5 +46,7 @@ namespace ContosoCrafts.WebSite.Pages
         {
             Products = ProductService.GetAllData();
         }
+
     }
+
 }
