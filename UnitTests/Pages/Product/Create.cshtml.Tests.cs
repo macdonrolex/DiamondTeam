@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -136,13 +135,12 @@ public class CreateTests
         // Act
 
         pageModel.OnGet();
+        
+        // Reset
 
         // Assert
 
         Assert.That(pageModel.Product, Is.Not.Null);
-
-        // Reset
-
     }
 
     #endregion OnGet
@@ -164,15 +162,14 @@ public class CreateTests
         // Act
 
         IActionResult result = await pageModel.OnPostAsync();
+        
+        // Reset
 
         // Assert
 
         Assert.That(result, Is.TypeOf<PageResult>());
 
         Assert.That(productService.GetAllData(), Is.Empty);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -194,6 +191,8 @@ public class CreateTests
         // Act
 
         IActionResult result = await pageModel.OnPostAsync();
+        
+        // Reset
 
         // Assert
 
@@ -214,9 +213,6 @@ public class CreateTests
         Assert.That(File.Exists(savedImagePath), Is.True);
 
         Assert.That(pageModel.TempData["SuccessMessage"], Is.EqualTo("Your post and image were uploaded."));
-
-        // Reset
-
     }
 
     /// <summary>
@@ -251,6 +247,8 @@ public class CreateTests
         // Act
 
         IActionResult result = await failingPageModel.OnPostAsync();
+        
+        // Reset
 
         // Assert
 
@@ -261,9 +259,6 @@ public class CreateTests
         Assert.That(Directory.GetFiles(Path.Combine(webRootPath, "data", "images")), Is.Empty);
 
         Assert.That(productService.GetAllData(), Is.Empty);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -309,13 +304,12 @@ public class CreateTests
                 Is.TypeOf<RedirectToPageResult>(),
                 $"The {extension} upload should be accepted.");
         }
+        
+        // Reset
 
         // Assert
 
         Assert.That(productService.GetAllData().Count(), Is.EqualTo(supportedImages.Length));
-
-        // Reset
-
     }
 
     /// <summary>
@@ -337,6 +331,8 @@ public class CreateTests
         // Act
 
         IActionResult result = await pageModel.OnPostAsync();
+        
+        // Reset
 
         // Assert
 
@@ -347,9 +343,6 @@ public class CreateTests
         Assert.That(productService.GetAllData(), Is.Empty);
 
         Assert.That(Directory.Exists(Path.Combine(webRootPath, "data", "images")), Is.False);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -371,6 +364,8 @@ public class CreateTests
         // Act
 
         IActionResult result = await pageModel.OnPostAsync();
+        
+        // Reset
 
         // Assert
 
@@ -381,9 +376,6 @@ public class CreateTests
         Assert.That(productService.GetAllData(), Is.Empty);
 
         Assert.That(Directory.Exists(Path.Combine(webRootPath, "data", "images")), Is.False);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -405,6 +397,8 @@ public class CreateTests
         // Act
 
         IActionResult result = await pageModel.OnPostAsync();
+        
+        // Reset
 
         // Assert
 
@@ -413,9 +407,6 @@ public class CreateTests
         Assert.That(pageModel.ModelState[nameof(pageModel.ImageFile)].Errors, Is.Not.Empty);
 
         Assert.That(productService.GetAllData(), Is.Empty);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -435,6 +426,8 @@ public class CreateTests
         // Act
 
         IActionResult result = await pageModel.OnPostAsync();
+        
+        // Reset
 
         // Assert
 
@@ -443,9 +436,6 @@ public class CreateTests
         Assert.That(pageModel.ModelState[nameof(pageModel.ImageFile)].Errors, Is.Not.Empty);
 
         Assert.That(productService.GetAllData(), Is.Empty);
-
-        // Reset
-
     }
 
     #endregion OnPostAsync
@@ -478,6 +468,8 @@ public class CreateTests
         // Act
 
         bool saved = await pageModel.SaveImageAndProductAsync(imagesFolder, fullImagePath, fileName);
+        
+        // Reset
 
         // Assert
 
@@ -488,9 +480,6 @@ public class CreateTests
         Assert.That(pageModel.Product.Image, Is.EqualTo("/data/images/test-cover.png"));
 
         Assert.That(productService.GetAllData().Single().Title, Is.EqualTo("Example Game"));
-
-        // Reset
-
     }
 
     /// <summary>
@@ -512,15 +501,14 @@ public class CreateTests
         // Act
 
         bool saved = await pageModel.SaveImageAndProductAsync(imagesFolder, fullImagePath, "missing.png");
+        
+        // Reset
 
         // Assert
 
         Assert.That(saved, Is.False);
 
         Assert.That(productService.GetAllData(), Is.Empty);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -550,6 +538,8 @@ public class CreateTests
         // Act
 
         bool saved = await pageModel.SaveImageAndProductAsync(imagesFolder, fullImagePath, "existing.png");
+        
+        // Reset
 
         // Assert
 
@@ -558,9 +548,6 @@ public class CreateTests
         Assert.That(File.ReadAllText(fullImagePath), Is.EqualTo("keep this file"));
 
         Assert.That(productService.GetAllData(), Is.Empty);
-
-        // Reset
-
     }
 
     #endregion SaveImageAndProductAsync
@@ -584,13 +571,12 @@ public class CreateTests
         // Act
 
         CreateModel.DeleteFileIfItExists(filePath);
+        
+        // Reset
 
         // Assert
 
         Assert.That(File.Exists(filePath), Is.False);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -608,13 +594,12 @@ public class CreateTests
         // Act
 
         CreateModel.DeleteFileIfItExists(filePath);
+        
+        // Reset
 
         // Assert
 
         Assert.That(File.Exists(filePath), Is.False);
-
-        // Reset
-
     }
 
     #endregion DeleteFileIfItExists
@@ -640,13 +625,12 @@ public class CreateTests
         // Act
 
         bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, ".png");
+        
+        // Reset
 
         // Assert
 
         Assert.That(isValid, Is.True);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -668,13 +652,12 @@ public class CreateTests
         // Act
 
         bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, ".jpg");
+        
+        // Reset
 
         // Assert
 
         Assert.That(isValid, Is.True);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -696,13 +679,12 @@ public class CreateTests
         // Act
 
         bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, ".jpeg");
+        
+        // Reset
 
         // Assert
 
         Assert.That(isValid, Is.True);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -724,13 +706,12 @@ public class CreateTests
         // Act
 
         bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, ".gif");
+        
+        // Reset
 
         // Assert
 
         Assert.That(isValid, Is.True);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -752,13 +733,12 @@ public class CreateTests
         // Act
 
         bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, ".gif");
+        
+        // Reset
 
         // Assert
 
         Assert.That(isValid, Is.True);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -797,14 +777,14 @@ public class CreateTests
                 "cover" + extension);
 
             bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, extension);
+            
+            // Reset
 
             // Assert
 
             Assert.That(isValid, Is.False, $"The short {extension} header should be rejected.");
         }
-
-        // Reset
-
+        
     }
 
     /// <summary>
@@ -849,6 +829,8 @@ public class CreateTests
                     "cover" + extension);
 
                 bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, extension);
+                
+                // Reset
 
                 // Assert
 
@@ -858,9 +840,6 @@ public class CreateTests
                     $"The {extension} header should fail when byte {position} changes.");
             }
         }
-
-        // Reset
-
     }
 
     /// <summary>
@@ -887,13 +866,12 @@ public class CreateTests
         // Act
 
         bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, ".webp");
+        
+        // Reset
 
         // Assert
 
         Assert.That(isValid, Is.True);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -915,13 +893,12 @@ public class CreateTests
         // Act
 
         bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, ".png");
+        
+        // Reset
 
         // Assert
 
         Assert.That(isValid, Is.False);
-
-        // Reset
-
     }
 
     /// <summary>
@@ -943,13 +920,12 @@ public class CreateTests
         // Act
 
         bool isValid = await CreateModel.HasValidImageSignatureAsync(imageFile, ".svg");
+        
+        // Reset
 
         // Assert
 
         Assert.That(isValid, Is.False);
-
-        // Reset
-
     }
 
     #endregion HasValidImageSignatureAsync
@@ -989,6 +965,9 @@ public class CreateTests
 
             return Task.FromResult(false);
         }
+        
     }
+    
     #endregion TestHelpers
+    
 }
