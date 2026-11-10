@@ -1,7 +1,5 @@
 @page "{id}"
 @using ContosoCrafts.WebSite.Models
-@using ContosoCrafts.WebSite.Services
-@inject JsonFileProductService ProductService
 @model ContosoCrafts.WebSite.Pages.Product.UpdateModel
 
 @{
@@ -162,6 +160,7 @@
 	</form>
 </div>
 
-@section Scripts {
+@section Scripts 
+{
 	<partial name="_ValidationScriptsPartial" />
 }
