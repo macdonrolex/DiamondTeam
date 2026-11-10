@@ -5,72 +5,69 @@ using ContosoCrafts.WebSite.Services;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ContosoCrafts.WebSite.Pages.Product
+namespace ContosoCrafts.WebSite.Pages.Product;
+
+/// <summary>
+/// Loads one product for the product details page.
+/// </summary>
+public class ReadModel : PageModel
 {
 
+    // Provides access to the product records shown by this page.
+    public readonly JsonFileProductService ProductService;
+
     /// <summary>
-    /// Loads one product for the product details page.
+    /// Creates the details page model with the product data service.
     /// </summary>
-    public class ReadModel : PageModel
+    /// <param name="productService">Service used to find product records.</param>
+    public ReadModel(JsonFileProductService productService)
+    {
+        ProductService = productService;
+    }
+
+    /// <summary>
+    /// Gets the product selected for display, or null when no product was found.
+    /// </summary>
+    public ProductModel Product { get; private set; }
+
+    /// <summary>
+    /// Gets related products shown with the selected product.
+    /// </summary>
+    public List<ProductModel> OtherProducts { get; set; } = new List<ProductModel>();
+
+    /// <summary>
+    /// Finds the requested product and displays it, or redirects when it is missing.
+    /// </summary>
+    /// <param name="id">Identifier of the product to display.</param>
+    /// <returns>The details page when a product exists; otherwise, a redirect to the listing.</returns>
+    public IActionResult OnGet(string id)
     {
 
-        // Provides access to the product records shown by this page.
-        public readonly JsonFileProductService ProductService;
-
-        /// <summary>
-        /// Creates the details page model with the product data service.
-        /// </summary>
-        /// <param name="productService">Service used to find product records.</param>
-        public ReadModel(JsonFileProductService productService)
+        // A missing identifier cannot select a product, so return to the listing.
+        if (string.IsNullOrEmpty(id))
         {
-            ProductService = productService;
+            return RedirectToPage("/Product/Index");
         }
 
-        /// <summary>
-        /// Gets the product selected for display, or null when no product was found.
-        /// </summary>
-        public ProductModel Product { get; private set; }
+        var products = ProductService.GetAllData();
 
-        /// <summary>
-        /// Gets related products shown with the selected product.
-        /// </summary>
-        public List<ProductModel> OtherProducts { get; set; } = new List<ProductModel>();
+        Product = products.FirstOrDefault(x => x.Id == id);
 
-        /// <summary>
-        /// Finds the requested product and displays it, or redirects when it is missing.
-        /// </summary>
-        /// <param name="id">Identifier of the product to display.</param>
-        /// <returns>The details page when a product exists; otherwise, a redirect to the listing.</returns>
-        public IActionResult OnGet(string id)
+        // Redirect when the supplied identifier does not match a stored product.
+        if (Product == null)
+
         {
-
-            // A missing identifier cannot select a product, so return to the listing.
-            if (string.IsNullOrEmpty(id))
-            {
-                return RedirectToPage("/Product/Index");
-            }
-
-            var products = ProductService.GetAllData();
-
-            Product = products.FirstOrDefault(x => x.Id == id);
-
-            // Redirect when the supplied identifier does not match a stored product.
-            if (Product == null)
-
-            {
-                return RedirectToPage("/Product/Index");
-            }
-
-            OtherProducts = products
-                .Where(x => x.Id != Product.Id)
-
-                .Take(3)
-
-                .ToList();
-
-            return Page();
+            return RedirectToPage("/Product/Index");
         }
 
+        OtherProducts = products
+            .Where(x => x.Id != Product.Id)
+
+            .Take(3)
+
+            .ToList();
+
+        return Page();
     }
 
 }
