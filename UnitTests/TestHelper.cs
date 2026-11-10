@@ -7,69 +7,68 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
-
 using Moq;
-
 using ContosoCrafts.WebSite.Services;
 
-namespace UnitTests
+namespace UnitTests;
+
+/// <summary>
+/// Helper to hold the web start settings
+///
+/// HttpClient
+/// 
+/// Action Contect
+/// 
+/// The View Data and Teamp Data
+/// 
+/// The Product Service
+/// </summary>
+public static class TestHelper
 {
+    public static Mock<IWebHostEnvironment> MockWebHostEnvironment;
+    public static IUrlHelperFactory UrlHelperFactory;
+    public static DefaultHttpContext HttpContextDefault;
+    public static IWebHostEnvironment WebHostEnvironment;
+    public static ModelStateDictionary ModelState;
+    public static ActionContext ActionContext;
+    public static EmptyModelMetadataProvider ModelMetadataProvider;
+    public static ViewDataDictionary ViewData;
+    public static TempDataDictionary TempData;
+    public static PageContext PageContext;
+    public static JsonFileProductService ProductService;
+
     /// <summary>
-    /// Helper to hold the web start settings
-    ///
-    /// HttpClient
-    /// 
-    /// Action Contect
-    /// 
-    /// The View Data and Teamp Data
-    /// 
-    /// The Product Service
+    /// Default Constructor
     /// </summary>
-    public static class TestHelper
+    static TestHelper()
     {
-        public static Mock<IWebHostEnvironment> MockWebHostEnvironment;
-        public static IUrlHelperFactory UrlHelperFactory;
-        public static DefaultHttpContext HttpContextDefault;
-        public static IWebHostEnvironment WebHostEnvironment;
-        public static ModelStateDictionary ModelState;
-        public static ActionContext ActionContext;
-        public static EmptyModelMetadataProvider ModelMetadataProvider;
-        public static ViewDataDictionary ViewData;
-        public static TempDataDictionary TempData;
-        public static PageContext PageContext;
-        public static JsonFileProductService ProductService;
+        MockWebHostEnvironment = new Mock<IWebHostEnvironment>();
+        MockWebHostEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
+        MockWebHostEnvironment.Setup(m => m.WebRootPath).Returns(TestFixture.DataWebRootPath);
+        MockWebHostEnvironment.Setup(m => m.ContentRootPath).Returns(TestFixture.DataContentRootPath);
 
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-        static TestHelper()
+        HttpContextDefault = new DefaultHttpContext()
         {
-            MockWebHostEnvironment = new Mock<IWebHostEnvironment>();
-            MockWebHostEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
-            MockWebHostEnvironment.Setup(m => m.WebRootPath).Returns(TestFixture.DataWebRootPath);
-            MockWebHostEnvironment.Setup(m => m.ContentRootPath).Returns(TestFixture.DataContentRootPath);
+            TraceIdentifier = "trace",
+        };
 
-            HttpContextDefault = new DefaultHttpContext()
-            {
-                TraceIdentifier = "trace",
-            };
+        ModelState = new ModelStateDictionary();
 
-            ModelState = new ModelStateDictionary();
+        ActionContext = new ActionContext(HttpContextDefault, HttpContextDefault.GetRouteData(),
+            new PageActionDescriptor(), ModelState);
 
-            ActionContext = new ActionContext(HttpContextDefault, HttpContextDefault.GetRouteData(), new PageActionDescriptor(), ModelState);
+        ModelMetadataProvider = new EmptyModelMetadataProvider();
+        ViewData = new ViewDataDictionary(ModelMetadataProvider, ModelState);
+        TempData = new TempDataDictionary(HttpContextDefault, Mock.Of<ITempDataProvider>());
 
-            ModelMetadataProvider = new EmptyModelMetadataProvider();
-            ViewData = new ViewDataDictionary(ModelMetadataProvider, ModelState);
-            TempData = new TempDataDictionary(HttpContextDefault, Mock.Of<ITempDataProvider>());
+        PageContext = new PageContext(ActionContext)
+        {
+            ViewData = ViewData,
+            HttpContext = HttpContextDefault
+        };
 
-            PageContext = new PageContext(ActionContext)
-            {
-                ViewData = ViewData,
-                HttpContext = HttpContextDefault
-            };
-
-            UrlHelperFactory = new UrlHelperFactory();
-            ProductService = new JsonFileProductService(MockWebHostEnvironment.Object);
-        }
+        UrlHelperFactory = new UrlHelperFactory();
+        ProductService = new JsonFileProductService(MockWebHostEnvironment.Object);
     }
+    
 }
