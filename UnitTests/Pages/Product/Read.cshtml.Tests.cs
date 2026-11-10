@@ -4,160 +4,178 @@ using ContosoCrafts.WebSite.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UnitTests.Pages.Product
+namespace UnitTests.Pages.Product;
+
+/// <summary>
+///  Unit tests for Read.cshtml.cs and Read.cshtml
+/// </summary>
+[TestFixture]
+public class ReadTests
 {
+    #region OnGet
+
     /// <summary>
-    ///  Unit tests for Read.cshtml.cs and Read.cshtml
+    /// Test whether OnGet actually redirect to the Index page while the given Id is null
     /// </summary>
-    [TestFixture]
-    public class ReadTests
+    [Test]
+    public void OnGet_InValid_Id_Null_Should_Return_RedirectToPage_Product_Index()
     {
-        #region OnGet
-        /// <summary>
-        /// Test whether OnGet actually redirect to the Index page while the given Id is null
-        /// </summary>
-        [Test]
-        public void OnGet_InValid_Id_Null_Should_Return_RedirectToPage_Product_Index()
-        {
-            // Arrange
-            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
-            var productService = new JsonFileProductService(webHostEnvironment);
-            var pageModel = new ReadModel(productService);
+        // Arrange
+        var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+        var productService = new JsonFileProductService(webHostEnvironment);
+        var pageModel = new ReadModel(productService);
 
-            // Act
-            var result = pageModel.OnGet(null) as RedirectToPageResult;
-            
-            // Reset
-            // Not needed
+        // Act
+        var result = pageModel.OnGet(null) as RedirectToPageResult;
 
-            // Assert
-            // If not RedirectToPageResult type, it will be null
-            Assert.That(result, Is.Not.Null);
-            // The redirected page is what we want
-            Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
-        }
+        // Reset
         
-        /// <summary>
-        /// Test whether OnGet actually redirect to the Index page while the given Id is empty.
-        /// </summary>
-        [Test]
-        public void OnGet_InValid_Id_Empty_Should_Return_RedirectToPage_Product_Index()
-        {
-            // Arrange
-            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
-            var productService = new JsonFileProductService(webHostEnvironment);
-            var pageModel = new ReadModel(productService);
+        // Not needed
 
-            // Act
-            var result = pageModel.OnGet("") as RedirectToPageResult;
-            
-            // Reset
-            // Not needed
-
-            // Assert
-            // If not RedirectToPageResult type, it will be null
-            Assert.That(result, Is.Not.Null);
-            // The redirected page is what we want
-            Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
-        }
+        // Assert
         
-        /// <summary>
-        /// Test whether OnGet actually redirect to the Index page while the given Id doesn't belong to any product(post).
-        /// </summary>
-        [Test]
-        public void OnGet_InValid_Product_Id_Not_Exist_Should_Return_RedirectToPage_Product_Index()
-        {
-            // Arrange
-            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
-            var productService = new JsonFileProductService(webHostEnvironment);
-            var pageModel = new ReadModel(productService);
-
-            // Act
-            var result = pageModel.OnGet("Non_Exist_Id") as RedirectToPageResult;
-            
-            // Reset
-            // Not needed
-
-            // Assert
-            // If not RedirectToPageResult type, it will be null
-            Assert.That(result, Is.Not.Null);
-            // The redirected page is what we want
-            Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
-        }
+        // If not RedirectToPageResult type, it will be null
+        Assert.That(result, Is.Not.Null);
         
-        /// <summary>
-        /// Test whether OnGet actually retrieves the product(post) with given Id.
-        /// </summary>
-        [Test]
-        public void OnGet_Valid_Id_Exist_Should_Load_Product()
-        {
-            // Arrange
-            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
-            var productService = new JsonFileProductService(webHostEnvironment);
-            var pageModel = new ReadModel(productService);
-
-            // Act
-            pageModel.OnGet("jenlooper-light");
-            
-            // Reset
-
-            // Assert
-            Assert.That(pageModel.Product, Is.Not.Null);
-            Assert.That(pageModel.Product.Id, Is.EqualTo("jenlooper-light"));
-        }
-        
-        /// <summary>
-        /// Test whether OnGet returns the page when the product(post) with the given id exists.
-        /// </summary>
-        [Test]
-        public void OnGet_Valid_Id_Exist_Should_Return_Page()
-        {
-            // Arrange
-            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
-            var productService = new JsonFileProductService(webHostEnvironment);
-            var pageModel = new ReadModel(productService);
-
-            // Act
-            var result = pageModel.OnGet("jenlooper-light"); 
-            
-            // Reset
-            // No needed
-
-            // Assert
-            // The result is the page itself, not a redirect
-            Assert.That(result, Is.TypeOf<PageResult>());
-        }
-        
-        /// <summary>
-        /// Test whether the Read page can display other three posts.
-        /// </summary>
-        [Test]
-        public void OnGet_Product_Exist_Should_Get_3_Other_Products()
-        {
-            // Arrange
-            var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
-            var productService = new JsonFileProductService(webHostEnvironment);
-            var pageModel = new ReadModel(productService);
-
-            // Act
-            // Load a post
-            pageModel.OnGet("jenlooper-light"); 
-            // And then we get three other posts
-            var result = pageModel.OtherProducts;
-            var resultCount = result.Count;
-            
-            // Reset
-            // No needed
-
-            // Assert
-            // 3 posts
-            Assert.That(resultCount, Is.EqualTo(3));
-            // Not the same as the product of the Read page
-            Assert.That(result[0].Id, Is.Not.EqualTo("jenlooper-light"));
-            Assert.That(result[1].Id, Is.Not.EqualTo("jenlooper-light"));
-            Assert.That(result[2].Id, Is.Not.EqualTo("jenlooper-light"));
-            
-        }
-        #endregion OnGet
+        // The redirected page is what we want
+        Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
     }
+
+    /// <summary>
+    /// Test whether OnGet actually redirect to the Index page while the given Id is empty.
+    /// </summary>
+    [Test]
+    public void OnGet_InValid_Id_Empty_Should_Return_RedirectToPage_Product_Index()
+    {
+        // Arrange
+        var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+        var productService = new JsonFileProductService(webHostEnvironment);
+        var pageModel = new ReadModel(productService);
+
+        // Act
+        var result = pageModel.OnGet("") as RedirectToPageResult;
+
+        // Reset
+        
+        // Not needed
+
+        // Assert
+        
+        // If not RedirectToPageResult type, it will be null
+        Assert.That(result, Is.Not.Null);
+        
+        // The redirected page is what we want
+        Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
+    }
+
+    /// <summary>
+    /// Test whether OnGet actually redirect to the Index page while the given Id doesn't belong to any product(post).
+    /// </summary>
+    [Test]
+    public void OnGet_InValid_Product_Id_Not_Exist_Should_Return_RedirectToPage_Product_Index()
+    {
+        // Arrange
+        var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+        var productService = new JsonFileProductService(webHostEnvironment);
+        var pageModel = new ReadModel(productService);
+
+        // Act
+        var result = pageModel.OnGet("Non_Exist_Id") as RedirectToPageResult;
+
+        // Reset
+        
+        // Not needed
+
+        // Assert
+        
+        // If not RedirectToPageResult type, it will be null
+        Assert.That(result, Is.Not.Null);
+        
+        // The redirected page is what we want
+        Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
+    }
+
+    /// <summary>
+    /// Test whether OnGet actually retrieves the product(post) with given Id.
+    /// </summary>
+    [Test]
+    public void OnGet_Valid_Id_Exist_Should_Load_Product()
+    {
+        // Arrange
+        var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+        var productService = new JsonFileProductService(webHostEnvironment);
+        var pageModel = new ReadModel(productService);
+
+        // Act
+        pageModel.OnGet("jenlooper-light");
+
+        // Reset
+        
+        // Not needed
+
+        // Assert
+        Assert.That(pageModel.Product, Is.Not.Null);
+        Assert.That(pageModel.Product.Id, Is.EqualTo("jenlooper-light"));
+    }
+
+    /// <summary>
+    /// Test whether OnGet returns the page when the product(post) with the given id exists.
+    /// </summary>
+    [Test]
+    public void OnGet_Valid_Id_Exist_Should_Return_Page()
+    {
+        // Arrange
+        var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+        var productService = new JsonFileProductService(webHostEnvironment);
+        var pageModel = new ReadModel(productService);
+
+        // Act
+        var result = pageModel.OnGet("jenlooper-light");
+
+        // Reset
+        
+        // No needed
+
+        // Assert
+        
+        // The result is the page itself, not a redirect
+        Assert.That(result, Is.TypeOf<PageResult>());
+    }
+
+    /// <summary>
+    /// Test whether the Read page can display other three posts.
+    /// </summary>
+    [Test]
+    public void OnGet_Product_Exist_Should_Get_3_Other_Products()
+    {
+        // Arrange
+        var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+        var productService = new JsonFileProductService(webHostEnvironment);
+        var pageModel = new ReadModel(productService);
+
+        // Act
+        
+        // Load a post
+        pageModel.OnGet("jenlooper-light");
+        // And then we get three other posts
+        var result = pageModel.OtherProducts;
+        var resultCount = result.Count;
+
+        // Reset
+        
+        // No needed
+
+        // Assert
+        
+        // 3 posts
+        Assert.That(resultCount, Is.EqualTo(3));
+        
+        // Not the same as the product of the Read page
+        Assert.That(result[0].Id, Is.Not.EqualTo("jenlooper-light"));
+        Assert.That(result[1].Id, Is.Not.EqualTo("jenlooper-light"));
+        Assert.That(result[2].Id, Is.Not.EqualTo("jenlooper-light"));
+    }
+
+    #endregion OnGet
+    
 }
