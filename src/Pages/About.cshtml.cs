@@ -1,21 +1,18 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ContosoCrafts.WebSite.Pages
+namespace ContosoCrafts.WebSite.Pages;
+
+/// <summary>
+/// Supplies the page handler for the About page.
+/// </summary>
+public class AboutModel : PageModel
 {
 
     /// <summary>
-    /// Supplies the page handler for the About page.
+    /// Handles a request to display the About page.
     /// </summary>
-    public class AboutModel : PageModel
+    public void OnGet()
     {
-
-        /// <summary>
-        /// Handles a request to display the About page.
-        /// </summary>
-        public void OnGet()
-        {
-        }
-
     }
 
 }
