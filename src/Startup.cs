@@ -50,15 +50,16 @@ namespace ContosoCrafts.WebSite
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Show detailed errors in development and use the error page and HSTS elsewhere.
-            if (env.IsDevelopment())
+            switch (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                case true:
+                    app.UseDeveloperExceptionPage();
+                    break;
+                case false:
+                    app.UseExceptionHandler("/Error");
+                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                    app.UseHsts();
+                    break;
             }
 
             app.UseHttpsRedirection();
