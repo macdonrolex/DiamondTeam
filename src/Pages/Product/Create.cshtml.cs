@@ -20,10 +20,10 @@ namespace ContosoCrafts.WebSite.Pages.Product
     {
 
         // Limit uploaded images to 10 MB.
-        private const long MaximumImageSizeBytes = 10 * 1024 * 1024;
+        public const long MaximumImageSizeBytes = 10 * 1024 * 1024;
 
         // Only common image formats are accepted; SVG files are excluded for safety.
-        private static readonly string[] AllowedImageExtensions =
+        public static readonly string[] AllowedImageExtensions =
             { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
 
         // Provides the operation that stores a submitted product.
@@ -162,7 +162,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// <param name="fullImagePath">Full image destination path.</param>
         /// <param name="fileName">Generated image file name.</param>
         /// <returns>True when image and product are saved.</returns>
-        private async Task<bool> SaveImageAndProductAsync(string imagesFolder, string fullImagePath, string fileName)
+        public virtual async Task<bool> SaveImageAndProductAsync(string imagesFolder, string fullImagePath, string fileName)
         {
 
             // Stop if no image was uploaded
@@ -198,7 +198,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// Deletes the specified file when it exists.
         /// </summary>
         /// <param name="path">Full path to the file.</param>
-        private static void DeleteFileIfItExists(string path)
+        public static void DeleteFileIfItExists(string path)
         {
             if (System.IO.File.Exists(path))
             {
@@ -213,7 +213,7 @@ namespace ContosoCrafts.WebSite.Pages.Product
         /// <param name="file">Uploaded file to inspect.</param>
         /// <param name="extension">File extension to validate.</param>
         /// <returns>True when the bytes match a supported image format.</returns>
-        private static async Task<bool> HasValidImageSignatureAsync(IFormFile file, string extension)
+        public static async Task<bool> HasValidImageSignatureAsync(IFormFile file, string extension)
         {
             var header = new byte[12];
             using var stream = file.OpenReadStream();
