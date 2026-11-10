@@ -1,63 +1,59 @@
 using System.Diagnostics;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace ContosoCrafts.WebSite.Pages
+namespace ContosoCrafts.WebSite.Pages;
+
+/// <summary>
+/// Supplies diagnostic information for the application's error page.
+/// </summary>
+[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+public class ErrorModel : PageModel
 {
 
     /// <summary>
-    /// Supplies diagnostic information for the application's error page.
+    /// Gets or sets the identifier for the current request.
     /// </summary>
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public class ErrorModel : PageModel
+    public string RequestId { get; set; }
+
+    /// <summary>
+    /// Gets whether the request identifier should be shown on the page.
+    /// </summary>
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
+    // Retained for the page's diagnostic logging dependency.
+    public readonly ILogger<ErrorModel> Logger;
+
+    /// <summary>
+    /// Creates the error page model with its logger.
+    /// </summary>
+    /// <param name="logger">Logger used by this page model.</param>
+    public ErrorModel(ILogger<ErrorModel> logger)
     {
+        Logger = logger;
+    }
 
-        /// <summary>
-        /// Gets or sets the identifier for the current request.
-        /// </summary>
-        public string RequestId { get; set; }
+    /// <summary>
+    /// Captures the current request identifier for display on the error page.
+    /// </summary>
+    public void OnGet()
+    {
+        string id = null;
 
-        /// <summary>
-        /// Gets whether the request identifier should be shown on the page.
-        /// </summary>
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-
-        // Retained for the page's diagnostic logging dependency.
-        public readonly ILogger<ErrorModel> Logger;
-
-        /// <summary>
-        /// Creates the error page model with its logger.
-        /// </summary>
-        /// <param name="logger">Logger used by this page model.</param>
-        public ErrorModel(ILogger<ErrorModel> logger)
+        // Use the current activity's ID if there is one
+        if (Activity.Current != null)
         {
-            Logger = logger;
+            id = Activity.Current.Id;
         }
 
-        /// <summary>
-        /// Captures the current request identifier for display on the error page.
-        /// </summary>
-        public void OnGet()
+        // If there was no activity, or it had no ID, use ASP.NET Core's request ID instead
+        if (id == null)
         {
-            string id = null;
-
-            // Use the current activity's ID if there is one
-            if (Activity.Current != null)
-            {
-                id = Activity.Current.Id;
-            }
-
-            // If there was no activity, or it had no ID, use ASP.NET Core's request ID instead
-            if (id == null)
-            {
-                id = HttpContext.TraceIdentifier;
-            }
-
-            RequestId = id;
+            id = HttpContext.TraceIdentifier;
         }
 
+        RequestId = id;
     }
 
 }
