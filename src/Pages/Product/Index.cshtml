@@ -24,6 +24,7 @@
             <p>Add a Post to see it here.</p>
         </div>
     }
+    
     @if (Model.Products != null && Model.Products.Any())
     {
         <section class="product-list" aria-label="Game products">
@@ -38,6 +39,7 @@
                                 @product.DateAdded.Value.ToLocalTime().ToString("MMM d, yyyy")
                             </time>
                         }
+                        
                         @if (!product.DateAdded.HasValue)
                         {
                             <span class="product-date-value product-date-unknown">Date not recorded</span>
@@ -56,6 +58,7 @@
                         {
                             <span class="product-maker">@product.Maker</span>
                         }
+                        
                         @if (!string.IsNullOrWhiteSpace(product.Genre.ToString()))
                         {
                             <span class="product-genre">@product.Genre</span>
@@ -81,6 +84,7 @@
                     <span aria-hidden="true">&larr;</span> Previous
                 </a>
             }
+            
             @if (Model.CurrentPage <= 1)
             {
                 <button class="pager-button pager-prev" type="button" disabled>
@@ -96,6 +100,7 @@
                     Next <span aria-hidden="true">&rarr;</span>
                 </a>
             }
+            
             @if (Model.CurrentPage >= Model.TotalPages)
             {
                 <button class="pager-button pager-next" type="button" disabled>
