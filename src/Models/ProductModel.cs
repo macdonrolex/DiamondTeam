@@ -19,9 +19,7 @@ public class ProductModel
     [Required(ErrorMessage = "Enter the maker or studio name.")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Maker must be between 2 and 80 characters.")]
     public string Maker { get; set; }
-
-
-
+    
     // The cover image can be a full URL or a path inside this site.
     [Required(ErrorMessage = "Add the cover image link.")]
     [StringLength(2048, ErrorMessage = "The image link must be 2,048 characters or fewer.")]
