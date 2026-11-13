@@ -54,6 +54,7 @@ public static class GenreEnumExtensions
             GenreEnum.Strategy => "Strategy Game",
             GenreEnum.Sandbox => "Sandbox Game",
             GenreEnum.Rhythm => "Rhythm Game",
+            GenreEnum.Unknown => "Unknown Game Genre",
  
             // Default, Unknown
             _ => "Unknown Game Genre",
