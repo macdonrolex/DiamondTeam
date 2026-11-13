@@ -28,6 +28,7 @@ public class GenreEnumExtensionsTests
         var productModelSandbox = new ProductModel();
         var productModelRhythm = new ProductModel();
         var productModelUnknown = new ProductModel();
+        var productModelUndefined = new ProductModel();
 
         // Set up Action genre
         productModelAction.Genre = GenreEnum.Action;
@@ -40,6 +41,7 @@ public class GenreEnumExtensionsTests
         productModelSandbox.Genre = GenreEnum.Sandbox;
         productModelRhythm.Genre = GenreEnum.Rhythm;
         productModelUnknown.Genre = GenreEnum.Unknown;
+        productModelUndefined.Genre = GenreEnum.Undefined;
 
         // Act
         var resultAction = productModelAction.Genre.DisplayGenre();
@@ -52,9 +54,10 @@ public class GenreEnumExtensionsTests
         var resultSandbox = productModelSandbox.Genre.DisplayGenre();
         var resultRhythm = productModelRhythm.Genre.DisplayGenre();
         var resultUnknown = productModelUnknown.Genre.DisplayGenre();
-
+        var resultUndefined = productModelUndefined.Genre.DisplayGenre();
+        
         // Reset
-
+        
         // Not needed
 
         // Assert
@@ -70,6 +73,7 @@ public class GenreEnumExtensionsTests
         Assert.That(resultSandbox, Is.EqualTo("Sandbox Game"));
         Assert.That(resultRhythm, Is.EqualTo("Rhythm Game"));
         Assert.That(resultUnknown, Is.EqualTo("Unknown Game Genre"));
+        Assert.That(resultUndefined, Is.EqualTo(""));
     }
 
     #endregion DisplayGenre
