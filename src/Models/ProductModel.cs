@@ -60,7 +60,7 @@ public class ProductModel
 
     // Genre of the game in the post. Default is Undefined
     [Required(ErrorMessage = "Choose a genre.")]
-    [Range(1, 9, ErrorMessage = "Choose a genre.")]
+    [Range(1, 10, ErrorMessage = "Choose a genre.")]
     public GenreEnum Genre { get; set; } = GenreEnum.Undefined;
     
     // When this product was first added. Existing records without a date remain null.
