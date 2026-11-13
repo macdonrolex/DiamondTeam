@@ -40,16 +40,10 @@
 					<div class="update-body">
 						<label asp-for="Product.Genre" class="update-label">Genre</label>
 						<select asp-for="Product.Genre" class="update-input update-select">
-							<option value="@GenreEnum.Action">@GenreEnum.Action.DisplayGenre()</option>
-							<option value="@GenreEnum.Adventure">@GenreEnum.Adventure.DisplayGenre()</option>
-							<option value="@GenreEnum.Platform">@GenreEnum.Platform.DisplayGenre()</option>
-							<option value="@GenreEnum.Shooter">@GenreEnum.Shooter.DisplayGenre()</option>
-							<option value="@GenreEnum.Fighting">@GenreEnum.Fighting.DisplayGenre()</option>
-							<option value="@GenreEnum.Stealth">@GenreEnum.Stealth.DisplayGenre()</option>
-							<option value="@GenreEnum.Strategy">@GenreEnum.Strategy.DisplayGenre()</option>
-							<option value="@GenreEnum.Sandbox">@GenreEnum.Sandbox.DisplayGenre()</option>
-							<option value="@GenreEnum.Rhythm">@GenreEnum.Rhythm.DisplayGenre()</option>
-							<option value="@GenreEnum.Undefined">@GenreEnum.Undefined.DisplayGenre()</option>
+							@foreach (var genre in Enum.GetValues<GenreEnum>().Skip(1))
+							{
+								<option value=@genre>@genre.DisplayGenre()</option>
+							}
 						</select>
 					</div>
 					<svg class="update-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg>
