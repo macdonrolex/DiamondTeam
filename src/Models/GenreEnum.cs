@@ -7,22 +7,31 @@ public enum GenreEnum
 {
     // Genre undefined
     Undefined = 0,
+    
     // Action game
     Action = 1,
+    
     // Adventure game
     Adventure = 2,
+    
     // Platforming game
     Platform = 3,
+    
     // Shooter game
     Shooter = 4,
+    
     // Fighting game
     Fighting = 5,
+    
     // Stealth game
     Stealth = 6,
+    
     // Strategy game
     Strategy = 7,
+    
     // Sandbox game
     Sandbox = 8,
+    
     // Rhythm game
     Rhythm = 9,
     
