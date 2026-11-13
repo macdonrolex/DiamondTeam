@@ -39,7 +39,7 @@ public class GenreEnumExtensionsTests
         productModelStrategy.Genre = GenreEnum.Strategy;
         productModelSandbox.Genre = GenreEnum.Sandbox;
         productModelRhythm.Genre = GenreEnum.Rhythm;
-        productModelUnknown.Genre = GenreEnum.Undefined;
+        productModelUnknown.Genre = GenreEnum.Unknown;
 
         // Act
         var resultAction = productModelAction.Genre.DisplayGenre();
