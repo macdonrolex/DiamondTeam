@@ -56,8 +56,8 @@ public static class GenreEnumExtensions
             GenreEnum.Rhythm => "Rhythm Game",
             GenreEnum.Unknown => "Unknown Game Genre",
  
-            // Default, Unknown
-            _ => "Unknown Game Genre",
+            // Default
+            _ => "",
         };
     }
 }
