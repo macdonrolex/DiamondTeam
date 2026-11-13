@@ -25,6 +25,9 @@ public enum GenreEnum
     Sandbox = 8,
     // Rhythm game
     Rhythm = 9,
+    
+    // Game with unknow game genre
+    Unknown = 10
 }
 
 /// <summary>
