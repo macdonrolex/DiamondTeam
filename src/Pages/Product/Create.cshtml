@@ -1,4 +1,5 @@
 ﻿@page
+@using ContosoCrafts.WebSite.Models
 @model ContosoCrafts.WebSite.Pages.Product.CreateModel
 
 <div class="container py-5 post-create-page">
@@ -57,16 +58,10 @@
                         <span>Genre</span>
                     </label>
                     <select asp-for="Product.Genre" class="form-control post-create-input post-create-genre">
-                        <option value="0" disabled>Choose Genre</option>
-                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Action">Action</option>
-                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Adventure">Adventure</option>
-                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Platform">Platform</option>
-                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Shooter">Shooter</option>
-                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Fighting">Fighting</option>
-                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Stealth">Stealth</option>
-                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Strategy">Strategy</option>
-                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Sandbox">Sandbox</option>
-                        <option value="@ContosoCrafts.WebSite.Models.GenreEnum.Rhythm">Rhythm</option>
+                        @foreach (var genre in Enum.GetValues<GenreEnum>().Skip(1))
+                        {
+                            <option value=@genre>@genre.DisplayGenre()</option>
+                        }
                     </select>
                     <span asp-validation-for="Product.Genre" class="post-create-error"></span>
                 </div>
