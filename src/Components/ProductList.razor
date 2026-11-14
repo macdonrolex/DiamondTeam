@@ -126,7 +126,7 @@
                 
                 @* Display all comments *@
                 <div class="comment-list">
-                    @foreach (var comment in SelectedProduct.CommentList)
+                    @foreach (var comment in Enumerable.Reverse(SelectedProduct.CommentList))
                     {
                         <div class="comment-box">
                             <div class="text-break">@comment.Comment</div>
