@@ -123,15 +123,14 @@
                         </div>
                     </div>
                 }
+                
                 @* Display all comments *@
-                @foreach (var comment in SelectedProduct.CommentList)
-                {
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-break">@comment.Comment</div>
-                        </div>
-                    </div>
-                }
+                <div class="comment-list">
+                    @foreach (var comment in SelectedProduct.CommentList)
+                    {
+                        <div class="text-break">@comment.Comment</div>
+                    }
+                </div>
             </div>
         </div>
     </div>
