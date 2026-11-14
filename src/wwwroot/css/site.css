@@ -2826,3 +2826,10 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
             transform: none;
         }
 }
+
+/* For comments displaying */
+.comment-list{
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 12px;
+}
