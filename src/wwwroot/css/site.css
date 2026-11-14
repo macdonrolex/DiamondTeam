@@ -2854,3 +2854,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     flex-direction: column;
     gap: 5px;
 }
+
+.my-modal-footer{
+    justify-content: space-between
+}
