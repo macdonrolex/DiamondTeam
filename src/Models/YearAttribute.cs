@@ -59,4 +59,14 @@ public class YearAttribute : ValidationAttribute
         
         return true;
     }
+    
+    /// <summary>
+    /// Builds the error message with the current limits of the range.
+    /// </summary>
+    /// <param name="name">The name of the property that failed validation</param>
+    /// <returns>The error message shown to the user</returns>
+    public override string FormatErrorMessage(string name)
+    {
+        return $"Choose a year between {StartYear} and {EndYear}.";
+    }
 }
