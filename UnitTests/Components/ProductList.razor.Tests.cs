@@ -176,7 +176,58 @@ public class ProductListTests : BunitTestContext
 
     #region UpdateCommentText
 
-    
+    /// <summary>
+    /// Test whether we can type in the comment, submit it, and display it
+    /// </summary>
+    [Test]
+    public void UpdateCommentText_Valid_TypeIn_Text_And_Submit_Should_Display_The_Comment()
+    {
+
+        // Arrange
+        Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+        var id = "MoreInfoButton_jenlooper-cactus";
+        var page = Render<ProductList>();
+
+        // Find the Buttons (more info)
+        var buttonList = page.FindAll("Button");
+
+        // Find the one that matches the ID looking for and click it
+        var button = buttonList.First((m => m.OuterHtml.Contains(id)));
+        button.Click();
+
+        // Get the markup for the assertion
+        var preButtonMarkup = page.Markup;
+
+        // Backup original database for resetting.
+        var backupData = TestHelper.ProductService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-cactus");
+
+        // Act
+
+        // Type in some text into the input field
+        page.Find("input[type='text']").Change("test_comment");
+
+        // Get the submit button and click it
+        buttonList = page.FindAll("Button");
+        id = "SubmitComment";
+        var submitButton = buttonList.First((m => m.OuterHtml.Contains(id)));
+        submitButton.Click();
+
+        // Get the post click markup 
+        var postButtonMarkup = page.Markup;
+
+        // Reset
+
+        // Update with the original data in database
+        TestHelper.ProductService.UpdateData(backupData);
+
+        // Assert
+
+        // Before clicking, no comment
+        Assert.That(preButtonMarkup.Contains("test_comment"), Is.False);
+
+        // After clicking, show the comment
+        Assert.That(postButtonMarkup.Contains("test_comment"), Is.True);
+    }
 
     #endregion UpdateCommentText
 
