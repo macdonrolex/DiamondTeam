@@ -2829,7 +2829,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
 
 /* For comments displaying */
 .comment-list{
-    max-height: 150px;
+    max-height: 130px;
     overflow-y: auto;
     padding: 12px;
 }
