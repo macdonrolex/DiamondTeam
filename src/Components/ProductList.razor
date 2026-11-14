@@ -88,7 +88,7 @@
                         @* comment input field *@
                         <input class="form-control" type="text" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText"/>
                         @* comment submit button *@
-                        <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); NewComment = false; }" class="btn btn-success" data-toggle="modal" id="SubmitComment">Submit Comment</button>
+                        <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); RefreshCommentInput(); }" class="btn btn-success" data-toggle="modal" id="SubmitComment">Submit Comment</button>
                     </div>
                     
                     @*vote feature*@
