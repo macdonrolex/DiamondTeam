@@ -2842,3 +2842,9 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     border-radius: 10px;
     background-color: rgb(202 224 234)
 }
+
+.comment-icon{
+    display: block;
+    width: 20px;
+    height: 20px;
+}
