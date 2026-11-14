@@ -2850,6 +2850,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
 }
 
 .comment-submit{
+    width: 250px;
     display: flex;
     flex-direction: column;
     gap: 5px;
