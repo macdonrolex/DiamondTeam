@@ -83,46 +83,41 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    @* The Add Comment button*@
-                    <div class="col">
-                        <button @onclick="(e => ShowNewCommentInput())" id="AddComment" class="btn btn-primary">Add Comment</button>
+                    @*comment submit*@
+                    <div class="comment-submit">
+                        @* comment input field *@
+                        <input class="form-control" type="text" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText"/>
+                        @* comment submit button *@
+                        <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); NewComment = false; }" class="btn btn-success" data-toggle="modal" id="SaveComment">Save Comment</button>
                     </div>
-                    @{
-                        string voteText = VoteCount + " " + VoteLabel;
-                        if (VoteCount == 0)
-                        {
-                            voteText = "Be the first to vote!";
-                        }
-                        <span>@voteText</span>
-                    }
-                    @for (int i = 1; i < 6; i++)
-                    {
-                        // Current star button to display
-                        var currentStar = i;
-                        // The class for star button
-                        string starClass = "fa fa-star";
+                    
+                    @*vote feature*@
+                    <div>
+                        @{
+                            string voteText = VoteCount + " " + VoteLabel;
+                            if (VoteCount == 0)
+                            {
+                                voteText = "Be the first to vote!";
+                            }
 
-                        // Example: CurrentRating = 3. It means we need to make the first 3 stars checked(shiny)
-                        if (currentStar <= CurrentRating)
-                        {
-                            starClass = "fa fa-star checked";
+                            <span>@voteText</span>
                         }
+                        @for (int i = 1; i < 6; i++)
+                        {
+                            // Current star button to display
+                            var currentStar = i;
+                            // The class for star button
+                            string starClass = "fa fa-star";
 
-                        <span class=@starClass @onclick="(e => SubmitRating(currentStar))"></span>
-                    }
+                            // Example: CurrentRating = 3. It means we need to make the first 3 stars checked(shiny)
+                            if (currentStar <= CurrentRating)
+                            {
+                                starClass = "fa fa-star checked";
+                            }
+                            <span class=@starClass @onclick="(e => SubmitRating(currentStar))"></span>
+                        }
+                    </div>
                 </div>
-                @* Show input field after clicking the Add Comment button*@
-                @if (NewComment)
-                {
-                    <div class="row" >
-                        <div class="col">
-                            <input type="text" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText" />
-                            @* Clicking the Save Comment button will close the input field by seeting the NewComment flag*@
-                            <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); 
-                                        NewComment = false; }" class="btn btn-success" data-toggle="modal" id="SaveComment">Save Comment</button>
-                        </div>
-                    </div>
-                }
                 
                 @* Display all comments *@
                 <div class="comment-list">
