@@ -68,7 +68,7 @@ public class ProductModel
     public DateTime? DateAdded { get; set; }
     
     // The year the game was originally released.
-    [Range(-1, 2077, ErrorMessage = "Choose a year between 0 and 2077. -1 for year unknown")]
+    [YearAttribute(1947, 3)]
     [JsonPropertyName("releaseYear")]
     public int ReleaseYear { get; set; }
     
