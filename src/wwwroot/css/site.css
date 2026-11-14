@@ -2848,3 +2848,9 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     width: 20px;
     height: 20px;
 }
+
+.comment-submit{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
