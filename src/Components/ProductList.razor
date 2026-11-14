@@ -128,7 +128,9 @@
                 <div class="comment-list">
                     @foreach (var comment in SelectedProduct.CommentList)
                     {
-                        <div class="text-break">@comment.Comment</div>
+                        <div class="comment-box">
+                            <div class="text-break">@comment.Comment</div>
+                        </div>
                     }
                 </div>
             </div>
