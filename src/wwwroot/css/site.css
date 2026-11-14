@@ -2833,3 +2833,12 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     overflow-y: auto;
     padding: 12px;
 }
+
+.comment-box{
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    margin: 0px 10px 15px 10px;
+    border-radius: 10px;
+    background-color: rgb(202 224 234)
+}
