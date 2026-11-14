@@ -2858,3 +2858,9 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
 .my-modal-footer{
     justify-content: space-between
 }
+
+.voting{
+    display: flex;
+    gap: 5px;
+    align-items: center
+}
