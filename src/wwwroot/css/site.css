@@ -2976,3 +2976,19 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     gap: 5px;
     align-items: center
 }
+
+/* Delete page: Back to List button above the card, lined up with its left edge */
+.delete-page {
+    align-content: center;
+}
+
+.delete-top {
+    width: min(960px, 100%);
+    margin-bottom: 1.25rem;
+}
+
+/* Add a post page: Back to List button above the card, lined up with its left edge */
+.post-create-top {
+    max-width: 880px;
+    margin: 0 auto 1.25rem;
+}
