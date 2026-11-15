@@ -240,6 +240,12 @@ public class JsonFileProductService
     /// </summary>
     public void AddCommentToProduct(ProductModel selectedProduct, string newCommentText)
     {
+        // Prevent empty or null input
+        if (string.IsNullOrEmpty(newCommentText))
+        {
+            return;
+        }
+        
         // Add it to the Comment List
         selectedProduct.CommentList.Add(new CommentModel() { Comment = newCommentText });
 
