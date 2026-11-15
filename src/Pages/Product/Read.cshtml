@@ -49,6 +49,16 @@
         <aside class="product-detail-sidebar">
             <section class="product-author-card">
                 <h2>Post Details</h2>
+                <p class="product-sidebar-label">WRITTEN BY</p>
+                @switch (string.IsNullOrWhiteSpace(Model.Product.Maker))
+                {
+                    case true:
+                        <p class="product-sidebar-value">Author Unknown</p>
+                        break;
+                    case false:
+                        <p class="product-sidebar-value">@Model.Product.Author</p>
+                        break;
+                }
                 <p class="product-sidebar-label">Maker</p>
                 @switch (string.IsNullOrWhiteSpace(Model.Product.Maker))
                 {
