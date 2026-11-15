@@ -54,16 +54,21 @@
                     </a>
 
                     <div class="product-summary">
+                        @if (!string.IsNullOrWhiteSpace(product.Author))
+                        {
+                            <span class="product-author">By @product.Author</span>
+                        }
+                        
                         @if (!string.IsNullOrWhiteSpace(product.Maker))
                         {
                             <span class="product-maker">@product.Maker</span>
                         }
-                        
+
                         @if (!string.IsNullOrWhiteSpace(product.Genre.ToString()))
                         {
                             <span class="product-genre">@product.Genre</span>
                         }
-                     
+
                         <p class="product-description">@product.Description</p>
                     </div>
 
