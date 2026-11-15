@@ -1,9 +1,16 @@
 ﻿@page
+@using System.IO
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment WebHostEnvironment
 @* @model ContosoCrafts.WebSite.Pages.AboutModel *@
 @{
+    ViewData["Title"] = "About";
 }
-<div class="container text-center h2 font-weight-bold text-dark py-4">
-    About page
+<section class="about-covers-card">
+    <div class="about-covers" aria-hidden="true">
+        @foreach (var picture in GetCoverPictures())
+        {
+            <div style="background-image:url('@picture')"></div>
+        }
 </div>
     <div class="about-body">
         <small>About GameHub</small>
