@@ -37,6 +37,16 @@
                     <input asp-for="Product.Maker" class="form-control post-create-input" placeholder="Studio or publisher" autocomplete="organization" />
                     <span asp-validation-for="Product.Maker" class="post-create-error"></span>
                 </div>
+                
+                <!-- Author -->
+                <div class="post-create-field">
+                    <label asp-for="Product.Maker" class="post-create-label">
+                        <svg class="post-create-label-icon post-create-label-icon--maker" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 8a4 4 0 1 0 8 0a4 4 0 1 0-8 0M5 20v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/></svg>
+                        <span>Author</span>
+                    </label>
+                    <input asp-for="Product.Author" class="form-control post-create-input" placeholder="Studio or publisher" autocomplete="organization" />
+                    <span asp-validation-for="Product.Author" class="post-create-error"></span>
+                </div>
 
                 <div class="post-create-field post-create-field-wide">
                     <label asp-for="Product.Description" class="post-create-label">
