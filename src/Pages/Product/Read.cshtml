@@ -6,8 +6,9 @@
 }
 <div class="container product-detail-page">
     <div class="product-detail-topbar">
-        <a class="btn btn-secondary" asp-page="/Product/Index">
-            Back to List
+        <a class="update-back" asp-page="/Product/Index">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"/></svg>
+            <span>Back to List</span>
         </a>
     </div>
     <h1>@Model.Product.Title</h1>
