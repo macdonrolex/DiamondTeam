@@ -64,7 +64,7 @@
 			</div>
 
 			<!-- Maker -->
-			<div class="update-field update-field-wide">
+			<div class="update-field">
 				<div class="update-control">
 					<svg class="post-create-label-icon post-create-label-icon--maker update-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20V7l8-4 8 4v13M2 20h20M8 10h2m4 0h2M8 14h2m4 0h2M10 20v-3h4v3"/></svg>
 					<div class="update-body">
@@ -73,6 +73,18 @@
 					</div>
 				</div>
 				<span asp-validation-for="Product.Maker" class="post-create-error update-error"></span>
+			</div>
+			
+			<!-- Author -->
+			<div class="update-field">
+				<div class="update-control">
+					<svg class="post-create-label-icon post-create-label-icon--maker update-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 8a4 4 0 1 0 8 0a4 4 0 1 0-8 0M5 20v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/></svg>
+					<div class="update-body">
+						<label asp-for="Product.Author" class="update-label">Author</label>
+						<input asp-for="Product.Author" class="update-input" placeholder="Who writes this post" />
+					</div>
+				</div>
+				<span asp-validation-for="Product.Author" class="post-create-error update-error"></span>
 			</div>
 
 			<!-- Description -->
