@@ -86,7 +86,7 @@
                     @*comment submit*@
                     <div class="comment-submit">
                         @* comment input field *@
-                        <input class="form-control" type="text" placeholder="Enter your comment(within 200 characters)" maxlength="200" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText"/>
+                        <input class="form-control" type="text" placeholder="Add a comment (max. 200)" maxlength="200" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText"/>
                         @* comment submit button *@
                         <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); RefreshCommentInput(); }" class="btn btn-success" data-toggle="modal" id="SubmitComment">Submit Comment</button>
                     </div>
