@@ -1,7 +1,7 @@
 [
   {
     "Id": "jenlooper-cactus",
-    "Maker": "@jenlooper",
+    "Maker": "Mojang",
     "Author": "@jenlooper",
     "img": "/images/minecraft.jpeg",
     "Title": "Minecraft",
@@ -28,7 +28,7 @@
   },
   {
     "Id": "jenlooper-light",
-    "Maker": "jenlooper",
+    "Maker": "Midway",
     "Author": "jenlooper",
     "img": "/images/MortalCombat.webp",
     "Title": "Mortal Combat",
@@ -45,7 +45,7 @@
   },
   {
     "Id": "jenlooper-lightshow",
-    "Maker": "@jenlooper",
+    "Maker": "Nintendo",
     "Author": "@jenlooper",
     "img": "/images/zelda.jpeg",
     "Title": "The Legend of Zelda",
@@ -64,7 +64,7 @@
   },
   {
     "Id": "jenlooper-survival",
-    "Maker": "jenlooper",
+    "Maker": "Riot Games",
     "Author": "jenlooper",
     "img": "/images/LOL.jpeg",
     "Title": "League of Legends",
@@ -81,7 +81,7 @@
   },
   {
     "Id": "sailorhg-bubblesortpic",
-    "Maker": "sailorhg",
+    "Maker": "Rockstar Games",
     "Author": "sailorhg",
     "img": "/images/gta6.jpeg",
     "Title": "Grand Theft Auto 6",
@@ -98,7 +98,7 @@
   },
   {
     "Id": "sailorhg-corsage",
-    "Maker": "sailorhg",
+    "Maker": "Santa Monica Studiio",
     "Author": "sailorhg",
     "img": "/images/GOW.webp",
     "Title": "God of War",
@@ -117,7 +117,7 @@
   },
   {
     "Id": "sailorhg-kit",
-    "Maker": "sailorhg",
+    "Maker": "Nintendo",
     "Author": "sailorhg",
     "img": "/images/FETH.webp",
     "Title": "Fire Emblem",
@@ -134,7 +134,7 @@
   },
   {
     "Id": "sailorhg-led",
-    "Maker": "sailorhg",
+    "Maker": "Nintendo",
     "Author": "sailorhg",
     "img": "/images/mario.webp",
     "Title": "Super Mario World",
@@ -151,7 +151,7 @@
   },
   {
     "Id": "selinazawacki-soi-shirt",
-    "Maker": "selinazawacki",
+    "Maker": "Konami",
     "Author": "selinazawacki",
     "img": "/images/MGS2.jpeg",
     "Title": "Metal Gear Solid",
@@ -168,7 +168,7 @@
   },
   {
     "Id": "selinazawacki-soi-pins",
-    "Maker": "selinazawacki",
+    "Maker": "Kojima Production",
     "Author": "selinazawacki",
     "img": "/images/DS.jpeg",
     "Title": "Death Stranding",
@@ -185,7 +185,7 @@
   },
   {
     "Id": "vogueandcode-hipster-dev-bro",
-    "Maker": "vogueandcode",
+    "Maker": "Epic Games",
     "Author": "vogueandcode",
     "img": "/images/fortnite.jpg",
     "Title": "Fortnite",
@@ -202,7 +202,7 @@
   },
   {
     "Id": "vogueandcode-pretty-girls-code-tee",
-    "Maker": "vogueandcode",
+    "Maker": "Re-Logic",
     "Author": "vogueandcode",
     "img": "/images/terraria.jpeg",
     "Title": "Terraria",
@@ -219,7 +219,7 @@
   },
   {
     "Id": "vogueandcode-ruby-sis-2",
-    "Maker": "vogueandcode",
+    "Maker": "Valve",
     "Author": "vogueandcode",
     "img": "/images/HL2.jpg",
     "Title": "Half-Life 2",
@@ -236,7 +236,7 @@
   },
   {
     "Id": "selinazawacki-moon",
-    "Maker": "selinazawacki",
+    "Maker": "Atari",
     "Author": "selinazawacki",
     "img": "/images/pong.webp",
     "Title": "PONG",
@@ -253,7 +253,7 @@
   },
   {
     "Id": "selinazawacki-shirt",
-    "Maker": "selinazawacki",
+    "Maker": "Nintendo",
     "Author": "selinazawacki",
     "img": "/images/smash.jpg",
     "Title": "Super Smash Bros",
@@ -270,7 +270,7 @@
   },
   {
     "Id": "fa0ebf89-a473-4a1a-b6f3-8fa6e865fa20",
-    "Maker": "Lewis",
+    "Maker": "Konami",
     "Author": "Lewis",
     "img": "https://media.mmorpg.com/images/heroes/posts/138609.jpg?cb=BE122AEEB126DEBFE6AC6CCA4C06510B",
     "Title": "Silent hill",
@@ -287,7 +287,7 @@
   },
   {
     "Id": "19442e3c-21ca-4875-a4dd-7c58e4b94a4c",
-    "Maker": "mimi",
+    "Maker": "Unknown Maker",
     "Author": "mimi",
     "img": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3067180/ss_e4c2e126e8b9b6a26058e727f0fc59e086a26cf0.1920x1080.jpg?t=1722016814",
     "Title": "wasafu",
