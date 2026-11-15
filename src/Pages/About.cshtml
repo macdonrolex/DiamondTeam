@@ -11,3 +11,83 @@
     <div class="mb-2">Lewis Wanjara</div>
     <div class="mb-2">Chin-Chi Kuo</div>
 </div>
+</section>
+
+@functions {
+    // Collects up to 8 pictures from the wwwroot/images folder for the top of the card.
+    // The folder is read every time, so a deleted picture is simply left out.
+    public List<string> GetCoverPictures()
+    {
+        var pictures = new List<string>();
+
+        var folder = System.IO.Path.Combine(WebHostEnvironment.WebRootPath, "images");
+        if (!Directory.Exists(folder))
+        {
+            return pictures;
+        }
+
+        var files = Directory.GetFiles(folder);
+        Array.Sort(files);
+
+        foreach (var file in files)
+        {
+            if (pictures.Count == 8)
+            {
+                return pictures;
+            }
+
+            var name = System.IO.Path.GetFileName(file);
+            if (IsGamePicture(name))
+            {
+                pictures.Add("/images/" + Uri.EscapeDataString(name));
+            }
+        }
+
+        return pictures;
+    }
+
+    // A game picture is an image file that is not the site logo or the site wallpaper
+    public bool IsGamePicture(string name)
+    {
+        var lowerName = name.ToLower();
+
+        if (lowerName.StartsWith("gamehlogo"))
+        {
+            return false;
+        }
+
+        if (lowerName.StartsWith("gamewall"))
+        {
+            return false;
+        }
+
+        if (lowerName.StartsWith("gamehub-wallpaper"))
+        {
+            return false;
+        }
+
+        var extension = System.IO.Path.GetExtension(lowerName);
+
+        if (extension == ".jpg")
+        {
+            return true;
+        }
+
+        if (extension == ".jpeg")
+        {
+            return true;
+        }
+
+        if (extension == ".png")
+        {
+            return true;
+        }
+
+        if (extension == ".webp")
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
