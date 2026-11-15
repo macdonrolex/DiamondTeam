@@ -2839,7 +2839,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     padding: 10px;
     margin: 0px 10px 15px 10px;
     border-radius: 10px;
-    background-color: rgb(202 224 234)
+    background-color: rgba(120, 131, 138, 0.5)
 }
 
 .comment-icon{
