@@ -20,6 +20,11 @@ public class ProductModel
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Maker must be between 2 and 80 characters.")]
     public string Maker { get; set; }
     
+    // The author who writes the post
+    [Required(ErrorMessage = "Enter the name of the author.")]
+    [StringLength(80, MinimumLength = 1, ErrorMessage = "Author name must be between 1 and 80 characters.")]
+    public string Author { get; set; }
+    
     // The cover image can be a full URL or a path inside this site.
     [Required(ErrorMessage = "Add the cover image link.")]
     [StringLength(2048, ErrorMessage = "The image link must be 2,048 characters or fewer.")]
