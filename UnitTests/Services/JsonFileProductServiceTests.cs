@@ -489,7 +489,7 @@ public class JsonFileProductServiceTests
     /// Check whether the function can add comment to the database
     /// </summary>
     [Test]
-    public void AddCommentToProduct_Valid__Should_Save_Comment_To_Product()
+    public void AddCommentToProduct_Valid_Should_Save_Comment_To_Product()
     {
 
         // Arrange
