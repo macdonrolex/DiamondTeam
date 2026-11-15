@@ -484,7 +484,49 @@ public class JsonFileProductServiceTests
     #endregion DeleteData
 
     #region AddCommentToProduct
+    
+    /// <summary>
+    /// Make sure the function doesn't modify the database if the given text is null or empty
+    /// </summary>
+    [Test]
+    public void AddCommentToProduct_InValid_Input_NullOrEmpty_Should_Do_Nothing()
+    {
 
+        // Arrange
+        var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+        var productService = new JsonFileProductService(webHostEnvironment);
+        
+        // product for empty input test
+        var productModelEmpty = new ProductModel();
+        
+        // Product for null input test
+        var productModelNull = new ProductModel();
+        
+        // The empty input
+        var data = "";
+
+        // Act
+
+        // Try to add the empty comment into the productModel
+        productService.AddCommentToProduct(productModelEmpty, data);
+        
+        // Try to add null into the productModel
+        productService.AddCommentToProduct(productModelEmpty, null);
+
+        // Reset
+
+        // Not needed, because the function shouldn't touch the database
+
+        // Assert
+
+        // The function shouldn't add new comment with the empty input
+        Assert.That(productModelEmpty.CommentList.Count, Is.EqualTo(0));
+        
+        // The function shouldn't add new comment with null input
+        Assert.That(productModelNull.CommentList.Count, Is.EqualTo(0));
+
+    }
+    
     /// <summary>
     /// Check whether the function can add comment to the database
     /// </summary>
