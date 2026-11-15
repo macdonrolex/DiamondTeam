@@ -2,6 +2,7 @@
   {
     "Id": "jenlooper-cactus",
     "Maker": "@jenlooper",
+    "Author": "@jenlooper",
     "img": "/images/minecraft.jpeg",
     "Title": "Minecraft",
     "Description": "Minecraft is a sandbox video game developed and published by the Swedish company Mojang Studios.",
@@ -28,6 +29,7 @@
   {
     "Id": "jenlooper-light",
     "Maker": "jenlooper",
+    "Author": "jenlooper",
     "img": "/images/MortalCombat.webp",
     "Title": "Mortal Combat",
     "Description": "Mortal Kombat is an American media franchise centered on a series of fighting video games originally developed by Midway Games in 1992.",
@@ -44,6 +46,7 @@
   {
     "Id": "jenlooper-lightshow",
     "Maker": "@jenlooper",
+    "Author": "@jenlooper",
     "img": "/images/zelda.jpeg",
     "Title": "The Legend of Zelda",
     "Description": "The Legend of Zelda[a] is a video game series created by Japanese game designers Shigeru Miyamoto and Takashi Tezuka.",
@@ -62,6 +65,7 @@
   {
     "Id": "jenlooper-survival",
     "Maker": "jenlooper",
+    "Author": "jenlooper",
     "img": "/images/LOL.jpeg",
     "Title": "League of Legends",
     "Description": "League of Legends (LoL), commonly referred to as League, is a multiplayer online battle arena video game developed and published by Riot Games.",
@@ -78,6 +82,7 @@
   {
     "Id": "sailorhg-bubblesortpic",
     "Maker": "sailorhg",
+    "Author": "sailorhg",
     "img": "/images/gta6.jpeg",
     "Title": "Grand Theft Auto 6",
     "Description": "Grand Theft Auto VI is an upcoming action-adventure game developed and published by Rockstar Games.",
@@ -94,6 +99,7 @@
   {
     "Id": "sailorhg-corsage",
     "Maker": "sailorhg",
+    "Author": "sailorhg",
     "img": "/images/GOW.webp",
     "Title": "God of War",
     "Description": "God of War is an action-adventure game franchise created by David Jaffe and developed by Sony\u0027s Santa Monica Studio.",
@@ -112,6 +118,7 @@
   {
     "Id": "sailorhg-kit",
     "Maker": "sailorhg",
+    "Author": "sailorhg",
     "img": "/images/FETH.webp",
     "Title": "Fire Emblem",
     "Description": "Fire Emblem[a] is a Japanese fantasy tactical role-playing video game franchise developed by Intelligent Systems and published by Nintendo.",
@@ -128,6 +135,7 @@
   {
     "Id": "sailorhg-led",
     "Maker": "sailorhg",
+    "Author": "sailorhg",
     "img": "/images/mario.webp",
     "Title": "Super Mario World",
     "Description": "Super Mario World[a] is a 1990 platform game developed and published by Nintendo for the Super Nintendo Entertainment System (SNES).",
@@ -144,6 +152,7 @@
   {
     "Id": "selinazawacki-soi-shirt",
     "Maker": "selinazawacki",
+    "Author": "selinazawacki",
     "img": "/images/MGS2.jpeg",
     "Title": "Metal Gear Solid",
     "Description": "Metal Gear Solid[d] is a 1998 action-adventure stealth game developed and published by Konami for the PlayStation.",
@@ -160,6 +169,7 @@
   {
     "Id": "selinazawacki-soi-pins",
     "Maker": "selinazawacki",
+    "Author": "selinazawacki",
     "img": "/images/DS.jpeg",
     "Title": "Death Stranding",
     "Description": "Death Stranding is a 2019 action-adventure game written, produced, designed and directed by Hideo Kojima.",
@@ -176,6 +186,7 @@
   {
     "Id": "vogueandcode-hipster-dev-bro",
     "Maker": "vogueandcode",
+    "Author": "vogueandcode",
     "img": "/images/fortnite.jpg",
     "Title": "Fortnite",
     "Description": "Fortnite is a 2017 online video game and game platform developed and released by Epic Games.",
@@ -192,6 +203,7 @@
   {
     "Id": "vogueandcode-pretty-girls-code-tee",
     "Maker": "vogueandcode",
+    "Author": "vogueandcode",
     "img": "/images/terraria.jpeg",
     "Title": "Terraria",
     "Description": "Terraria (/t\u0259\u02C8r\u025B\u0259ri\u0259/ t\u0259-RAIR-ee-\u0259[7]) is a 2011 action-adventure video game developed and published by Re-Logic.",
@@ -208,6 +220,7 @@
   {
     "Id": "vogueandcode-ruby-sis-2",
     "Maker": "vogueandcode",
+    "Author": "vogueandcode",
     "img": "/images/HL2.jpg",
     "Title": "Half-Life 2",
     "Description": "Half-Life 2 is a 2004 first-person shooter (FPS) game developed and published by Valve Corporation.",
@@ -224,6 +237,7 @@
   {
     "Id": "selinazawacki-moon",
     "Maker": "selinazawacki",
+    "Author": "selinazawacki",
     "img": "/images/pong.webp",
     "Title": "PONG",
     "Description": "Pong is a 1972 sports video game developed and published by Atari, Inc.",
@@ -240,6 +254,7 @@
   {
     "Id": "selinazawacki-shirt",
     "Maker": "selinazawacki",
+    "Author": "selinazawacki",
     "img": "/images/smash.jpg",
     "Title": "Super Smash Bros",
     "Description": "Super Smash Bros.[a][b] is a series of platform fighting video games published by Nintendo.",
@@ -256,6 +271,7 @@
   {
     "Id": "fa0ebf89-a473-4a1a-b6f3-8fa6e865fa20",
     "Maker": "Lewis",
+    "Author": "Lewis",
     "img": "https://media.mmorpg.com/images/heroes/posts/138609.jpg?cb=BE122AEEB126DEBFE6AC6CCA4C06510B",
     "Title": "Silent hill",
     "Description": "Silent hill is a horror game",
@@ -272,6 +288,7 @@
   {
     "Id": "19442e3c-21ca-4875-a4dd-7c58e4b94a4c",
     "Maker": "mimi",
+    "Author": "mimi",
     "img": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3067180/ss_e4c2e126e8b9b6a26058e727f0fc59e086a26cf0.1920x1080.jpg?t=1722016814",
     "Title": "wasafu",
     "Description": "musdfsdfsdfdj sfgjgdfgd gdjdfgdf g dfgdfkdfgdf ggdfg",
