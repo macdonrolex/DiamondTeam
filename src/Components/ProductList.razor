@@ -217,7 +217,7 @@
         foreach (var p in list)
         {
             // Concatenate all fields for searching
-            var target = p.Title + " " + p.Description+ " " + p.Maker;
+            var target = p.Title + " " + p.Description+ " " + p.Maker + " " + p.Author;
             if (ContainsSearchText(target, query))
             {
                 resultList.Add(p);
