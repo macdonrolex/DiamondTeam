@@ -3175,3 +3175,9 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
         visibility: hidden;
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .gh-notification {
+        animation: gh-notification-out 1ms linear 6s forwards;
+    }
+}
