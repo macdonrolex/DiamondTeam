@@ -3220,6 +3220,17 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     }
 }
 
+@property --post-fade-top {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --post-fade-bottom {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
 @keyframes post-fade-top {
     from {
         --post-fade-top: 0px;
