@@ -3219,3 +3219,23 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
         animation: gh-notification-out 1ms linear 6s forwards;
     }
 }
+
+@keyframes post-fade-top {
+    from {
+        --post-fade-top: 0px;
+    }
+
+    to {
+        --post-fade-top: 36px;
+    }
+}
+
+@keyframes post-fade-bottom {
+    from {
+        --post-fade-bottom: 36px;
+    }
+
+    to {
+        --post-fade-bottom: 0px;
+    }
+}
