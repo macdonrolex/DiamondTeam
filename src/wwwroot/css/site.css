@@ -3259,3 +3259,12 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
         --post-fade-bottom: 0px;
     }
 }
+
+/* One-line fields: the same fade, sideways */
+.update-page input.update-input {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--post-fade-top), #000 calc(100% - var(--post-fade-bottom)), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 var(--post-fade-top), #000 calc(100% - var(--post-fade-bottom)), transparent 100%);
+    animation: post-fade-top linear both, post-fade-bottom linear both;
+    animation-timeline: scroll(self inline), scroll(self inline);
+    animation-range: 0px 30px, calc(100% - 30px) 100%;
+}
