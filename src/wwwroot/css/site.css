@@ -2997,12 +2997,6 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     margin-bottom: 1.25rem;
 }
 
-/* Add a post page: Back to List button above the card, lined up with its left edge */
-.post-create-top {
-    max-width: 880px;
-    margin: 0 auto 1.25rem;
-}
-
 /* About page: "Faded covers" card (About redesign, Design 7) */
 .about-covers-card {
     max-width: 720px;
@@ -3123,6 +3117,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     cursor: wait;
     opacity: .82;
 }
+
     .update-save .post-create-spinner {
         margin-left: .6rem;
         border-color: rgba(255, 255, 255, .35);
@@ -3132,6 +3127,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     .update-save.is-submitting .post-create-spinner {
         display: inline-block;
     }
+
 /* Blazor notification: a pill at the bottom middle of the page (Components/Notification.razor) */
 .gh-notification {
     position: fixed;
