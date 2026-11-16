@@ -3156,3 +3156,22 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     .gh-notification-close:hover {
         background: rgba(255, 255, 255, .3);
     }
+
+@keyframes gh-notification-in {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 24px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes gh-notification-out {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
