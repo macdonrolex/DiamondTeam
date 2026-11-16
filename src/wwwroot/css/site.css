@@ -3220,6 +3220,10 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     }
 }
 
+/* Add a post and Update pages: text fades out like frosted glass at the edge of a field
+   while it is scrolled. Tall text boxes fade at the top and bottom; one-line fields fade
+   at the left and right when the text is longer than the field. Done with CSS only (a scroll-driven animation), no JavaScript.
+   Browsers that do not support it simply show the text box without the fade. */
 @property --post-fade-top {
     syntax: "<length>";
     inherits: false;
@@ -3240,6 +3244,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     /* The top fade grows over the first 30px of scrolling; the bottom fade shrinks over the last 30px */
     animation-range: 0px 30px, calc(100% - 30px) 100%;
 }
+
 @keyframes post-fade-top {
     from {
         --post-fade-top: 0px;
