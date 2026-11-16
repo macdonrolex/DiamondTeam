@@ -1,0 +1,63 @@
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+
+@* A short message shown at the bottom middle of the page. It closes by itself after a few seconds. *@
+@if (IsVisible)
+{
+    <div class="gh-notification" role="status" aria-live="polite">
+        <span class="gh-notification-icon" aria-hidden="true">&#10003;</span>
+        <span class="gh-notification-text">@Message</span>
+        <button type="button" class="gh-notification-close" id="NotificationCloseButton" aria-label="Close notification" @onclick="Close">&times;</button>
+    </div>
+}
+
+@code
+{
+    // The text shown inside the notification
+    [Parameter]
+    public string Message { get; set; } = "";
+
+    // How long the notification stays on the page, in milliseconds
+    [Parameter]
+    public int DisplayMilliseconds { get; set; } = 4000;
+
+    // True while the notification is shown on the page
+    public bool IsVisible = true;
+
+    /// <summary>
+    /// Hides the notification from the start when there is no message to show.
+    /// </summary>
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrEmpty(Message))
+        {
+            IsVisible = false;
+        }
+    }
+
+    /// <summary>
+    /// Waits for the display time after the first render, then closes the notification.
+    /// </summary>
+    /// <param name="firstRender">True only the first time the component is rendered</param>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        await Task.Delay(DisplayMilliseconds);
+
+        Close();
+    }
+
+    /// <summary>
+    /// Closes the notification and redraws the component.
+    /// </summary>
+    public void Close()
+    {
+        IsVisible = false;
+        StateHasChanged();
+    }
+}
