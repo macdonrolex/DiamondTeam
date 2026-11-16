@@ -3102,7 +3102,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
         }
 }
 
-/* Add a post form: reuses the Update page layout, plus its own upload row and loading state */
+/* Add a post form: reuses the Update page layout, plus its own upload row */
 .update-control-upload .post-create-upload-control {
     margin-top: .2rem;
 }
@@ -3113,19 +3113,35 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     padding-left: 1.4rem;
 }
 
-.update-save.is-submitting {
-    cursor: wait;
-    opacity: .82;
+/* The browser's own file picker, with its button styled as a pill */
+.post-create-file-picker {
+    max-width: 100%;
+    color: #344054;
+    font-family: inherit;
+    font-weight: 600;
 }
 
-    .update-save .post-create-spinner {
-        margin-left: .6rem;
-        border-color: rgba(255, 255, 255, .35);
-        border-top-color: #fff;
+    .post-create-file-picker::file-selector-button {
+        min-height: 48px;
+        margin-right: .8rem;
+        padding: .7rem 1.15rem;
+        border: 1px solid rgba(255, 255, 255, .35);
+        border-radius: 999px;
+        background: linear-gradient(135deg, #526de5, #7955cc);
+        box-shadow: 0 8px 20px rgba(81, 94, 184, .24);
+        color: #fff;
+        font-family: inherit;
+        font-weight: 700;
+        cursor: pointer;
     }
 
-    .update-save.is-submitting .post-create-spinner {
-        display: inline-block;
+    .post-create-file-picker::file-selector-button:hover {
+        filter: brightness(1.06);
+    }
+
+    .post-create-file-picker:focus-visible {
+        outline: 3px solid rgba(82, 109, 229, .35);
+        outline-offset: 3px;
     }
 
 /* Blazor notification: a pill at the bottom middle of the page (Components/Notification.razor) */
