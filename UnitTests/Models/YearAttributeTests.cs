@@ -60,6 +60,34 @@ public class YearAttributeTests
         // Assert
         Assert.That(result, Is.EqualTo(false));
     }
+    
+    /// <summary>
+    /// Test whether the attribute can validate the result when the given value is
+    /// an invalid data type such as null non-integer.
+    /// </summary>
+    [Test]
+    public void IsValid_InValid_Not_Int_Should_Return_False()
+    {
+        // Arrange
+        
+        // Set the year attribute with start year = 100, and extra years = 5
+        var data = new YearAttribute(100, 5);
+        
+        // Create non-int value
+        var dataString = "This is a string";
+        
+        // Act
+        var resultNonInt = data.IsValid(dataString);
+        var resultNull = data.IsValid(null);
+
+        // Reset
+
+        // Not needed
+
+        // Assert
+        Assert.That(resultNonInt, Is.EqualTo(false));
+        Assert.That(resultNull, Is.EqualTo(false));
+    }
 
     #endregion IsValid
 }
