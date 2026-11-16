@@ -1,4 +1,5 @@
 ﻿@page
+@using ContosoCrafts.WebSite.Components
 @model ContosoCrafts.WebSite.Pages.Product.IndexModel
 @{
     ViewData["Title"] = "Reviews";
@@ -115,6 +116,17 @@
         </nav>
     }
 </div>
+
+@{
+    // A message left by the Add a post page after a successful upload
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
+@if (successMessage != null)
+{
+    @* Blazor notification at the bottom middle of the page *@
+    @(await Html.RenderComponentAsync<Notification>(RenderMode.ServerPrerendered, new { Message = successMessage }))
+}
 
 @section Scripts {
     @if (TempData["SuccessMessage"] is string successMessage)
