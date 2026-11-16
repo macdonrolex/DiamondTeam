@@ -117,12 +117,8 @@
                     <div class="update-body">
                         <label asp-for="ImageFile" class="update-label">Upload game image</label>
                         <div class="post-create-upload-control">
-                            <input asp-for="ImageFile" type="file" accept=".jpg,.jpeg,.png,.gif,.webp,image/jpeg,image/png,image/gif,image/webp" class="sr-only post-create-file-input" />
-                            <label for="ImageFile" class="btn btn-primary rounded-pill post-create-file-button">
-                                <span class="post-create-file-button-icon" aria-hidden="true">&uarr;</span>
-                                <span>Choose image</span>
-                            </label>
-                            <span id="selectedImageName" class="post-create-file-name" aria-live="polite">No image selected</span>
+                            @* The browser's own file picker: it shows the chosen file name by itself, with no JavaScript *@
+                            <input asp-for="ImageFile" type="file" accept=".jpg,.jpeg,.png,.gif,.webp,image/jpeg,image/png,image/gif,image/webp" class="post-create-file-picker" />
                         </div>
                     </div>
                 </div>
@@ -170,7 +166,6 @@
             <a asp-page="/Product/Index" class="update-cancel">Cancel</a>
             <button type="submit" class="update-save" id="postCreateSubmit">
                 <span class="post-create-submit-label">Add Post</span>
-                <span class="post-create-spinner" aria-hidden="true"></span>
             </button>
         </div>
     </form>
@@ -178,20 +173,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
-    <script>
-        // Show the selected image filename beside the upload button.
-        (() => {
-            const imageInput = document.getElementById("ImageFile");
-            const imageName = document.getElementById("selectedImageName");
-
-            if (!imageInput || !imageName) return;
-
-            imageInput.addEventListener("change", () => {
-                const selectedFile = imageInput.files && imageInput.files[0];
-                imageName.textContent = selectedFile ? selectedFile.name : "No image selected";
-                imageName.classList.toggle("has-file", Boolean(selectedFile));
-            });
-        })();
-    </script>
 }
