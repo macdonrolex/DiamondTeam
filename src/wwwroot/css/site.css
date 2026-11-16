@@ -52,6 +52,11 @@
     .privacy-section li {
         margin-bottom: 8px;
     }
+    
+    .privacy-section strong {
+        font-weight: bolder;
+        color: #7a1f2d;
+    }
 
 .privacy-highlight {
     background: #f1f5ff;
