@@ -88,6 +88,45 @@ public class YearAttributeTests
         Assert.That(resultNonInt, Is.EqualTo(false));
         Assert.That(resultNull, Is.EqualTo(false));
     }
+    
+    /// <summary>
+    /// Test whether the attribute can validate the range we want when
+    /// the given year is within the valid range
+    /// </summary>
+    [Test]
+    public void IsValid_Valid_Within_Range_Should_Return_True()
+    {
+        // Arrange
+        
+        // Set the year attribute with start year = 100, and extra years = 5
+        var data = new YearAttribute(100, 5);
+        
+        // Create some year values that are within the range
+        
+        // Normal value
+        var dataNormalYear = 2000;
+        
+        // Valid edge cases
+        var dataThisYear = DateTime.Now.Year;
+        var dataTYPlusExtra = DateTime.Now.Year + 5;
+        var dataStartYear = 100;
+        
+        // Act
+        var resultNormal = data.IsValid(dataNormalYear);
+        var resultThisYear = data.IsValid(dataThisYear);
+        var resultTYPlusExtra = data.IsValid(dataTYPlusExtra);
+        var resultStartYear = data.IsValid(dataStartYear);
+
+        // Reset
+
+        // Not needed
+
+        // Assert
+        Assert.That(resultNormal, Is.EqualTo(true));
+        Assert.That(resultThisYear, Is.EqualTo(true));
+        Assert.That(resultTYPlusExtra, Is.EqualTo(true));
+        Assert.That(resultStartYear, Is.EqualTo(true));
+    }
 
     #endregion IsValid
 }
