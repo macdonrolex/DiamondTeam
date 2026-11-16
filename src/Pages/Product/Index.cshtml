@@ -1,5 +1,6 @@
 ﻿@page
 @using ContosoCrafts.WebSite.Components
+@using ContosoCrafts.WebSite.Models
 @model ContosoCrafts.WebSite.Pages.Product.IndexModel
 @{
     ViewData["Title"] = "Reviews";
@@ -65,9 +66,9 @@
                             <span class="product-maker">@product.Maker</span>
                         }
 
-                        @if (!string.IsNullOrWhiteSpace(product.Genre.ToString()))
+                        @if (!string.IsNullOrWhiteSpace(product.Genre.DisplayGenre()))
                         {
-                            <span class="product-genre">@product.Genre</span>
+                            <span class="product-genre">@product.Genre.DisplayGenre()</span>
                         }
 
                         <p class="product-description">@product.Description</p>
