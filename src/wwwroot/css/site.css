@@ -796,14 +796,8 @@ ul {
 }
 
 .product-author {
-    font-size: .78rem;
-    font-weight: 800;
     letter-spacing: .08em;
     text-transform: uppercase;
-    margin: 20px;
-    padding: 5px;
-    background-color: color(srgb 0.1196 0.2286 0.435 / 0.22);
-    border-radius: 7px;
 }
 
 .product-description {
