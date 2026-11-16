@@ -129,20 +129,9 @@
 }
 
 @section Scripts {
-    @if (TempData["SuccessMessage"] is string successMessage)
+    @if (successMessage != null)
     {
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            // Show a short success toast after the saved post appears in the list.
-            Swal.fire({
-                toast: true,
-                position: "top-end",
-                icon: "success",
-                title: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(successMessage)),
-                showConfirmButton: false,
-                timer: 4000,
-                timerProgressBar: true
-            });
-        </script>
+        @* Blazor's own script: it connects the notification to the server so it can close itself *@
+        <script src="~/_framework/blazor.server.js"></script>
     }
 }
