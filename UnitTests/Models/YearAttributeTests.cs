@@ -1,3 +1,4 @@
+using System;
 using ContosoCrafts.WebSite.Models;
 using NUnit.Framework;
 
@@ -25,6 +26,32 @@ public class YearAttributeTests
         
         // Act
         var result = data.IsValid(99);
+
+        // Reset
+
+        // Not needed
+
+        // Assert
+        Assert.That(result, Is.EqualTo(false));
+    }
+    
+    /// <summary>
+    /// Test whether the attribute can validate the range we want when given year is greater
+    /// than this year + extra years
+    /// </summary>
+    [Test]
+    public void IsValid_InValid_Greater_Than_ThisYear_Plus_ExtraYears_Should_Return_False()
+    {
+        // Arrange
+        
+        // Set the year attribute with start year = 100, and extra years = 5
+        var data = new YearAttribute(100, 5);
+        
+        // Create an year that is greater than this year + extra years
+        var dataYear = DateTime.Now.Year + 6;
+        
+        // Act
+        var result = data.IsValid(dataYear);
 
         // Reset
 
