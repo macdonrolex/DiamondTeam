@@ -3108,6 +3108,15 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
         }
 }
 
+    .update-save .post-create-spinner {
+        margin-left: .6rem;
+        border-color: rgba(255, 255, 255, .35);
+        border-top-color: #fff;
+    }
+
+    .update-save.is-submitting .post-create-spinner {
+        display: inline-block;
+    }
 /* Blazor notification: a pill at the bottom middle of the page (Components/Notification.razor) */
 .gh-notification {
     position: fixed;
