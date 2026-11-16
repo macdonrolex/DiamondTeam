@@ -129,4 +129,32 @@ public class YearAttributeTests
     }
 
     #endregion IsValid
+
+    #region FormatErrorMessage
+
+    /// <summary>
+    /// Check if the the attribute can provide the message format we want after the validation failed.
+    /// </summary>
+    [Test]
+    public void FormatErrorMessage_Valid_Should_Return_Formated_Message()
+    {
+        // Arrange
+        
+        // Set the year attribute with start year = 100, and extra years = 5
+        var data = new YearAttribute(100, 5);
+        
+
+        
+        // Act
+        var result = data.FormatErrorMessage("data");
+
+        // Reset
+
+        // Not needed
+
+        // Assert
+        Assert.That(result, Is.EqualTo($"Choose a year between {data.StartYear} and {data.EndYear}."));
+    }
+
+    #endregion FormatErrorMessage
 }
