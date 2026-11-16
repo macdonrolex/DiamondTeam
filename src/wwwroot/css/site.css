@@ -3139,6 +3139,17 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     animation: gh-notification-in 320ms ease both, gh-notification-out 400ms ease 6s forwards;
 }
 
+.gh-notification-icon {
+    display: flex;
+    flex: 0 0 26px;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #2e9e5b;
+    font-size: 14px;
+}
 
 .gh-notification-close {
     flex: 0 0 auto;
