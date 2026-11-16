@@ -3108,6 +3108,21 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
         }
 }
 
+/* Add a post form: reuses the Update page layout, plus its own upload row and loading state */
+.update-control-upload .post-create-upload-control {
+    margin-top: .2rem;
+}
+
+.update-hint {
+    display: block;
+    margin-top: .4rem;
+    padding-left: 1.4rem;
+}
+
+.update-save.is-submitting {
+    cursor: wait;
+    opacity: .82;
+}
     .update-save .post-create-spinner {
         margin-left: .6rem;
         border-color: rgba(255, 255, 255, .35);
