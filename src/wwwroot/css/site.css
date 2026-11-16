@@ -3138,3 +3138,21 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     /* Slide in, then fade out after 6 seconds as a safety net if Blazor could not close it */
     animation: gh-notification-in 320ms ease both, gh-notification-out 400ms ease 6s forwards;
 }
+
+
+.gh-notification-close {
+    flex: 0 0 auto;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .16);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+}
+
+    .gh-notification-close:hover {
+        background: rgba(255, 255, 255, .3);
+    }
