@@ -144,6 +144,9 @@ public class JsonFileProductService
 
         // No need to trim bool
         productData.IsMultiplayer = data.IsMultiplayer;
+        
+        // No need to trim Ratings
+        productData.Ratings = data.Ratings;
 
 
         SaveData(products);
