@@ -2985,9 +2985,9 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
 }
 
 .comment-submit{
-    width: 250px;
+    width: 450px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 5px;
 }
 
