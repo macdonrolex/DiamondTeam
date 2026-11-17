@@ -2996,7 +2996,6 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     height: 1.25rem;
 }
 .my-modal-footer{
-    margin-right: 20px;
     justify-content: space-between
 }
 
