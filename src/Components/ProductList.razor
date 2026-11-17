@@ -59,8 +59,8 @@
         Next <span aria-hidden="true">&rarr;</span>
     </button>
 </div>
-@* Modal for displaying the selected product's details. *@
 
+@* Modal for displaying the selected product's details. *@
 @if (SelectedProduct != null)
 {
     <div class="modal-backdrop fade show" @onclick="CloseProductModal"></div>
@@ -114,7 +114,15 @@
                         @* comment input field *@
                         <input class="form-control" type="text" placeholder="Add a comment (max. 200)" maxlength="200" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText"/>
                         @* comment submit button *@
-                        <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); RefreshCommentInput(); }" class="btn btn-success" data-toggle="modal" id="SubmitComment">Submit Comment</button>
+                        <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); RefreshCommentInput(); }" class="btn btn-success" data-toggle="modal" id="SubmitComment">
+                            <svg class="submit-comment-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M5.5 4.5 20 12 5.5 19.5 7 14.4h4.5V9.6H7z"
+                                      fill="currentColor"
+                                      stroke="currentColor"
+                                      stroke-width="2"
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
                 
