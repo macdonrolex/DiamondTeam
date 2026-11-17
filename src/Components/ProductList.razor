@@ -82,6 +82,32 @@
                         </div>
                     </div>
                 </div>
+                @*vote feature*@
+                <div class="voting">
+                    @{
+                        string voteText = VoteCount + " " + VoteLabel;
+                        if (VoteCount == 0)
+                        {
+                            voteText = "Be the first to vote!";
+                        }
+
+                        <span>@voteText</span>
+                    }
+                    @for (int i = 1; i < 6; i++)
+                    {
+                        // Current star button to display
+                        var currentStar = i;
+                        // The class for star button
+                        string starClass = "fa fa-star";
+
+                        // Example: CurrentRating = 3. It means we need to make the first 3 stars checked(shiny)
+                        if (currentStar <= CurrentRating)
+                        {
+                            starClass = "fa fa-star checked";
+                        }
+                        <span class=@starClass @onclick="(e => SubmitRating(currentStar))"></span>
+                    }
+                </div>
                 <div class="modal-footer my-modal-footer">
                     @*comment submit*@
                     <div class="comment-submit">
@@ -89,33 +115,6 @@
                         <input class="form-control" type="text" placeholder="Add a comment (max. 200)" maxlength="200" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText"/>
                         @* comment submit button *@
                         <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); RefreshCommentInput(); }" class="btn btn-success" data-toggle="modal" id="SubmitComment">Submit Comment</button>
-                    </div>
-                    
-                    @*vote feature*@
-                    <div class="voting">
-                        @{
-                            string voteText = VoteCount + " " + VoteLabel;
-                            if (VoteCount == 0)
-                            {
-                                voteText = "Be the first to vote!";
-                            }
-
-                            <span>@voteText</span>
-                        }
-                        @for (int i = 1; i < 6; i++)
-                        {
-                            // Current star button to display
-                            var currentStar = i;
-                            // The class for star button
-                            string starClass = "fa fa-star";
-
-                            // Example: CurrentRating = 3. It means we need to make the first 3 stars checked(shiny)
-                            if (currentStar <= CurrentRating)
-                            {
-                                starClass = "fa fa-star checked";
-                            }
-                            <span class=@starClass @onclick="(e => SubmitRating(currentStar))"></span>
-                        }
                     </div>
                 </div>
                 
