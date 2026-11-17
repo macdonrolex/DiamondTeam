@@ -163,6 +163,25 @@
 			<a asp-page="/Product/Index" class="update-cancel">Cancel</a>
 			<button type="submit" class="update-save">Save changes</button>
 		</div>
+		
+		@* Hidden fields that send the stored ratings back, so UpdateData does not erase them *@
+		@if (Model.Product.Ratings is int[] ratings)
+		{
+			@for (var i = 0; i < ratings.Length; ++i)
+			{
+				<input type="hidden" asp-for="Product.Ratings[i]" />
+			}
+		}
+
+		@* Hidden fields that send the stored comments back, so UpdateData does not erase them *@
+		@if (Model.Product.CommentList is List<CommentModel> comments)
+		{
+			@for (var i = 0; i < comments.Count; ++i)
+			{
+				<input type="hidden" asp-for="Product.CommentList[i].Id" />
+				<input type="hidden" asp-for="Product.CommentList[i].Comment" />
+			}
+		}
 	</form>
 </div>
 
