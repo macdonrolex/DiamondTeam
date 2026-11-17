@@ -2999,7 +2999,8 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
 .voting{
     display: flex;
     gap: 5px;
-    align-items: center
+    align-items: center;
+    justify-content: center;
 }
 
 /* Delete page: Back to List button above the card, lined up with its left edge */
