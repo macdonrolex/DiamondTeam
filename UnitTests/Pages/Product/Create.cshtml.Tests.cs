@@ -24,16 +24,16 @@ namespace UnitTests.Pages.Product;
 public class CreateTests
 {
     // Test data root keeps each upload away from the project's shared JSON data.
-    private string webRootPath;
+    public string webRootPath;
 
     // Page model under test for the current test case.
-    private CreateModel pageModel;
+    public CreateModel pageModel;
 
     // Product service used by the page model.
-    private JsonFileProductService productService;
+    public JsonFileProductService productService;
 
     // Content stream assigned to the uploaded form file.
-    private MemoryStream imageStream;
+    public MemoryStream imageStream;
 
     #region TestSetup
 
