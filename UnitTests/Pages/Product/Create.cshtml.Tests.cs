@@ -216,6 +216,65 @@ public class CreateTests
     }
 
     /// <summary>
+    /// Confirms that a post with no uploaded image is saved with the default picture.
+    /// </summary>
+    [Test]
+    public async Task OnPostAsync_Valid_No_Image_Should_Save_Default_Image_And_Redirect_To_Product_Index()
+    {
+
+        // Arrange
+
+        // Leave the image empty, like a user who skips the picture.
+        pageModel.ImageFile = null;
+
+        // Act
+
+        IActionResult result = await pageModel.OnPostAsync();
+
+        // Reset
+
+        // Assert
+
+        Assert.That(result, Is.TypeOf<RedirectToPageResult>());
+
+        Assert.That(((RedirectToPageResult)result).PageName, Is.EqualTo("/Product/Index"));
+
+        ProductModel savedProduct = productService.GetAllData().Single();
+
+        Assert.That(savedProduct.Image, Is.EqualTo(CreateModel.DefaultImagePath));
+
+        Assert.That(savedProduct.DateAdded, Is.Not.Null);
+
+        Assert.That(pageModel.TempData["SuccessMessage"], Is.EqualTo("Your post was uploaded with the default picture."));
+    }
+
+    /// <summary>
+    /// Confirms that the default picture file exists in the website images folder.
+    /// </summary>
+    [Test]
+    public void DefaultImagePath_Valid_Should_Point_To_Existing_File()
+    {
+
+        // Arrange
+
+        // Find the real website images folder from the test output folder.
+        string defaultImageFile = Path.GetFullPath(Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            "..", "..", "..", "..", "src", "wwwroot",
+            CreateModel.DefaultImagePath.TrimStart('/').Replace('/', Path.DirectorySeparatorChar)));
+
+        // Act
+
+        bool fileExists = File.Exists(defaultImageFile);
+
+        // Reset
+
+        // Assert
+
+        Assert.That(fileExists, Is.True);
+    }
+
+    /// <summary>
     /// Confirms that a failed save removes a partial image and returns the form with an error.
     /// </summary>
     [Test]
