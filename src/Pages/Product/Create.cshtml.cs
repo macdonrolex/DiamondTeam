@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using ContosoCrafts.WebSite.Models;
 using ContosoCrafts.WebSite.Services;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +24,9 @@ public class CreateModel : PageModel
     public static readonly string[] AllowedImageExtensions =
         { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
 
+    // The picture used when the user does not upload one.
+    public const string DefaultImagePath = "/images/default-post.svg";
+
     // Provides the operation that stores a submitted product.
     public readonly JsonFileProductService ProductService;
 
@@ -45,9 +47,9 @@ public class CreateModel : PageModel
 
     /// <summary>
     /// Gets or sets the image file selected in the create form.
+    /// It is optional: when it is left empty, the default picture is used.
     /// </summary>
     [BindProperty]
-    [Required(ErrorMessage = "Choose an image file to upload.")]
     public IFormFile ImageFile { get; set; }
 
     /// <summary>
@@ -73,6 +75,15 @@ public class CreateModel : PageModel
         if (!ModelState.IsValid)
         {
             return Page();
+        }
+
+        // No picture was chosen, so save the post with the default picture.
+        if (ImageFile == null)
+        {
+            SaveProductWithDefaultImage();
+
+            TempData["SuccessMessage"] = "Your post was uploaded with the default picture.";
+            return RedirectToPage("/Product/Index");
         }
 
         // Step 2: Check the file size.
@@ -191,6 +202,16 @@ public class CreateModel : PageModel
         ProductService.AddProduct(Product);
 
         return true;
+    }
+
+    /// <summary>
+    /// Adds the product record with the default picture, for a post with no uploaded image.
+    /// </summary>
+    public void SaveProductWithDefaultImage()
+    {
+        Product.Image = DefaultImagePath;
+        Product.DateAdded = DateTime.UtcNow;
+        ProductService.AddProduct(Product);
     }
 
     /// <summary>
