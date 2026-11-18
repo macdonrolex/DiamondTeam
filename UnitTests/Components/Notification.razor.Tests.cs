@@ -42,5 +42,38 @@ public class NotificationTests: BunitTestContext
         Assert.That(markup, Is.Empty);
     }
     
+    /// <summary>
+    /// The notification with a message should have been displayed.
+    /// </summary>
+    [Test]
+    public void OnInitialized_Valid_Has_Message_Should_Display_Notification()
+    {
+
+        // Arrange
+        
+        // Not needed
+        
+        // Act
+        
+        // Render the notification with a message
+        var page = Render<Notification>(parameters => 
+            parameters.Add(p => p.Message, "test_message"));
+        
+        // Markup for notification for assertion
+        var markup = page.Markup;
+        
+        // Reset
+
+        // Not needed
+
+        // Assert
+        
+        // The IsVisible is true
+        Assert.That(page.Instance.IsVisible, Is.True);
+        
+        // Display the notification we want
+        Assert.That(markup.Contains("test_message"), Is.True);
+    }
+    
     #endregion OnInitialized
 }
