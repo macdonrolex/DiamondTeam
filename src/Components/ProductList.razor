@@ -189,7 +189,7 @@
     public void RefreshFilteredProducts()
     {
         // Get the full list before applying search filters.
-        var products = ProductService.GetAllData().ToList();
+        var products = Enumerable.Reverse(ProductService.GetAllData()).ToList();;
         
         // Apply text filter
         products = TextFilter(products);

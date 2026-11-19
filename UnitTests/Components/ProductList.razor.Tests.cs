@@ -35,6 +35,9 @@ public class ProductListTests : BunitTestContext
 
         // Arrange
         Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+        
+        // Get the Title of the latest post
+        var latestTitle = TestHelper.ProductService.GetAllData().Last().Title;
 
         // Act
         var page = Render<ProductList>();
@@ -47,7 +50,7 @@ public class ProductListTests : BunitTestContext
         // Not needed
 
         // Assert
-        Assert.That(result.Contains("Minecraft"), Is.True);
+        Assert.That(result.Contains(latestTitle), Is.True);
     }
 
     #region SelectProduct
@@ -61,7 +64,13 @@ public class ProductListTests : BunitTestContext
 
         // Arrange
         Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
-        var id = "MoreInfoButton_jenlooper-cactus";
+        
+        // Get the Id of the button. The post ID we need is the last one because the latest post will be displayed on top.
+        var id = "MoreInfoButton_" + TestHelper.ProductService.GetAllData().Last().Id;
+        
+        // Get the description of the latest post for assertion
+        var latestDescription = TestHelper.ProductService.GetAllData().Last().Description;
+        
         var page = Render<ProductList>();
 
         // Find the Buttons (more info)
@@ -82,9 +91,7 @@ public class ProductListTests : BunitTestContext
 
         // Assert
         Assert.That(
-            pageMarkup.Contains(
-                "Minecraft is a sandbox video game developed and published by the Swedish company Mojang Studios."),
-            Is.True);
+            pageMarkup.Contains(latestDescription), Is.True);
     }
 
     #endregion SelectProduct
@@ -108,7 +115,10 @@ public class ProductListTests : BunitTestContext
 
         // Arrange
         Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
-        var id = "MoreInfoButton_jenlooper-light";
+        
+        // Get the Id of the button. The post ID we need is the last one because the latest post will be displayed on top.
+        var id = "MoreInfoButton_" + TestHelper.ProductService.GetAllData().Last().Id;
+        
         var page = Render<ProductList>();
 
         // Find the Buttons (more info)
@@ -185,7 +195,10 @@ public class ProductListTests : BunitTestContext
 
         // Arrange
         Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
-        var id = "MoreInfoButton_jenlooper-cactus";
+        
+        // Get the Id of the button. The post ID we need is the last one because the latest post will be displayed on top.
+        var id = "MoreInfoButton_" + TestHelper.ProductService.GetAllData().Last().Id;
+        
         var page = Render<ProductList>();
 
         // Find the Buttons (more info)
@@ -452,7 +465,10 @@ public class ProductListTests : BunitTestContext
 
         // Arrange
         Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
-        var id = "MoreInfoButton_jenlooper-cactus";
+        
+        // Get the Id of the button. The post ID we need is the last one because the latest post will be displayed on top.
+        var id = "MoreInfoButton_" + TestHelper.ProductService.GetAllData().Last().Id;
+        
         var page = Render<ProductList>();
 
         // Find the Buttons (more info)
