@@ -76,7 +76,7 @@ public class IndexModel : PageModel
     {
 
         // Keep the complete collection available, then calculate the requested page.
-        Products = ProductService.GetAllData().ToList();
+        Products = Enumerable.Reverse(ProductService.GetAllData().ToList());
         CurrentPage = Math.Max(1, Math.Min(pageNumber, TotalPages));
     }
 
