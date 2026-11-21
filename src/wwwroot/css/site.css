@@ -2979,6 +2979,13 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     background-color: rgba(120, 131, 138, 0.5);
 }
 
+/* For icon, like and dislike arrangement*/
+.comment-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .comment-icon{
     display: block;
     width: 20px;
