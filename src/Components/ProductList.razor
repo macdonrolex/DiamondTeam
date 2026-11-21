@@ -131,9 +131,26 @@
                     @foreach (var comment in Enumerable.Reverse(SelectedProduct.CommentList))
                     {
                         <div class="comment-box">
-                            <svg class="comment-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M8 8a4 4 0 1 0 8 0a4 4 0 1 0-8 0M5 20v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/>
-                            </svg>
+                            
+                            @* display the icon, like and dislike*@
+                            <div class=comment-info>
+                                <svg class="comment-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M8 8a4 4 0 1 0 8 0a4 4 0 1 0-8 0M5 20v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/>
+                                </svg>
+                                <div class="comment-reactions">
+                                    <button type="button" class="comment-like" id="CommentLike" aria-label="Like (@comment.LikeCount)" @onclick="(e => LikeComment(comment))">
+                                        <span class="fa fa-thumbs-up" aria-hidden="true"></span>
+                                        <span>@comment.LikeCount</span>
+                                    </button>
+
+                                    <button type="button" class="comment-dislike" id="CommentDislike" aria-label="Dislike (@comment.DislikeCount)" @onclick="(e => DislikeComment(comment))">
+                                        <span class="fa fa-thumbs-down" aria-hidden="true"></span>
+                                        <span>@comment.DislikeCount</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            @* display the comment *@
                             <div class="text-break">@comment.Comment</div>
                         </div>
                     }
