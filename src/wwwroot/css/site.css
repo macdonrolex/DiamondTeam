@@ -2986,6 +2986,12 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     justify-content: space-between;
 }
 
+/* Keeps the like and dislike buttons close to each other */
+.comment-reactions {
+    display: flex;
+    gap: 12px;
+}
+
 .comment-icon{
     display: block;
     width: 20px;
