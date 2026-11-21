@@ -39,7 +39,7 @@ public class ReadModel : PageModel
     /// Finds the requested product and displays it, or redirects when it is missing.
     /// </summary>
     /// <param name="id">Identifier of the product to display.</param>
-    /// <returns>The details page when a product exists; otherwise, a redirect to the listing.</returns>
+    /// <returns>The details page when a product exists; a redirect to the listing when no id is given; otherwise, Not Found.</returns>
     public IActionResult OnGet(string id)
     {
 
@@ -53,11 +53,11 @@ public class ReadModel : PageModel
 
         Product = products.FirstOrDefault(x => x.Id == id);
 
-        // Redirect when the supplied identifier does not match a stored product.
+        // Show the "page not found" card when the supplied identifier does not match a stored product.
         if (Product == null)
 
         {
-            return RedirectToPage("/Product/Index");
+            return NotFound();
         }
 
         OtherProducts = products
