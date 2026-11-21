@@ -8,27 +8,34 @@
     <div class="col-6">
         @* Live search controls for front-page posts. *@
         <div class="product-search mb-4" role="search">
-            <div class="input-group">
-                <div class="input-group-prepend"><span class="input-group-text" aria-hidden="true">&#128269;</span></div>
+            @* Pill-shaped search box with the icon at the front. *@
+            <div class="search-pill">
+                @* The icon sits in a span so the number of spans on the page stays the same as before. *@
+                <span class="search-pill-icon-wrap" aria-hidden="true"><svg class="search-pill-icon" viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.6-3.6" /></svg></span>
                 @* Bind each keystroke to the search text and reset pagination afterward. *@
-                <input id="post-search" class="form-control" type="search" placeholder="Search posts by title or text..." @bind="SearchQuery" @bind:event="oninput" @bind:after="ResetSearchPage"/>
+                <input id="post-search" class="search-pill-input" type="search" aria-label="Search posts" placeholder="Search posts by title or text..." @bind="SearchQuery" @bind:event="oninput" @bind:after="ResetSearchPage"/>
                 @if (!string.IsNullOrWhiteSpace(SearchQuery))
                 {
-                    <div class="input-group-append"><button class="btn btn-outline-secondary" type="button" @onclick="ClearSearch" id="Clear">Clear</button></div>
+                    <button class="search-pill-clear" type="button" @onclick="ClearSearch" id="Clear">Clear</button>
                 }
             </div>
-            <small class="form-text text-muted">@FilteredProducts.Count() posts found</small>
+            <small class="form-text search-pill-count">@FilteredProducts.Count() posts found</small>
         </div>
     </div>
     <div class="col-6">
         @* Bind the selected genre to the genre query and reset pagination afterward. *@
-        <select id="genre_search" class="form-control" @bind="GenreQuery" @bind:event="onchange" @bind:after="ResetSearchPage">
-            <option value="">All Genres</option>
-            @foreach (var genre in Enum.GetValues<GenreEnum>().Skip(1))
-            {
-                <option value=@genre>@genre.DisplayGenre()</option>
-            }
-        </select>
+        @* Pill-shaped genre filter with a tag icon at the front and an arrow at the end. *@
+        <div class="search-pill">
+            <svg class="search-pill-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.6 13.4 11 3.8H4v7.1l9.6 9.7a2 2 0 0 0 2.8 0l4.2-4.3a2 2 0 0 0 0-2.9Z" /><circle cx="7.5" cy="7.5" r="1" /></svg>
+            <select id="genre_search" class="search-pill-input search-pill-select" aria-label="Filter by genre" @bind="GenreQuery" @bind:event="onchange" @bind:after="ResetSearchPage">
+                <option value="">All Genres</option>
+                @foreach (var genre in Enum.GetValues<GenreEnum>().Skip(1))
+                {
+                    <option value=@genre>@genre.DisplayGenre()</option>
+                }
+            </select>
+            <svg class="search-pill-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg>
+        </div>
     </div>
 </div>
 @if (!FilteredProducts.Any())
