@@ -2992,6 +2992,16 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     gap: 12px;
 }
 
+/* For like comment */
+.comment-like {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: none;
+    color: green;
+}
+
 .comment-icon{
     display: block;
     width: 20px;
