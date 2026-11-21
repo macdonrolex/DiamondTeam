@@ -1,26 +1,42 @@
 ﻿@page
 @model ErrorModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Page not found";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="gh-error">
+    <div class="gh-error-card">
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
-}
+        <!-- Big faded 404 in the corner -->
+        <div class="gh-error-ghost" aria-hidden="true">404</div>
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to the <strong>Development</strong> environment displays detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+        <!-- Stick figure peeking in from the right edge with a magnifying glass -->
+        <svg class="gh-error-peek" viewBox="0 0 90 150" width="108" height="180" role="img" aria-label="A curious stick figure peeking in from the edge with a magnifying glass">
+            <g fill="none" stroke="#1F3A6E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="80" cy="42" r="20" fill="#fff" />
+                <path d="M62 27 L70 25" />
+                <path d="M74 25 L82 27" />
+                <circle cx="70" cy="54" r="2.5" />
+                <path d="M90 86 L72 88" />
+                <path d="M72 88 L64 86" />
+                <circle cx="54" cy="82" r="11" fill="#e9eefb" />
+                <path d="M90 128 L76 138 L66 138" />
+            </g>
+            <circle cx="66" cy="39" r="2.6" fill="#172033" />
+            <circle cx="76" cy="39" r="2.6" fill="#172033" />
+        </svg>
+
+        <div class="gh-error-top">
+            <div class="gh-error-label">404 · Page not found</div>
+            <h1 class="gh-error-title">
+                This page went out for milk and never
+                <span class="gh-error-title-end">came back.</span>
+            </h1>
+            <p class="gh-error-text">We've checked under the couch, behind the fridge, and in the other tab you forgot about. Nothing.</p>
+        </div>
+
+        <div class="gh-error-actions">
+            <a class="gh-error-btn gh-error-btn-primary" href="/">Take me home</a>
+        </div>
+    </div>
+</div>
