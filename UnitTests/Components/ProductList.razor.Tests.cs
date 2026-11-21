@@ -116,6 +116,11 @@ public class ProductListTests : BunitTestContext
         // Arrange
         Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
         
+        // Reset the Ratings in the last post
+        var lastPost = TestHelper.ProductService.GetAllData().Last();
+        lastPost.Ratings = [];
+        TestHelper.ProductService.UpdateData(lastPost);
+        
         // Get the Id of the button. The post ID we need is the last one because the latest post will be displayed on top.
         var id = "MoreInfoButton_" + TestHelper.ProductService.GetAllData().Last().Id;
         
