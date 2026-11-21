@@ -3002,6 +3002,16 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     color: green;
 }
 
+/* For dislike comment */
+.comment-dislike {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: none;
+    color: red;
+}
+
 .comment-icon{
     display: block;
     width: 20px;
