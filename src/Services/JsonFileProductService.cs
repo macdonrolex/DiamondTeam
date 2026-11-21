@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -255,6 +256,73 @@ public class JsonFileProductService
 
         // Call for the Product to be saved
         UpdateData(selectedProduct);
+    }
+    
+
+    /// <summary>
+    /// Add likes or dislikes to the target comment 
+    /// </summary>
+    /// <param name="postId"> The id of the post </param>
+    /// <param name="commentId"> The id of the comment</param>
+    /// <param name="likeCount"> The non-negative number of likes you want to add to the comment</param>
+    /// <param name="dislikeCount"> The non-negative number of dislikes you want to add to the comment</param>
+    /// <returns></returns>
+    public bool AddCommentLikeOrDislike(string postId, string commentId, int likeCount, int dislikeCount)
+    {
+        // If the postID is invalid, return
+        if (string.IsNullOrEmpty(postId))
+        {
+            return false;
+        }
+        
+        // If the commentID is invalid, return
+        if (string.IsNullOrEmpty(commentId))
+        {
+            return false;
+        }
+        
+        // We don't allow negative counts
+        if (likeCount < 0)
+        {
+            return false;
+        }
+        
+        if (dislikeCount < 0)
+        {
+            return false;
+        }
+        
+        // Load the records so the selected post can be updated in memory.
+        var posts = GetAllData();
+        
+        // Find the post
+        var post = posts.FirstOrDefault(x => x.Id == postId);
+        if (post == null)
+        {
+            return false;
+        }
+        
+        // If the post has no comment, return false
+        if (post.CommentList == null)
+        {
+            return false;
+        }
+        
+        // Find the comment
+        var comment = post.CommentList.FirstOrDefault(x => x.Id == commentId);
+        if (comment == null)
+        {
+            return false;
+        }
+        
+        // Update like and dislike count
+        comment.LikeCount += likeCount;
+        comment.DislikeCount += dislikeCount;
+        
+        // Save the result back to the database
+        SaveData(posts);
+
+        return true;
     }
 
 }
