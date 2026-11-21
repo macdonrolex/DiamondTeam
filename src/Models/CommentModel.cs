@@ -10,4 +10,10 @@ public class CommentModel
 
     // The Comment
     public string Comment { get; set; }
+    
+    // The number of likes for this comment
+    public int LikeCount { get; set; } = 0;
+    
+    // The number of dislikes for this comment
+    public int DislikeCount { get; set; } = 0;
 }
