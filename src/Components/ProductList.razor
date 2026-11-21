@@ -424,5 +424,18 @@
         // Refresh the selected post to display the latest comment state
         SelectProduct(SelectedProductId); 
     }
+    
+    /// <summary>
+    /// Give the comment a dislike
+    /// </summary>
+    /// /// <param name="comment"> the comment you give the dislike to</param>
+    public void DislikeComment(CommentModel comment)
+    {
+        // Give the comment a dislike
+        ProductService.AddCommentLikeOrDislike(SelectedProductId, comment.Id, 0, 1);
+        
+        // Refresh the selected post to display the latest comment state
+        SelectProduct(SelectedProductId); 
+    }
 
 }
