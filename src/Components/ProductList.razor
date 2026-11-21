@@ -412,4 +412,17 @@
         NewCommentText = newCommentText;
     }
 
+    /// <summary>
+    /// Give the comment a like
+    /// </summary>
+    /// <param name="comment"> the comment you give the like to</param>
+    public void LikeComment(CommentModel comment)
+    {
+        // Give the comment a like
+        ProductService.AddCommentLikeOrDislike(SelectedProductId, comment.Id, 1, 0);
+        
+        // Refresh the selected post to display the latest comment state
+        SelectProduct(SelectedProductId); 
+    }
+
 }
