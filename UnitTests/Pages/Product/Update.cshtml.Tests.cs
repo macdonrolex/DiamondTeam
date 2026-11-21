@@ -70,10 +70,10 @@ public class UpdateTests
     }
 
     /// <summary>
-    /// Test whether OnGet actually redirect to the Index page while the given Id doesn't belong to any product(post).
+    /// Test whether OnGet returns Not Found while the given Id doesn't belong to any product(post).
     /// </summary>
     [Test]
-    public void OnGet_InValid_Product_Id_Not_Exist_Should_Return_RedirectToPage_Product_Index()
+    public void OnGet_InValid_Product_Id_Not_Exist_Should_Return_NotFound()
     {
         // Arrange
         var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
@@ -81,7 +81,7 @@ public class UpdateTests
         var pageModel = new UpdateModel(productService);
 
         // Act
-        var result = pageModel.OnGet("Non_Exist_Id") as RedirectToPageResult;
+        var result = pageModel.OnGet("Non_Exist_Id") as NotFoundResult;
 
         // Reset
         
@@ -89,11 +89,11 @@ public class UpdateTests
 
         // Assert
         
-        // If not RedirectToPageResult type, it will be null
+        // If not NotFoundResult type, it will be null
         Assert.That(result, Is.Not.Null);
-        
-        // The redirected page is what we want
-        Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
+
+        // Not Found sends the visitor to the "page not found" card
+        Assert.That(result.StatusCode, Is.EqualTo(404));
     }
 
     /// <summary>
