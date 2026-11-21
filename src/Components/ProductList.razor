@@ -354,10 +354,11 @@
         {
             VoteLabel = "Votes";
         }
-        // Calculate the average rating
-        CurrentRating = SelectedProduct.Ratings.Sum() / VoteCount;
+        // Calculate the average rating, round the result to the closet integer.
+        CurrentRating = (int)Math.Round((decimal)SelectedProduct.Ratings.Sum() / VoteCount, MidpointRounding.AwayFromZero);
         
         System.Console.WriteLine($"Current rating for {SelectedProduct.Id}: {CurrentRating}");
+        System.Console.WriteLine($"Current rating for {SelectedProduct.Id}: {(decimal)SelectedProduct.Ratings.Sum() / VoteCount}");
     }
     
     /// <summary>
