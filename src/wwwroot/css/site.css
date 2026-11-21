@@ -3498,3 +3498,100 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
         display: none;
     }
 }
+
+/* Home page search and genre filter: pill shape, icon at the front, small shadow on hover */
+.search-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 48px;
+    padding: 0 8px 0 18px;
+    border: 1px solid rgba(137, 151, 170, .45);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .9);
+    font-family: 'Nunito', system-ui, sans-serif;
+    transition: box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+}
+
+    .search-pill:hover {
+        background: #fff;
+        box-shadow: 0 6px 16px rgba(29, 37, 56, .14);
+    }
+
+    .search-pill:focus-within {
+        border-color: #1F3A6E;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(31, 58, 110, .18);
+    }
+
+.search-pill-icon-wrap {
+    display: flex;
+    flex: 0 0 20px;
+}
+
+.search-pill-icon,
+.search-pill-chevron {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #1F3A6E;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+.search-pill-chevron {
+    margin-right: 8px;
+    stroke: #4f5b70;
+}
+
+.search-pill-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #172033;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+    .search-pill-input::placeholder {
+        color: #5c6678;
+    }
+
+    .search-pill-input::-webkit-search-cancel-button {
+        display: none;
+    }
+
+.search-pill-select {
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.search-pill-clear {
+    flex: 0 0 auto;
+    height: 36px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 18px;
+    background: #e9eefb;
+    color: #1F3A6E;
+    font-weight: 700;
+    transition: background-color .15s ease;
+}
+
+    .search-pill-clear:hover {
+        background: #d8e0f6;
+    }
+
+.search-pill-count {
+    padding-left: 18px;
+    color: #3d4759;
+    font-family: 'Nunito', system-ui, sans-serif;
+}
