@@ -60,6 +60,9 @@ public class Startup
                 break;
         }
 
+        // Show the GameHub "page not found" card when an address does not exist
+        app.UseStatusCodePagesWithReExecute("/Error");
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
