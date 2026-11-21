@@ -34,7 +34,7 @@ public class Delete : PageModel
     /// Finds the product selected for deletion.
     /// </summary>
     /// <param name="id">Identifier of the product to load.</param>
-    /// <returns>The details page when a product exists; otherwise, a redirect to the listing.</returns>
+    /// <returns>The details page when a product exists; a redirect to the listing when no id is given; otherwise, Not Found.</returns>
     public IActionResult OnGet(string id)
     {
 
@@ -46,10 +46,10 @@ public class Delete : PageModel
 
         Product = ProductService.GetAllData().FirstOrDefault(x => x.Id == id);
 
-        // Redirect when the supplied identifier does not match a stored product.
+        // Show the "page not found" card when the supplied identifier does not match a stored product.
         if (Product == null)
         {
-            return RedirectToPage("/Product/Index");
+            return NotFound();
         }
 
         return Page();
