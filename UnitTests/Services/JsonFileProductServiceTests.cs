@@ -715,6 +715,42 @@ public class JsonFileProductServiceTests
         Assert.That(result, Is.EqualTo(false));
     }
     
+    /// <summary>
+    /// If the target post has no comment, fast fail
+    /// </summary>
+    [Test]
+    public void AddCommentLikeOrDislike_InValid_Post_Has_No_Comment_Should_Return_False()
+    {
+
+        // Arrange
+        
+        // Backup the first post
+        var backupData = TestHelper.ProductService.GetAllData().First();
+        
+        // Get the first post and remove all its comments
+        var data = TestHelper.ProductService.GetAllData().First();
+        data.CommentList = null;
+        TestHelper.ProductService.UpdateData(data);
+        
+        // Provide CommentID
+        var dataCommentID = "test_commentID";
+        
+        // Act
+
+        // Try to add a Like to the first post
+        var result = TestHelper.ProductService.AddCommentLikeOrDislike(data.Id, dataCommentID, 1, 0);
+
+        // Reset
+        
+        // Put the backup first post back
+        TestHelper.ProductService.UpdateData(backupData);
+
+        // Assert
+
+        // The results should be false
+        Assert.That(result, Is.EqualTo(false));
+    }
+    
     #endregion AddCommentLikeOrDislike
 
 }
