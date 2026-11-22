@@ -793,6 +793,60 @@ public class JsonFileProductServiceTests
         Assert.That(result, Is.EqualTo(false));
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    [Test]
+    public void AddCommentLikeOrDislike_Valid_Find_Comment_Should_Return_True_And_Save()
+    {
+
+        // Arrange
+        
+        // Backup the first post
+        var backupData = TestHelper.ProductService.GetAllData().First();
+        
+        // Get the first post and remove all its comments
+        var data = TestHelper.ProductService.GetAllData().First();
+        data.CommentList = [];
+        
+        // Give the first post a test comment
+        var comment = new CommentModel();
+        comment.Id = "test_id";
+        comment.Comment = "test_comment";
+        data.CommentList.Add(comment);
+        TestHelper.ProductService.UpdateData(data);
+        
+        // Provide CommentID. This ID can be found.
+        var dataCommentID = "test_id";
+        
+        // Act
+
+        // Try to add a Like to the first post
+        var result = TestHelper.ProductService.AddCommentLikeOrDislike(data.Id, dataCommentID, 1, 0);
+        
+        // The like count
+        var likeResult = TestHelper.ProductService.GetAllData().First().CommentList.First().LikeCount;
+        
+        // The dislike count
+        var dislikeResult = TestHelper.ProductService.GetAllData().First().CommentList.First().DislikeCount;
+        
+        // Reset
+        
+        // Put the backup first post back
+        TestHelper.ProductService.UpdateData(backupData);
+
+        // Assert
+
+        // The results should be true
+        Assert.That(result, Is.EqualTo(true));
+        
+        // Like count should be 1
+        Assert.That(likeResult, Is.EqualTo(1));
+        
+        // Dislike count should be 0
+        Assert.That(dislikeResult, Is.EqualTo(0));
+    }
+    
     #endregion AddCommentLikeOrDislike
 
 }
