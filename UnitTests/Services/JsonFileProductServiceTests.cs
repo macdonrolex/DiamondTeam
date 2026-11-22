@@ -751,6 +751,48 @@ public class JsonFileProductServiceTests
         Assert.That(result, Is.EqualTo(false));
     }
     
+    /// <summary>
+    /// If the target comment cannot be found, fast fail
+    /// </summary>
+    [Test]
+    public void AddCommentLikeOrDislike_InValid_Cannot_Find_Comment_Should_Return_False()
+    {
+
+        // Arrange
+        
+        // Backup the first post
+        var backupData = TestHelper.ProductService.GetAllData().First();
+        
+        // Get the first post and remove all its comments
+        var data = TestHelper.ProductService.GetAllData().First();
+        data.CommentList = [];
+        
+        // Give the first post a test comment
+        var comment = new CommentModel();
+        comment.Id = "test_id";
+        comment.Comment = "test_comment";
+        data.CommentList.Add(comment);
+        TestHelper.ProductService.UpdateData(data);
+        
+        // Provide CommentID. This ID cannot be found.
+        var dataCommentID = "non_exist_commentID";
+        
+        // Act
+
+        // Try to add a Like to the first post
+        var result = TestHelper.ProductService.AddCommentLikeOrDislike(data.Id, dataCommentID, 1, 0);
+
+        // Reset
+        
+        // Put the backup first post back
+        TestHelper.ProductService.UpdateData(backupData);
+
+        // Assert
+
+        // The results should be false
+        Assert.That(result, Is.EqualTo(false));
+    }
+    
     #endregion AddCommentLikeOrDislike
 
 }
