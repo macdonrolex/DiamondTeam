@@ -597,6 +597,38 @@ public class JsonFileProductServiceTests
         Assert.That(resultNull, Is.EqualTo(false));
     }
     
+    /// <summary>
+    /// If the CommentID is null or empty, fast fail.
+    /// </summary>
+    [Test]
+    public void AddCommentLikeOrDislike_InValid_CommentID_NullOrEmpty_Should_Return_False()
+    {
+
+        // Arrange
+        
+        // The empty comment ID
+        var dataCommentID = "";
+        
+        // The valid Post ID
+        var dataPostID = "test_postID";
+
+        // Act
+
+        // Try to add a Like to the comment
+        var resultEmpty = TestHelper.ProductService.AddCommentLikeOrDislike(dataPostID, dataCommentID, 1, 0);
+        var resultNull = TestHelper.ProductService.AddCommentLikeOrDislike(dataPostID, null, 1, 0);
+
+        // Reset
+        
+        // Not needed
+
+        // Assert
+
+        // The results should be false
+        Assert.That(resultEmpty, Is.EqualTo(false));
+        Assert.That(resultNull, Is.EqualTo(false));
+    }
+    
     #endregion AddCommentLikeOrDislike
 
 }
