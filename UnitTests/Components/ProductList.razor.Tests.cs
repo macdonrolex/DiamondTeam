@@ -217,7 +217,7 @@ public class ProductListTests : BunitTestContext
         var preButtonMarkup = page.Markup;
 
         // Backup original database for resetting.
-        var backupData = TestHelper.ProductService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-cactus");
+        var backupData = TestHelper.ProductService.GetAllData().Last();
 
         // Act
 
