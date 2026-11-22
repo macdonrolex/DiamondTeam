@@ -58,7 +58,7 @@ public class Delete : PageModel
     /// <summary>
     /// Deletes the product(post) if it exists, and returns to the listing.
     /// </summary>
-    /// <returns>The current page when validation fails; otherwise, a redirect to the listing.</returns>
+    /// <returns>A redirect to the listing after deleting; Not Found when the post was already deleted.</returns>
     public IActionResult OnPost()
     {
 
@@ -68,7 +68,12 @@ public class Delete : PageModel
             return RedirectToPage("/Product/Index");
         }
 
-        ProductService.DeleteData(Product.Id);
+        // The post was already deleted (for example in another tab), so show the Error page
+        if (ProductService.DeleteData(Product.Id) == false)
+        {
+            return NotFound();
+        }
+
         return RedirectToPage("/Product/Index");
     }
 
