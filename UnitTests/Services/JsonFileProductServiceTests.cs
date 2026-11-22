@@ -685,6 +685,36 @@ public class JsonFileProductServiceTests
         Assert.That(result, Is.EqualTo(false));
     }
     
+    /// <summary>
+    /// If we cannot find the post, fast fail
+    /// </summary>
+    [Test]
+    public void AddCommentLikeOrDislike_InValid_Cannot_Find_Post_Should_Return_False()
+    {
+
+        // Arrange
+        
+        // The postID that is not exist in the database
+        var dataPostID = "not_exist";
+        
+        // Provide valid CommentID
+        var dataCommentID = "test_commentID";
+        
+        // Act
+
+        // Try to add a Like to a non_exist post
+        var result = TestHelper.ProductService.AddCommentLikeOrDislike(dataPostID, dataCommentID, 1, 0);
+
+        // Reset
+        
+        // Not needed
+
+        // Assert
+
+        // The results should be false
+        Assert.That(result, Is.EqualTo(false));
+    }
+    
     #endregion AddCommentLikeOrDislike
 
 }
