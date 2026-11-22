@@ -629,6 +629,34 @@ public class JsonFileProductServiceTests
         Assert.That(resultNull, Is.EqualTo(false));
     }
     
+    /// <summary>
+    /// We don't allow adding negative like counts.
+    /// </summary>
+    [Test]
+    public void AddCommentLikeOrDislike_InValid_Negative_Like_Count_Should_Return_False()
+    {
+
+        // Arrange
+        
+        // Provide valid PostID and CommentID
+        var dataPostID = "test_postID";
+        var dataCommentID = "test_commentID";
+        
+        // Act
+
+        // Try to add a negative Like count to the comment
+        var result = TestHelper.ProductService.AddCommentLikeOrDislike(dataPostID, dataCommentID, -1, 0);
+
+        // Reset
+        
+        // Not needed
+
+        // Assert
+
+        // The results should be false
+        Assert.That(result, Is.EqualTo(false));
+    }
+    
     #endregion AddCommentLikeOrDislike
 
 }
