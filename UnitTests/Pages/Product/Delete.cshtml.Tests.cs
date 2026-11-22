@@ -249,5 +249,46 @@ public class DeleteTests
         Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
     }
 
+    /// <summary>
+    /// Test whether OnPost returns Not Found when the product(post) was already deleted,
+    /// for example when it is deleted in a second tab after the first tab deleted it.
+    /// </summary>
+    [Test]
+    public void OnPost_InValid_Product_Already_Deleted_Should_Return_NotFound()
+    {
+        // Arrange
+        var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+        var productService = new JsonFileProductService(webHostEnvironment);
+
+        // Two pages (tabs) showing the same product(post)
+        var firstTab = new Delete(productService);
+        var secondTab = new Delete(productService);
+        firstTab.Product = productService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-light");
+        secondTab.Product = productService.GetAllData().FirstOrDefault(x => x.Id == "jenlooper-light");
+
+        // Backup original database for resetting.
+        var path = Path.Combine(TestFixture.DataWebRootPath, "data", "products.json");
+        var backupDatabase = File.ReadAllText(path);
+
+        // Act
+
+        // The first tab deletes the post, then the second tab tries to delete it again
+        firstTab.OnPost();
+        var result = secondTab.OnPost() as NotFoundResult;
+
+        // Reset
+
+        // Write the original texts in the database back to modified database
+        File.WriteAllText(path, backupDatabase);
+
+        // Assert
+
+        // If not NotFoundResult type, it will be null
+        Assert.That(result, Is.Not.Null);
+
+        // Not Found sends the visitor to the Error page
+        Assert.That(result.StatusCode, Is.EqualTo(404));
+    }
+
     #endregion OnPost
 }
