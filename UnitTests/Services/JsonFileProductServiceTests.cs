@@ -562,5 +562,41 @@ public class JsonFileProductServiceTests
     }
 
     #endregion AddCommentToProduct
+    
+    #region AddCommentLikeOrDislike
+    
+    /// <summary>
+    /// If the PostID is null or empty, fast fail.
+    /// </summary>
+    [Test]
+    public void AddCommentLikeOrDislike_InValid_PostID_NullOrEmpty_Should_Return_False()
+    {
+
+        // Arrange
+        
+        // The empty Post ID
+        var dataPostID = "";
+        
+        // The valid comment ID
+        var dataCommentID = "test_commentID";
+
+        // Act
+
+        // Try to add a Like to the comment
+        var resultEmpty = TestHelper.ProductService.AddCommentLikeOrDislike(dataPostID, dataCommentID, 1, 0);
+        var resultNull = TestHelper.ProductService.AddCommentLikeOrDislike(null, dataCommentID, 1, 0);
+
+        // Reset
+        
+        // Not needed
+
+        // Assert
+
+        // The results should be false
+        Assert.That(resultEmpty, Is.EqualTo(false));
+        Assert.That(resultNull, Is.EqualTo(false));
+    }
+    
+    #endregion AddCommentLikeOrDislike
 
 }
