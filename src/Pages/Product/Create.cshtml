@@ -41,7 +41,7 @@
                         <select asp-for="Product.Genre" class="update-input update-select post-create-genre">
                             @foreach (var genre in Enum.GetValues<GenreEnum>().Skip(1))
                             {
-                                <option value=@genre>@genre.DisplayGenre()</option>
+                                <option value=@((int)genre)>@genre.DisplayGenre()</option>
                             }
                         </select>
                     </div>
