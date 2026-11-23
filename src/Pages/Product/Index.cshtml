@@ -19,7 +19,7 @@
         </a>
     </header>
 
-    @if (Model.Products == null || !Model.Products.Any())
+    @if (Model.Products == null || Model.Products.Any() == false)
     {
         <div class="product-list-empty">
             <h2>Your library is ready for its first Post</h2>
@@ -27,7 +27,7 @@
         </div>
     }
     
-    @if (Model.Products != null && Model.Products.Any())
+    @if ((Model.Products == null) == false && Model.Products.Any())
     {
         <section class="product-list" aria-label="Game products">
             @foreach (var product in Model.PagedProducts)
@@ -42,7 +42,7 @@
                             </time>
                         }
                         
-                        @if (!product.DateAdded.HasValue)
+                        @if (product.DateAdded.HasValue == false)
                         {
                             <span class="product-date-value product-date-unknown">Date not recorded</span>
                         }
@@ -56,17 +56,17 @@
                     </a>
 
                     <div class="product-summary">
-                        @if (!string.IsNullOrWhiteSpace(product.Author))
+                        @if (string.IsNullOrWhiteSpace(product.Author) == false)
                         {
                             <span class="product-author">By @product.Author</span>
                         }
                         
-                        @if (!string.IsNullOrWhiteSpace(product.Maker))
+                        @if (string.IsNullOrWhiteSpace(product.Maker) == false)
                         {
                             <span class="product-maker">@product.Maker</span>
                         }
 
-                        @if (!string.IsNullOrWhiteSpace(product.Genre.DisplayGenre()))
+                        @if (string.IsNullOrWhiteSpace(product.Genre.DisplayGenre()) == false)
                         {
                             <span class="product-genre">@product.Genre.DisplayGenre()</span>
                         }
@@ -123,14 +123,14 @@
     var successMessage = TempData["SuccessMessage"] as string;
 }
 
-@if (successMessage != null)
+@if ((successMessage == null) == false)
 {
     @* Blazor notification at the bottom middle of the page *@
     @(await Html.RenderComponentAsync<Notification>(RenderMode.ServerPrerendered, new { Message = successMessage }))
 }
 
 @section Scripts {
-    @if (successMessage != null)
+    @if ((successMessage == null) == false)
     {
         @* Blazor's own script: it connects the notification to the server so it can close itself *@
         <script src="~/_framework/blazor.server.js"></script>
