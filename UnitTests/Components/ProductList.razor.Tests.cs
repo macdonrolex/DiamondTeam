@@ -720,7 +720,7 @@ public class ProductListTests : BunitTestContext
 
         // Act
 
-        // Click the star button
+        // Click the like button
         likeButton.Click();
 
         // Get the Like Count before clicking like
@@ -749,4 +749,85 @@ public class ProductListTests : BunitTestContext
     }
     
     #endregion LikeCount
+    
+    #region DislikeCount
+    
+    /// <summary>
+    /// Test the dislike button can display the result instantly, and save it to database.
+    /// </summary>
+    [Test]
+    public void DislikeCount_Valid_Click_Dislike_Should_Increment_Dislike_Count()
+    {
+
+        // Arrange
+        Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+        
+        // Backup the last post
+        var backupData = TestHelper.ProductService.GetAllData().Last();
+        
+        // Get the last post and remove all its comments
+        var data = TestHelper.ProductService.GetAllData().Last();
+        data.CommentList = [];
+        
+        // Give the last post a test comment
+        var comment = new CommentModel();
+        comment.Id = "test_id";
+        comment.Comment = "test_comment";
+        data.CommentList.Add(comment);
+        TestHelper.ProductService.UpdateData(data);
+        
+        // Get the Id of the button. The post ID we need is the last one because the latest post will be displayed on top.
+        var id = "MoreInfoButton_" + TestHelper.ProductService.GetAllData().Last().Id;
+        
+        var page = Render<ProductList>();
+
+        // Find the Buttons (more info)
+        var buttonList = page.FindAll("Button");
+
+        // Find the one that matches the ID looking for and click it
+        var button = buttonList.First((m => m.OuterHtml.Contains(id)));
+        button.Click();
+
+        // Get the dislike button
+        var preDislikeButtonList = page.FindAll("button");
+        var idDislike = "CommentDislike";
+        var dislikeButton = preDislikeButtonList.FirstOrDefault(m => m.OuterHtml.Contains(idDislike));
+
+        // Get the Dislike Count before clicking dislike
+        var preDislikeSpanList = page.FindAll<ProductList>("span");
+        var idDislikeCount = "DislikeCount";
+        var preDislikeCountSpan = preDislikeSpanList.FirstOrDefault(m => m.OuterHtml.Contains(idDislikeCount));
+        var preDislikeCount = preDislikeCountSpan.InnerHtml;
+
+        // Act
+
+        // Click the dislike button
+        dislikeButton.Click();
+
+        // Get the Dislike Count before clicking dislike
+        var postDislikeSpanList = page.FindAll<ProductList>("span");
+        var postDislikeCountSpan = postDislikeSpanList.FirstOrDefault(m => m.OuterHtml.Contains(idDislikeCount));
+        var postDislikeCount = postDislikeCountSpan.InnerHtml;
+        
+        // Check the database to see if it is saved
+        var result = TestHelper.ProductService.GetAllData().Last().CommentList.First().DislikeCount;
+        
+        // Reset
+
+        // Update with the original data in database
+        TestHelper.ProductService.UpdateData(backupData);
+
+        // Assert
+         
+        // Before clicking Dislike, 0
+        Assert.That(preDislikeCount, Is.EqualTo("0"));
+        
+        // After clicking like, 1
+        Assert.That(postDislikeCount, Is.EqualTo("1"));
+        
+        // The result is saved to the database
+        Assert.That(result, Is.EqualTo(1));
+    }
+    
+    #endregion DislikeCount
 }
