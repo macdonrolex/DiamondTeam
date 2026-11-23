@@ -72,7 +72,7 @@ public class CreateModel : PageModel
         ModelState.Remove("Product.Image");
 
         // Step 1: If the normal form fields have problems, show them right away.
-        if (!ModelState.IsValid)
+        if (ModelState.IsValid == false)
         {
             return Page();
         }
@@ -88,8 +88,8 @@ public class CreateModel : PageModel
 
         // Step 2: Check the file size.
         bool fileIsEmpty = ImageFile.Length == 0;
-        bool fileIsTooBig = !fileIsEmpty && ImageFile.Length > MaximumImageSizeBytes;
-        bool fileSizeIsOk = !fileIsEmpty && !fileIsTooBig;
+        bool fileIsTooBig = fileIsEmpty == false && ImageFile.Length > MaximumImageSizeBytes;
+        bool fileSizeIsOk = fileIsEmpty == false && fileIsTooBig == false;
 
         if (fileIsEmpty)
         {
@@ -114,7 +114,7 @@ public class CreateModel : PageModel
 
         }
 
-        if (!extensionIsAllowed)
+        if (extensionIsAllowed == false)
         {
             ModelState.AddModelError(nameof(ImageFile), "Choose a JPG, PNG, GIF, or WEBP image.");
         }
@@ -124,7 +124,7 @@ public class CreateModel : PageModel
         {
             bool fileIsRealImage = await HasValidImageSignatureAsync(ImageFile, extension);
 
-            if (!fileIsRealImage)
+            if (fileIsRealImage == false)
             {
                 ModelState.AddModelError(nameof(ImageFile), "This file is not a valid supported image.");
             }
@@ -132,7 +132,7 @@ public class CreateModel : PageModel
         }
 
         // Step 5: If any image check failed, show the errors.
-        if (!ModelState.IsValid)
+        if (ModelState.IsValid == false)
         {
             return Page();
         }
@@ -148,7 +148,7 @@ public class CreateModel : PageModel
         // Step 7: Save the image and the product.
         bool savedOk = await SaveImageAndProductAsync(imagesFolder, fullImagePath, fileName);
 
-        if (!savedOk)
+        if (savedOk == false)
         {
 
             // Saving failed, so clean up any half-saved image.
