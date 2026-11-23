@@ -5363,29 +5363,29 @@ jQuery.Event = function( src, props ) {
 	}
 
 	// Event object
-	if ( src && ContosoCrafts.WebSite.type ) {
+	if ( src && src.type ) {
 		this.originalEvent = src;
-		this.type = ContosoCrafts.WebSite.type;
+		this.type = src.type;
 
 		// Events bubbling up the document may have been marked as prevented
 		// by a handler lower down the tree; reflect the correct value.
-		this.isDefaultPrevented = ContosoCrafts.WebSite.defaultPrevented ||
-				ContosoCrafts.WebSite.defaultPrevented === undefined &&
+		this.isDefaultPrevented = src.defaultPrevented ||
+				src.defaultPrevented === undefined &&
 
 				// Support: Android <=2.3 only
-				ContosoCrafts.WebSite.returnValue === false ?
+				src.returnValue === false ?
 			returnTrue :
 			returnFalse;
 
 		// Create target properties
 		// Support: Safari <=6 - 7 only
 		// Target should not be a text node (#504, #13143)
-		this.target = ( ContosoCrafts.WebSite.target && ContosoCrafts.WebSite.target.nodeType === 3 ) ?
-			ContosoCrafts.WebSite.target.parentNode :
-			ContosoCrafts.WebSite.target;
+		this.target = ( src.target && src.target.nodeType === 3 ) ?
+			src.target.parentNode :
+			src.target;
 
-		this.currentTarget = ContosoCrafts.WebSite.currentTarget;
-		this.relatedTarget = ContosoCrafts.WebSite.relatedTarget;
+		this.currentTarget = src.currentTarget;
+		this.relatedTarget = src.relatedTarget;
 
 	// Event type
 	} else {
@@ -5398,7 +5398,7 @@ jQuery.Event = function( src, props ) {
 	}
 
 	// Create a timestamp if incoming event doesn't have one
-	this.timeStamp = src && ContosoCrafts.WebSite.timeStamp || Date.now();
+	this.timeStamp = src && src.timeStamp || Date.now();
 
 	// Mark it as fixed
 	this[ jQuery.expando ] = true;
@@ -5671,12 +5671,12 @@ function fixInput( src, dest ) {
 	var nodeName = dest.nodeName.toLowerCase();
 
 	// Fails to persist the checked state of a cloned checkbox or radio button.
-	if ( nodeName === "input" && rcheckableType.test( ContosoCrafts.WebSite.type ) ) {
-		dest.checked = ContosoCrafts.WebSite.checked;
+	if ( nodeName === "input" && rcheckableType.test( src.type ) ) {
+		dest.checked = src.checked;
 
 	// Fails to return the selected option to the default selected state when cloning options
 	} else if ( nodeName === "input" || nodeName === "textarea" ) {
-		dest.defaultValue = ContosoCrafts.WebSite.defaultValue;
+		dest.defaultValue = src.defaultValue;
 	}
 }
 
