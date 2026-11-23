@@ -602,7 +602,7 @@ public class ProductListTests : BunitTestContext
         data.SelectedProduct = TestHelper.ProductService.GetAllData().First();
         data.SelectedProduct.Ratings = [];
 
-        // Set the VoteCount and VoteLabel to arbitrary values for assertion
+        // Set the CurrentRating and VoteLabel to arbitrary values for assertion
         data.VoteLabel = "test";
         data.CurrentRating = 999;
 
