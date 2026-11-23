@@ -147,7 +147,7 @@
                                 <div class="comment-reactions">
                                     <button type="button" class="comment-like" id="CommentLike" aria-label="Like (@comment.LikeCount)" @onclick="(e => LikeComment(comment))">
                                         <span class="fa fa-thumbs-up" aria-hidden="true"></span>
-                                        <span>@comment.LikeCount</span>
+                                        <span id="LikeCount">@comment.LikeCount</span>
                                     </button>
 
                                     <button type="button" class="comment-dislike" id="CommentDislike" aria-label="Dislike (@comment.DislikeCount)" @onclick="(e => DislikeComment(comment))">
