@@ -63,7 +63,7 @@ public class UpdateModel : PageModel
 	{
 
 		// Preserve the submitted values so the user can correct validation errors.
-		if (!ModelState.IsValid)
+		if (ModelState.IsValid == false)
 		{
 			return Page();
 		}
@@ -74,6 +74,7 @@ public class UpdateModel : PageModel
 			return NotFound();
 		
 		}
+
         ProductService.UpdateData(Product);
         return RedirectToPage("/Product/Index");
 	}
