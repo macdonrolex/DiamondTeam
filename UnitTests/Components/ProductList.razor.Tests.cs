@@ -619,6 +619,34 @@ public class ProductListTests : BunitTestContext
         Assert.That(data.VoteLabel, Is.EqualTo("Vote"));
         Assert.That(data.CurrentRating, Is.EqualTo(0));
     }
+    
+    /// <summary>
+    /// If the post has more than 1 vote, display "Votes".
+    /// </summary>
+    [Test]
+    public void GetCurrentRating_Valid_VoteCount_Greater_Than_1_Should_Display_Votes()
+    {
+
+        // Arrange
+
+        // Put the first entry into ProductList, and set its VoteCount to 2
+        var data = new ProductList();
+        data.SelectedProduct = TestHelper.ProductService.GetAllData().First();
+        data.SelectedProduct.Ratings = [1, 1];
+        data.VoteCount = 2;
+
+        // Act
+
+        // The method should set VoteLabel to "Vote" and CurrentRating to 0
+        data.GetCurrentRating();
+
+        // Reset
+
+        // Not needed
+
+        // Assert
+        Assert.That(data.VoteLabel, Is.EqualTo("Votes"));
+    }
 
     #endregion GetCurrentRating
 
