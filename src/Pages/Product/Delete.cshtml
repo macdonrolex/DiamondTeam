@@ -14,7 +14,7 @@
     </div>
     <section class="delete-card" aria-labelledby="delete-title">
         <div class="delete-card__visual">
-            @if (!string.IsNullOrWhiteSpace(Model.Product.Image))
+            @if (string.IsNullOrWhiteSpace(Model.Product.Image) == false)
             {
                 <img class="delete-card__image" src="@Model.Product.Image" alt="" />
             }
