@@ -61,7 +61,7 @@ public class ReadModel : PageModel
         }
 
         OtherProducts = products
-            .Where(x => x.Id != Product.Id)
+            .Where(x => (x.Id == Product.Id) == false)
 
             .Take(3)
 
