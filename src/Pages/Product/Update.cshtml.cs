@@ -68,9 +68,14 @@ public class UpdateModel : PageModel
 			return Page();
 		}
 
-		ProductService.UpdateData(Product);
-
-		return RedirectToPage("/Product/Index");
+		// Checks if there is item still in the database if not it will throw notfound page
+		if (ProductService.UpdateData(Product) == null)
+		{
+			return NotFound();
+		
+		}
+        ProductService.UpdateData(Product);
+        return RedirectToPage("/Product/Index");
 	}
 
 }
