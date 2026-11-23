@@ -64,7 +64,7 @@
         // Find out which page is open right now
         var currentPage = "";
         var pageValue = ViewContext.RouteData.Values["page"];
-        if (pageValue != null)
+        if ((pageValue == null) == false)
         {
             currentPage = pageValue.ToString();
         }
