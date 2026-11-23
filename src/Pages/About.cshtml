@@ -29,7 +29,7 @@
         var pictures = new List<string>();
 
         var folder = System.IO.Path.Combine(WebHostEnvironment.WebRootPath, "images");
-        if (!Directory.Exists(folder))
+        if (Directory.Exists(folder) == false)
         {
             return pictures;
         }
