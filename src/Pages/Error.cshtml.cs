@@ -42,7 +42,7 @@ public class ErrorModel : PageModel
         string id = null;
 
         // Use the current activity's ID if there is one
-        if (Activity.Current != null)
+        if ((Activity.Current == null) == false)
         {
             id = Activity.Current.Id;
         }
