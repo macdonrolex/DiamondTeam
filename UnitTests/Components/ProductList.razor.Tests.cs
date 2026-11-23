@@ -669,4 +669,84 @@ public class ProductListTests : BunitTestContext
 
     #endregion GenreFilter
 
+    #region LikeCount
+    
+    /// <summary>
+    /// Test the like button can display the result instantly, and save it to database.
+    /// </summary>
+    [Test]
+    public void LikeCount_Valid_Click_Like_Should_Increment_Like_Count()
+    {
+
+        // Arrange
+        Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+        
+        // Backup the last post
+        var backupData = TestHelper.ProductService.GetAllData().Last();
+        
+        // Get the last post and remove all its comments
+        var data = TestHelper.ProductService.GetAllData().Last();
+        data.CommentList = [];
+        
+        // Give the last post a test comment
+        var comment = new CommentModel();
+        comment.Id = "test_id";
+        comment.Comment = "test_comment";
+        data.CommentList.Add(comment);
+        TestHelper.ProductService.UpdateData(data);
+        
+        // Get the Id of the button. The post ID we need is the last one because the latest post will be displayed on top.
+        var id = "MoreInfoButton_" + TestHelper.ProductService.GetAllData().Last().Id;
+        
+        var page = Render<ProductList>();
+
+        // Find the Buttons (more info)
+        var buttonList = page.FindAll("Button");
+
+        // Find the one that matches the ID looking for and click it
+        var button = buttonList.First((m => m.OuterHtml.Contains(id)));
+        button.Click();
+
+        // Get the like buttons
+        var preLikeButtonList = page.FindAll("button");
+        var idLike = "CommentLike";
+        var likeButton = preLikeButtonList.FirstOrDefault(m => m.OuterHtml.Contains(idLike));
+
+        // Get the Like Count before clicking like
+        var preLikeSpanList = page.FindAll<ProductList>("span");
+        var idLikeCount = "LikeCount";
+        var preLikeCountSpan = preLikeSpanList.FirstOrDefault(m => m.OuterHtml.Contains(idLikeCount));
+        var preLikeCount = preLikeCountSpan.InnerHtml;
+
+        // Act
+
+        // Click the star button
+        likeButton.Click();
+
+        // Get the Like Count before clicking like
+        var postLikeSpanList = page.FindAll<ProductList>("span");
+        var postLikeCountSpan = postLikeSpanList.FirstOrDefault(m => m.OuterHtml.Contains(idLikeCount));
+        var postLikeCount = postLikeCountSpan.InnerHtml;
+        
+        // Check the database to see if it is saved
+        var result = TestHelper.ProductService.GetAllData().Last().CommentList.First().LikeCount;
+        
+        // Reset
+
+        // Update with the original data in database
+        TestHelper.ProductService.UpdateData(backupData);
+
+        // Assert
+         
+        // Before clicking like, 0
+        Assert.That(preLikeCount, Is.EqualTo("0"));
+        
+        // After clicking like, 1
+        Assert.That(postLikeCount, Is.EqualTo("1"));
+        
+        // The result is saved to the database
+        Assert.That(result, Is.EqualTo(1));
+    }
+    
+    #endregion LikeCount
 }
