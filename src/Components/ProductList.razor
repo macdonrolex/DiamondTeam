@@ -152,7 +152,7 @@
 
                                     <button type="button" class="comment-dislike" id="CommentDislike" aria-label="Dislike (@comment.DislikeCount)" @onclick="(e => DislikeComment(comment))">
                                         <span class="fa fa-thumbs-down" aria-hidden="true"></span>
-                                        <span>@comment.DislikeCount</span>
+                                        <span id="DislikeCount">@comment.DislikeCount</span>
                                     </button>
                                 </div>
                             </div>
