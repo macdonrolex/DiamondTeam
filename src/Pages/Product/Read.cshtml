@@ -20,11 +20,11 @@
     <div class="product-detail-layout">
         <main class="product-detail-story">
             <div class="product-detail-actions">
-                @if (!string.IsNullOrWhiteSpace(Model.Product.ShopLink))
+                @if (string.IsNullOrWhiteSpace(Model.Product.ShopLink) == false)
                 {
                     <a class="btn btn-primary" href="@Model.Product.ShopLink">Buy</a>
                 }
-                @if (!string.IsNullOrWhiteSpace(Model.Product.RatingLink))
+                @if (string.IsNullOrWhiteSpace(Model.Product.RatingLink) == false)
                 {
                     <a class="btn btn-secondary" href="@Model.Product.RatingLink">
                         Game Rating
