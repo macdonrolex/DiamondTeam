@@ -22,28 +22,40 @@
 </section>
 
 @functions {
-    // Collects up to 8 pictures from the wwwroot/images folder for the top of the card.
-    // The folder is read every time, so a deleted picture is simply left out.
+    /// <summary>
+    /// Collects up to 8 pictures from the wwwroot/images folder for the top of the card.
+    /// The folder is read every time, so a deleted picture is simply left out.
+    /// </summary>
+    /// <returns>The web addresses of up to 8 game pictures</returns>
     public List<string> GetCoverPictures()
     {
+
+        // The web addresses of the pictures to show
         var pictures = new List<string>();
 
+        // Full path of the wwwroot/images folder on disk
         var folder = System.IO.Path.Combine(WebHostEnvironment.WebRootPath, "images");
+
+        // Fast fail: no images folder, so no pictures
         if (Directory.Exists(folder) == false)
         {
             return pictures;
         }
 
+        // Every file in the images folder, sorted by name so the order is always the same
         var files = Directory.GetFiles(folder);
         Array.Sort(files);
 
         foreach (var file in files)
         {
+
+            // Stop once there are enough pictures for the card
             if (pictures.Count == 8)
             {
                 return pictures;
             }
 
+            // The file name without its folder, for example "zelda.jpeg"
             var name = System.IO.Path.GetFileName(file);
             if (IsGamePicture(name))
             {
@@ -54,9 +66,15 @@
         return pictures;
     }
 
-    // A game picture is an image file that is not the site logo or the site wallpaper
+    /// <summary>
+    /// A game picture is an image file that is not the site logo or the site wallpaper.
+    /// </summary>
+    /// <param name="name">The file name to check</param>
+    /// <returns>True when the file is a game picture, otherwise false</returns>
     public bool IsGamePicture(string name)
     {
+
+        // Lower-case name, so ".JPG" and ".jpg" are treated the same
         var lowerName = name.ToLower();
 
         if (lowerName.StartsWith("gamehlogo"))
@@ -74,6 +92,7 @@
             return false;
         }
 
+        // The file type, for example ".png"
         var extension = System.IO.Path.GetExtension(lowerName);
 
         if (extension == ".jpg")
