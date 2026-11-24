@@ -695,6 +695,74 @@ public class ProductListTests : BunitTestContext
         Assert.That(resultList.Count, Is.EqualTo(1));
     }
 
+    /// <summary>
+    /// With no genre selected: visible label, plain pill, no reset button, "all genres" note
+    /// </summary>
+    [Test]
+    public void GenreFilter_Valid_Default_Should_Show_Label_And_No_Reset()
+    {
+        // Arrange
+        Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+
+        // Act
+        var page = Render<ProductList>();
+
+        // Reset
+
+        // Assert
+        Assert.That(page.Find("label[for='genre_search']").TextContent, Is.EqualTo("Genre"));
+        Assert.That(page.Find("#GenrePill").ClassList.Contains("is-active"), Is.False);
+        Assert.That(page.FindAll("#ResetGenre").Count, Is.EqualTo(0));
+        Assert.That(page.Find("#GenreStatus").TextContent.Trim(), Is.EqualTo("Showing all genres"));
+    }
+
+    /// <summary>
+    /// Choosing a genre highlights the pill, names the genre, and shows the reset button
+    /// </summary>
+    [Test]
+    public void GenreFilter_Valid_Select_Genre_Should_Highlight_And_Show_Reset()
+    {
+        // Arrange
+        Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+        var page = Render<ProductList>();
+
+        // Act
+        page.Find("#genre_search").Change(GenreEnum.Action.ToString());
+
+        // Reset
+
+        // Assert
+        Assert.That(page.Find("#GenrePill").ClassList.Contains("is-active"), Is.True);
+        Assert.That(page.FindAll("#ResetGenre").Count, Is.EqualTo(1));
+        Assert.That(page.Find("#GenreStatus").TextContent, Does.Contain(GenreEnum.Action.DisplayGenre()));
+    }
+
+    /// <summary>
+    /// Reset removes only the genre filter and keeps the search text
+    /// </summary>
+    [Test]
+    public void ResetGenre_Valid_Click_Should_Clear_Genre_And_Keep_Search()
+    {
+        // Arrange
+        Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+        var page = Render<ProductList>();
+        page.Find("#post-search").Input("a");
+        page.Find("#genre_search").Change(GenreEnum.Action.ToString());
+        page.Instance.CurrentPage = 2;
+
+        // Act
+        page.Find("#ResetGenre").Click();
+
+        // Reset
+
+        // Assert
+        Assert.That(page.Instance.GenreQuery, Is.Null);
+        Assert.That(page.Instance.SearchQuery, Is.EqualTo("a"));
+        Assert.That(page.Instance.CurrentPage, Is.EqualTo(1));
+        Assert.That(page.Find("#GenrePill").ClassList.Contains("is-active"), Is.False);
+        Assert.That(page.FindAll("#ResetGenre").Count, Is.EqualTo(0));
+    }
+
     #endregion GenreFilter
 
     #region LikeCount
@@ -856,6 +924,58 @@ public class ProductListTests : BunitTestContext
         // The result is saved to the database
         Assert.That(result, Is.EqualTo(1));
     }
-    
+
     #endregion DislikeCount
+
+    #region SelectProduct_Deleted
+
+    /// <summary>
+    /// Opening a post that was deleted shows a message instead of crashing
+    /// </summary>
+    [Test]
+    public void SelectProduct_InValid_Deleted_Post_Should_Show_Message()
+    {
+        // Arrange
+        Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+        var page = Render<ProductList>();
+
+        // Act
+        page.InvokeAsync(() => page.Instance.SelectProduct("post-that-does-not-exist"));
+
+        // Draw the page again, as a button click would
+        page.Render();
+
+        // Reset
+
+        // Assert
+        Assert.That(page.Instance.SelectedProduct, Is.Null);
+        Assert.That(page.Instance.SelectedProductId, Is.Null);
+        Assert.That(page.Find("#ProductMessage").TextContent, Does.Contain("no longer exists"));
+        Assert.That(page.FindAll("#productModal").Count, Is.EqualTo(0));
+    }
+
+    /// <summary>
+    /// Opening an existing post after the message clears the message
+    /// </summary>
+    [Test]
+    public void SelectProduct_Valid_After_Deleted_Post_Should_Clear_Message()
+    {
+        // Arrange
+        Services.AddSingleton<JsonFileProductService>(TestHelper.ProductService);
+        var page = Render<ProductList>();
+        page.InvokeAsync(() => page.Instance.SelectProduct("post-that-does-not-exist"));
+        var id = "MoreInfoButton_" + TestHelper.ProductService.GetAllData().Last().Id;
+
+        // Act
+        page.FindAll("Button").First(m => m.OuterHtml.Contains(id)).Click();
+
+        // Reset
+
+        // Assert
+        Assert.That(page.Instance.ProductMessage, Is.Null);
+        Assert.That(page.FindAll("#ProductMessage").Count, Is.EqualTo(0));
+        Assert.That(page.Instance.SelectedProduct, Is.Not.Null);
+    }
+
+    #endregion SelectProduct_Deleted
 }
