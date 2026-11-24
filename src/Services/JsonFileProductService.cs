@@ -227,15 +227,23 @@ public class JsonFileProductService
     /// <returns><see langword="true"/> when a product is removed; otherwise, <see langword="false"/>.</returns>
     public bool DeleteData(string id)
     {
+
+        // All products currently saved in the data file
         var products = GetAllData();
+
+        // The product with the given id, or null if there is none
         var productToDelete = products.FirstOrDefault(x => x.Id == id);
 
+        // Fast fail: nothing to delete
         if (productToDelete == null)
         {
             return false;
         }
 
+        // Every product except the one being deleted
         var updatedProducts = products.Where(x => x.Id != id);
+
+        // Save the remaining products back to the data file
         SaveData(updatedProducts);
         return true;
     }
