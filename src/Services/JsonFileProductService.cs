@@ -30,7 +30,7 @@ public class JsonFileProductService
     /// <summary>
     /// Gets the full path to the product JSON file under <c>wwwroot/data</c>.
     /// </summary>
-    private string JsonFileName
+    public string JsonFileName
     {
         get { return Path.Combine(WebHostEnvironment.WebRootPath, "data", "products.json"); }
     }
