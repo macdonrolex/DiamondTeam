@@ -86,17 +86,13 @@ public class CreateModel : PageModel
             return RedirectToPage("/Product/Index");
         }
 
-        // Step 2: Check the file size.
-        bool fileIsEmpty = ImageFile.Length == 0;
-        bool fileIsTooBig = fileIsEmpty == false && ImageFile.Length > MaximumImageSizeBytes;
-        bool fileSizeIsOk = fileIsEmpty == false && fileIsTooBig == false;
-
-        if (fileIsEmpty)
+        // Step 2: Check the file size. A too-big file is never empty, so the two checks are separate.
+        if (ImageFile.Length == 0)
         {
             ModelState.AddModelError(nameof(ImageFile), "The selected image file is empty.");
         }
 
-        if (fileIsTooBig)
+        if (ImageFile.Length > MaximumImageSizeBytes)
         {
             ModelState.AddModelError(nameof(ImageFile), "Choose an image smaller than 10 MB.");
         }
@@ -119,21 +115,19 @@ public class CreateModel : PageModel
             ModelState.AddModelError(nameof(ImageFile), "Choose a JPG, PNG, GIF, or WEBP image.");
         }
 
-        // Step 4: Only look inside the file if the extension and size are both fine.
-        if (extensionIsAllowed && fileSizeIsOk)
-        {
-            bool fileIsRealImage = await HasValidImageSignatureAsync(ImageFile, extension);
-
-            if (fileIsRealImage == false)
-            {
-                ModelState.AddModelError(nameof(ImageFile), "This file is not a valid supported image.");
-            }
-
-        }
-
-        // Step 5: If any image check failed, show the errors.
+        // Step 4: Fast fail. If the size or extension is wrong, show those errors now
+        // and don't look inside the file.
         if (ModelState.IsValid == false)
         {
+            return Page();
+        }
+
+        // Step 5: The size and extension are fine, so check the file really is that kind of image.
+        bool fileIsRealImage = await HasValidImageSignatureAsync(ImageFile, extension);
+
+        if (fileIsRealImage == false)
+        {
+            ModelState.AddModelError(nameof(ImageFile), "This file is not a valid supported image.");
             return Page();
         }
 
@@ -145,7 +139,7 @@ public class CreateModel : PageModel
         string fileName = Guid.NewGuid().ToString("N") + extension;
         string fullImagePath = Path.Combine(imagesFolder, fileName);
 
-        // Step 7: Save the image and the product.
+        // Step 7: Save the image and the product. True if both were saved, false if saving failed.
         bool savedOk = await SaveImageAndProductAsync(imagesFolder, fullImagePath, fileName);
 
         if (savedOk == false)
@@ -162,8 +156,6 @@ public class CreateModel : PageModel
         TempData["SuccessMessage"] = "Your post and image were uploaded.";
         return RedirectToPage("/Product/Index");
     }
-
-    // Returns true if the image and product were saved, false if saving failed.
 
     /// <summary>
     /// Saves the uploaded image and adds the product record.
