@@ -24,9 +24,7 @@ public class Delete : PageModel
         ProductService = productService;
     }
 
-    /// <summary>
-    /// Gets or sets the product displayed for confirmation and submitted for deletion.
-    /// </summary>
+    // The product displayed for confirmation and submitted for deletion.
     [BindProperty]
     public ProductModel Product { get; set; }
 
