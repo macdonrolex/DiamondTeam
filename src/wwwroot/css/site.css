@@ -3442,6 +3442,65 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     line-height: 1.75;
 }
 
+.gh-error-more > summary {
+    display: inline-block;
+    list-style: none;
+    cursor: pointer;
+    color: #1F3A6E;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+    .gh-error-more > summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .gh-error-more > summary:focus-visible {
+        outline: 2px solid #1F3A6E;
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+
+.gh-error-more[open] > summary {
+    margin-bottom: 10px;
+}
+
+.gh-error-reasons {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 10px 0 0;
+    padding-left: 20px;
+    line-height: 1.6;
+}
+
+.gh-error-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.gh-error-excuse {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.gh-error-excuse-label {
+    color: #4f5b70;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.gh-error-excuse-text {
+    color: #172033;
+    font-size: 16px;
+}
+
 .gh-error-actions {
     display: flex;
     flex-wrap: wrap;
@@ -3479,6 +3538,16 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     .gh-error-btn-primary:hover {
         background: #5f1723;
         color: #fff;
+    }
+
+.gh-error-btn-secondary {
+    background: #e9eefb;
+    color: #1F3A6E;
+}
+
+    .gh-error-btn-secondary:hover {
+        background: #d8e0f6;
+        color: #1F3A6E;
     }
 
 @media (max-width: 640px) {
