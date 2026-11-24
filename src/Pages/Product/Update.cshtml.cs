@@ -68,15 +68,16 @@ public class UpdateModel : PageModel
 			return Page();
 		}
 
-		// Checks if there is item still in the database if not it will throw notfound page
-		if (ProductService.UpdateData(Product) == null)
+		// Save the changes once. UpdateData returns null when the post is no longer in the database,
+		// for example because it was deleted while this page was open, so show the Not Found page.
+		var updatedProduct = ProductService.UpdateData(Product);
+
+		if (updatedProduct == null)
 		{
 			return NotFound();
-		
 		}
 
-        ProductService.UpdateData(Product);
-        return RedirectToPage("/Product/Index");
+		return RedirectToPage("/Product/Index");
 	}
 
 }
