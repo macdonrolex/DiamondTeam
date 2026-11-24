@@ -1,6 +1,7 @@
 @page "{id}"
 @using ContosoCrafts.WebSite.Models
 @model ContosoCrafts.WebSite.Pages.Product.UpdateModel
+@using ContosoCrafts.WebSite.Components
 
 @{
 	ViewData["Title"] = "Update page";
@@ -117,11 +118,15 @@
 					<svg class="post-create-label-icon post-create-label-icon--image update-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/></svg>
 					<div class="update-body">
 						<label asp-for="Product.Image" class="update-label">Image</label>
-						<input asp-for="Product.Image" class="update-input" placeholder="Image link or path" autocomplete="off" />
+						<!-- Render the input field in the component -->
+						<!-- The second parameter set the ImageUpload component's InitialFilePath property to current image path -->
+						@(await Html.RenderComponentAsync<ImageUpload>(RenderMode.ServerPrerendered, new { InitialFilePath = Model.Product.Image }))
+						
 					</div>
 				</div>
 				<span asp-validation-for="Product.Image" class="post-create-error update-error"></span>
 			</div>
+			
 
 			<!-- Shop link -->
 			<div class="update-field">
@@ -189,3 +194,5 @@
 {
 	<partial name="_ValidationScriptsPartial" />
 }
+
+<script src="~/_framework/blazor.server.js"></script>
