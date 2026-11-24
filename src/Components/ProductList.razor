@@ -36,6 +36,17 @@
             </select>
             <svg class="search-pill-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg>
         </div>
+            @* Says which genre is applied, so the selected filter is easy to spot *@
+            <small class="form-text search-pill-count" id="GenreStatus">
+                @if (GenreQuery == null)
+                {
+                    @:Showing all genres
+                }
+                else
+                {
+                    @:Filtered by <strong>@GenreQuery.Value.DisplayGenre()</strong>
+                }
+            </small>
     </div>
 </div>
 @if (!FilteredProducts.Any())
