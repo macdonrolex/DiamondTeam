@@ -33,10 +33,55 @@
                 <span class="gh-error-title-end">came back.</span>
             </h1>
             <p class="gh-error-text">We've checked under the couch, behind the fridge, and in the other tab you forgot about. Nothing.</p>
+
+            <!-- Opens to list the usual reasons this page shows up -->
+            <details class="gh-error-more">
+                <summary>Read more</summary>
+                <p class="gh-error-text">This can happen when you're:</p>
+                <ul class="gh-error-text gh-error-reasons">
+                    <li>Opening the Read, Update, or Delete page with an id that does not exist.</li>
+                    <li>Saving changes on the Update page after the post was deleted (for example, by another user in a different tab).</li>
+                    <li>Deleting a post that was already deleted.</li>
+                </ul>
+            </details>
         </div>
 
-        <div class="gh-error-actions">
-            <a class="gh-error-btn gh-error-btn-primary" href="/">Take me home</a>
+        <div class="gh-error-bottom">
+            <!-- A joke excuse; "Try another excuse" swaps in the next one -->
+            <div class="gh-error-excuse" aria-live="polite">
+                <div class="gh-error-excuse-label">Official excuse #<span id="gh-excuse-no">404</span></div>
+                <div class="gh-error-excuse-text" id="gh-excuse-text">The page is on vacation. No forwarding address.</div>
+            </div>
+
+            <div class="gh-error-actions">
+                <a class="gh-error-btn gh-error-btn-primary" href="/">Take me home</a>
+                <button type="button" class="gh-error-btn gh-error-btn-secondary" id="gh-excuse-next">Try another excuse</button>
+            </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // Cycle through the excuses; the number goes up by 13 each time, starting at 404 fun fun fun
+        (function () {
+            var excuses = [
+                "The page is on vacation. No forwarding address.",
+                "A squirrel chewed through that link.",
+                "The id you asked for moved out last week.",
+                "Someone deleted it, then deleted the evidence.",
+                "It was here a second ago. We swear.",
+                "The page is hiding. It owes us money."
+            ];
+            var count = 0;
+            var text = document.getElementById("gh-excuse-text");
+            var number = document.getElementById("gh-excuse-no");
+
+            document.getElementById("gh-excuse-next").addEventListener("click", function () {
+                count = count + 1;
+                text.textContent = excuses[count % excuses.length];
+                number.textContent = 404 + count * 13;
+            });
+        })();
+    </script>
+}
