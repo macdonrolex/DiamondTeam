@@ -51,6 +51,23 @@ public class IndexModel : PageModel
 
     }
 
+    // True when at least one post is loaded, so the page knows whether to show the list or the empty message.
+    public bool HasProducts
+    {
+        get
+        {
+
+            // No posts are loaded at all
+            if (Products == null)
+            {
+                return false;
+            }
+
+            return Products.Any();
+        }
+
+    }
+
     // The four posts to render for the current page.
     public IEnumerable<ProductModel> PagedProducts
     {
