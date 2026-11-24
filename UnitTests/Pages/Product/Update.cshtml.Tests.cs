@@ -211,6 +211,36 @@ public class UpdateTests
         Assert.That(result.PageName, Is.EqualTo("/Product/Index"));
     }
 
+    /// <summary>
+    /// Saving a post that was deleted while the page was open returns Not Found
+    /// and does not add the post back
+    /// </summary>
+    [Test]
+    public void OnPost_InValid_Product_Deleted_Should_Return_NotFound()
+    {
+        // Arrange
+        var webHostEnvironment = TestHelper.MockWebHostEnvironment.Object;
+        var productService = new JsonFileProductService(webHostEnvironment);
+        var pageModel = new UpdateModel(productService);
+
+        // A post with valid fields whose id is not in the database
+        pageModel.Product = productService.GetAllData().First();
+        pageModel.Product.Id = "post-that-was-deleted";
+        var countBefore = productService.GetAllData().Count();
+
+        // Act
+        var result = pageModel.OnPost();
+
+        // Reset
+
+        // Not needed, nothing was saved
+
+        // Assert
+        Assert.That(result, Is.TypeOf<NotFoundResult>());
+        Assert.That(productService.GetAllData().Count(), Is.EqualTo(countBefore));
+        Assert.That(productService.GetAllData().Any(x => x.Id == "post-that-was-deleted"), Is.False);
+    }
+
     #endregion OnPost
     
 }
