@@ -1,8 +1,8 @@
 using System;
-using ContosoCrafts.WebSite.Models;
+using ContosoCrafts.WebSite.Attributes;
 using NUnit.Framework;
 
-namespace UnitTests.Models;
+namespace UnitTests.Attributes;
 
 /// <summary>
 ///  Unit tests for YearAttribute.cs 
