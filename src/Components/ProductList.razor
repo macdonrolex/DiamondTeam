@@ -5,9 +5,12 @@
 @using Microsoft.AspNetCore.Components
 
 <div class="row">
-    <div class="col-6">
+    @* Side by side on wider screens, stacked on phones *@
+    <div class="col-12 col-md-6">
         @* Live search controls for front-page posts. *@
         <div class="product-search mb-4" role="search">
+            @* Visible label so both fields are easy to identify *@
+            <label class="filter-label" for="post-search">Search</label>
             @* Pill-shaped search box with the icon at the front. *@
             <div class="search-pill">
                 @* The icon sits in a span so the number of spans on the page stays the same as before. *@
@@ -22,25 +25,29 @@
             <small class="form-text search-pill-count">@FilteredProducts.Count() posts found</small>
         </div>
     </div>
-    <div class="col-6">
-        @* Bind the selected genre to the genre query and reset pagination afterward. *@
-        @* Pill-shaped genre filter with a tag icon at the front and an arrow at the end. *@
-        <div class="search-pill">
-            <svg class="search-pill-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.6 13.4 11 3.8H4v7.1l9.6 9.7a2 2 0 0 0 2.8 0l4.2-4.3a2 2 0 0 0 0-2.9Z" /><circle cx="7.5" cy="7.5" r="1" /></svg>
-            <select id="genre_search" class="search-pill-input search-pill-select" aria-label="Filter by genre" @bind="GenreQuery" @bind:event="onchange" @bind:after="ResetSearchPage">
-                <option value="">All Genres</option>
-                @foreach (var genre in Enum.GetValues<GenreEnum>().Skip(1))
-                {
-                    <option value=@genre>@genre.DisplayGenre()</option>
-                }
-            </select>
-            <svg class="search-pill-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg>
+    <div class="col-12 col-md-6">
+        <div class="genre-filter mb-4">
+            @* Visible label for the genre filter *@
+            <label class="filter-label" for="genre_search">Genre</label>
+            @* Bind the selected genre to the genre query and reset pagination afterward. *@
+            @* Pill-shaped genre filter with a tag icon at the front and an arrow at the end. *@
+            @* It gets the "is-active" look while a genre is selected. *@
+            <div class="search-pill @(GenreQuery == null ? "" : "is-active")" id="GenrePill">
+                <svg class="search-pill-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.6 13.4 11 3.8H4v7.1l9.6 9.7a2 2 0 0 0 2.8 0l4.2-4.3a2 2 0 0 0 0-2.9Z" /><circle cx="7.5" cy="7.5" r="1" /></svg>
+                <select id="genre_search" class="search-pill-input search-pill-select" @bind="GenreQuery" @bind:event="onchange" @bind:after="ResetSearchPage">
+                    <option value="">All Genres</option>
+                    @foreach (var genre in Enum.GetValues<GenreEnum>().Skip(1))
+                    {
+                        <option value=@genre>@genre.DisplayGenre()</option>
+                    }
+                </select>
+                <svg class="search-pill-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg>
                 @* Reset only the genre, shown while a genre is selected *@
                 @if (GenreQuery != null)
                 {
                     <button class="search-pill-clear" type="button" @onclick="ResetGenre" id="ResetGenre" aria-label="Reset genre filter">Reset</button>
                 }
-        </div>
+            </div>
             @* Says which genre is applied, so the selected filter is easy to spot *@
             <small class="form-text search-pill-count" id="GenreStatus">
                 @if (GenreQuery == null)
@@ -52,6 +59,7 @@
                     @:Filtered by <strong>@GenreQuery.Value.DisplayGenre()</strong>
                 }
             </small>
+        </div>
     </div>
 </div>
 @if (!FilteredProducts.Any())
@@ -337,13 +345,26 @@
         // Set query properties to default to display all posts
         SearchQuery = string.Empty;
         GenreQuery = null;
-        
+
         // Back to page 1
         CurrentPage = 1;
-        
+
         RefreshFilteredProducts();
     }
-    
+
+    /// <summary>
+    /// Remove only the genre filter and keep the search text.
+    /// </summary>
+    public void ResetGenre()
+    {
+        GenreQuery = null;
+
+        // Back to page 1
+        CurrentPage = 1;
+
+        RefreshFilteredProducts();
+    }
+
     
     /// <summary>
     /// Closes the game post modal by clearing the selected product.
