@@ -30,6 +30,12 @@
     </label>
 </p>
 
+@if (string.IsNullOrEmpty(ErrorMessage) == false)
+{
+    <p class="text-danger">@ErrorMessage</p>
+}
+
+
 @if (IsLoading)
 {
     <p>Uploading...</p>
@@ -55,6 +61,9 @@
 
     // Web path of the post's image (current, default, or newly uploaded), sent to the form by the hidden input
     public string FilePath;
+    
+    // The error message displayed to users
+    public string ErrorMessage { get; set; } = "";
 
     /// <summary>
     /// Starts with the given image path: the post's current image (Update) or the default image (Create).
@@ -76,6 +85,18 @@
 
         // The file chosen by the user
         TheFile = e.File;
+        
+        // If the file is too big, fast fail
+        // .Size is reported by the browser so a modified client could report a small size and send a large file, 
+        // so it just a basic protection.
+        // The real protection actually happens in OpenReadStream(MaxFileSize). It throws while the actual file is too big.
+        // We are not allowed to do try/catch, so the exception could break the blazor connection.
+        if (TheFile.Size > MaxFileSize)
+        {
+            ErrorMessage = "The image must be smaller than 10 MB";
+            IsLoading = false;
+            return;
+        }
 
         // The file's extension (.jpg, .png, and so on), used in the saved file's name
         string extension = Path.GetExtension(TheFile.Name).ToLowerInvariant();
@@ -98,7 +119,10 @@
         // Web path of the new file, used by the browser to load it (never the disk path).
         // Set only after the copy succeeds, so a failed upload keeps the previous image.
         FilePath = "/data/images/" + trustedFileName;
-
+        
+        // Reset the error message
+        ErrorMessage = "";
+        
         IsLoading = false;
     }
 }
