@@ -19,7 +19,7 @@
         </a>
     </header>
 
-    @if (Model.Products == null || Model.Products.Any() == false)
+    @if (Model.HasProducts == false)
     {
         <div class="product-list-empty">
             <h2>Your library is ready for its first Post</h2>
@@ -27,7 +27,7 @@
         </div>
     }
     
-    @if ((Model.Products == null) == false && Model.Products.Any())
+    @if (Model.HasProducts)
     {
         <section class="product-list" aria-label="Game products">
             @foreach (var product in Model.PagedProducts)
