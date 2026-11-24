@@ -17,7 +17,7 @@
                 <span class="search-pill-icon-wrap" aria-hidden="true"><svg class="search-pill-icon" viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.6-3.6" /></svg></span>
                 @* Bind each keystroke to the search text and reset pagination afterward. *@
                 <input id="post-search" class="search-pill-input" type="search" aria-label="Search posts" placeholder="Search posts by title or text..." @bind="SearchQuery" @bind:event="oninput" @bind:after="ResetSearchPage"/>
-                @if (!string.IsNullOrWhiteSpace(SearchQuery))
+                @if (string.IsNullOrWhiteSpace(SearchQuery) == false)
                 {
                     <button class="search-pill-clear" type="button" @onclick="ClearSearch" id="Clear">Clear</button>
                 }
@@ -62,9 +62,15 @@
         </div>
     </div>
 </div>
-@if (!FilteredProducts.Any())
+@if (FilteredProducts.Any() == false)
 {
     <div class="alert alert-info text-center mt-3" role="status">No matching post found.</div>
+}
+
+@* Shown when the visitor opens a post that was deleted in the meantime *@
+@if (string.IsNullOrEmpty(ProductMessage) == false)
+{
+    <div class="alert alert-warning text-center mt-3" role="alert" id="ProductMessage">@ProductMessage</div>
 }
 
 <div class="card-columns">
@@ -113,6 +119,7 @@
                         </div>
                     </div>
                 </div>
+
                 @*vote feature*@
                 <div class="voting">
                     @{
@@ -126,8 +133,10 @@
                     }
                     @for (int i = 1; i < 6; i++)
                     {
+
                         // Current star button to display
                         var currentStar = i;
+
                         // The class for star button
                         string starClass = "fa fa-star";
 
@@ -140,10 +149,13 @@
                     }
                 </div>
                 <div class="modal-footer my-modal-footer">
+
                     @*comment submit*@
                     <div class="comment-submit">
+
                         @* comment input field *@
                         <input class="form-control" type="text" placeholder="Add a comment (max. 200)" maxlength="200" @onchange="(e) => UpdateCommentText(e.Value.ToString())" value="@NewCommentText"/>
+
                         @* comment submit button *@
                         <button @onclick="(e) => { ProductService.AddCommentToProduct(SelectedProduct, NewCommentText); RefreshCommentInput(); }" class="btn btn-success" data-toggle="modal" id="SubmitComment">
                             <svg class="submit-comment-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -197,24 +209,37 @@
 {   
     // Currently displayed game post
     public ProductModel SelectedProduct;
+
     // Id of the game post
     public string SelectedProductId;
+
+    // Message shown when the chosen post no longer exists, empty otherwise
+    public string ProductMessage;
+
     // Average rating of the selected game post
     public int CurrentRating = 0;
+
     // Number of votes the selected game post has received
     public int VoteCount = 0;
+
     // Text shown next to the vote count ("Vote" or "Votes")
     public string VoteLabel;
+
     // Number of game posts shown on each page
     public const int PageSize = 6;
+
     // Page currently displayed, starting from 1
     public int CurrentPage = 1;
+
     // The new comment text to store
     public string NewCommentText;
+
     // Total number of pages, calculated from the number of game posts (at least 1)
     public int TotalPages => Math.Max(1, (int)Math.Ceiling(FilteredProducts.Count() / (double)PageSize));
+
     // Text used to filter home-page posts as the visitor types.
     public string SearchQuery { get; set; } = string.Empty;
+
     // Cache filtered posts so each render avoids rereading the JSON file.
     public List<ProductModel> FilteredProducts { get; set; } = new();
     
@@ -381,8 +406,23 @@
     /// <param name="productId">Id of the product the user clicked</param>
     public void SelectProduct(string productId)
     {
+
+        // Look the post up; it may have been deleted since the list was shown
+        var product = ProductService.GetAllData().FirstOrDefault(x => x.Id == productId);
+
+        // Fast fail: the post is gone, so close the popup, say so, and refresh the list
+        if (product == null)
+        {
+            SelectedProduct = null;
+            SelectedProductId = null;
+            ProductMessage = "This post no longer exists. It may have been deleted.";
+            RefreshFilteredProducts();
+            return;
+        }
+
+        ProductMessage = null;
         SelectedProductId = productId;
-        SelectedProduct = ProductService.GetAllData().First(x => x.Id == productId);
+        SelectedProduct = product;
         GetCurrentRating();
     }
     
