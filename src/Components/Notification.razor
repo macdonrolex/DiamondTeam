@@ -40,7 +40,7 @@
     /// <param name="firstRender">True only the first time the component is rendered</param>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!firstRender)
+        if (firstRender == false)
         {
             return;
         }
