@@ -343,13 +343,11 @@ public class CreateTests
 
         foreach ((string extension, byte[] header) in supportedImages)
         {
-            // Dispose the previous stream before preparing the next upload.
-            imageStream?.Dispose();
-
-            imageStream = new MemoryStream(header);
+            // A new local stream for each upload; it is closed at the end of this loop pass.
+            using var uploadStream = new MemoryStream(header);
 
             pageModel.ImageFile = new FormFile(
-                imageStream,
+                uploadStream,
                 0,
                 header.Length,
                 "ImageFile",
@@ -823,13 +821,11 @@ public class CreateTests
 
         foreach ((string extension, byte[] header) in shortHeaders)
         {
-            // Replace the stream for the next short-header case.
-            imageStream?.Dispose();
-
-            imageStream = new MemoryStream(header);
+            // A new local stream for each short-header case; it is closed at the end of this loop pass.
+            using var headerStream = new MemoryStream(header);
 
             IFormFile imageFile = new FormFile(
-                imageStream,
+                headerStream,
                 0,
                 header.Length,
                 "ImageFile",
@@ -876,12 +872,11 @@ public class CreateTests
 
                 changedHeader[position] ^= 0xFF;
 
-                imageStream?.Dispose();
-
-                imageStream = new MemoryStream(changedHeader);
+                // A new local stream for each changed header; it is closed at the end of this loop pass.
+                using var changedStream = new MemoryStream(changedHeader);
 
                 IFormFile imageFile = new FormFile(
-                    imageStream,
+                    changedStream,
                     0,
                     changedHeader.Length,
                     "ImageFile",
