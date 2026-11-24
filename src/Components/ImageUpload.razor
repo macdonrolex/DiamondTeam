@@ -1,0 +1,104 @@
+@*  Image upload component, used in the Create and Update pages.
+    Implementation based on https://learn.microsoft.com/en-us/aspnet/core/blazor/file-uploads?view=aspnetcore-9.0
+    Relevant sections:
+    1. File uploads (the first section)
+    2. Security considerations: avoid IBrowserFile.Size for size limits, and file name security
+    3. The first paragraph of Examples: GetMultipleFiles versus File
+    4. Server-side file upload example: the template this component is based on
+    5. The note after the client-side example: never trust Name, Size, or ContentType *@
+
+@using System.IO
+@using ContosoCrafts.WebSite.Services
+@using Microsoft.AspNetCore.Components.Forms
+@inject JsonFileProductService ProductService
+
+@*  Sends the image path to the page's form.
+    The browser posts every named input inside the <form>, no matter who rendered it.
+    This component is placed inside the form of the Create and Update pages, so this input is posted with the other fields.
+    Its name matches what asp-for would write ("Product.Image"), so model binding puts its value into Product.Image.
+    Blazor does not support asp-for, so the name is written by hand.
+    The value is FilePath, which LoadFile updates after a successful upload. *@
+<input type="hidden" name="Product.Image" value="@FilePath" autocomplete="off" />
+
+<p>
+    @* The upload control that the user sees *@
+    <label>
+        Upload an image of up to 10 MB:
+        @*  InputFile renders an <input type="file"> for a single file.
+            When the user chooses a file (the change event), it calls LoadFile. *@
+        <InputFile OnChange="LoadFile"/>
+    </label>
+</p>
+
+@if (IsLoading)
+{
+    <p>Uploading...</p>
+}
+
+@code {
+
+    // The picture used when the user does not upload one
+    public const string DefaultImagePath = "/images/default-post.svg";
+
+    // The image to start with: the post's current image (Update page), or the default image (Create page)
+    [Parameter]
+    public string InitialFilePath { get; set; } = DefaultImagePath;
+
+    // Largest accepted image size: 10 MB
+    public long MaxFileSize = 10 * 1024 * 1024;
+
+    // True while a chosen file is being saved
+    public bool IsLoading;
+
+    // The file chosen by the user
+    public IBrowserFile TheFile;
+
+    // Web path of the post's image (current, default, or newly uploaded), sent to the form by the hidden input
+    public string FilePath;
+
+    /// <summary>
+    /// Starts with the given image path: the post's current image (Update) or the default image (Create).
+    /// </summary>
+    protected override void OnInitialized()
+    {
+        FilePath = InitialFilePath;
+    }
+
+    /// <summary>
+    /// Runs when the user chooses a file. Saves the file under wwwroot/data/images with a random name,
+    /// then sets FilePath to its web path, so the hidden input posts the new image with the form.
+    /// </summary>
+    /// <param name="e">Event data from InputFile. Its File property is the single file that the user chose.</param>
+    public async Task LoadFile(InputFileChangeEventArgs e)
+    {
+
+        IsLoading = true;
+
+        // The file chosen by the user
+        TheFile = e.File;
+
+        // The file's extension (.jpg, .png, and so on), used in the saved file's name
+        string extension = Path.GetExtension(TheFile.Name).ToLowerInvariant();
+
+        // A random file name, so users cannot choose the name or the location of the saved file
+        var trustedFileName = Guid.NewGuid().ToString("N") + extension;
+
+        // Disk path: the file's full location on the server's file system
+        var path = Path.Combine(ProductService.WebHostEnvironment.WebRootPath,
+            "data/images/",
+            trustedFileName);
+
+        // Create the file on disk, and close it automatically when this method ends.
+        await using FileStream fs = new(path, FileMode.Create);
+        
+        // OpenReadStream reads the bytes from the browser, and throws if the file is larger than MaxFileSize.
+        // CopyToAsync writes them to the file in small pieces, so the whole image is never held in memory.
+        await TheFile.OpenReadStream(MaxFileSize).CopyToAsync(fs);
+
+        // Web path of the new file, used by the browser to load it (never the disk path).
+        // Set only after the copy succeeds, so a failed upload keeps the previous image.
+        FilePath = "/data/images/" + trustedFileName;
+
+        IsLoading = false;
+    }
+}
