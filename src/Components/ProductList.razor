@@ -35,6 +35,11 @@
                 }
             </select>
             <svg class="search-pill-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg>
+                @* Reset only the genre, shown while a genre is selected *@
+                @if (GenreQuery != null)
+                {
+                    <button class="search-pill-clear" type="button" @onclick="ResetGenre" id="ResetGenre" aria-label="Reset genre filter">Reset</button>
+                }
         </div>
             @* Says which genre is applied, so the selected filter is easy to spot *@
             <small class="form-text search-pill-count" id="GenreStatus">
