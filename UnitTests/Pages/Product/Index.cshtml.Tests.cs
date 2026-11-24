@@ -177,5 +177,63 @@ public class IndexTests
     }
 
     #endregion OnGet
-    
+
+    #region HasProducts
+
+    /// <summary>
+    /// If the products could not be loaded, there are no products to show
+    /// </summary>
+    [Test]
+    public void HasProducts_InValid_Products_Null_Should_Return_False()
+    {
+        // Arrange
+        pageModel.Products = null;
+
+        // Act
+        var result = pageModel.HasProducts;
+
+        // Reset
+
+        // Assert
+        Assert.That(result, Is.False);
+    }
+
+    /// <summary>
+    /// If the products were loaded but the list is empty, there are no products to show
+    /// </summary>
+    [Test]
+    public void HasProducts_Valid_Empty_List_Should_Return_False()
+    {
+        // Arrange
+        pageModel.Products = Enumerable.Empty<ContosoCrafts.WebSite.Models.ProductModel>();
+
+        // Act
+        var result = pageModel.HasProducts;
+
+        // Reset
+
+        // Assert
+        Assert.That(result, Is.False);
+    }
+
+    /// <summary>
+    /// After loading the data file, there are products to show
+    /// </summary>
+    [Test]
+    public void HasProducts_Valid_Loaded_Products_Should_Return_True()
+    {
+        // Arrange
+        pageModel.OnGet();
+
+        // Act
+        var result = pageModel.HasProducts;
+
+        // Reset
+
+        // Assert
+        Assert.That(result, Is.True);
+    }
+
+    #endregion HasProducts
+
 }
