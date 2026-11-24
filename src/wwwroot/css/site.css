@@ -3597,3 +3597,49 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     color: #3d4759;
     font-family: 'Nunito', system-ui, sans-serif;
 }
+
+/* Visible label above the search and genre fields */
+.filter-label {
+    display: block;
+    margin: 0 0 6px 18px;
+    color: #1F3A6E;
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+/* Keyboard focus on the dropdown: a stronger ring than the hover shadow */
+.search-pill:has(.search-pill-select:focus-visible) {
+    border-color: #1F3A6E;
+    box-shadow: 0 0 0 4px rgba(31, 58, 110, .3);
+}
+
+/* A genre is selected: tinted pill, bold blue text, so the active filter stands out */
+.search-pill.is-active {
+    border-color: #1F3A6E;
+    background: #eef3ff;
+}
+
+    .search-pill.is-active .search-pill-select {
+        color: #1F3A6E;
+        font-weight: 700;
+    }
+
+    .search-pill.is-active .search-pill-chevron {
+        stroke: #1F3A6E;
+    }
+
+/* Clear and Reset buttons: visible keyboard focus */
+.search-pill-clear:focus-visible {
+    outline: 2px solid #1F3A6E;
+    outline-offset: 2px;
+}
+
+/* Phones: slightly smaller reset button so the genre name still fits */
+@media (max-width: 575.98px) {
+    .search-pill-clear {
+        padding: 0 12px;
+    }
+}
