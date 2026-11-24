@@ -3000,6 +3000,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     padding: 0;
     border: none;
     color: green;
+    background: none;
 }
 
 /* For dislike comment */
@@ -3010,6 +3011,7 @@ body *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="material-symbo
     padding: 0;
     border: none;
     color: red;
+    background: none;
 }
 
 .comment-icon{
