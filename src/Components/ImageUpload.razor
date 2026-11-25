@@ -58,6 +58,9 @@
 
     // The file chosen by the user
     public IBrowserFile TheFile;
+    
+    // A random file name, so users cannot choose the name or the location of the saved file
+    public string TrustedFileName { get; set; }
 
     // Web path of the post's image (current, default, or newly uploaded), sent to the form by the hidden input
     public string FilePath = DefaultImagePath;
@@ -101,13 +104,13 @@
         // The file's extension (.jpg, .png, and so on), used in the saved file's name
         string extension = Path.GetExtension(TheFile.Name).ToLowerInvariant();
 
-        // A random file name, so users cannot choose the name or the location of the saved file
-        var trustedFileName = Guid.NewGuid().ToString("N") + extension;
+        // Set TrustedFileName
+        TrustedFileName = Guid.NewGuid().ToString("N") + extension;
 
         // Disk path: the file's full location on the server's file system
         var path = Path.Combine(ProductService.WebHostEnvironment.WebRootPath,
             "data/images/",
-            trustedFileName);
+            TrustedFileName);
 
         // Create the file on disk, and close it automatically when this method ends.
         await using FileStream fs = new(path, FileMode.Create);
@@ -118,7 +121,7 @@
 
         // Web path of the new file, used by the browser to load it (never the disk path).
         // Set only after the copy succeeds, so a failed upload keeps the previous image.
-        FilePath = "/data/images/" + trustedFileName;
+        FilePath = "/data/images/" + TrustedFileName;
         
         // Reset the error message
         ErrorMessage = "";
