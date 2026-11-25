@@ -60,7 +60,7 @@
     public IBrowserFile TheFile;
 
     // Web path of the post's image (current, default, or newly uploaded), sent to the form by the hidden input
-    public string FilePath;
+    public string FilePath = DefaultImagePath;
     
     // The error message displayed to users
     public string ErrorMessage { get; set; } = "";
