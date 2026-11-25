@@ -36,10 +36,6 @@
 }
 
 
-@if (IsLoading)
-{
-    <p>Uploading...</p>
-}
 
 @code {
 
@@ -52,9 +48,6 @@
     
     // Largest accepted image size: 10 MB
     public long MaxFileSize = 10 * 1024 * 1024;
-
-    // True while a chosen file is being saved
-    public bool IsLoading;
 
     // The file chosen by the user
     public IBrowserFile TheFile;
@@ -83,9 +76,6 @@
     /// <param name="e">Event data from InputFile. Its File property is the single file that the user chose.</param>
     public async Task LoadFile(InputFileChangeEventArgs e)
     {
-
-        IsLoading = true;
-
         // The file chosen by the user
         TheFile = e.File;
         
@@ -97,7 +87,6 @@
         if (TheFile.Size > MaxFileSize)
         {
             ErrorMessage = "The image must be smaller than 10 MB";
-            IsLoading = false;
             return;
         }
 
@@ -132,7 +121,5 @@
         
         // Reset the error message
         ErrorMessage = "";
-        
-        IsLoading = false;
     }
 }
