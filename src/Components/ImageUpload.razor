@@ -49,7 +49,7 @@
     // The image to start with: the post's current image (Update page), or the default image (Create page)
     [Parameter]
     public string InitialFilePath { get; set; } = DefaultImagePath;
-
+    
     // Largest accepted image size: 10 MB
     public long MaxFileSize = 10 * 1024 * 1024;
 
@@ -106,11 +106,18 @@
 
         // Set TrustedFileName
         TrustedFileName = Guid.NewGuid().ToString("N") + extension;
+        
+        // The directory where we store images
+        string imagesFolder = Path.Combine(
+            ProductService.WebHostEnvironment.WebRootPath,
+            "data",
+            "images");
+        
+        // Make sure the images folder exists
+        Directory.CreateDirectory(imagesFolder);
 
         // Disk path: the file's full location on the server's file system
-        var path = Path.Combine(ProductService.WebHostEnvironment.WebRootPath,
-            "data/images/",
-            TrustedFileName);
+        var path = Path.Combine(imagesFolder, TrustedFileName);
 
         // Create the file on disk, and close it automatically when this method ends.
         await using FileStream fs = new(path, FileMode.Create);
