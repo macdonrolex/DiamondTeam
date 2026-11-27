@@ -60,6 +60,10 @@
     
     // The error message displayed to users
     public string ErrorMessage { get; set; } = "";
+    
+    // Only common image formats are accepted; SVG files are excluded for safety.
+    public static readonly List<string> AllowedImageExtensions =
+        [ ".jpg", ".jpeg", ".png", ".gif", ".webp" ];
 
     /// <summary>
     /// Starts with the given image path: the post's current image (Update) or the default image (Create).
@@ -92,6 +96,13 @@
 
         // The file's extension (.jpg, .png, and so on), used in the saved file's name
         string extension = Path.GetExtension(TheFile.Name).ToLowerInvariant();
+        
+        // Check if the file is an accepted image file. Not contain, fast fail
+        if (AllowedImageExtensions.Contains(extension) == false)
+        {
+            ErrorMessage = "The uploaded file is not accepted. We accept .jpg, .jpeg, .png, .gif, and .webp";
+            return;
+        }
 
         // Set TrustedFileName
         TrustedFileName = Guid.NewGuid().ToString("N") + extension;
