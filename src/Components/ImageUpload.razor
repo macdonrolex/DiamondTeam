@@ -96,7 +96,7 @@
         // Set TrustedFileName
         TrustedFileName = Guid.NewGuid().ToString("N") + extension;
         
-        // The directory where we store images
+        // The directory where we store images (wwwroot/data/images)
         string imagesFolder = Path.Combine(
             ProductService.WebHostEnvironment.WebRootPath,
             "data",
@@ -105,7 +105,7 @@
         // Make sure the images folder exists
         Directory.CreateDirectory(imagesFolder);
 
-        // Disk path: the file's full location on the server's file system
+        // Disk path: the file's full location on the file system
         var path = Path.Combine(imagesFolder, TrustedFileName);
 
         // Create the file on disk, and close it automatically when this method ends.
