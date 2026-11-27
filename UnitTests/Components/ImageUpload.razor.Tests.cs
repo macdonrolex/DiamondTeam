@@ -103,7 +103,11 @@ public class ImageUploadTests : BunitTestContext
         
         // The error message is set
         Assert.That(page.Instance.ErrorMessage, Is.EqualTo("The image must be smaller than 10 MB"));
+        
+        // Before uploading a too big image file, no error message
         Assert.That(preMarkup.Contains(page.Instance.ErrorMessage), Is.EqualTo(false));
+        
+        // After uploading a too big image file, show error message
         Assert.That(postMarkup.Contains(page.Instance.ErrorMessage), Is.EqualTo(true));
     }
     
